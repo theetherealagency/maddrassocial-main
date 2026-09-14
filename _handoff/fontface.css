@@ -1,0 +1,69 @@
+/* ─── Madras Social typefaces ──────────────────────────────────────────────
+   Replaces the Kugile / Gotham block in src/index.css.
+   Files live in public/fonts/ and are served from /fonts/.
+
+   New Icon  — display / headings   (replaces Kugile)
+   Aksen     — body                 (replaces Gotham)
+   Seruni    — accent               (new; eyebrows, labels, nav only)
+
+   NOTE: the Aksen files currently in public/fonts/ are the TRIAL cut. They are
+   missing ' " : ; ( ) / % – — and cannot set body copy. Replace all five with
+   the licensed family when it arrives — filenames and weights below are already
+   correct, so it is a straight file swap with no CSS change.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'New Icon';
+  src: url('/fonts/NewIcon-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Seruni';
+  src: url('/fonts/Seruni-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

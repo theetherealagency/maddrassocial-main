@@ -1,0 +1,3 @@
+Contact: hello@madrasmami.ca
+Preferred-Languages: en
+Canonical: https://madrasmami.ca/.well-known/security.txt

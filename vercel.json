@@ -1,0 +1,47 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/menu",
+      "destination": "/menu/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/reservations",
+      "destination": "/reservations/index.html"
+    },
+    {
+      "source": "/catering",
+      "destination": "/catering/index.html"
+    },
+    {
+      "source": "/gift-cards",
+      "destination": "/gift-cards/index.html"
+    },
+    {
+      "source": "/brunch-tasting",
+      "destination": "/brunch-tasting/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about-us/index.html"
+    },
+    {
+      "source": "/newsletter",
+      "destination": "/newsletter/index.html"
+    },
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
