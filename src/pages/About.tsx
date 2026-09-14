@@ -64,7 +64,7 @@ const About = () => {
             <div style={{ width: "48px", height: "1px", backgroundColor: "hsl(46,70%,55%)", opacity: 0.5 }} />
           </div>
           <h2 className="font-display leading-[1.2] md:leading-[1.15] mb-6 md:mb-10 text-[24px] md:text-[clamp(36px,5vw,52px)]" style={{ color: "hsl(var(--mud))" }}>
-            From Chennai to Brampton
+            A room for it
           </h2>
           <div className="space-y-4 md:space-y-6 font-body leading-[1.6] md:leading-[1.8] text-[14px] md:text-[15px]" style={{ color: "hsl(29,30%,32%)" }}>
             <p>

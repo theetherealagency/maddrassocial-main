@@ -11,6 +11,9 @@
 //   4. Copy the /exec URL into the site's VITE_CATERING_SHEET_ENDPOINT.
 // After editing: Deploy > Manage deployments > pencil > New version > Deploy
 
+// PENDING — this is still Madras Mami's Sheet. Replace with Madras Social's
+// own Sheet id before deploying the script, or enquiries land in the wrong
+// spreadsheet. See PENDING.md.
 var SHEET_ID = '1jPPECYFnWL_k8yRkhL7hWFqLhG1JwCttmQ855f09ltE';
 var NOTIFY_INTERNAL = 'hello@madrassocial.ca';
 var REPLY_TO = 'hello@madrassocial.ca';
@@ -19,7 +22,10 @@ var SHARED_TOKEN = 'mami-catering-2026';
 // is verified under Gmail > Settings > Accounts > "Send mail as" on the account
 // running this script. Run listAliases() to check.
 var SEND_AS = 'hello@madrassocial.ca';
-var PHONE = '(905) 913-5900';
+// PENDING — Madras Social's number has not been supplied. While this is empty
+// the confirmation email omits the "call us" line rather than printing a
+// Madras Mami number. See PENDING.md.
+var PHONE = '';
 // The branded email design lives on the website, so it can be changed by
 // deploying the site — this script does not need re-pasting for design edits.
 var TEMPLATE_URL = 'https://www.madrassocial.ca/catering/email-template.html';
@@ -290,9 +296,9 @@ function sendEnquirerEmail(lead) {
     + '  Date: ' + lead.eventDate + '\n'
     + '  Guests: ' + lead.guests + '\n'
     + '  Budget: ' + lead.budget + '\n\n'
-    + 'If your date is close, call us on ' + PHONE + ' and we will sort it faster.\n\n'
+    + (PHONE ? 'If your date is close, call us on ' + PHONE + ' and we will sort it faster.\n\n' : '')
     + 'Madras Social\n'
-    + '6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9\n';
+    + '8 Erb Street West, Waterloo, ON N2L 1S7\n';
 
   var opts = {
     to: lead.email,

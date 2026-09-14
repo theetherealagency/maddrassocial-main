@@ -161,3 +161,41 @@ page with Madras Mami's vegetarian and desi-ghee claims. It has no route, no
 rewrite and no entry in `seo/routes.mjs`, so it cannot render or be indexed.
 There is no Madras Social equivalent of the page. Left in place pending a
 decision to delete it.
+
+---
+
+## Update — asset purge and integration pass
+
+**Unreferenced assets removed.** 68 files from `src/assets` (217 MB) and 7 from
+`public/lovable-uploads` (14 MB) that never appeared in the build output. Only
+30 files / 43 MB of `src/assets` were ever bundled. Verified afterwards: the
+build emits the same 32 assets and all 58 image/font references in the built
+HTML, JS and CSS resolve. Everything is recoverable from commit `4f0e2a6`.
+
+**Removed as dead code** (both recoverable from `4f0e2a6`):
+- `src/pages/Brampton.tsx` — unrouted Brampton landing page carrying false
+  vegetarian and desi-ghee claims. No Madras Social equivalent.
+- `apps-script/brunch-tasting/` — its form and route were removed, so the
+  script had nothing to serve.
+
+**Catering email templates rebranded.** `public/catering/email-template.html`
+and `email-internal.html` now use the Madras Social palette (Carbon, Burnt
+Terracotta, Warm Linen, Curry Leaf), the Waterloo address, and no vegetarian
+claim. The phone line is dropped while the number is pending.
+
+**`apps-script/catering/Code.gs`** — address corrected; `PHONE` set to empty
+with the confirmation email omitting the "call us" line rather than printing a
+Madras Mami number.
+
+### Still outstanding in that script
+`SHEET_ID` is still Madras Mami's spreadsheet
+(`1jPPECYFnWL_k8yRkhL7hWFqLhG1JwCttmQ855f09ltE`). Enquiries will land in the
+wrong Sheet until it is replaced and the script is redeployed against Madras
+Social's own Google account.
+
+### Live deployment
+`https://maddrassocialfinal.vercel.app` — production on the
+`the-ethereal-agency/maddrassocialfinal` project, no custom domain attached.
+`madrassocial.ca` is untouched. **No environment variables are set on that
+project**, so every form on the live site fails by design rather than writing
+to Madras Mami's database.
