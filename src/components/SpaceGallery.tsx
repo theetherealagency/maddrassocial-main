@@ -1,5 +1,5 @@
 import { useInView } from '@/hooks/useInView';
-import mamiHero from '@/assets/madras-mami-hero.png';
+import mamiHero from '@/assets/madras-social-hero.png';
 import sitarImg from '@/assets/sitar.png';
 import stoneImg from '@/assets/stone.png';
 
@@ -21,7 +21,7 @@ const SpaceGallery = () => {
         {/* Asymmetrical Gallery */}
         <div className={`grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-5 max-w-6xl mx-auto transition-all duration-[1.2s] delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="md:col-span-7 aspect-[4/3] overflow-hidden rounded group">
-            <img src={mamiHero} alt="Madras Mami" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            <img src={mamiHero} alt="Madras Social" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
           </div>
 
           <div className="md:col-span-5 grid grid-rows-2 gap-3 md:gap-5">

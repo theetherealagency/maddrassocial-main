@@ -9,7 +9,7 @@ const testimonials = [
   {
     quote: 'This isn\'t just dosa — it\'s the dosa that makes you close your eyes and remember home. My paati would approve.',
     name: 'Karthik R.',
-    location: 'Brampton, ON',
+    location: 'Waterloo, ON',
   },
   {
     quote: 'The Bisibelebath Risotto is pure genius. Heritage flavours in a way I\'ve never experienced before. We come every weekend now.',

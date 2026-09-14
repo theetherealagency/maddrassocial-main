@@ -12,18 +12,18 @@
 // After editing: Deploy > Manage deployments > pencil > New version > Deploy
 
 var SHEET_ID = '1jPPECYFnWL_k8yRkhL7hWFqLhG1JwCttmQ855f09ltE';
-var NOTIFY_INTERNAL = 'hello@madrasmami.ca';
-var REPLY_TO = 'hello@madrasmami.ca';
+var NOTIFY_INTERNAL = 'hello@madrassocial.ca';
+var REPLY_TO = 'hello@madrassocial.ca';
 var SHARED_TOKEN = 'mami-catering-2026';
 // Enquirers must see this as the sender. Google only allows it once the address
 // is verified under Gmail > Settings > Accounts > "Send mail as" on the account
 // running this script. Run listAliases() to check.
-var SEND_AS = 'hello@madrasmami.ca';
+var SEND_AS = 'hello@madrassocial.ca';
 var PHONE = '(905) 913-5900';
 // The branded email design lives on the website, so it can be changed by
 // deploying the site — this script does not need re-pasting for design edits.
-var TEMPLATE_URL = 'https://www.madrasmami.ca/catering/email-template.html';
-var INTERNAL_TEMPLATE_URL = 'https://www.madrasmami.ca/catering/email-internal.html';
+var TEMPLATE_URL = 'https://www.madrassocial.ca/catering/email-template.html';
+var INTERNAL_TEMPLATE_URL = 'https://www.madrassocial.ca/catering/email-internal.html';
 
 var HEADERS = ['created_time', 'form_name', 'occasion', 'full_name', 'email',
   'phone', 'event_date', 'guests', 'budget', 'description', 'consent',
@@ -35,7 +35,7 @@ function doGet(e) {
   if (e && e.parameter && e.parameter.diag && e.parameter.diag === SHARED_TOKEN) {
     return json(diagnostics());
   }
-  return json({ ok: true, service: 'Madras Mami catering intake' });
+  return json({ ok: true, service: 'Madras Social catering intake' });
 }
 
 function diagnostics() {
@@ -291,13 +291,13 @@ function sendEnquirerEmail(lead) {
     + '  Guests: ' + lead.guests + '\n'
     + '  Budget: ' + lead.budget + '\n\n'
     + 'If your date is close, call us on ' + PHONE + ' and we will sort it faster.\n\n'
-    + 'Madras Mami\n'
+    + 'Madras Social\n'
     + '6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9\n';
 
   var opts = {
     to: lead.email,
-    subject: 'We have your catering enquiry — Madras Mami',
-    name: 'Madras Mami',
+    subject: 'We have your catering enquiry — Madras Social',
+    name: 'Madras Social',
     replyTo: REPLY_TO,
     body: text
   };
@@ -353,7 +353,7 @@ function notifyBusiness(lead) {
   var opts = {
     to: NOTIFY_INTERNAL,
     subject: subject,
-    name: 'Madras Mami website',
+    name: 'Madras Social website',
     replyTo: lead.email || REPLY_TO,
     body: text
   };
@@ -374,7 +374,7 @@ function notifyBusiness(lead) {
       .replace(/{{DESCRIPTION}}/g, nl2br(lead.description || '—'))
       .replace(/{{CONSENT}}/g, escapeHtml(lead.consent))
       .replace(/{{RECEIVED}}/g, escapeHtml(receivedStamp()))
-      .replace(/{{REPLY_SUBJECT}}/g, encodeURIComponent('Your Madras Mami catering enquiry'));
+      .replace(/{{REPLY_SUBJECT}}/g, encodeURIComponent('Your Madras Social catering enquiry'));
   }
 
   sendAs(opts);

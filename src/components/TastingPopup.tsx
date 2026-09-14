@@ -38,6 +38,7 @@ const TastingPopup = () => {
     if (!validate()) return;
     setIsSubmitting(true);
     try {
+      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
       const { error } = await supabase.from('leads').insert({
         form_type: 'newsletter',
         name: `${formData.firstName} ${formData.lastName}`,
@@ -49,7 +50,7 @@ const TastingPopup = () => {
       if (error) throw error;
       trackFormSuccess('newsletter');
       setIsSubmitted(true);
-      toast({ title: "You're in!", description: "Welcome to Mami's Circle." });
+      toast({ title: "You're in!", description: "We'll be in touch." });
     } catch {
       toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
     } finally {
@@ -90,13 +91,13 @@ const TastingPopup = () => {
         {isSubmitted ? (
           <div className="text-center py-4">
             <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-3 font-gotham font-medium">
-              Welcome to the Family
+              You're on the list
             </p>
             <h2 className="font-kugile text-2xl text-primary mb-3">
-              You're in Mami's Circle
+              Thanks — see you soon
             </h2>
             <p className="text-muted-foreground text-xs leading-relaxed mb-6">
-              Expect the good stuff — offers, events, new dishes and Mami's stories straight to your inbox.
+              We'll email you when the doors open, and when something worth coming in for lands on the menu.
             </p>
             <button onClick={() => setIsOpen(false)} className="btn-cta px-6 py-2.5">
               Close
@@ -106,14 +107,14 @@ const TastingPopup = () => {
           <>
             <div className="text-center mb-5">
               <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-2 font-gotham font-medium">
-                Madras Mami, Brampton
+                Madras Social, Waterloo
               </p>
               <h2 className="font-kugile text-2xl text-primary mb-2">
-                Join Mami's Circle
+                Opening in Waterloo Region
               </h2>
               <div className="w-8 h-px bg-accent/40 mx-auto mb-3" />
               <p className="text-muted-foreground text-xs leading-relaxed max-w-xs mx-auto">
-                Exclusive offers, early access to new dishes, event invites and more — straight from Mami's kitchen to your inbox.
+                A South Indian kitchen and bar on Erb Street West. Leave your email and we'll tell you when to book.
               </p>
             </div>
 
@@ -162,7 +163,7 @@ const TastingPopup = () => {
               </div>
 
               <button type="submit" disabled={isSubmitting} className="btn-cta w-full py-3">
-                {isSubmitting ? "Signing you up…" : "Join Mami's Circle"}
+                {isSubmitting ? "Adding you…" : "Keep me posted"}
               </button>
 
               <p className="text-center text-muted-foreground/60 text-[10px] font-gotham">

@@ -16,11 +16,10 @@ const LocationSection = () => {
             rel="noopener noreferrer"
             className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors block leading-relaxed"
           >
-            <span className="text-foreground">6261 Mayfield Rd, Unit 145</span><br />
-            Brampton, ON L6P 0X9
+            <span className="text-foreground">8 Erb Street West</span><br />
+            Waterloo, ON N2L 1S7
           </a>
           <p className="mt-3 text-sm text-muted-foreground">
-            <a href="tel:+19059135900" className="hover:text-primary transition-colors">(905) 913-5900</a>
           </p>
           <div className="w-8 h-px bg-accent/40 mx-auto mt-8" />
         </div>

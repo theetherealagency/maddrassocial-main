@@ -6,11 +6,10 @@ import { ONLINE_ORDER_URL } from '@/lib/links';
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'Menu', href: '/menu' },
-  { name: 'Brunch Tasting', href: '/brunch-tasting' },
-  { name: 'About Us', href: '/about' },
+  { name: 'About', href: '/about' },
   { name: 'Reservations', href: '/reservations' },
-  { name: 'Catering', href: '/catering' },
-  { name: 'Gift Cards', href: '/gift-cards' },
+  { name: 'Events', href: '/events' },
+  { name: 'Careers', href: '/careers' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -71,7 +70,7 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-2 group">
             <img
               src="/lovable-uploads/mm-logo-web-01.png"
-              alt="Madras Mami"
+              alt="Madras Social"
               className="h-10 w-auto transition-all duration-500 group-hover:scale-105"
               style={{
                 filter: isScrolled
@@ -101,9 +100,9 @@ const Header = () => {
           {/* Order CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
             <a
-              href={ONLINE_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(ONLINE_ORDER_URL
+                ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
+                : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
               className="hidden md:inline-block px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm transition-all duration-500"
               style={{
                 borderColor: textColor,
@@ -182,9 +181,9 @@ const Header = () => {
               );
             })}
             <a
-              href={ONLINE_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(ONLINE_ORDER_URL
+                ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
+                : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
               className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm text-center transition-all duration-300"
               style={{
                 borderColor: isScrolled ? '#452E18' : '#DBB640',

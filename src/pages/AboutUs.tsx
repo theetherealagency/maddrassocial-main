@@ -4,7 +4,7 @@ import ScallopDivider from "@/components/homepage/ScallopDivider";
 import mmAbout from "@/assets/mm-about.jpg";
 import GoldOrnament from "@/components/homepage/GoldOrnament";
 import HomeFooter from "@/components/homepage/HomeFooter";
-import mamiCharacter from "@/assets/mami-character-hero.png";
+import mamiCharacter from "@/assets/social-character-hero.png";
 
 import heroBg from "@/assets/hero-temple-street.png";
 import ambientBg from "@/assets/entrance-3d-view.png";
@@ -75,7 +75,7 @@ const AboutUs = () => {
       <section className="relative overflow-hidden" style={{ minHeight: "80vh" }} id="hero">
         <img
           src={heroBg}
-          alt="Split scene: Chennai temple street on the left, Brampton street on the right"
+          alt="Split scene: a South Indian street on the left, Waterloo on the right"
           className="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
         />
@@ -96,7 +96,7 @@ const AboutUs = () => {
         >
           <img
             src={mamiCharacter}
-            alt="Illustrated Mami character standing proudly"
+            alt="Illustrated Social character standing proudly"
             className="h-full w-auto object-contain object-bottom will-change-transform"
             loading="eager"
             style={{
@@ -120,23 +120,20 @@ const AboutUs = () => {
             className="font-display italic leading-[1.2] mb-10"
             style={{ fontSize: "clamp(32px, 4.5vw, 44px)", color: BROWN }}
           >
-            From Chennai to Brampton
+            A room for it
           </h2>
           <div className="space-y-6 font-body text-[14px] leading-[1.85]" style={{ color: BROWN }}>
             <p>
-              Madras Mami was born from a craving that every South Indian living abroad knows too
-              well, the craving for amma's filter coffee on a cold Canadian morning, for the sound
-              of dosa batter sizzling on a cast iron tavaa, for sambar that tastes like it was
-              simmered by generations before us.
+              South Indian food is on menus from Times Square to Singapore. Waterloo Region has
+              the appetite for it, and the people. What it did not have was the room.
             </p>
             <p>
-              We realized that thousands of us in the GTA shared this same longing. Not just for
-              the food, but for the feeling, the warmth of a home kitchen, the chaos of a Chennai
-              eatery, the quiet ritual of breaking idli into sambar while amma watches you eat.
+              Not a dosa counter with a liquor licence. A South Indian kitchen with a real bar,
+              where the evening is the point and the table is yours for as long as you want it.
             </p>
             <p>
-              That's what Madras Mami brings to your table. Not just dishes, but memories. Not
-              just flavors, but the feeling of being home.
+              Kerala and Tamil cooking, plates built for the middle of the table, and somewhere
+              to sit with all of it. That is Madras Social, on Erb Street West.
             </p>
           </div>
         </FadeUp>
@@ -152,8 +149,8 @@ const AboutUs = () => {
 
       {/* ── SECTION 4: OUR VALUES ───────────────────────────────── */}
       {/*
-        Image used: /images/about/madras mami about us page_about us values sec without text.png
-        Shows: Mami character (woman in white saree with sunglasses, drinking from brass tumbler)
+        Image used: /images/about/madras social about us page_about us values sec without text.png
+        Shows: Social character (woman in white saree with sunglasses, drinking from brass tumbler)
                on warm mustard/gold background with cream scalloped borders at top and bottom.
         Strategy: full-width image as section visual, text overlaid absolutely on lg screens.
                   On mobile: image shown + values rendered below in mustard block.
@@ -161,7 +158,7 @@ const AboutUs = () => {
       <section id="values">
         <img
           src={valuesFull}
-          alt="Our Values — Authenticity First, Community at the Core, Modern Presentation, Sustainability"
+          alt="Our values"
           className="w-full h-auto block"
           loading="lazy"
         />
@@ -171,7 +168,7 @@ const AboutUs = () => {
       <section className="w-full overflow-hidden" style={{ height: "50vh" }} id="ambient">
         <img
           src={ambientBg}
-          alt="Madras Mami restaurant dining room — warm, welcoming atmosphere"
+          alt="Madras Social restaurant dining room — warm, welcoming atmosphere"
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />

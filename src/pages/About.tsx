@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import FloatingOrderCTA from "@/components/FloatingOrderCTA";
 import ScallopDivider from "@/components/homepage/ScallopDivider";
-import heroBanner from '../assets/madras mami our story banner 2.png';
+import heroBanner from '../assets/madras social our story banner 2.png';
 import heroBannerMobile from '../assets/about-hero-mobile.png';
 import grungeTexture from '../assets/grunge-wall-texture.jpg';
 import blackGradient from '../assets/black gradient.png';
@@ -39,7 +39,7 @@ const About = () => {
       <Header />
 
       {/* ── HERO BANNER ── */}
-      <h1 className="sr-only">About Madras Mami — Authentic South Indian Restaurant in Brampton</h1>
+      <h1 className="sr-only">About Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
       <section className="relative overflow-hidden md:h-[380px]">
         {/* Desktop */}
         <img src={heroBanner} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center hidden md:block" loading="eager" />
@@ -68,7 +68,7 @@ const About = () => {
           </h2>
           <div className="space-y-4 md:space-y-6 font-body leading-[1.6] md:leading-[1.8] text-[14px] md:text-[15px]" style={{ color: "hsl(29,30%,32%)" }}>
             <p>
-              Madras Mami was born from a craving that every South Indian living abroad knows too well — the craving
+              Madras Social was born from a craving that every South Indian living abroad knows too well — the craving
               for amma's filter coffee on a cold Canadian morning, for the sound of dough batter sizzling on a cast iron
               tava, for sambar that tastes like it was simmered by generations before us.
             </p>
@@ -78,7 +78,7 @@ const About = () => {
               in sambar while amma watches you eat.
             </p>
             <p>
-              That is what Madras Mami brings to your table. Not just dishes, but memories. Not just flavors, but the
+              That is what Madras Social brings to your table. Not just dishes, but memories. Not just flavors, but the
               feeling of being home.
             </p>
           </div>

@@ -6,11 +6,10 @@ import { ONLINE_ORDER_URL } from "@/lib/links";
 const navLinks = [
   { name: "HOME", href: "/" },
   { name: "MENU", href: "/menu" },
-  { name: "BRUNCH TASTING", href: "/brunch-tasting" },
-  { name: "ABOUT US", href: "/about" },
+  { name: "ABOUT", href: "/about" },
   { name: "RESERVATIONS", href: "/reservations" },
-  { name: "CATERING", href: "/catering" },
-  { name: "GIFT CARDS", href: "/gift-cards" },
+  { name: "EVENTS", href: "/events" },
+  { name: "CAREERS", href: "/careers" },
   { name: "CONTACT", href: "/contact" },
 ];
 
@@ -42,7 +41,7 @@ const HomeNavbar = () => {
         <Link to="/" className="flex items-center">
           <img
             src="/lovable-uploads/mm-logo-web-01.png"
-            alt="Madras Mami"
+            alt="Madras Social"
             className="h-10 w-auto"
           />
         </Link>
@@ -64,9 +63,9 @@ const HomeNavbar = () => {
         <div className="flex items-center gap-3">
           {/* Online ordering — desktop */}
           <a
-            href={ONLINE_ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(ONLINE_ORDER_URL
+              ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
+              : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
             className="hidden xl:inline-block border-[1.5px] border-gold rounded-sm px-5 py-[9px] font-body font-medium text-[11px] uppercase tracking-[0.3em] text-gold transition-all duration-250 hover:bg-gold hover:text-brown-brand"
           >
             ORDER ONLINE
@@ -134,9 +133,9 @@ const HomeNavbar = () => {
             );
           })}
           <a
-            href={ONLINE_ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(ONLINE_ORDER_URL
+              ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
+              : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
             className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#452E18] text-[#452E18] rounded-sm text-center"
             onClick={() => setMobileOpen(false)}
           >

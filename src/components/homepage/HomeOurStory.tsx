@@ -30,24 +30,22 @@ const HomeOurStory = () => {
         <GoldOrnament className="mb-4 md:mb-7" />
 
         <h2 className="heading-display text-[22px] md:text-[42px] lg:text-[52px] mb-4 md:mb-7 leading-[1.3] md:leading-[1.25]">
-          The comforting whistle of the pressure cooker...
+          South Indian food,
           <br className="hidden md:block" />
           <span className="md:hidden"> </span>
-          The ritual of the first morning filter kapi....
+          and somewhere to sit with it.
         </h2>
 
         <p className="body-text max-w-[580px] mx-auto mb-4 md:mb-5 text-[14px] md:text-[14px] leading-[1.6] md:leading-[1.85]">
-          Every dish at Madras Mami is a love letter written by Mami's hands,
-          the same hands that ground fresh batter before dawn, that tempered
-          mustard seeds till they danced in hot oil, that rolled perfect idlis
-          while the whole house still slept in the warmth of a Chennai morning.
+          Kerala and Tamil cooking, a full bar, and a table you book rather
+          than a counter you queue at. Rasam and roots to open. Dosas off the
+          tava. Biryani for the middle of the table.
         </p>
 
         <p className="body-text max-w-[580px] mx-auto mb-6 md:mb-10 text-[14px] md:text-[14px] leading-[1.6] md:leading-[1.85]">
-          Heritage recipes passed down through Mami's kitchen, from the temple
-          towns of Tamil Nadu to the coffee houses of Bengaluru, from the spice
-          markets of Chettinad to the tiffin stalls of Mylapore, we bring that
-          warmth, that taste of home, right here to Brampton.
+          South Indian food is on menus from Times Square to Singapore.
+          Waterloo Region has the appetite for it. What it did not have was
+          the room. That is Madras Social, on Erb Street West.
         </p>
       </div>
     </section>

@@ -12,7 +12,7 @@ const dishes = [
     name: 'Coastal Traditions Reimagined',
     subtitle: 'Food',
     description:
-      'Step into Madras Mami where rich South Indian flavours meet creative flair, authentic coastal spices elevated with modern touches for a dining experience that delights every sense.',
+      'Kerala and Tamil cooking, plates built for the middle of the table, and a full bar alongside.',
     images: [showcaseDosa, showcaseRasam],
     imageAlt: 'The Everything Vada',
     align: 'left' as const,
@@ -21,7 +21,7 @@ const dishes = [
     name: 'Elevated Pairings',
     subtitle: 'Heritage Fusion',
     description:
-      'Thoughtfully curated combinations that complement our bold South Indian plates — Bisibelebath Risotto, millet-based lentil rice with coconut, appalam, and desi ghee — tradition with a modern twist.',
+      'Southern gravies served with ghee sadam, biryani layered and loaded, and sides that never stay extra.',
     images: [showcaseCoffee, showcasePayasam],
     imageAlt: 'Bisibelebath Risotto',
     align: 'right' as const,

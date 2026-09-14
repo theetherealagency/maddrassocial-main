@@ -3,7 +3,7 @@ import { Instagram } from 'lucide-react';
 import igRow1 from '@/assets/ig-home-1.png';
 import igRow2 from '@/assets/ig-home-2.png';
 
-const INSTAGRAM_URL = 'https://www.instagram.com/madrasmami.ca/';
+const INSTAGRAM_URL = 'https://www.instagram.com/madrassocial/';
 
 const InstagramFeed = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -16,7 +16,7 @@ const InstagramFeed = () => {
             From Our Kitchen to Your Feed
           </p>
           <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-4">
-            @madrasmami.ca
+            @madrassocial.ca
           </h2>
           <div className="w-8 h-px bg-accent/50 mx-auto" />
         </div>
@@ -29,9 +29,9 @@ const InstagramFeed = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="block overflow-hidden rounded-sm border border-border/30 hover:border-accent/40 transition-all duration-500"
-              aria-label="Visit @madrasmami.ca on Instagram"
+              aria-label="Visit @madrassocial.ca on Instagram"
             >
-              <img src={src} alt="Madras Mami on Instagram" className="w-full h-auto block" loading="lazy" />
+              <img src={src} alt="Madras Social on Instagram" className="w-full h-auto block" loading="lazy" />
             </a>
           ))}
         </div>

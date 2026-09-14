@@ -1,6 +1,6 @@
-# Madras Mami — https://www.madrasmami.ca
+# Madras Social — https://www.madrassocial.ca
 # Everything is public. Search crawlers and AI answer engines are both welcome:
-# a restaurant wants to be quoted in "best South Indian in Brampton" answers.
+# a restaurant wants to be quoted in "best South Indian in Waterloo" answers.
 
 User-agent: *
 Allow: /
@@ -94,4 +94,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://www.madrasmami.ca/sitemap.xml
+Sitemap: https://www.madrassocial.ca/sitemap.xml

@@ -15,7 +15,7 @@ const EventsBanner = () => (
     <div className="relative">
       <img
         src={eventsBanner}
-        alt="Madras Mami catering and events — a carved temple doorway framed by South Indian dishes"
+        alt="Madras Social catering and events — a carved temple doorway framed by South Indian dishes"
         className="w-full h-auto block"
         loading="eager"
       />

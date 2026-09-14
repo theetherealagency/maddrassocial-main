@@ -42,6 +42,7 @@ const Reservations = () => {
     if (!validate()) return;
     setIsSubmitting(true);
     try {
+      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
       const { error } = await supabase.from('leads').insert({
         form_type: 'reservation',
         name: `${formData.firstName} ${formData.lastName}`,
@@ -71,8 +72,8 @@ const Reservations = () => {
               <CheckCircle className="w-7 h-7 text-accent" />
             </div>
             <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-3 font-gotham font-medium">Reservation Received</p>
-            <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-3">A seat at Mami's table awaits</h2>
-            <h1 className="sr-only">Reserve a Table at Madras Mami — Authentic South Indian Restaurant in Brampton</h1>
+            <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-3">Book a table</h2>
+            <h1 className="sr-only">Book a Table at Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
             <p className="text-muted-foreground text-sm mb-8 leading-relaxed">Taking you to confirm your booking now.</p>
             <a href={RESERVATION_BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-cta">Continue to Booking</a>
           </div>
@@ -133,7 +134,7 @@ const Reservations = () => {
             time controls start below the fold and the guest has to scroll inside
             it. Until the panel is made tall enough to show the whole form, this
             tells them where to look. It sits in the clear strip to the right of
-            Mami's hanging fingers (which occupy 36%–42% of the width down to
+            the character art's hanging fingers (which occupy 36%-42% of the width down to
             103vw), so it costs the widget no height. */}
         <div style={{
           position: 'absolute',
@@ -155,7 +156,7 @@ const Reservations = () => {
         {/* The booking widget sits inside the blank cream panel painted into the
             artwork above. These offsets are measured off that panel: it starts
             90.6vw down and ends 176.8vw down, spanning 18.7%–88.5% of the width.
-            The top is inset past Mami's arm, which overlaps the panel's top-left
+            The top is inset past the character art's arm, which overlaps the panel's top-left
             corner. Re-measure these if the artwork is ever replaced. */}
         <div style={{
           position: 'absolute',

@@ -5,18 +5,18 @@ import ScallopDivider from "./ScallopDivider";
 const HomeHero = () => {
   return (
     <section className="relative w-full md:overflow-hidden" id="home">
-      <h1 className="sr-only">Madras Mami — Authentic South Indian Restaurant in Brampton, 100% Pure Vegetarian, Made with Pure Desi Ghee</h1>
+      <h1 className="sr-only">Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
       {/* Desktop banner */}
       <img
         src={heroBanner}
-        alt="Madras Mami — Tradition, Reimagined"
+        alt="Madras Social — Southern roots. Social plates."
         className="hidden md:block w-full h-auto relative"
         loading="eager"
       />
       {/* Mobile banner — full width, no cropping */}
       <img
         src={heroBannerMobile}
-        alt="Madras Mami — Tradition, Reimagined"
+        alt="Madras Social — Southern roots. Social plates."
         className="block md:hidden w-full h-auto"
         loading="eager"
       />

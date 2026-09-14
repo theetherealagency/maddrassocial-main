@@ -151,7 +151,11 @@ const EventEnquiryForm = ({ def }: { def: EventFormDef }) => {
         description: val('description'),
         consent,
       }),
-      supabase
+      (supabase
+        ? supabase
+        : (() => {
+            throw new Error('Supabase is not configured — see .env.example');
+          })())
         .from('leads')
         .insert({
           form_type: def.formType,
@@ -200,9 +204,6 @@ const EventEnquiryForm = ({ def }: { def: EventFormDef }) => {
           Your enquiry is with us and a confirmation is on its way to your inbox. Our team will
           be in touch shortly to shape the menu around your gathering. For urgent bookings,
           call{' '}
-          <a href="tel:+19059135900" className="underline">
-            (905) 913-5900
-          </a>
           .
         </p>
       </div>

@@ -47,7 +47,7 @@ const inferSource = (referrer: string): { source: string; medium: string } => {
   } catch {
     return { source: 'direct', medium: 'none' };
   }
-  if (host.endsWith('madrasmami.ca')) return { source: 'internal', medium: 'internal' };
+  if (host.endsWith('madrassocial.ca')) return { source: 'internal', medium: 'internal' };
   if (/google\./.test(host))    return { source: 'google',    medium: 'organic' };
   if (/bing\./.test(host))      return { source: 'bing',      medium: 'organic' };
   if (/duckduckgo\./.test(host))return { source: 'duckduckgo',medium: 'organic' };

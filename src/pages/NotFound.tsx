@@ -16,7 +16,7 @@ const NotFound = () => {
           </h1>
           <div className="w-10 h-px mx-auto mb-6" style={{ backgroundColor: "hsl(var(--gold))" }} />
           <p className="text-muted-foreground text-sm font-gotham leading-relaxed mb-8">
-            Looks like this page wandered off — even Mami can't find it. Let's get you back to something delicious.
+            Looks like this page wandered off — even Social can't find it. Let's get you back to something delicious.
           </p>
           <Link
             to="/"

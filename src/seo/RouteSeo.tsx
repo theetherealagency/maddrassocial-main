@@ -50,7 +50,7 @@ const RouteSeo = () => {
     // Unknown path — the SPA renders NotFound, so keep it out of the index
     // instead of leaving the previous route's tags in place.
     if (!route) {
-      document.title = 'Page not found | Madras Mami';
+      document.title = 'Page not found | Madras Social';
       byName('robots', 'noindex, follow');
       return;
     }

@@ -1,167 +1,140 @@
-# Madras Mami
+# Madras Social
 
-Authentic South Indian restaurant in Brampton, Ontario, Canada.
-100% pure vegetarian. Every dish made with pure desi ghee.
+A South Indian kitchen and bar in Waterloo Region, Ontario, Canada.
+Kerala and Tamil cooking, a full bar, and a table you book rather than a counter you queue at.
 
-6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9
-Phone: (905) 913-5900
-Email: hello@madrasmami.ca
-Website: https://www.madrasmami.ca
+8 Erb Street West, Waterloo, ON N2L 1S7
+Email: hello@madrassocial.ca
+Website: https://www.madrassocial.ca
 
 ## Hours
+Not yet published.
 
-Monday 4:00pm - 11:00pm
-Tuesday 4:00pm - 11:00pm
-Wednesday 4:00pm - 11:00pm
-Thursday 4:00pm - 11:00pm
-Friday 4:00pm - 11:00pm
-Saturday 10:00am - 11:00pm
-Sunday 10:00am - 11:00pm
+## Links
+Menu: https://www.madrassocial.ca/menu
+Reservations: https://www.madrassocial.ca/reservations
+Events: https://www.madrassocial.ca/events
+Careers: https://www.madrassocial.ca/careers
+Contact: https://www.madrassocial.ca/contact
 
-## Order, book and visit
-
-Order online (takeout and delivery): https://order.toasttab.com/online/madras-mami-6261-mayfield-road-unit-145
-Book a table: https://www.madrasmami.ca/reservations
-Menu: https://www.madrasmami.ca/menu
-Catering enquiries: https://www.madrasmami.ca/catering
-Gift cards: https://www.madrasmami.ca/gift-cards
-Contact: https://www.madrasmami.ca/contact
-Instagram: https://www.instagram.com/madrasmami.ca/
-Facebook: https://www.facebook.com/madrasmami
-
-Serving Brampton, Mississauga, Vaughan, Caledon, Bolton, Woodbridge,
-Etobicoke, Malton, Georgetown and Orangeville.
+## Area served
+Waterloo, Kitchener, Cambridge, Guelph, Elmira, St. Jacobs, Breslau, Baden.
 
 ## About
+South Indian food is on menus from Times Square to Singapore. Waterloo Region has
+the appetite for it. What it did not have was the room — a South Indian kitchen with
+a real bar, where the evening is the point. That is Madras Social.
 
-Madras Mami is Brampton's best South Indian restaurant, built on one belief: that authentic food should never be diluted to fit a new geography.
+Vegetarian dishes are marked on the menu. The kitchen also cooks chicken, mutton,
+lamb, pomfret, lobster and shrimp. Madras Social is not a vegetarian restaurant.
 
-The name says everything. Mami is what you call the woman in the neighbourhood whose kitchen always smells like something is on the stove. The one who feeds you without asking. The one whose sambar you spent years trying to recreate and never quite could. Madras Mami is that kitchen, brought to Brampton.
+## Menu
+Southern roots. Social plates.
 
-Every dish on the menu comes from a specific place and a specific tradition. Tamil Nadu's tiffin culture, where breakfast is a ritual and the dosa tava never cools down. Bengaluru's Benne dosa lanes, where the butter is real and the batter is its own secret. Chettinad's spice vocabulary, bold and unapologetic. Kerala's coconut-softened curries. Andhra's heat. Telangana's depth. Five states, one menu, one kitchen in Brampton.
+### Rasam & Roots
+Bowls, greens and bright beginnings.
+- Nattu Kozhi Rasam — $12.00: A peppery country-chicken broth simmered with garlic — the South Indian answer to chicken soup.
+- Banana Stem Hotpot — $10.50 (vegetarian): A comforting Burmese-style bowl of banana stem and chickpeas, finished with crisp plantain fritters.
+- Madras Karamani Bowl — $9.00 (vegetarian): Black-eyed peas and fresh sprouts tossed with coconut, mustard and bright South Indian seasoning.
+- Mango & Clementine Salad — $12.50 (vegetarian): Sweet mango, juicy clementine and mixed greens with a zingy mango-ginger dressing.
 
-The two things that do not change regardless of what is on the plate: everything is 100% pure vegetarian and everything is made with pure desi ghee. Not as a selling point. As a non-negotiable. This is how South Indian food is supposed to be cooked and this is the only way Madras Mami will ever cook it.
+### Madras Tapas
+Small plates with a southern attitude.
+- Mango Pickle Guac & Tapioca Chips — $7.00 (vegetarian): Creamy guacamole with a tangy mango-pickle kick, served with crisp tapioca chips.
+- Beet Poriyal Hummus & Edamame Varuval — $12.50 (vegetarian): Beetroot, coconut and green chilli blended into hummus, paired with honey-glazed edamame.
+- Mangalorean Soya Chaap Arancini — $13.00 (vegetarian): Crisp, mozzarella-filled soya chaap rice bites with creamy curry mayo.
+- Cheesy Chicken Punugulu — $13.50: Andhra-style fritters packed with minced chicken and a gooey cheese centre.
+- Honey Chilli Shrimp Lettuce Wrap — $13.50: Juicy shrimp and bell peppers in tangy Tangra sauce, tucked into crisp lettuce with peanuts.
+- Rum-my Kozhi Roast — $18.00: Tender chicken roasted with dark rum, curry leaves and smoky black cardamom.
+- Madurai Mutton Sukka — $20.00: Bone-in mutton slow-roasted with coconut, red chilli and star anise.
 
-The restaurant opened because the GTA's South Indian community deserved better than compromised versions of food they grew up eating. And it stays because every table that comes in once tends to come back.
+### Main Affairs
+Built for the centre of the table.
+- Malabar Chicken Steak — $28.00: Seared chicken breast with ghee sadam, podi mash, charred asparagus and roasted baby carrots.
+- Madras Lamb Shank — $36.50: Pepper-braised lamb shank with ghee sadam, podi mash, charred asparagus and roasted baby carrots.
+- Baked Kari Dosa Lasagne — $22.00: Layers of soft kal dosa, spiced mutton kheema, coconut vegetable sauce and bubbling mozzarella.
+- Lobster & Shrimp Moilee — $38.50: Lobster tail and jumbo shrimp in a gentle coconut moilee, with ghee sadam, podi mash, charred asparagus and roasted baby carrots.
+- Fish Pollichathu — $27.50: Whole golden pomfret roasted with South Indian spices, served with ghee sadam, charred asparagus and roasted baby carrots.
+- Ghee Roast Patta Paneer — $23.00 (vegetarian): Paneer wrapped in banana leaf, roasted with ghee and served with ghee sadam, charred asparagus and roasted baby carrots.
+- Kalan Mushroom Sambar Risotto — $22.00 (vegetarian): Coimbatore-style mushroom mash over creamy, buttered sambar rice, finished with crunchy corn chips.
+- Roasted Pineapple Steak — $23.00 (vegetarian): Caramelized pineapple steak with coconut reduction, ghee sadam, charred asparagus and roasted baby carrots.
 
-## What makes Madras Mami different
+### Pottalam Club
+Celebration rice, layered and loaded.
+- Wedding Mutton Biryani — $21.00: Celebration-style goat pilaf with brinjal salna, onion raita and a boiled egg.
+- Ambur Chicken Biryani — $19.00: Ambur-style chicken and fragrant seeraga samba rice, served with egg, onion raita and brinjal salna.
+- Madurai Veg Brinji — $17.00 (vegetarian): A fragrant rice pot with mixed vegetables and soya chunks, served with brinjal salna and onion raita.
 
-100% pure vegetarian. No meat, fish or eggs, ever.
-Every dish cooked with pure desi ghee. No oil substitutes.
-Heritage recipes from five South Indian states: Tamil Nadu, Kerala, Andhra Pradesh, Karnataka, Telangana.
-Signature Mami's Podi, a house spice blend made in-house.
-Dosa batter fermented and prepared fresh every single day.
-Three freshly ground chutneys daily: coconut, tomato, Nilgiri.
-Sambar slow-cooked from scratch every morning.
-Bangalore Benne dosas made with authentic desi white butter and fenugreek, rare outside Karnataka.
-Modern South Indian desserts that honour tradition: Filter Kapi Tiramisu, Silk Coconut Gelato, Elaneer Payasam.
-Signature drinks rooted in South Indian culture: Madras Filter Kapi, Black Kokum Cooler, Tamarindo, Rosie Darling.
+### Tiffin Tales
+Breakfast classics, welcome all day.
+- Medu Vada — $9.00 (vegetarian): Golden lentil doughnuts — crisp outside, fluffy inside — with coconut chutney, tomato chutney and sambar.
+- Sambar Vada — $11.00 (vegetarian): Crisp vada soaked in warm vegetable sambar and finished with a spoon of ghee.
+- Steamed Idli — $9.00 (vegetarian): Soft steamed rice-and-lentil cakes with sambar, coconut chutney and tomato chutney.
+- KGF Thatte Idli — $11.00 (vegetarian): A big, flat Karnataka-style idli with melted ghee and podi, served with chutneys and sambar.
 
-## The food
+### Dosa District
+Crisp, comforting and made to tear and share. Dosas and uthappams are served with coconut chutney, tomato chutney and vegetable sambar.
+- Masala Dosa — $15.00 (vegetarian): A crisp rice-and-lentil crepe filled with classic spiced potato masala.
+- Mysore Masala Dosa — $16.50 (vegetarian): Our crisp dosa spread with fiery Mysore chutney and filled with potato masala.
+- Paneer Bhurji Dosa — $19.50 (vegetarian): A crisp dosa filled with grated paneer, onion, tomato and chaat masala.
+- Pepper Chicken Dosa — $19.50: A crisp dosa loaded with bold black-pepper chicken.
+- Onion Uthappam — $15.00 (vegetarian): A thick, fluffy savoury pancake topped with red onion, tomato, green chilli and cilantro.
+- Madurai Kari Uthappam — $18.00: A thick uthappam topped with rich, slow-cooked Madurai-style mutton kari.
 
-At Madras Mami, Brampton's best South Indian restaurant, every section of the menu comes from somewhere specific. A region, a family kitchen, a street corner that regulars know by smell before they see it.
+### Benne Bistro
+Bangalore butter dosas with a Madras Social spin.
+- Benne Masala — $16.00 (vegetarian): Bangalore-style thick dosa with potato masala, house podi and a generous gloss of ghee.
+- Benne Mysore — $17.00 (vegetarian): Thick benne dosa layered with spicy Mysore chutney, potato masala, house podi and ghee.
+- Paneer Bhurji Benne — $19.00 (vegetarian): Thick benne dosa filled with spiced paneer bhurji, Mysore chutney, house podi and ghee.
 
-The dosas alone tell you that. Twelve varieties, each one different in batter, filling, technique and finish. The Sada Dosa is pure and simple, just the dosa and desi ghee, the way it should be. The Ghee Roast Masala Dosa is paper thin, crackling at the edges, the kind you get at a good tiffin house in Chennai. The Ghotala Dosa is stuffed with homemade cheese, paneer and bell peppers, bolder and richer, built for people who want more.
+### The Curry Club
+Southern gravies made for scooping. Served with ghee sadam.
+- Chicken Chettinad — $22.00: Boneless chicken simmered in a bold Chettinad curry with roasted spices and coconut.
+- Uthukuli Butter Chicken — $22.00: Our southern butter chicken — cashew-rich, coconut-creamy and made for scooping.
+- Guntur Kara Mutton — $23.00: Slow-braised mutton with fiery Guntur chilli, shallots and garlic.
+- Malabar Veg Kurma — $16.00 (vegetarian): Mixed vegetables in a creamy coconut-cashew sauce scented with poppy seeds.
+- Gutti Vankaya Kura — $17.00 (vegetarian): Baby eggplant stuffed with peanut, coconut and chilli, cooked Andhra-style.
 
-The Bangalore Benne section is something most people in Canada have never encountered outside their own kitchen. A Bengaluru street specialty, unique batter, fenugreek, desi white butter. It is very specific and very good.
+### Beyond South
+North Indian favourites, our way. Served with ghee rice.
+- Chicken Tikka Masala — $22.00: Charred chicken tikka folded into a silky tomato-butter masala.
+- Garlic Lamb Saag — $22.50: Slow-braised lamb in a garlicky spinach sauce.
+- Paneer Tikka Lababdar — $19.00 (vegetarian): Charred paneer in a rich, slightly smoky tomato and cashew gravy.
+- Masala Chole — $16.00 (vegetarian): Chickpeas simmered with onion, tomato and warming North Indian spices.
 
-The Vada Bar gives the humble medhu vada four completely different lives. Classic with Nilgiri chutney. The Curd Bomb injected with sweet salty yoghurt cream. Rasam Vada soaked in garlic tomato broth. The Medhu Vada Poutine, a Brampton idea that works better than it has any right to.
+### Side-Chicks
+The extras that never stay extra.
+- Ghee Sadam — $7.00 (vegetarian): Steamed rice glossed with fragrant ghee.
+- Bisi Bele Bhath — $11.00 (vegetarian): Karnataka-style rice and lentils cooked with vegetables and warm spices.
+- Garlic Naan — $5.00 (vegetarian): Soft flatbread brushed with garlic butter.
+- Flaky Parotta — $5.00 (vegetarian): Layered South Indian flatbread, crisp at the edges and soft inside.
+- Onion Raita — $4.00 (vegetarian): Cool yogurt with sliced onion and gentle spices.
+- Mango Pickle — $4.00 (vegetarian)
+- Tapioca Chips — $5.00 (vegetarian)
 
-The Coupled Plates are how South Indian food actually gets eaten at home. A curry and its companion. Vada curry with Kal Dosa. Bagara Baingan with Ghee Rice. Paneer Korma with Malabar Parotta. Nothing is served in isolation here.
+### Sweet Social
+Save room. Seriously.
+- Tirunelveli Halwa — $11.00 (vegetarian): Glossy wheat halwa with roasted cashews and rich ghee finish.
+- Pistachio Semiya Kunafa — $10.00 (vegetarian): Crisp vermicelli, creamy kunafa filling and pistachio sauce in every bite.
+- Blueberry Bliss — $12.50 (vegetarian): Warm blueberries and white-chocolate melt with bright berry compote.
+- Filter Kaapi Tiramisu — $8.50 (vegetarian): Coffee-soaked ladyfingers layered with cream and finished with bold South Indian filter coffee.
 
-Mami's Fuel covers the heartier end. Bisi Bele Bath Risotto with millet, coconut and desi ghee. Idiyappam Ramen with coconut stew. Patta Biryani wrapped and steamed in banana leaf. These are South Indian flavours expressed with confidence.
+## FAQ
+Is Madras Social vegetarian?
+Not entirely. There is a large vegetarian section on every part of the menu, and the kitchen also cooks chicken, mutton, lamb, pomfret, lobster and shrimp. Vegetarian dishes are marked on the menu.
 
-The desserts are where the kitchen gets personal. Filter Kapi Tiramisu uses real Madras filter coffee in place of espresso. Elaneer Payasam is tender coconut, jaggery and milk, a temple offering turned into dessert. Silk Coconut Gelato is slow-churned and deeply South Indian in its simplicity.
+Does Madras Social have a bar?
+Yes. Madras Social is a South Indian kitchen and a bar — a room you book a table in, not a takeout counter.
 
-The drinks menu reads like a South Indian road trip. Madras Filter Kapi brewed strong and frothy. Iced Filter Kapi for summer. Black Kokum Cooler from the Konkan coast. Tamarindo inspired by street-side coolers. Rosie Darling, rose milk with basil seeds and cardamom, nostalgic for anyone who grew up drinking it.
+Where is Madras Social located?
+Madras Social is at 8 Erb Street West, Waterloo, ON N2L 1S7, in Waterloo Region.
 
-## Full menu
+What kind of food does Madras Social serve?
+Kerala and Tamil cooking. Rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies, biryani, and a few North Indian dishes cooked our way.
 
-### Mami's Dosa Classics
-Served with veg sambar, coconut chutney, tomato chutney and Nilgiri chutney
+Which areas does Madras Social serve?
+Waterloo, Kitchener, Cambridge, Guelph, Elmira, St. Jacobs, Breslau, Baden.
 
-Sada Dosa, Masala Dosa, Mysore Masala Dosa, Ghee Roast Masala Dosa, Podi Masala Dosa, Amul Cheese and Chilli Dosa, Garlic Butter Dosa, Mushroom Sukka Dosa, Ghotala Dosa, Manglorean Paneer Dosa, Pav Bhaaji Dosa, Paneer Burji Dosa
+Can I book Madras Social for an event?
+Yes. Send the details to hello@madrassocial.ca and we will come back to you.
 
-### Bangalore Benne
-Benne Classic, Benne Masala Dosa, Benne Mysore Masala, Benne Paneer Burji
-
-### Rava Dosa and Uthappam
-Rava Masala, Onion Rava Masala, Paneer Rava Masala Dosa, Onion Uthappam, Mushroom Ghee Roast Uthappam, Pesto Uthappam
-
-### Idli
-Steamed Idli, Mami Thatte Idli, Gunpowder Idli Fries, Barbeque Idli Skewers, Dunked Junior Idlis
-
-### The Vada Bar
-The Everything Vada, The Curd Bomb (Thayir Vada), Great Rasa Vada (Rasam Vada), Amazing Medhu Vada Poutine
-
-### Munchies
-Edamame and Soundal Hummus, Chilli Bhajji, Ghee Roast Paneer Tacos, Chettinad Soya Chaap Momo, Roadstyle Kalan Mushroom, Truffle Fries
-
-### The Coupled Plates
-Nunku Paya and Malabar Parotta, Comforting Vada Curry and Kal Dosa, Yennegai Badenkayi and Steamed Ghee Rice, Village Style Paneer Korma and Malabar Parotta, Curry Leaf Tofu and Zesty Lemon Rice
-
-### Mami's Fuel
-Bisi Bele Bath Risotto, Idiyappam Ramen, Patta Biryani
-
-### Extra Affairs
-Temple Tamarind Rice, Heritage Lemon Rice, Cold Curd Rice, Steamed Ghee Rice, Malabar Parotta
-
-### Soup and Salad
-Rasam Soup, Avocado Kosambari
-
-### Desserts and Sweets
-Filter Kapi Tiramisu, Elaneer Payasam Classic, Chocolate Dosa Waffle and Cardamom Berrie Combot, Mango Panna Cotta, Silk Coconut Gelato
-
-### Beverages
-Madras Filter Kapi, Iced Madras Filter Kapi, Cutting Chai, Fresh Coconut Water, Black Kokum Cooler, Coconut Matcha, Fresh Mango Slush, Tamarindo, Rosie Darling
-
-## Catering
-
-Madras Mami caters weddings, receptions, birthdays, baby showers, kitty parties and corporate events across the GTA. The food travels well because it is built on technique. Slow-cooked curries. Freshly made dosa batter. Chutneys ground the same morning.
-
-Live Dosa Counter: hand-rolled at your event, golden and made-to-order in front of your guests.
-Wedding and Reception Catering: a full South Indian spread built around your guest count.
-Private Events and House Parties: birthdays, baby showers, kitty parties, corporate lunches.
-Curated Packages: tiffin menus, thali spreads, chaat counters, dessert stations.
-
-Contact hello@madrasmami.ca or call (905) 913-5900
-
-## Common questions
-
-Is Madras Mami 100% vegetarian?
-Yes. Madras Mami is 100% pure vegetarian. No meat, no fish, no eggs, anywhere on the menu.
-
-Do you cook with desi ghee?
-Yes. Every dish is made with pure desi ghee, not oil substitutes.
-
-What are Madras Mami's hours?
-Monday to Friday 4:00pm to 11:00pm. Saturday and Sunday 10:00am to 11:00pm.
-
-Where is Madras Mami located?
-At 6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9, in Mayfield Plaza in north Brampton.
-
-What is Madras Mami's phone number?
-Call (905) 913-5900, or email hello@madrasmami.ca.
-
-Does Madras Mami do catering?
-Yes. Madras Mami caters weddings, receptions, birthdays, baby showers, kitty parties
-and corporate events across the GTA, including a live dosa counter, thali spreads,
-tiffin menus, chaat counters and dessert stations.
-
-Can I order South Indian food online from Madras Mami?
-Yes. Takeout and delivery are available through the online ordering page, and you
-can also call (905) 913-5900.
-
-Do you take reservations?
-Yes. Tables can be booked at https://www.madrasmami.ca/reservations or by calling
-(905) 913-5900.
-
-Is there a Jain menu?
-Yes. Madras Mami has a separate Jain menu alongside the main menu and the tasting menu.
-
-## Who comes to Madras Mami
-
-South Indians in the GTA who want food that actually tastes like home. Families with children who need a menu that works for everyone. People who have never tried South Indian food and are curious. Vegetarians who are tired of being an afterthought on a menu. Anyone planning a wedding, event or celebration who wants food with soul.
-
----
-Last updated: 2026-09-04

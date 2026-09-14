@@ -41,7 +41,7 @@ const HeroSection = () => {
         <div className={`transition-all duration-[1.8s] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <img
             src={fullLogo}
-            alt="Madras Mami"
+            alt="Madras Social"
             className="w-52 md:w-72 mx-auto object-contain mb-8"
           />
         </div>
@@ -54,7 +54,7 @@ const HeroSection = () => {
 
         <div className={`transition-all duration-[1.8s] delay-700 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-white/60 text-sm md:text-base font-gotham max-w-lg mx-auto leading-relaxed tracking-wide">
-            Where the aroma of amma's kitchen meets the elegance of modern Brampton.
+            A South Indian kitchen and bar in Waterloo Region.
             Every bite, a memory. Every meal, a homecoming.
           </p>
         </div>

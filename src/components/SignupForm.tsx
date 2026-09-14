@@ -16,13 +16,14 @@ const SignupForm = () => {
     if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
     setIsSubmitting(true);
     try {
+      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
       const { error } = await supabase.from('leads').insert({
         form_type: 'newsletter_signup', name: formData.name, email: formData.email, phone: formData.phone,
       });
       if (error) throw error;
       trackFormSuccess('newsletter_signup');
       setIsSubmitted(true);
-      toast({ title: "Welcome to the family!", description: "We'll keep you posted on Mami's latest creations." });
+      toast({ title: "You're on the list", description: "We'll keep you posted." });
     } catch (error) {
       console.error('Form submission error:', error);
       toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
@@ -50,7 +51,7 @@ const SignupForm = () => {
         <div className={`text-center mb-10 transition-all duration-[1.2s] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4 font-gotham font-medium">Stay Close</p>
           <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-4">
-            A seat at Mami's table is always reserved for you
+            Hear it from us first
           </h2>
           <div className="w-8 h-px bg-accent/50 mx-auto mb-4" />
           <p className="text-xs text-muted-foreground max-w-md mx-auto">
@@ -76,7 +77,7 @@ const SignupForm = () => {
               {isSubmitting ? 'Joining...' : 'Join the Family'}
             </button>
           </div>
-          <p className="text-[10px] text-muted-foreground text-center mt-4 tracking-wide">No spam. Just love letters from Mami's kitchen.</p>
+          <p className="text-[10px] text-muted-foreground text-center mt-4 tracking-wide">No spam. Just the useful things.</p>
         </form>
       </div>
     </section>

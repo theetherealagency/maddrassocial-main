@@ -1,4 +1,4 @@
-// Brunch At Mami's Table - website form endpoint
+// Brunch At Social's Table - website form endpoint
 // Appends signups to the Brunch lead sheet with platform = "website",
 // emails the guest, and notifies the business.
 // The email design lives at TEMPLATE_URL on the website, so it can be
@@ -6,17 +6,17 @@
 // After editing: Deploy > Manage deployments > pencil > New version > Deploy
 
 var SHEET_ID = '1b2Oo8hwcQwAVikr75_q7NUbr2l5MIVemzpQMw5nNPXs';
-var NOTIFY_INTERNAL = 'hello@madrasmami.ca';
-var REPLY_TO = 'hello@madrasmami.ca';
+var NOTIFY_INTERNAL = 'hello@madrassocial.ca';
+var REPLY_TO = 'hello@madrassocial.ca';
 var SHARED_TOKEN = 'mami-brunch-2026';
-var TEMPLATE_URL = 'https://www.madrasmami.ca/brunch/email-template.html';
+var TEMPLATE_URL = 'https://www.madrassocial.ca/brunch/email-template.html';
 // Guests must see this as the sender. Google only allows it once the address is
 // verified under Gmail > Settings > Accounts > "Send mail as" on the account
 // running this script. Run listAliases() to check.
-var SEND_AS = 'hello@madrasmami.ca';
+var SEND_AS = 'hello@madrassocial.ca';
 
 function doGet() {
-  return json({ ok: true, service: "Brunch At Mami's Table intake" });
+  return json({ ok: true, service: "Brunch At Social's Table intake" });
 }
 
 function doPost(e) {
@@ -135,8 +135,8 @@ function sendGuestEmail(first, email) {
   var hello = name ? 'Hello ' + name + ',' : 'Hello,';
   var opts = {
     to: email,
-    subject: "You're on the list - Brunch At Mami's Table",
-    name: 'Madras Mami',
+    subject: "You're on the list - Brunch At Social's Table",
+    name: 'Madras Social',
     replyTo: REPLY_TO,
     body: guestText(name)
   };
@@ -209,7 +209,7 @@ function guestText(name) {
   return [
     name ? 'Hello ' + name + ',' : 'Hello,',
     '',
-    "Thank you for signing up for Brunch At Mami's Table.",
+    "Thank you for signing up for Brunch At Social's Table.",
     '',
     "We're inviting a small group to try our new brunch in our dining room before it launches - it's free, and all we ask is your honest feedback.",
     '',
@@ -218,9 +218,9 @@ function guestText(name) {
     'WHAT HAPPENS NEXT',
     "We're reviewing signups now and will reach out to selected guests with the date and details.",
     '',
-    'Madras Mami',
+    'Madras Social',
     '6261 Mayfield Rd, Unit 145, Brampton, ON',
-    '(905) 913-5900 | hello@madrasmami.ca'
+    '(905) 913-5900 | hello@madrassocial.ca'
   ].join('\n');
 }
 
@@ -228,7 +228,7 @@ function notifyBusiness(first, last, email, phone) {
   sendAs({
     to: NOTIFY_INTERNAL,
     subject: 'New brunch tasting signup - ' + first + ' ' + last,
-    name: 'Madras Mami Website',
+    name: 'Madras Social Website',
     body: [
       'A new Brunch Tasting signup came in from the website.',
       '',

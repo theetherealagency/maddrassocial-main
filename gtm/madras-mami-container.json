@@ -6,7 +6,7 @@
     "container": {
       "accountId": "6372153073",
       "containerId": "6372153073",
-      "name": "Madras Mami",
+      "name": "Madras Social",
       "publicId": "GTM-TCQRBQ8D",
       "usageContext": [
         "WEB"
@@ -2220,7 +2220,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "^https?://(?!(www\\.)?madrasmami\\.ca)"
+                "value": "^https?://(?!(www\\.)?madrassocial\\.ca)"
               }
             ]
           }

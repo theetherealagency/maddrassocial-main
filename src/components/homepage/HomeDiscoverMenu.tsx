@@ -16,27 +16,27 @@ import menuSlide9 from "@/assets/menu-slide-9.jpg";
 const menuCards = [
   {
     category: "FOOD",
-    title: "Coastal Traditions Reimagined",
-    body: "Experience Madras Mami where rich South Indian flavours meet creative flair. Authentic coastal spices elevated with modern touches for a dining experience that delights every sense.",
+    title: "Southern Roots, Social Plates",
+    body: "Kerala and Tamil cooking, served for the middle of the table. Rasam and roots to open, small plates with a southern attitude, and mains built to share. Vegetarian dishes are marked.",
     imageLeft: false,
     images: [menuSlide2, menuSlide7, menuSlide8],
-    imageAlt: "Madras Mami food — authentic South Indian dishes",
+    imageAlt: "Madras Social — South Indian plates for the middle of the table",
   },
   {
-    category: "HERITAGE FUSION",
-    title: "Elevated Pairings",
-    body: "Thoughtfully curated combinations that complement our best South Indian dishes. Handpicked flavours, meticulously food-matched with coconut appetisers, and idli ghee. Tradition with a modern twist.",
+    category: "FROM THE TAVA",
+    title: "Dosa District",
+    body: "Dosas and uthappams, crisp at the edge and made to tear and share. Served with coconut chutney, tomato chutney and vegetable sambar. Bangalore butter dosas have a section of their own.",
     imageLeft: true,
     images: [menuSlide1, menuSlide3, menuSlide5],
-    imageAlt: "Heritage fusion dishes — tradition with a modern twist",
+    imageAlt: "Dosas and uthappams from the tava",
   },
   {
     category: "DESSERTS",
-    title: "Modern Spice Mixes",
-    body: "Playful creations reimagining the South Indian pantry staples — heritage aromas with ladyfingers soaked in Madras filter coffee, layered with cream cheese, a heritage flavour fused with the inventive, contemporary craft.",
+    title: "Sweet Social",
+    body: "Tirunelveli halwa with roasted cashews. Pistachio semiya kunafa. Filter kaapi tiramisu, with ladyfingers soaked in South Indian filter coffee. Save room.",
     imageLeft: false,
     images: [dessertMangoPannaCotta, menuSlide9],
-    imageAlt: "Modern spice mix desserts — contemporary South Indian craft",
+    imageAlt: "Madras Social desserts",
   },
 ];
 

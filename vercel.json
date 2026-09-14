@@ -20,14 +20,6 @@
       "destination": "/catering/index.html"
     },
     {
-      "source": "/gift-cards",
-      "destination": "/gift-cards/index.html"
-    },
-    {
-      "source": "/brunch-tasting",
-      "destination": "/brunch-tasting/index.html"
-    },
-    {
       "source": "/contact",
       "destination": "/contact/index.html"
     },
@@ -36,8 +28,12 @@
       "destination": "/about-us/index.html"
     },
     {
-      "source": "/newsletter",
-      "destination": "/newsletter/index.html"
+      "source": "/events",
+      "destination": "/events/index.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers/index.html"
     },
     {
       "source": "/((?!.*\\.).*)",

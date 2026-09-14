@@ -17,28 +17,35 @@ interface JobPosition {
   responsibilities: string[];
 }
 
+/**
+ * PENDING — Madras Social's actual open roles have not been supplied. These
+ * four are inherited from the source and rewritten into The Host voice; they
+ * are plausible for the room but unconfirmed. Note there is no bar role here
+ * even though Madras Social has a full bar. Confirm or replace before launch.
+ * See PENDING.md.
+ */
 const jobPositions: JobPosition[] = [
   {
     id: 'head-chef', title: 'Head Chef', type: 'Full-time',
-    description: 'Lead our kitchen team and bring Mami\'s authentic South Indian flavors to life every single day.',
+    description: 'Run the kitchen. Kerala and Tamil cooking, a menu that changes when it should, and a team worth keeping.',
     requirements: ['5+ years in South Indian cuisine', 'Strong leadership skills', 'Food safety certification'],
     responsibilities: ['Oversee all kitchen operations', 'Develop and refine menu items', 'Train and mentor kitchen staff'],
   },
   {
     id: 'line-cook', title: 'Line Cook', type: 'Full-time / Part-time',
-    description: 'Join our kitchen brigade — where every dish is made with the same care as Mami\'s home kitchen.',
+    description: 'Work a station on a South Indian line. Dosas, gravies, biryani, and the prep behind all of it.',
     requirements: ['1+ years kitchen experience', 'Familiarity with South Indian cuisine preferred', 'Team player'],
     responsibilities: ['Prepare ingredients and dishes', 'Maintain station cleanliness', 'Follow food safety protocols'],
   },
   {
     id: 'server', title: 'Server', type: 'Full-time / Part-time',
-    description: 'Be the warmth that greets every guest — like welcoming family into our home.',
+    description: 'Look after a section. Know the menu, know the bar, and read a table before it asks.',
     requirements: ['Previous restaurant experience preferred', 'Excellent communication', 'Smart Serve certification'],
     responsibilities: ['Welcome and seat guests', 'Present menu and take orders', 'Ensure guest satisfaction'],
   },
   {
     id: 'manager', title: 'Restaurant Manager', type: 'Full-time',
-    description: 'Lead our front-of-house team and ensure every guest leaves feeling like they just visited home.',
+    description: 'Run the floor. Rotas, service standards, and the hundred small things that make a room work.',
     requirements: ['3+ years management experience', 'POS system proficiency', 'Strong leadership'],
     responsibilities: ['Oversee daily operations', 'Hire and train staff', 'Handle customer feedback'],
   },
@@ -108,6 +115,7 @@ const ApplicationModal = ({ job, onClose, onSubmit }: { job: JobPosition; onClos
     if (!formData.fullName || !formData.email || !formData.phone) return;
     setIsSubmitting(true);
     try {
+      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
       const { error } = await supabase.from('leads').insert({
         form_type: 'job_application', name: formData.fullName, email: formData.email,
         phone: formData.phone, job_title: job.title, experience: formData.experience || null,
@@ -200,7 +208,7 @@ const ApplicationModal = ({ job, onClose, onSubmit }: { job: JobPosition; onClos
               rows={3} className="form-input text-sm resize-none" placeholder="Tell us about yourself..." />
           </div>
           <div>
-            <label className="form-label text-[10px]">Why Madras Mami?</label>
+            <label className="form-label text-[10px]">Why Madras Social?</label>
             <textarea value={formData.whyWork}
               onChange={(e) => setFormData(prev => ({ ...prev, whyWork: e.target.value }))}
               rows={3} className="form-input text-sm resize-none" placeholder="What draws you to our family..." />
@@ -236,7 +244,7 @@ const Careers = () => {
           <h1 className="font-kugile text-3xl sm:text-4xl md:text-5xl text-primary mb-4">Join the Family</h1>
           <div className="w-10 h-px bg-accent/50 mx-auto mb-4" />
           <p className="text-muted-foreground text-xs max-w-sm mx-auto font-gotham tracking-wide">
-            We're not just hiring staff — we're welcoming family. People who understand that food is love.
+            We are opening in Waterloo Region and hiring for the kitchen, the bar and the floor.
           </p>
         </div>
       </section>
@@ -248,7 +256,7 @@ const Careers = () => {
               <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4 font-gotham font-medium">Open Positions</p>
               <h2 className="font-kugile text-xl md:text-2xl text-primary">Current Opportunities</h2>
               <p className="text-xs text-muted-foreground mt-3 max-w-md mx-auto">
-                Like Mami always said — a kitchen is only as good as the people in it.
+                Like Social always said — a kitchen is only as good as the people in it.
               </p>
             </div>
 
@@ -257,7 +265,7 @@ const Careers = () => {
             ))}
 
             <p className="text-[10px] text-muted-foreground text-center mt-12 tracking-wide">
-              Madras Mami is an equal opportunity employer.
+              Madras Social is an equal opportunity employer.
             </p>
           </div>
         </div>

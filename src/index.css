@@ -2,59 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Fonts */
-@font-face {
-  font-family: 'Kugile';
-  src: url('/fonts/Kugile.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* ─── Madras Social typefaces ──────────────────────────────────────────────
+   Replaces the Kugile / Gotham block in src/index.css.
+   Files live in public/fonts/ and are served from /fonts/.
+
+   New Icon  — display / headings   (replaces Kugile)
+   Aksen     — body                 (replaces Gotham)
+   Seruni    — accent               (new; eyebrows, labels, nav only)
+
+   NOTE: the Aksen files currently in public/fonts/ are the TRIAL cut. They are
+   missing ' " : ; ( ) / % – — and cannot set body copy. Replace all five with
+   the licensed family when it arrives — filenames and weights below are already
+   correct, so it is a straight file swap with no CSS change.
+   ────────────────────────────────────────────────────────────────────────── */
 
 @font-face {
-  font-family: 'KugileDemo';
-  src: url('/fonts/Kugile_Demo.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/GothamBook.ttf') format('truetype');
+  font-family: 'New Icon';
+  src: url('/fonts/NewIcon-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/GothamBookItalic.ttf') format('truetype');
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-Medium.otf') format('opentype');
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/GothamMedium.ttf') format('truetype');
-  font-weight: 500;
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-SemiBold.woff2') format('woff2');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-Bold.ttf') format('truetype');
+  font-family: 'Aksen';
+  src: url('/fonts/Aksen-Bold.woff2') format('woff2');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Seruni';
+  src: url('/fonts/Seruni-Regular.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -62,78 +75,79 @@
 @layer base {
   :root {
     /* Core palette */
-    --background: 39 25% 92%;
-    --foreground: 21 50% 15%;
+    --background: 36 34% 89%;
+    --foreground: 12 9% 11%;
 
-    --card: 36 33% 80%;
-    --card-foreground: 21 50% 15%;
+    --card: 45 21% 55%;
+    --card-foreground: 12 9% 11%;
 
-    --popover: 41 38% 89%;
-    --popover-foreground: 21 50% 15%;
+    --popover: 36 34% 89%;
+    --popover-foreground: 12 9% 11%;
 
-    --primary: 44 50% 63%;
-    --primary-foreground: 21 50% 15%;
+    --primary: 11 65% 40%;
+    --primary-foreground: 36 34% 89%;
 
-    --secondary: 100 30% 15%;
-    --secondary-foreground: 41 38% 89%;
+    --secondary: 79 29% 23%;
+    --secondary-foreground: 36 34% 89%;
 
-    --muted: 36 33% 80%;
-    --muted-foreground: 21 50% 15%;
+    --muted: 45 21% 55%;
+    --muted-foreground: 12 9% 11%;
 
-    --accent: 44 50% 63%;
-    --accent-foreground: 21 50% 15%;
+    --accent: 11 65% 40%;
+    --accent-foreground: 36 34% 89%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 44 50% 63%;
-    --input: 44 50% 63%;
-    --ring: 44 50% 63%;
+    --border: 11 65% 40%;
+    --input: 11 65% 40%;
+    --ring: 11 65% 40%;
 
     --radius: 0.5rem;
 
     /* Brand tokens */
-    --color-cream: 39 25% 92%;
-    --color-beige: 36 33% 80%;
-    --color-green: 100 30% 15%;
-    --color-brown: 21 50% 15%;
-    --color-gold: 44 50% 63%;
+    --color-cream: 36 34% 89%;
+    --color-beige: 45 21% 55%;
+    --color-green: 79 29% 23%;
+    --color-brown: 12 9% 11%;
+    --color-gold: 11 65% 40%;
     --color-white: 0 0% 100%;
 
     /* Extended brand tokens (from current project) */
-    --offwhite: 42 56% 89%;
-    --cream: 42 50% 93%;
-    --emerald: 167 91% 9%;
-    --emerald-light: 167 60% 20%;
-    --emerald-muted: 167 40% 30%;
-    --mud: 29 48% 18%;
-    --mud-light: 29 30% 35%;
-    --mud-muted: 29 20% 50%;
-    --gold: 46 70% 55%;
-    --gold-light: 46 60% 70%;
-    --gold-dark: 46 75% 42%;
+    --offwhite: 36 34% 89%;
+    --cream: 36 34% 89%;
+    --emerald: 79 29% 23%;
+    --emerald-light: 79 25% 32%;
+    --emerald-muted: 79 20% 42%;
+    --mud: 12 9% 11%;
+    --mud-light: 12 9% 26%;
+    --mud-muted: 45 21% 55%;
+    --gold: 11 65% 40%;
+    --gold-light: 11 55% 52%;
+    --gold-dark: 11 70% 31%;
 
     /* Font families */
-    --font-display: 'Kugile', 'KugileDemo', 'Playfair Display', serif;
-    --font-body: 'Gotham', 'Raleway', sans-serif;
+    --font-display: 'New Icon', Georgia, serif;
+    --font-body: 'Aksen', system-ui, sans-serif;
+    --font-accent: 'Seruni', 'New Icon', serif;
 
     /* Shadows */
-    --shadow-card: 0 20px 40px -15px hsla(100, 30%, 15%, 0.15);
-    --shadow-polaroid: 0 8px 32px hsla(21, 50%, 15%, 0.18);
-    --shadow-nav: 0 2px 20px hsla(21, 50%, 15%, 0.08);
-    --shadow-soft: 0 4px 20px hsl(29 48% 18% / 0.06);
-    --shadow-medium: 0 8px 30px hsl(29 48% 18% / 0.1);
-    --shadow-large: 0 16px 50px hsl(29 48% 18% / 0.14);
+    --shadow-card: 0 20px 40px -15px hsla(79, 29%, 23%, 0.15);
+    --shadow-polaroid: 0 8px 32px hsla(12, 9%, 11%, 0.18);
+    --shadow-nav: 0 2px 20px hsla(12, 9%, 11%, 0.08);
+    --shadow-soft: 0 4px 20px hsl(12 9% 11% / 0.06);
+    --shadow-medium: 0 8px 30px hsl(12 9% 11% / 0.1);
+    --shadow-large: 0 16px 50px hsl(12 9% 11% / 0.14);
 
     /* Sidebar */
-    --sidebar-background: 167 91% 9%;
-    --sidebar-foreground: 42 56% 89%;
-    --sidebar-primary: 46 70% 55%;
-    --sidebar-primary-foreground: 29 48% 12%;
-    --sidebar-accent: 167 60% 15%;
-    --sidebar-accent-foreground: 42 56% 89%;
-    --sidebar-border: 167 50% 15%;
-    --sidebar-ring: 46 70% 55%;
+    --sidebar-background: 79 29% 23%;
+    --sidebar-foreground: 36 34% 89%;
+    --sidebar-primary: 11 65% 40%;
+    --sidebar-primary-foreground: 36 34% 89%;
+    --sidebar-accent: 79 25% 32%;
+    --sidebar-accent-foreground: 36 34% 89%;
+    --sidebar-border: 79 25% 32%;
+    --sidebar-ring: 11 65% 40%;
   }
 }
 

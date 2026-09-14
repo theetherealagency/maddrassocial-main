@@ -5,14 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
-import About from "./pages/About";
+// /about renders the merged about page (pages/AboutUs.tsx), per BUILD-PLAN Part 2.
 import AboutUs from "./pages/AboutUs";
-import TastingEvent from "./pages/TastingEvent";
 import Reservations from "./pages/Reservations";
-import GiftCards from "./pages/GiftCards";
-import BrunchTasting from "./pages/BrunchTasting";
 import Events from "./pages/Events";
-// Careers page hidden
+import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import RouteSeo from "./seo/RouteSeo";
@@ -33,14 +30,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/reservations" element={<Reservations />} />
-          <Route path="/gift-cards" element={<GiftCards />} />
-          <Route path="/newsletter" element={<TastingEvent />} />
-          <Route path="/brunch-tasting" element={<BrunchTasting />} />
           <Route path="/catering" element={<Events />} />
-          {/* Careers route hidden */}
+          <Route path="/events" element={<Events />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           
           <Route path="*" element={<NotFound />} />

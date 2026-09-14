@@ -19,16 +19,16 @@ const StorySection = () => {
 
           <div className="space-y-5 text-sm text-muted-foreground leading-[1.9]">
             <p>
-              Every dish at Madras Mami is a love letter written by Mami's hands —
+              Kerala and Tamil cooking, a full bar, and a table you book rather than a
               the same hands that ground fresh batter before dawn, that tempered mustard seeds
               till they danced in hot oil, that rolled perfect idlis while the whole house
               still slept in the warmth of a Chennai morning.
             </p>
             <p>
-              Heritage recipes passed down through Mami's kitchen, from the temple towns
+              South Indian food is on menus from Times Square to Singapore. Waterloo
               of Tamil Nadu to the coffee houses of Bangalore, from the spice markets
               of Chettinad to the tiffin stalls of Mylapore — we bring that warmth,
-              that taste of home, right here to Brampton.
+              Region has the appetite for it. What it did not have was the room.
             </p>
           </div>
         </div>

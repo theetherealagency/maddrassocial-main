@@ -37,20 +37,40 @@ const openingHours = OPENING_HOURS.map((h) => ({
   closes: h.closes,
 }));
 
+/**
+ * PENDING guard. Values not yet supplied are the literal string 'PENDING'
+ * (see PENDING.md). Schema must omit the field entirely rather than emit the
+ * string — a 'PENDING' telephone or geo coordinate is worse than no field.
+ */
+const isSet = (v) =>
+  v != null && v !== 'PENDING' && !(typeof v === 'string' && v.trim() === '');
+
+/** Spread helper: `...opt('telephone', SITE.phone)` yields {} when pending. */
+const opt = (key, value) => (isSet(value) ? { [key]: value } : {});
+
+/** Geo block, or {} when either coordinate is pending. */
+const geoNode = () =>
+  isSet(SITE.geo?.lat) && isSet(SITE.geo?.lng)
+    ? {
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: SITE.geo.lat,
+          longitude: SITE.geo.lng,
+        },
+      }
+    : {};
+
+/**
+ * Only claims that are established for Madras Social. The Madras Mami list
+ * carried 'Live Dosa Counter', 'Jain Menu Available', 'Takeout', 'Delivery',
+ * 'Wedding Catering', 'Family Friendly' and 'Wheelchair Accessible Entrance' —
+ * none of which have been confirmed here, and amenityFeature is a factual
+ * claim Google surfaces. Add them back once confirmed. See PENDING.md.
+ */
 const amenities = [
-  '100% Pure Vegetarian',
-  'Cooked with Pure Desi Ghee',
-  'Authentic Heritage Recipes',
   'Dine In',
-  'Takeout',
-  'Delivery',
-  'Catering Available',
-  'Live Dosa Counter',
+  'Full Bar',
   'Private Events',
-  'Wedding Catering',
-  'Jain Menu Available',
-  'Family Friendly',
-  'Wheelchair Accessible Entrance',
 ].map((name) => ({
   '@type': 'LocationFeatureSpecification',
   name,
@@ -72,7 +92,7 @@ export const imageNodes = () => [
     height: SITE.ogImageMeta.height,
     encodingFormat: SITE.ogImageMeta.type,
     caption:
-      'A South Indian spread at Madras Mami in Brampton — ghee roast dosa, medhu vada, idli, chutneys and Madras filter coffee in brass.',
+      'A South Indian spread at Madras Social in Waterloo.',
     representativeOfPage: true,
   },
   {
@@ -83,7 +103,7 @@ export const imageNodes = () => [
     width: SITE.logoMeta.width,
     height: SITE.logoMeta.height,
     encodingFormat: SITE.logoMeta.type,
-    caption: 'Madras Mami',
+    caption: 'Madras Social',
   },
 ];
 
@@ -91,13 +111,9 @@ export const imageNodes = () => [
 export const placeNode = () => ({
   '@type': 'Place',
   '@id': ID.place,
-  name: SITE.containedInPlace,
+  ...opt('name', SITE.containedInPlace),
   address: postalAddress,
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: SITE.geo.lat,
-    longitude: SITE.geo.lng,
-  },
+  ...geoNode(),
 });
 
 /** The business itself — the anchor every other node points at. */
@@ -105,34 +121,34 @@ export const restaurantNode = () => ({
   '@type': 'Restaurant',
   '@id': ID.restaurant,
   name: SITE.name,
-  alternateName: 'Madras Mami Brampton',
+  alternateName: 'Madras Social Waterloo',
   description:
-    'Authentic South Indian restaurant in Brampton, Ontario — 100% pure vegetarian, every dish cooked with pure desi ghee. Heritage dosas, idli, vada, uthappam, Bangalore Benne dosas, thali, filter coffee and catering, drawn from Tamil Nadu, Kerala, Andhra Pradesh, Karnataka and Telangana.',
+    'A South Indian kitchen and bar in Waterloo Region. Kerala and Tamil cooking — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies and biryani — with a full bar. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
   url: `${O}/`,
   image: { '@id': ID.ogImage },
   logo: { '@id': ID.logo },
   photo: { '@id': ID.ogImage },
-  telephone: SITE.phone,
+  ...opt('telephone', SITE.phone),
   email: SITE.email,
   priceRange: SITE.priceRange,
   currenciesAccepted: SITE.currency,
   paymentAccepted: 'Cash, Credit Card, Debit Card',
   servesCuisine: SITE.cuisines,
   address: postalAddress,
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: SITE.geo.lat,
-    longitude: SITE.geo.lng,
-  },
-  hasMap: SITE.map,
-  identifier: {
-    '@type': 'PropertyValue',
-    propertyID: 'Google Knowledge Graph MID',
-    value: SITE.kgmid,
-  },
+  ...geoNode(),
+  ...opt('hasMap', SITE.map),
+  ...(isSet(SITE.kgmid)
+    ? {
+        identifier: {
+          '@type': 'PropertyValue',
+          propertyID: 'Google Knowledge Graph MID',
+          value: SITE.kgmid,
+        },
+      }
+    : {}),
   areaServed: SITE.areaServed.map((n) => ({ '@type': 'City', name: n })),
   openingHoursSpecification: openingHours,
-  acceptsReservations: SITE.reserveUrl,
+  ...opt('acceptsReservations', SITE.reserveUrl),
   hasMenu: [
     { '@id': ID.menu },
     { '@id': ID.menuJain },
@@ -143,7 +159,7 @@ export const restaurantNode = () => ({
   knowsAbout: KNOWS_ABOUT,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'What Madras Mami offers',
+    name: 'What Madras Social offers',
     itemListElement: OFFERINGS.map(([name, description]) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name, description },
@@ -156,14 +172,14 @@ export const restaurantNode = () => ({
   publicAccess: true,
   isAccessibleForFree: false,
   keywords:
-    'south indian restaurant brampton, pure vegetarian restaurant brampton, dosa brampton, idli brampton, filter coffee brampton, south indian catering brampton',
+    'south indian restaurant waterloo, south indian kitchen and bar waterloo, dosa waterloo, biryani waterloo, kerala food kitchener, tamil food cambridge',
   amenityFeature: amenities,
   sameAs: SITE.sameAs,
   parentOrganization: { '@id': ID.org },
   potentialAction: [
-    {
+    ...(isSet(SITE.orderUrl) ? [{
       '@type': 'OrderAction',
-      name: 'Order South Indian food online from Madras Mami',
+      name: 'Order South Indian food online from Madras Social',
       target: {
         '@type': 'EntryPoint',
         urlTemplate: SITE.orderUrl,
@@ -177,10 +193,10 @@ export const restaurantNode = () => ({
         'https://schema.org/OnSitePickup',
         'https://schema.org/ParcelService',
       ],
-    },
-    {
+    }] : []),
+    ...(isSet(SITE.reserveUrl) ? [{
       '@type': 'ReserveAction',
-      name: 'Book a table at Madras Mami',
+      name: 'Book a table at Madras Social',
       target: {
         '@type': 'EntryPoint',
         urlTemplate: SITE.reserveUrl,
@@ -191,7 +207,7 @@ export const restaurantNode = () => ({
         ],
       },
       result: { '@type': 'FoodEstablishmentReservation', name: 'Table reservation' },
-    },
+    }] : []),
   ],
 });
 
@@ -203,14 +219,14 @@ export const organizationNode = () => ({
   logo: { '@id': ID.logo },
   image: { '@id': ID.ogImage },
   email: SITE.email,
-  telephone: SITE.phone,
+  ...opt('telephone', SITE.phone),
   address: postalAddress,
   sameAs: SITE.sameAs,
   knowsAbout: KNOWS_ABOUT,
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      telephone: SITE.phone,
+      ...opt('telephone', SITE.phone),
       email: SITE.email,
       contactType: 'reservations',
       areaServed: 'CA',
@@ -218,7 +234,7 @@ export const organizationNode = () => ({
     },
     {
       '@type': 'ContactPoint',
-      telephone: SITE.phone,
+      ...opt('telephone', SITE.phone),
       email: SITE.email,
       contactType: 'catering',
       areaServed: 'CA',
@@ -234,7 +250,7 @@ export const websiteNode = () => ({
   url: `${O}/`,
   inLanguage: 'en-CA',
   description:
-    'Authentic South Indian restaurant in Brampton — 100% pure vegetarian, cooked in pure desi ghee.',
+    'A South Indian kitchen and bar in Waterloo Region.',
   publisher: { '@id': ID.org },
   about: { '@id': ID.restaurant },
 });
@@ -257,8 +273,20 @@ export const menuNodes = () => {
             ...(sec.description ? { description: sec.description } : {}),
             hasMenuItem: sec.items.map((item) => ({
               '@type': 'MenuItem',
-              name: item,
-              suitableForDiet: 'https://schema.org/VegetarianDiet',
+              name: item.name,
+              ...(item.description ? { description: item.description } : {}),
+              ...(item.price != null
+                ? {
+                    offers: {
+                      '@type': 'Offer',
+                      price: item.price.toFixed(2),
+                      priceCurrency: SITE.currency,
+                    },
+                  }
+                : {}),
+              ...(item.veg
+                ? { suitableForDiet: 'https://schema.org/VegetarianDiet' }
+                : {}),
             })),
           })),
         }
@@ -270,9 +298,9 @@ export const menuNodes = () => {
 export const giftCardNode = () => ({
   '@type': 'Product',
   '@id': ID.giftCard,
-  name: 'Madras Mami Gift Card',
+  name: 'Madras Social Gift Card',
   description:
-    'A Madras Mami gift card, redeemable in the restaurant at 6261 Mayfield Rd, Unit 145, Brampton — for family who miss the food they grew up with, and friends who moved away.',
+    'A Madras Social gift card, redeemable in the restaurant.',
   category: 'Gift Card',
   image: { '@id': ID.ogImage },
   brand: { '@id': ID.org },
@@ -314,21 +342,21 @@ export const faqNode = (url) => ({
 export const cateringNode = () => ({
   '@type': 'Service',
   '@id': `${O}/catering#service`,
-  name: 'South Indian Catering — Madras Mami',
+  name: 'South Indian Catering — Madras Social',
   serviceType: 'South Indian catering',
   description:
-    'Pure vegetarian South Indian catering for weddings, receptions, birthdays, baby showers, kitty parties and corporate events across the Greater Toronto Area.',
+    'Private dining and event catering from a South Indian kitchen and bar in Waterloo Region.',
   provider: { '@id': ID.restaurant },
   areaServed: SITE.areaServed.map((n) => ({ '@type': 'City', name: n })),
   availableChannel: {
     '@type': 'ServiceChannel',
     serviceUrl: `${O}/catering`,
-    servicePhone: SITE.phone,
+    ...opt('servicePhone', SITE.phone),
     serviceLocation: { '@id': ID.restaurant },
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Madras Mami catering packages',
+    name: 'Madras Social catering packages',
     itemListElement: [
       ['Live Dosa Counter', 'Dosas hand-rolled to order in front of your guests.'],
       ['Wedding and Reception Catering', 'A full South Indian spread built around your guest count.'],

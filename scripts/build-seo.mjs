@@ -23,6 +23,16 @@ import { fileURLToPath } from 'node:url';
 
 import { SITE, HOURS_TEXT, FULL_ADDRESS } from '../seo/site.mjs';
 import { ROUTES, INDEXABLE } from '../seo/routes.mjs';
+
+/**
+ * PENDING guard — mirrors seo/schema.mjs and seo/routes.mjs. Values not yet
+ * supplied are the literal string 'PENDING' (see PENDING.md); the meta tag is
+ * dropped entirely rather than emitting the word into every page's head.
+ */
+const isSet = (v) =>
+  v != null && v !== 'PENDING' && !(typeof v === 'string' && v.trim() === '');
+/** Emit a whole meta line only when the value is real. */
+const metaIf = (cond, line) => (cond ? line : '');
 import { graphFor } from '../seo/schema.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -71,23 +81,23 @@ function headFor(route) {
     <meta property="og:image:type"       content="${SITE.ogImageMeta.type}">
     <meta property="og:image:width"      content="${SITE.ogImageMeta.width}">
     <meta property="og:image:height"     content="${SITE.ogImageMeta.height}">
-    <meta property="og:image:alt"        content="A South Indian spread at Madras Mami in Brampton — ghee roast dosa, medhu vada, idli, chutneys and Madras filter coffee in brass.">
+    <meta property="og:image:alt"        content="A South Indian spread at Madras Social in Waterloo.">
 ${SITE.sameAs.map((u) => `    <meta property="og:see_also"         content="${attr(u)}">`).join('\n')}
 
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="${attr(route.title)}">
     <meta name="twitter:description" content="${attr(route.description)}">
     <meta name="twitter:image"       content="${attr(SITE.ogImage)}">
-    <meta name="twitter:image:alt"   content="A South Indian spread at Madras Mami in Brampton — ghee roast dosa, medhu vada, idli, chutneys and Madras filter coffee in brass.">
+    <meta name="twitter:image:alt"   content="A South Indian spread at Madras Social in Waterloo.">
     <meta name="twitter:label1"      content="Cuisine">
-    <meta name="twitter:data1"       content="South Indian &middot; 100% pure vegetarian">
-    <meta name="twitter:label2"      content="Open">
-    <meta name="twitter:data2"       content="Mon-Fri 4pm-11pm &middot; Sat-Sun 10am-11pm">
+    <meta name="twitter:data1"       content="South Indian kitchen &amp; bar">
+    ${metaIf(isSet(HOURS_TEXT), `<meta name="twitter:label2"      content="Open">
+    <meta name="twitter:data2"       content="${attr(HOURS_TEXT)}">`)}
 
     <!-- Open Graph restaurant + place namespace: fills in the business card
          Facebook and other consumers render beside a shared link. -->
-    <meta property="place:location:latitude"           content="${SITE.geo.lat}">
-    <meta property="place:location:longitude"          content="${SITE.geo.lng}">
+    ${metaIf(isSet(SITE.geo.lat) && isSet(SITE.geo.lng), `<meta property="place:location:latitude"           content="${SITE.geo.lat}">
+    <meta property="place:location:longitude"          content="${SITE.geo.lng}">`)}
     <meta property="restaurant:menu"                   content="${SITE.origin}/menu">
     <meta property="restaurant:price_range"            content="${attr(SITE.priceRange)}">
     <meta property="restaurant:category"               content="South Indian">
@@ -96,16 +106,16 @@ ${SITE.sameAs.map((u) => `    <meta property="og:see_also"         content="${at
     <meta property="restaurant:contact_info:region"         content="${attr(SITE.address.region)}">
     <meta property="restaurant:contact_info:postal_code"    content="${attr(SITE.address.postalCode)}">
     <meta property="restaurant:contact_info:country_name"   content="Canada">
-    <meta property="restaurant:contact_info:phone_number"   content="${attr(SITE.phoneDisplay)}">
+    ${metaIf(isSet(SITE.phoneDisplay), `<meta property="restaurant:contact_info:phone_number"   content="${attr(SITE.phoneDisplay)}">`)}
     <meta property="restaurant:contact_info:email"          content="${attr(SITE.email)}">
     <meta property="restaurant:contact_info:website"        content="${SITE.origin}/">
 
     <meta name="geo.region"    content="CA-ON">
-    <meta name="geo.placename" content="Brampton, Ontario, Canada">
-    <meta name="geo.position"  content="${SITE.geo.lat};${SITE.geo.lng}">
-    <meta name="ICBM"          content="${SITE.geo.lat}, ${SITE.geo.lng}">
+    <meta name="geo.placename" content="Waterloo, Ontario, Canada">
+    ${metaIf(isSet(SITE.geo.lat) && isSet(SITE.geo.lng), `<meta name="geo.position"  content="${SITE.geo.lat};${SITE.geo.lng}">
+    <meta name="ICBM"          content="${SITE.geo.lat}, ${SITE.geo.lng}">`)}
     <meta name="geo.country"   content="CA">
-    <meta name="business:hours" content="${attr(HOURS_TEXT)}">
+    ${metaIf(isSet(HOURS_TEXT), `<meta name="business:hours" content="${attr(HOURS_TEXT)}">`)}
     <meta name="address"        content="${attr(FULL_ADDRESS)}">
 
     <link rel="alternate" hreflang="en-ca"    href="${attr(canonical)}">

@@ -25,6 +25,7 @@ const Contact = () => {
     }
     setIsSubmitting(true);
     try {
+      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
       const { error } = await supabase.from('leads').insert({
         form_type: 'contact', name: formData.name, email: formData.email,
         phone: formData.phone || null, subject: formData.subject || null, message: formData.message,
@@ -72,7 +73,7 @@ const Contact = () => {
           <h1 className="font-kugile text-2xl sm:text-3xl md:text-5xl text-primary mb-3 md:mb-4">Contact</h1>
           <div className="w-10 h-px bg-accent/50 mx-auto mb-3 md:mb-4" />
           <p className="text-muted-foreground text-xs max-w-sm mx-auto font-gotham tracking-wide">
-            Mami's door is always open. Come say hello.
+            Come say hello.
           </p>
         </div>
       </section>
@@ -86,23 +87,31 @@ const Contact = () => {
             {/* Contact Info */}
             <div ref={infoRef} className={`transition-all duration-[1.2s] ${infoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <h2 className="font-kugile text-xl md:text-2xl text-primary mb-3">
-                Like a warm cup of filter kapi, we're always here for you
+                Get in touch
               </h2>
               <p className="text-xs text-muted-foreground leading-relaxed mb-8">
-                Whether it's a catering inquiry, a reservation, or just to tell us how much you loved the dosa — we'd love to hear from you.
+                An event, a table, or a question about the menu. Write to us and we will come back to you.
               </p>
 
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: MapPin, title: 'Location', content: '6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9', href: 'https://share.google/US5bWLfnTKIab8p5V', external: true },
-                  { icon: Mail, title: 'Email', content: 'hello@madrasmami.ca', href: 'mailto:hello@madrasmami.ca', external: false },
-                  { icon: Phone, title: 'Phone', content: '(905) 913-5900', href: 'tel:+19059135900', external: false },
-                ].map((item) => (
-                  <a
+                  // Google Maps share link is PENDING — the address renders as
+                  // plain text (href undefined) rather than a dead link.
+                  { icon: MapPin, title: 'Location', content: '8 Erb Street West, Waterloo, ON N2L 1S7', href: undefined, external: false },
+                  { icon: Mail, title: 'Email', content: 'hello@madrassocial.ca', href: 'mailto:hello@madrassocial.ca', external: false },
+                  // Phone is PENDING — the row is omitted entirely until the number lands.
+                ].map((item) => {
+                  const Comp = item.href ? 'a' : 'div';
+                  return (
+                  <Comp
                     key={item.title}
-                    href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    {...(item.href
+                      ? {
+                          href: item.href,
+                          target: item.external ? '_blank' : undefined,
+                          rel: item.external ? 'noopener noreferrer' : undefined,
+                        }
+                      : {})}
                     className="group flex items-start gap-3 py-3 border-b border-border/30 hover:border-accent/30 transition-all duration-300"
                   >
                     <item.icon className="w-4 h-4 text-accent/70 shrink-0 mt-0.5" />
@@ -110,16 +119,17 @@ const Contact = () => {
                       <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-0.5 font-gotham">{item.title}</p>
                       <p className="text-xs text-foreground group-hover:text-primary transition-colors">{item.content}</p>
                     </div>
-                  </a>
-                ))}
+                  </Comp>
+                  );
+                })}
               </div>
 
               <div className="flex gap-3">
-                <a href="https://instagram.com/madrasmami.ca" target="_blank" rel="noopener noreferrer"
+                <a href="https://instagram.com/madrassocial" target="_blank" rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all">
                   <Instagram className="w-3.5 h-3.5" />
                 </a>
-                <a href="https://facebook.com/madrasmami" target="_blank" rel="noopener noreferrer"
+                <a href="https://facebook.com/profile.php?id=61592799734722" target="_blank" rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all">
                   <Facebook className="w-3.5 h-3.5" />
                 </a>

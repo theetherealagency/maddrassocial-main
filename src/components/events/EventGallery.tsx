@@ -5,7 +5,7 @@ import type { EventPanel } from './types';
 
 /* The three gatherings as expandable panels. Built on the framer-motion
    flex-expand technique from components/ui/gallery-animation.tsx, restyled to
-   the Madras Mami palette; clicking a panel opens its enquiry form. */
+   the Madras Social palette; clicking a panel opens its enquiry form. */
 
 const cream = 'hsl(var(--color-cream))';
 const gold = 'hsl(var(--color-gold))';

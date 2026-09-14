@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface FloatingOrderCTAProps {
-  /** External ordering URL. When set, opens in a new tab instead of linking to /menu. */
-  href?: string;
+  /** External ordering URL. When set, opens in a new tab instead of linking to /menu.
+   *  Null while the ordering URL is PENDING — the component falls back to /menu. */
+  href?: string | null;
   label?: string;
 }
 

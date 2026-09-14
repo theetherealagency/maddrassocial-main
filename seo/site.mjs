@@ -1,5 +1,5 @@
 /**
- * Single source of truth for Madras Mami SEO / GEO data.
+ * Single source of truth for Madras Social SEO / GEO data.
  *
  * Imported by BOTH:
  *   - scripts/build-seo.mjs  (Node, at build time — writes per-route static HTML)
@@ -9,264 +9,601 @@
  */
 
 export const SITE = {
-  origin: 'https://www.madrasmami.ca',
-  name: 'Madras Mami',
-  legalName: 'Madras Mami',
-  phone: '+19059135900',
-  phoneDisplay: '(905) 913-5900',
-  email: 'hello@madrasmami.ca',
-  priceRange: '$$',
+  // Inferred from the hello@madrassocial.ca address — CONFIRM before launch.
+  // Every canonical URL, the sitemap and all JSON-LD are built from this.
+  origin: 'https://www.madrassocial.ca',
+
+  name: 'Madras Social',
+  legalName: 'Madras Social',
+
+  phone: 'PENDING',          // E.164, e.g. +15195550100
+  phoneDisplay: 'PENDING',   // e.g. (519) 555-0100
+
+  email: 'hello@madrassocial.ca',
+
+  // Mains run $16–$38.50 with a full bar. Madras Social was '$$'; this sits
+  // higher. Confirm with the client — it shows in Google's listing.
+  priceRange: '$$$',
   currency: 'CAD',
-  ogImage: 'https://www.madrasmami.ca/og-banner.jpg',
-  logo: 'https://www.madrasmami.ca/logo.png',
-  // Both files were 404 until 2026-09-04 — every share and every schema
-  // image/logo field pointed at nothing. Generated from brand assets.
+
+  ogImage: 'https://www.madrassocial.ca/og-banner.jpg',
+  logo: 'https://www.madrassocial.ca/logo.png',
   ogImageMeta: { width: 1200, height: 630, type: 'image/jpeg' },
   logoMeta: { width: 1200, height: 461, type: 'image/png' },
-  // The unit sits inside this plaza; used for containedInPlace.
-  containedInPlace: 'Mayfield Plaza',
+
   address: {
-    street: '6261 Mayfield Rd, Unit 145',
-    locality: 'Brampton',
+    street: '8 Erb Street West',
+    locality: 'Waterloo',
     region: 'ON',
-    postalCode: 'L6P 0X9',
+    postalCode: 'N2L 1S7',
     country: 'CA',
   },
-  geo: { lat: 43.7587, lng: -79.7612 },
-  // Verified 2026-09-04. Zomato (404) and Yelp (unverified) links were removed —
-  // broken sameAs targets weaken entity matching rather than help it.
+
+  // PENDING — take the exact lat/lng from the Google Business Profile once
+  // the listing is claimed. Do not approximate: geo drives map pin accuracy
+  // and local-pack ranking.
+  geo: { lat: 'PENDING', lng: 'PENDING' },
+
   sameAs: [
-    'https://www.instagram.com/madrasmami.ca/',
-    'https://www.facebook.com/madrasmami',
-    'https://share.google/US5bWLfnTKIab8p5V',
+    'https://www.instagram.com/madrassocial/',
+    'https://www.facebook.com/profile.php?id=61592799734722',
   ],
-  // Google Knowledge Graph entity id for the business, resolved from the
-  // client's own Google share link.
-  kgmid: '/g/11zjp7gn6g',
-  map: 'https://share.google/US5bWLfnTKIab8p5V',
-  orderUrl: 'https://order.toasttab.com/online/madras-mami-6261-mayfield-road-unit-145',
-  reserveUrl: 'https://tables.toasttab.com/restaurants/c2d848f2-293b-430d-af30-e9d996b1ed2b/findTime',
-  cuisines: ['South Indian', 'Tamil', 'Indian', 'Vegetarian'],
+
+  kgmid: 'PENDING',      // Google Knowledge Graph id — exists once the listing is verified
+  map: 'PENDING',        // Google share link for the listing
+
+  orderUrl: 'PENDING',   // online ordering — FloatingOrderCTA hides until set
+  reserveUrl: 'PENDING', // reservations — /reservations CTA disabled until set
+
+  cuisines: ['South Indian', 'Tamil', 'Kerala', 'Indian'],
+
   areaServed: [
-    'Brampton', 'Mississauga', 'Vaughan', 'Caledon', 'Bolton',
-    'Woodbridge', 'Etobicoke', 'Malton', 'Georgetown', 'Orangeville',
+    'Waterloo', 'Kitchener', 'Cambridge', 'Guelph',
+    'Elmira', 'St. Jacobs', 'Breslau', 'Baden',
   ],
 };
 
-/** Machine-readable hours. Mon–Fri 4pm–11pm, Sat–Sun 10am–11pm. */
+/**
+ * PENDING — opening hours not supplied.
+ * Shape kept from the source so it drops straight in. Both the machine-readable
+ * array and the prose version must match when filled.
+ */
 export const OPENING_HOURS = [
-  {
-    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '16:00',
-    closes: '23:00',
-  },
-  {
-    days: ['Saturday', 'Sunday'],
-    opens: '10:00',
-    closes: '23:00',
-  },
+  // { days: ['Monday','Tuesday','Wednesday','Thursday'], opens: 'HH:MM', closes: 'HH:MM' },
+  // { days: ['Friday','Saturday'], opens: 'HH:MM', closes: 'HH:MM' },
+  // { days: ['Sunday'], opens: 'HH:MM', closes: 'HH:MM' },
 ];
 
-/** Same hours in prose, for visible page text and llms.txt. */
-export const HOURS_TEXT =
-  'Monday to Friday 4:00pm to 11:00pm. Saturday and Sunday 10:00am to 11:00pm.';
+export const HOURS_TEXT = 'PENDING';
 
-export const FULL_ADDRESS =
-  '6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9';
+export const FULL_ADDRESS = '8 Erb Street West, Waterloo, ON N2L 1S7';
 
 /**
  * The menu, by section. Powers the Menu JSON-LD on /menu so the dishes are
  * machine-readable even though the page itself presents the menu as images.
  */
+export const MENU_TAGLINE = 'Southern roots. Social plates.';
+
 export const MENU_SECTIONS = [
   {
-    name: "Mami's Dosa Classics",
+    name: 'Rasam & Roots',
+    description: 'Bowls, greens and bright beginnings.',
+    items: [
+      {
+        name: 'Nattu Kozhi Rasam',
+        price: 12,
+        veg: false,
+        description:
+          'A peppery country-chicken broth simmered with garlic — the South Indian answer to chicken soup.',
+      },
+      {
+        name: 'Banana Stem Hotpot',
+        price: 10.5,
+        veg: true,
+        description:
+          'A comforting Burmese-style bowl of banana stem and chickpeas, finished with crisp plantain fritters.',
+      },
+      {
+        name: 'Madras Karamani Bowl',
+        price: 9,
+        veg: true,
+        description:
+          'Black-eyed peas and fresh sprouts tossed with coconut, mustard and bright South Indian seasoning.',
+      },
+      {
+        name: 'Mango & Clementine Salad',
+        price: 12.5,
+        veg: true,
+        description:
+          'Sweet mango, juicy clementine and mixed greens with a zingy mango-ginger dressing.',
+      },
+    ],
+  },
+
+  {
+    name: 'Madras Tapas',
+    description: 'Small plates with a southern attitude.',
+    items: [
+      {
+        name: 'Mango Pickle Guac & Tapioca Chips',
+        price: 7,
+        veg: true,
+        description:
+          'Creamy guacamole with a tangy mango-pickle kick, served with crisp tapioca chips.',
+      },
+      {
+        name: 'Beet Poriyal Hummus & Edamame Varuval',
+        price: 12.5,
+        veg: true,
+        description:
+          'Beetroot, coconut and green chilli blended into hummus, paired with honey-glazed edamame.',
+      },
+      {
+        name: 'Mangalorean Soya Chaap Arancini',
+        price: 13,
+        veg: true,
+        description:
+          'Crisp, mozzarella-filled soya chaap rice bites with creamy curry mayo.',
+      },
+      {
+        name: 'Cheesy Chicken Punugulu',
+        price: 13.5,
+        veg: false,
+        description:
+          'Andhra-style fritters packed with minced chicken and a gooey cheese centre.',
+      },
+      {
+        name: 'Honey Chilli Shrimp Lettuce Wrap',
+        price: 13.5,
+        veg: false,
+        description:
+          'Juicy shrimp and bell peppers in tangy Tangra sauce, tucked into crisp lettuce with peanuts.',
+      },
+      {
+        name: 'Rum-my Kozhi Roast',
+        price: 18,
+        veg: false,
+        description:
+          'Tender chicken roasted with dark rum, curry leaves and smoky black cardamom.',
+      },
+      {
+        name: 'Madurai Mutton Sukka',
+        price: 20,
+        veg: false,
+        description:
+          'Bone-in mutton slow-roasted with coconut, red chilli and star anise.',
+      },
+    ],
+  },
+
+  {
+    name: 'Main Affairs',
+    description: 'Built for the centre of the table.',
+    items: [
+      {
+        name: 'Malabar Chicken Steak',
+        price: 28,
+        veg: false,
+        description:
+          'Seared chicken breast with ghee sadam, podi mash, charred asparagus and roasted baby carrots.',
+      },
+      {
+        name: 'Madras Lamb Shank',
+        price: 36.5,
+        veg: false,
+        description:
+          'Pepper-braised lamb shank with ghee sadam, podi mash, charred asparagus and roasted baby carrots.',
+      },
+      {
+        name: 'Baked Kari Dosa Lasagne',
+        price: 22,
+        veg: false,
+        description:
+          'Layers of soft kal dosa, spiced mutton kheema, coconut vegetable sauce and bubbling mozzarella.',
+      },
+      {
+        name: 'Lobster & Shrimp Moilee',
+        price: 38.5,
+        veg: false,
+        description:
+          'Lobster tail and jumbo shrimp in a gentle coconut moilee, with ghee sadam, podi mash, charred asparagus and roasted baby carrots.',
+      },
+      {
+        name: 'Fish Pollichathu',
+        price: 27.5,
+        veg: false,
+        description:
+          'Whole golden pomfret roasted with South Indian spices, served with ghee sadam, charred asparagus and roasted baby carrots.',
+      },
+      {
+        name: 'Ghee Roast Patta Paneer',
+        price: 23,
+        veg: true,
+        description:
+          'Paneer wrapped in banana leaf, roasted with ghee and served with ghee sadam, charred asparagus and roasted baby carrots.',
+      },
+      {
+        name: 'Kalan Mushroom Sambar Risotto',
+        price: 22,
+        veg: true,
+        description:
+          'Coimbatore-style mushroom mash over creamy, buttered sambar rice, finished with crunchy corn chips.',
+      },
+      {
+        name: 'Roasted Pineapple Steak',
+        price: 23,
+        veg: true,
+        description:
+          'Caramelized pineapple steak with coconut reduction, ghee sadam, charred asparagus and roasted baby carrots.',
+      },
+    ],
+  },
+
+  {
+    name: 'Pottalam Club',
+    description: 'Celebration rice, layered and loaded.',
+    items: [
+      {
+        name: 'Wedding Mutton Biryani',
+        price: 21,
+        veg: false,
+        description:
+          'Celebration-style goat pilaf with brinjal salna, onion raita and a boiled egg.',
+      },
+      {
+        name: 'Ambur Chicken Biryani',
+        price: 19,
+        veg: false,
+        description:
+          'Ambur-style chicken and fragrant seeraga samba rice, served with egg, onion raita and brinjal salna.',
+      },
+      {
+        name: 'Madurai Veg Brinji',
+        price: 17,
+        veg: true,
+        description:
+          'A fragrant rice pot with mixed vegetables and soya chunks, served with brinjal salna and onion raita.',
+      },
+    ],
+  },
+
+  {
+    name: 'Tiffin Tales',
+    description: 'Breakfast classics, welcome all day.',
+    items: [
+      {
+        name: 'Medu Vada',
+        price: 9,
+        veg: true,
+        description:
+          'Golden lentil doughnuts — crisp outside, fluffy inside — with coconut chutney, tomato chutney and sambar.',
+      },
+      {
+        name: 'Sambar Vada',
+        price: 11,
+        veg: true,
+        description:
+          'Crisp vada soaked in warm vegetable sambar and finished with a spoon of ghee.',
+      },
+      {
+        name: 'Steamed Idli',
+        price: 9,
+        veg: true,
+        description:
+          'Soft steamed rice-and-lentil cakes with sambar, coconut chutney and tomato chutney.',
+      },
+      {
+        name: 'KGF Thatte Idli',
+        price: 11,
+        veg: true,
+        description:
+          'A big, flat Karnataka-style idli with melted ghee and podi, served with chutneys and sambar.',
+      },
+    ],
+  },
+
+  {
+    name: 'Dosa District',
     description:
-      'Served with veg sambar, coconut chutney, tomato chutney and Nilgiri chutney.',
+      'Crisp, comforting and made to tear and share. Dosas and uthappams are served with coconut chutney, tomato chutney and vegetable sambar.',
     items: [
-      'Sada Dosa', 'Masala Dosa', 'Mysore Masala Dosa', 'Ghee Roast Masala Dosa',
-      'Podi Masala Dosa', 'Amul Cheese and Chilli Dosa', 'Garlic Butter Dosa',
-      'Mushroom Sukka Dosa', 'Ghotala Dosa', 'Manglorean Paneer Dosa',
-      'Pav Bhaaji Dosa', 'Paneer Burji Dosa',
+      {
+        name: 'Masala Dosa',
+        price: 15,
+        veg: true,
+        description:
+          'A crisp rice-and-lentil crepe filled with classic spiced potato masala.',
+      },
+      {
+        name: 'Mysore Masala Dosa',
+        price: 16.5,
+        veg: true,
+        description:
+          'Our crisp dosa spread with fiery Mysore chutney and filled with potato masala.',
+      },
+      {
+        name: 'Paneer Bhurji Dosa',
+        price: 19.5,
+        veg: true,
+        description:
+          'A crisp dosa filled with grated paneer, onion, tomato and chaat masala.',
+      },
+      {
+        name: 'Pepper Chicken Dosa',
+        price: 19.5,
+        veg: false,
+        description: 'A crisp dosa loaded with bold black-pepper chicken.',
+      },
+      {
+        name: 'Onion Uthappam',
+        price: 15,
+        veg: true,
+        description:
+          'A thick, fluffy savoury pancake topped with red onion, tomato, green chilli and cilantro.',
+      },
+      {
+        name: 'Madurai Kari Uthappam',
+        price: 18,
+        veg: false,
+        description:
+          'A thick uthappam topped with rich, slow-cooked Madurai-style mutton kari.',
+      },
     ],
   },
+
   {
-    name: 'Bangalore Benne',
-    description:
-      'A Bengaluru street specialty — its own batter, fenugreek and desi white butter.',
-    items: ['Benne Classic', 'Benne Masala Dosa', 'Benne Mysore Masala', 'Benne Paneer Burji'],
-  },
-  {
-    name: 'Rava Dosa and Uthappam',
+    name: 'Benne Bistro',
+    description: 'Bangalore butter dosas with a Madras Social spin.',
     items: [
-      'Rava Masala', 'Onion Rava Masala', 'Paneer Rava Masala Dosa',
-      'Onion Uthappam', 'Mushroom Ghee Roast Uthappam', 'Pesto Uthappam',
+      {
+        name: 'Benne Masala',
+        price: 16,
+        veg: true,
+        description:
+          'Bangalore-style thick dosa with potato masala, house podi and a generous gloss of ghee.',
+      },
+      {
+        name: 'Benne Mysore',
+        price: 17,
+        veg: true,
+        description:
+          'Thick benne dosa layered with spicy Mysore chutney, potato masala, house podi and ghee.',
+      },
+      {
+        name: 'Paneer Bhurji Benne',
+        price: 19,
+        veg: true,
+        description:
+          'Thick benne dosa filled with spiced paneer bhurji, Mysore chutney, house podi and ghee.',
+      },
     ],
   },
+
   {
-    name: 'Idli',
+    name: 'The Curry Club',
+    description: 'Southern gravies made for scooping. Served with ghee sadam.',
     items: [
-      'Steamed Idli', 'Mami Thatte Idli', 'Gunpowder Idli Fries',
-      'Barbeque Idli Skewers', 'Dunked Junior Idlis',
+      {
+        name: 'Chicken Chettinad',
+        price: 22,
+        veg: false,
+        description:
+          'Boneless chicken simmered in a bold Chettinad curry with roasted spices and coconut.',
+      },
+      {
+        name: 'Uthukuli Butter Chicken',
+        price: 22,
+        veg: false,
+        description:
+          'Our southern butter chicken — cashew-rich, coconut-creamy and made for scooping.',
+      },
+      {
+        name: 'Guntur Kara Mutton',
+        price: 23,
+        veg: false,
+        description:
+          'Slow-braised mutton with fiery Guntur chilli, shallots and garlic.',
+      },
+      {
+        name: 'Malabar Veg Kurma',
+        price: 16,
+        veg: true,
+        description:
+          'Mixed vegetables in a creamy coconut-cashew sauce scented with poppy seeds.',
+      },
+      {
+        name: 'Gutti Vankaya Kura',
+        price: 17,
+        veg: true,
+        description:
+          'Baby eggplant stuffed with peanut, coconut and chilli, cooked Andhra-style.',
+      },
     ],
   },
+
   {
-    name: 'The Vada Bar',
+    name: 'Beyond South',
+    description: 'North Indian favourites, our way. Served with ghee rice.',
     items: [
-      'The Everything Vada', 'The Curd Bomb (Thayir Vada)',
-      'Great Rasa Vada (Rasam Vada)', 'Amazing Medhu Vada Poutine',
+      {
+        name: 'Chicken Tikka Masala',
+        price: 22,
+        veg: false,
+        description:
+          'Charred chicken tikka folded into a silky tomato-butter masala.',
+      },
+      {
+        name: 'Garlic Lamb Saag',
+        price: 22.5,
+        veg: false,
+        description: 'Slow-braised lamb in a garlicky spinach sauce.',
+      },
+      {
+        name: 'Paneer Tikka Lababdar',
+        price: 19,
+        veg: true,
+        description:
+          'Charred paneer in a rich, slightly smoky tomato and cashew gravy.',
+      },
+      {
+        name: 'Masala Chole',
+        price: 16,
+        veg: true,
+        description:
+          'Chickpeas simmered with onion, tomato and warming North Indian spices.',
+      },
     ],
   },
+
   {
-    name: 'Munchies',
+    name: 'Side-Chicks',
+    description: 'The extras that never stay extra.',
     items: [
-      'Edamame and Soundal Hummus', 'Chilli Bhajji', 'Ghee Roast Paneer Tacos',
-      'Chettinad Soya Chaap Momo', 'Roadstyle Kalan Mushroom', 'Truffle Fries',
+      {
+        name: 'Ghee Sadam',
+        price: 7,
+        veg: true,
+        description: 'Steamed rice glossed with fragrant ghee.',
+      },
+      {
+        name: 'Bisi Bele Bhath',
+        price: 11,
+        veg: true,
+        description:
+          'Karnataka-style rice and lentils cooked with vegetables and warm spices.',
+      },
+      {
+        name: 'Garlic Naan',
+        price: 5,
+        veg: true,
+        description: 'Soft flatbread brushed with garlic butter.',
+      },
+      {
+        name: 'Flaky Parotta',
+        price: 5,
+        veg: true,
+        description:
+          'Layered South Indian flatbread, crisp at the edges and soft inside.',
+      },
+      {
+        name: 'Onion Raita',
+        price: 4,
+        veg: true,
+        description: 'Cool yogurt with sliced onion and gentle spices.',
+      },
+      { name: 'Mango Pickle', price: 4, veg: true },
+      { name: 'Tapioca Chips', price: 5, veg: true },
     ],
   },
+
   {
-    name: 'The Coupled Plates',
-    description: 'A curry and its companion, the way South Indian food gets eaten at home.',
+    name: 'Sweet Social',
+    description: 'Save room. Seriously.',
     items: [
-      'Nunku Paya and Malabar Parotta', 'Comforting Vada Curry and Kal Dosa',
-      'Yennegai Badenkayi and Steamed Ghee Rice',
-      'Village Style Paneer Korma and Malabar Parotta',
-      'Curry Leaf Tofu and Zesty Lemon Rice',
-    ],
-  },
-  {
-    name: "Mami's Fuel",
-    items: ['Bisi Bele Bath Risotto', 'Idiyappam Ramen', 'Patta Biryani'],
-  },
-  {
-    name: 'Extra Affairs',
-    items: [
-      'Temple Tamarind Rice', 'Heritage Lemon Rice', 'Cold Curd Rice',
-      'Steamed Ghee Rice', 'Malabar Parotta',
-    ],
-  },
-  {
-    name: 'Soup and Salad',
-    items: ['Rasam Soup', 'Avocado Kosambari'],
-  },
-  {
-    name: 'Desserts and Sweets',
-    items: [
-      'Filter Kapi Tiramisu', 'Elaneer Payasam Classic',
-      'Chocolate Dosa Waffle and Cardamom Berrie Combot',
-      'Mango Panna Cotta', 'Silk Coconut Gelato',
-    ],
-  },
-  {
-    name: 'Beverages',
-    items: [
-      'Madras Filter Kapi', 'Iced Madras Filter Kapi', 'Cutting Chai',
-      'Fresh Coconut Water', 'Black Kokum Cooler', 'Coconut Matcha',
-      'Fresh Mango Slush', 'Tamarindo', 'Rosie Darling',
+      {
+        name: 'Tirunelveli Halwa',
+        price: 11,
+        veg: true,
+        description: 'Glossy wheat halwa with roasted cashews and rich ghee finish.',
+      },
+      {
+        name: 'Pistachio Semiya Kunafa',
+        price: 10,
+        veg: true,
+        addOn: { name: 'Add ice cream', price: 2 },
+        description:
+          'Crisp vermicelli, creamy kunafa filling and pistachio sauce in every bite.',
+      },
+      {
+        name: 'Blueberry Bliss',
+        price: 12.5,
+        veg: true,
+        description:
+          'Warm blueberries and white-chocolate melt with bright berry compote.',
+      },
+      {
+        name: 'Filter Kaapi Tiramisu',
+        price: 8.5,
+        veg: true,
+        description:
+          'Coffee-soaked ladyfingers layered with cream and finished with bold South Indian filter coffee.',
+      },
     ],
   },
 ];
 
 /**
- * Questions real guests actually ask. Rendered as FAQPage JSON-LD on the pages
- * where the answer belongs, and as crawlable text in the static block.
+ * FAQs. Answers must be true and must never depend on a PENDING value —
+ * hours, phone, ordering and reservation links are not supplied yet, so no
+ * FAQ here asserts them. Add those questions back when the values land.
  */
 export const FAQS = [
   {
-    q: 'Is Madras Mami 100% vegetarian?',
-    a: 'Yes. Madras Mami is 100% pure vegetarian. No meat, no fish, no eggs, anywhere on the menu.',
+    q: 'Is Madras Social vegetarian?',
+    a: 'Not entirely. There is a large vegetarian section on every part of the menu, and the kitchen also cooks chicken, mutton, lamb, pomfret, lobster and shrimp. Vegetarian dishes are marked on the menu.',
   },
   {
-    q: 'Do you cook with desi ghee?',
-    a: 'Yes. Every dish is made with pure desi ghee, not oil substitutes.',
+    q: 'Does Madras Social have a bar?',
+    a: 'Yes. Madras Social is a South Indian kitchen and a bar — a room you book a table in, not a takeout counter.',
   },
   {
-    q: 'What are Madras Mami’s hours?',
-    a: 'Monday to Friday 4:00pm to 11:00pm. Saturday and Sunday 10:00am to 11:00pm.',
+    q: 'Where is Madras Social located?',
+    a: `Madras Social is at ${FULL_ADDRESS}, in Waterloo Region.`,
   },
   {
-    q: 'Where is Madras Mami located?',
-    a: 'At 6261 Mayfield Rd, Unit 145, Brampton, ON L6P 0X9, in Mayfield Plaza in north Brampton.',
+    q: 'What kind of food does Madras Social serve?',
+    a: 'Kerala and Tamil cooking. Rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies, biryani, and a few North Indian dishes cooked our way.',
   },
   {
-    q: 'What is Madras Mami’s phone number?',
-    a: 'Call (905) 913-5900, or email hello@madrasmami.ca.',
+    q: 'Which areas does Madras Social serve?',
+    a: `${SITE.areaServed.join(', ')}.`,
   },
   {
-    q: 'Does Madras Mami do catering?',
-    a: 'Yes. Madras Mami caters weddings, receptions, birthdays, baby showers, kitty parties and corporate events across the GTA, including a live dosa counter, thali spreads, tiffin menus, chaat counters and dessert stations.',
-  },
-  {
-    q: 'Can I order South Indian food online from Madras Mami?',
-    a: 'Yes. Takeout and delivery are available through the online ordering page, and you can also call (905) 913-5900.',
-  },
-  {
-    q: 'Do you take reservations?',
-    a: 'Yes. Tables can be booked on the reservations page or by calling (905) 913-5900.',
+    q: 'Can I book Madras Social for an event?',
+    a: `Yes. Send the details to ${SITE.email} and we will come back to you.`,
   },
 ];
 
-/**
- * The three menus the /menu page actually presents as tabs. Previously modelled
- * as a single Menu, which understated the Jain and tasting offerings — both of
- * which are their own search demand ("jain south indian brampton").
- */
+/** The menus, as schema entities. */
 export const MENUS = [
   {
     id: 'main',
-    name: 'Madras Mami Menu',
+    name: 'Madras Social Menu',
     description:
-      'The full South Indian menu — dosas, idli, vada, uthappam, coupled plates, rice, desserts and filter coffee. 100% pure vegetarian, cooked in pure desi ghee.',
+      'The full menu — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies, biryani, sides and desserts. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
     sectioned: true,
-  },
-  {
-    id: 'jain',
-    name: 'Madras Mami Jain Menu',
-    description:
-      'A separate Jain menu, prepared without onion or garlic, drawn from the same South Indian kitchen.',
-    diets: ['https://schema.org/VegetarianDiet'],
-  },
-  {
-    id: 'tasting',
-    name: "Madras Mami Tasting Menu",
-    description:
-      'A guided tasting through the South Indian regions the kitchen cooks from.',
-    diets: ['https://schema.org/VegetarianDiet'],
   },
 ];
 
 /** What the restaurant actually sells, as an offer catalogue. */
 export const OFFERINGS = [
-  ['Dine In', 'Table service at 6261 Mayfield Rd, Unit 145, Brampton.'],
-  ['Takeout', 'Order ahead online or by phone and collect in the restaurant.'],
-  ['Delivery', 'South Indian delivery across north Brampton and the surrounding GTA.'],
-  ['Catering', 'Weddings, receptions, birthdays, baby showers and corporate events.'],
-  ['Live Dosa Counter', 'Dosas hand-rolled to order at your event.'],
-  ['Gift Cards', 'Redeemable in the restaurant, in any amount.'],
+  ['Dine In', `Table service at ${FULL_ADDRESS}.`],
+  ['Bar', 'A full bar alongside the kitchen.'],
+  ['Private Events', 'Enquiries by email.'],
 ];
 
 /** Topics the kitchen is genuinely expert in — entity grounding, not keywords. */
 export const KNOWS_ABOUT = [
   'South Indian cuisine',
-  'Tamil Nadu tiffin cooking',
-  'Dosa and dosa batter fermentation',
+  'Tamil Nadu cooking',
+  'Kerala cooking',
+  'Dosa and uthappam',
   'Bangalore Benne dosa',
   'Chettinad spice blends',
-  'Kerala coconut curries',
-  'Andhra and Telangana cooking',
-  'Pure vegetarian cooking',
-  'Desi ghee cooking',
+  'Biryani',
   'South Indian filter coffee',
-  'Jain cooking without onion or garlic',
-  'South Indian wedding catering',
+  'Restaurant bar programme',
 ];
 
-/** The real video on the brunch page — public/brunch/hero.mp4 with its poster. */
+/** LEGACY — Madras Mami brunch video. No Madras Social equivalent supplied;
+ *  kept so nothing importing it breaks, but it must not be emitted as schema.
+ *  See PENDING.md.
+ *  Original note: the real video on the brunch page — public/brunch/hero.mp4 with its poster. */
 export const BRUNCH_VIDEO = {
-  name: "Brunch at Mami's Table — Madras Mami, Brampton",
+  name: 'Madras Social',
   description:
-    "A look at the South Indian brunch service at Madras Mami in Brampton, from the dosa tava to the filter coffee.",
-  contentUrl: 'https://www.madrasmami.ca/brunch/hero.mp4',
-  thumbnailUrl: 'https://www.madrasmami.ca/brunch/hero-poster.jpg',
+    'PENDING — no Madras Social video supplied.',
+  contentUrl: 'https://www.madrassocial.ca/brunch/hero.mp4',
+  thumbnailUrl: 'https://www.madrassocial.ca/brunch/hero-poster.jpg',
   uploadDate: '2026-07-27',
 };

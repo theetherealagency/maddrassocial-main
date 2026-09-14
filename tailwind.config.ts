@@ -14,12 +14,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        kugile: ['Kugile', 'KugileDemo', 'serif'],
-        gotham: ['Gotham', 'system-ui', 'sans-serif'],
-        display: ['Kugile', 'KugileDemo', 'Playfair Display', 'serif'],
-        body: ['Gotham', 'Raleway', 'sans-serif'],
-        cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        jost: ['Jost', 'system-ui', 'sans-serif'],
+        // canonical
+        display: ['"New Icon"', 'Georgia', 'serif'],
+        body:    ['Aksen', 'system-ui', 'sans-serif'],
+        accent:  ['Seruni', '"New Icon"', 'serif'],
+
+        // legacy aliases — same faces, so inherited markup renders correctly
+        kugile:  ['"New Icon"', 'Georgia', 'serif'],
+        gotham:  ['Aksen', 'system-ui', 'sans-serif'],
       },
 
       colors: {

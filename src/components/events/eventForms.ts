@@ -111,7 +111,7 @@ const CATERING_FIELDS: FieldDef[] = [
   },
 ];
 
-const CONSENT = 'I agree to be contacted by Madras Mami regarding this enquiry.';
+const CONSENT = 'I agree to be contacted by Madras Social regarding this enquiry.';
 
 const buildCateringForm = (id: string, title: string, occasion: string): EventFormDef => ({
   id,
@@ -133,8 +133,12 @@ export interface EventType {
   highlights: string[];
 }
 
-/* The four kinds of catering Madras Mami does — all pure vegetarian, all at
-   your venue. */
+/* PENDING — the four event categories below are inherited from Madras Mami and
+   describe off-site South Indian vegetarian catering. Madras Social's actual
+   event offering has not been supplied: we do not know whether it caters off
+   site at all, or only hosts private dining in the room. Titles and copy are
+   left in place so the page renders, but they must be confirmed or replaced
+   before launch. See PENDING.md. */
 export const eventTypes: EventType[] = [
   {
     def: buildCateringForm('weddings', 'Weddings & Celebrations', 'Wedding / Event Catering'),
