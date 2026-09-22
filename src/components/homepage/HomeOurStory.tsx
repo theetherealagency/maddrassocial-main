@@ -58,27 +58,38 @@ const HomeOurStory = () => {
         loading="lazy"
       />
 
-      {/* Desktop — the tight band. No ornament; every px is spent on copy.
-          The reveal is observed on the <section> above, not on either of
-          these two — each is display:none on the other breakpoint, and an
-          element with no layout box never reports as intersecting, so the
-          fade-in silently never fired on whichever one wasn't watched. */}
+      {/*
+        Desktop — the reveal is observed on the <section> above, not on
+        either of these two — each is display:none on the other breakpoint,
+        and an element with no layout box never reports as intersecting, so
+        the fade-in silently never fired on whichever one wasn't watched.
+
+        Re-verified against the new 2880px export: same shape, same safe
+        rectangle (33.6-58.9% top, 34.0-62.8% left) — re-exporting bigger
+        did not create more room, since the silhouette narrows fast above
+        and below this band. What changed is the type: bigger, more
+        line-height, a drawn rule under the eyebrow, so the block reads as
+        composed copy instead of a huddle of small text (client feedback,
+        2026-09-22 — "spread this text out... make it better"). cqw units
+        off a container-type wrapper scale it with the box, not the viewport.
+      */}
       <div
         className="hidden md:flex absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
-        style={{ top: "33.1%", height: "25.2%", left: "34.1%", width: "28.6%", ...fade }}
+        style={{ top: "32.5%", height: "27%", left: "34%", width: "29%", containerType: "inline-size", ...fade }}
       >
-        <p className="section-label mb-1 text-[9px] tracking-[0.3em]">OUR STORY</p>
-        <h2 className="heading-display text-[19px] leading-[1.15] mb-2">
-          South Indian food,
-          <br />
-          and somewhere to sit with it.
+        <p className="section-label mb-2" style={{ fontSize: "clamp(9px, 2.6cqw, 13px)", letterSpacing: "0.32em" }}>
+          Our Story
+        </p>
+        <span aria-hidden className="block mx-auto mb-3" style={{ width: "15%", height: "1px", backgroundColor: "currentColor", opacity: 0.35 }} />
+        <h2 className="heading-display" style={{ fontSize: "clamp(17px, 6cqw, 32px)", lineHeight: 1.2 }}>
+          South Indian food, and somewhere to sit with it.
         </h2>
-        <p className="body-text text-[10px] leading-[1.35] mb-1.5">
+        <p className="body-text mx-auto mt-3" style={{ fontSize: "clamp(10px, 2.5cqw, 13px)", lineHeight: 1.55, maxWidth: "94%" }}>
           Kerala and Tamil cooking, a full bar, and a table you book rather
           than a counter you queue at. Rasam and roots to open. Dosas off the
           tava. Biryani for the middle of the table.
         </p>
-        <p className="body-text text-[10px] leading-[1.35]">
+        <p className="body-text mx-auto mt-2" style={{ fontSize: "clamp(10px, 2.5cqw, 13px)", lineHeight: 1.55, maxWidth: "94%" }}>
           South Indian food is on menus from Times Square to Singapore.
           Waterloo Region has the appetite for it. What it did not have was
           the room. That is Madras Social, on Erb Street West.
