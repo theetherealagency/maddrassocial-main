@@ -21,8 +21,10 @@ const quickLinks = [
   { name: "Contact",      href: "/contact" },
 ];
 
-const cream = "rgba(242,235,214,0.85)";
-const creamFull = "rgb(242,235,214)";
+// Warm Linen — the real Madras Social palette (see CLAUDE.md § Brand).
+// These were rgb(242,235,214), a close-but-not-exact leftover value.
+const cream = "rgba(236,228,216,0.85)";
+const creamFull = "rgb(236,228,216)";
 
 const INSTAGRAM_URL = "https://www.instagram.com/madrassocial/";
 
@@ -66,7 +68,7 @@ const HomeFooter = () => {
     <footer
       ref={footerRef}
       className="footer-root lg:px-20 lg:pt-[60px] lg:pb-10"
-      style={{ backgroundColor: "#3d2210" }}
+      style={{ backgroundColor: "#1f1b1a" }} // Carbon — was a leftover Madras Mami brown (#3d2210)
     >
       {/* ── DESKTOP layout (lg+) ── */}
       <div className="hidden lg:block">
@@ -113,8 +115,8 @@ const HomeFooter = () => {
         </div>
 
         {/* Copyright */}
-        <div className="pt-6" style={{ borderTop: "1px solid #C8922A" }}>
-          <p className="font-body text-[12px] text-center" style={{ color: "rgba(242,235,214,0.5)" }}>© 2026 Madras Social. All rights reserved.</p>
+        <div className="pt-6" style={{ borderTop: "1px solid #a83d24" }}>
+          <p className="font-body text-[12px] text-center" style={{ color: "rgba(236,228,216,0.5)" }}>© 2026 Madras Social. All rights reserved.</p>
           <a href="https://etherealpr.com/" target="_blank" rel="noopener noreferrer"
             style={{color:'rgba(255,255,255,0.5)', fontSize:'12px', textDecoration:'none', display:'block', textAlign:'center', marginTop:'8px'}}
             onMouseOver={e => (e.currentTarget.style.color='rgba(255,255,255,0.8)')}
@@ -159,8 +161,8 @@ const HomeFooter = () => {
         </div>
 
         {/* ROW 3: Copyright */}
-        <div className="pt-2 text-center" style={{ borderTop: "1px solid #C8922A" }}>
-          <p className="font-body" style={{ color: "rgba(242,235,214,0.5)", fontSize: '10px' }}>© 2026 Madras Social. All rights reserved.</p>
+        <div className="pt-2 text-center" style={{ borderTop: "1px solid #a83d24" }}>
+          <p className="font-body" style={{ color: "rgba(236,228,216,0.5)", fontSize: '10px' }}>© 2026 Madras Social. All rights reserved.</p>
           <a href="https://etherealpr.com/" target="_blank" rel="noopener noreferrer"
             style={{color:'rgba(255,255,255,0.5)', fontSize:'10px', textDecoration:'none', display:'block', marginTop:'4px'}}
             onMouseOver={e => (e.currentTarget.style.color='rgba(255,255,255,0.8)')}

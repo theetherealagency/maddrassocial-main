@@ -28,7 +28,10 @@ const HomeNavbar = () => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const textColor = scrolled ? '#452E18' : '#DBB640';
+  // Carbon / Burnt Terracotta — the real Madras Social palette (see
+  // CLAUDE.md § Brand). These were '#452E18' / '#DBB640' before, which are
+  // neither: leftover Madras Mami hex values hardcoded past the rebrand.
+  const textColor = scrolled ? '#1f1b1a' : '#a83d24';
 
   return (
     <nav
@@ -111,7 +114,7 @@ const HomeNavbar = () => {
           mobileOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{
-          backgroundColor: scrolled ? 'rgba(244,239,227,0.98)' : 'rgba(244,239,227,0.98)',
+          backgroundColor: 'rgba(236,228,216,0.98)', // Warm Linen
           backdropFilter: 'blur(12px)',
         }}
       >
@@ -124,7 +127,7 @@ const HomeNavbar = () => {
                 to={link.href}
                 className="px-3 py-3 text-sm tracking-[0.1em] uppercase font-body font-medium rounded transition-all duration-300 min-h-[44px] flex items-center"
                 style={{
-                  color: isActive ? '#452E18' : 'rgba(69,46,24,0.7)',
+                  color: isActive ? '#1f1b1a' : 'rgba(31,27,26,0.7)', // Carbon
                 }}
                 onClick={() => setMobileOpen(false)}
               >
@@ -136,7 +139,7 @@ const HomeNavbar = () => {
             {...(ONLINE_ORDER_URL
               ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
               : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
-            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#452E18] text-[#452E18] rounded-sm text-center"
+            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#1f1b1a] text-[#1f1b1a] rounded-sm text-center"
             onClick={() => setMobileOpen(false)}
           >
             Order Online
@@ -145,7 +148,7 @@ const HomeNavbar = () => {
             href="/reservations"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#452E18] text-[#452E18] rounded-sm text-center"
+            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#1f1b1a] text-[#1f1b1a] rounded-sm text-center"
             onClick={() => setMobileOpen(false)}
           >
             Reserve Now

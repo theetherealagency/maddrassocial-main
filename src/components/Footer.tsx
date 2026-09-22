@@ -14,7 +14,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="text-primary-foreground" style={{ backgroundColor: "#3d2210" }}>
+    <footer className="text-primary-foreground" style={{ backgroundColor: "#1f1b1a" }}>
       <div className="container mx-auto px-6 lg:px-12 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}

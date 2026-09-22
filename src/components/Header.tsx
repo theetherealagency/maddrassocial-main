@@ -43,21 +43,24 @@ const Header = () => {
   // Desktop: solid bg when scrolled. Mobile: frosted glass when scrolled.
   const headerBg = isScrolled
     ? isMobile
-      ? 'rgba(242, 237, 228, 0.95)'
-      : '#F4EFE3'
+      ? 'rgba(236, 228, 216, 0.95)' // Warm Linen
+      : '#ece4d8'
     : 'transparent';
 
   const headerStyle: React.CSSProperties = {
     backgroundColor: headerBg,
-    boxShadow: isScrolled ? '0 1px 8px rgba(69,46,24,0.08)' : 'none',
+    boxShadow: isScrolled ? '0 1px 8px rgba(31,27,26,0.08)' : 'none', // Carbon
     backdropFilter: isScrolled && isMobile ? 'blur(8px)' : 'none',
     WebkitBackdropFilter: isScrolled && isMobile ? 'blur(8px)' : 'none',
     transition: 'background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease',
   };
 
-  const textColor = isScrolled ? '#452E18' : '#DBB640';
-  const activeColor = isScrolled ? '#452E18' : '#DBB640';
-  const inactiveColor = isScrolled ? 'rgba(69,46,24,0.7)' : 'rgba(219,182,64,0.7)';
+  // Carbon / Burnt Terracotta — the real Madras Social palette (see
+  // CLAUDE.md § Brand). These were '#452E18' / '#DBB640' before, which are
+  // neither: leftover Madras Mami hex values hardcoded past the rebrand.
+  const textColor = isScrolled ? '#1f1b1a' : '#a83d24';
+  const activeColor = isScrolled ? '#1f1b1a' : '#a83d24';
+  const inactiveColor = isScrolled ? 'rgba(31,27,26,0.7)' : 'rgba(168,61,36,0.7)';
 
   return (
     <header
@@ -72,11 +75,10 @@ const Header = () => {
               src="/brand/madras-social-logo.png"
               alt="Madras Social"
               className="h-10 w-auto transition-all duration-500 group-hover:scale-105"
-              style={{
-                filter: isScrolled
-                  ? 'brightness(0.3) sepia(1) saturate(2) hue-rotate(15deg)'
-                  : 'none',
-              }}
+              // No filter: the old logo asset needed this to fake a colour
+              // change on scroll (brightness/sepia/hue-rotate tuned to that
+              // specific gold). The real Madras Social logo is Burnt
+              // Terracotta already and does not need to shift colour here.
             />
           </Link>
 
@@ -110,7 +112,7 @@ const Header = () => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = textColor;
-                e.currentTarget.style.color = isScrolled ? '#F4EFE3' : '#1a1a1a';
+                e.currentTarget.style.color = isScrolled ? '#ece4d8' : '#1f1b1a';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -130,7 +132,7 @@ const Header = () => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = textColor;
-                e.currentTarget.style.color = isScrolled ? '#F4EFE3' : '#1a1a1a';
+                e.currentTarget.style.color = isScrolled ? '#ece4d8' : '#1f1b1a';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -157,7 +159,7 @@ const Header = () => {
           isMobileMenuOpen ? 'max-h-[520px] opacity-100' : 'max-h-0 opacity-0'
         }`}
         style={{
-          backgroundColor: isScrolled ? 'rgba(244,239,227,0.98)' : 'rgba(69,46,24,0.95)',
+          backgroundColor: isScrolled ? 'rgba(236,228,216,0.98)' : 'rgba(31,27,26,0.95)', // Warm Linen / Carbon
           backdropFilter: 'blur(12px)',
         }}
       >
@@ -172,8 +174,8 @@ const Header = () => {
                   className="px-3 py-3 text-sm tracking-[0.1em] uppercase font-gotham font-medium rounded transition-all duration-300 min-h-[44px] flex items-center"
                   style={{
                     color: isScrolled
-                      ? isActive ? '#452E18' : 'rgba(69,46,24,0.7)'
-                      : isActive ? '#DBB640' : '#F2EBD6',
+                      ? isActive ? '#1f1b1a' : 'rgba(31,27,26,0.7)'
+                      : isActive ? '#a83d24' : '#ece4d8',
                   }}
                 >
                   {link.name}
@@ -186,8 +188,8 @@ const Header = () => {
                 : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
               className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm text-center transition-all duration-300"
               style={{
-                borderColor: isScrolled ? '#452E18' : '#DBB640',
-                color: isScrolled ? '#452E18' : '#DBB640',
+                borderColor: isScrolled ? '#1f1b1a' : '#a83d24',
+                color: isScrolled ? '#1f1b1a' : '#a83d24',
               }}
             >
               Order Online
@@ -198,8 +200,8 @@ const Header = () => {
               rel="noopener noreferrer"
               className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm text-center transition-all duration-300"
               style={{
-                borderColor: isScrolled ? '#452E18' : '#DBB640',
-                color: isScrolled ? '#452E18' : '#DBB640',
+                borderColor: isScrolled ? '#1f1b1a' : '#a83d24',
+                color: isScrolled ? '#1f1b1a' : '#a83d24',
               }}
             >
               Reserve Now
