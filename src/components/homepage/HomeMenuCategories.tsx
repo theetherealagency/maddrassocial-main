@@ -102,12 +102,37 @@ const HomeMenuCategories = () => {
       </h2>
       <GoldOrnament className="mb-6 md:mb-10 mx-auto" />
 
-      {/* "4 times in the same line" from md up; a 390px phone cannot hold four
-          readable cards in one row, so it steps down to 2x2 there. */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-[1200px] mx-auto">
-        {CATEGORIES.map((category) => (
-          <MenuCard key={category.title} category={category} />
-        ))}
+      {/*
+        "4 times in the same line" from md up — a plain 4-col grid.
+        Below md, a 390px phone cannot hold four readable cards side by side,
+        so it becomes a horizontal swipe of two pages, two cards each: the
+        page on open shows cards 1-2, one swipe reveals 3-4 (client spec,
+        2026-09-22).
+
+        `md:contents` is what makes one markup serve both layouts: below md
+        each wrapper is a real element — a snap-locked, full-width flex child
+        holding its own 2-col grid. At md and up `display:contents` removes
+        the wrapper from layout entirely, so its two cards become direct
+        children of the outer `md:grid md:grid-cols-4` and fall into the
+        single row like the other pair's cards do.
+      */}
+      <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-4 md:overflow-visible gap-3 md:gap-4 max-w-[1200px] mx-auto">
+        <div className="flex-none w-full snap-start grid grid-cols-2 gap-3 md:contents">
+          <MenuCard category={CATEGORIES[0]} />
+          <MenuCard category={CATEGORIES[1]} />
+        </div>
+        <div className="flex-none w-full snap-start grid grid-cols-2 gap-3 md:contents">
+          <MenuCard category={CATEGORIES[2]} />
+          <MenuCard category={CATEGORIES[3]} />
+        </div>
+      </div>
+
+      {/* Two dots, mobile only — the only hint that there is a second page to
+          swipe to, since the cards fill the screen edge to edge and leave no
+          peek of the next one showing. */}
+      <div className="flex md:hidden justify-center gap-1.5 mt-4">
+        <span className="h-1.5 w-1.5 rounded-full bg-brown-brand/30" />
+        <span className="h-1.5 w-1.5 rounded-full bg-brown-brand/30" />
       </div>
 
       <div className="text-center mt-6 md:mt-10">

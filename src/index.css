@@ -328,6 +328,18 @@
 }
 
 @layer utilities {
+  /* Hides the scrollbar on the mobile menu-card swipe strip, without
+     disabling scroll or snap — the swipe gesture and scroll-snap still work
+     identically, this only hides the (usually auto-hiding-anyway) bar so it
+     doesn't visually compete with the scallop dividers above/below it. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .animate-hero-bg {
     animation: heroFadeIn 1s ease forwards;
   }
