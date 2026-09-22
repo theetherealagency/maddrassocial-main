@@ -12,6 +12,11 @@ import menuSlide5 from "@/assets/menu-slide-5.jpg";
 import menuSlide7 from "@/assets/menu-slide-7.jpg";
 import menuSlide8 from "@/assets/menu-slide-8.jpg";
 import menuSlide9 from "@/assets/menu-slide-9.jpg";
+/** The one real Madras Social food photo supplied so far (2026-09-22) —
+ *  fried okra, pappadam and a beet chutney. Leads the Tapas card's
+ *  slideshow; the rest of the pool below is still Madras Mami stock,
+ *  pending the real menu shoot. */
+import homepageMenuTapas from "@/assets/homepage-menu-tapas.jpg";
 
 const menuCards = [
   {
@@ -19,7 +24,7 @@ const menuCards = [
     title: "Southern Roots, Social Plates",
     body: "Kerala and Tamil cooking, served for the middle of the table. Rasam and roots to open, small plates with a southern attitude, and mains built to share. Vegetarian dishes are marked.",
     imageLeft: false,
-    images: [menuSlide2, menuSlide7, menuSlide8],
+    images: [homepageMenuTapas, menuSlide2, menuSlide8],
     imageAlt: "Madras Social — South Indian plates for the middle of the table",
   },
   {
@@ -27,14 +32,22 @@ const menuCards = [
     title: "Dosa District",
     body: "Dosas and uthappams, crisp at the edge and made to tear and share. Served with coconut chutney, tomato chutney and vegetable sambar. Bangalore butter dosas have a section of their own.",
     imageLeft: true,
-    images: [menuSlide1, menuSlide3, menuSlide5],
+    images: [menuSlide1, menuSlide3],
     imageAlt: "Dosas and uthappams from the tava",
+  },
+  {
+    category: "MAINS",
+    title: "Main Affairs",
+    body: "Built for the centre of the table: Malabar chicken steak, a pepper-braised Madras lamb shank, and a whole Fish Pollichathu roasted in South Indian spices. Kalan mushroom sambar risotto and ghee roast paneer cover the table's vegetarians.",
+    imageLeft: false,
+    images: [menuSlide5, menuSlide7],
+    imageAlt: "Madras Social mains, built for the centre of the table",
   },
   {
     category: "DESSERTS",
     title: "Sweet Social",
     body: "Tirunelveli halwa with roasted cashews. Pistachio semiya kunafa. Filter kaapi tiramisu, with ladyfingers soaked in South Indian filter coffee. Save room.",
-    imageLeft: false,
+    imageLeft: true,
     images: [dessertMangoPannaCotta, menuSlide9],
     imageAlt: "Madras Social desserts",
   },

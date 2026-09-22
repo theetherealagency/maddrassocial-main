@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import ScallopDivider from "@/components/homepage/ScallopDivider";
-import mmAbout from "@/assets/mm-about.jpg";
 import GoldOrnament from "@/components/homepage/GoldOrnament";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import mamiCharacter from "@/assets/social-character-hero.png";
@@ -9,6 +8,16 @@ import mamiCharacter from "@/assets/social-character-hero.png";
 import heroBg from "@/assets/hero-temple-street.png";
 import ambientBg from "@/assets/entrance-3d-view.png";
 import valuesFull from "@/assets/values-full.png";
+
+// Our Space collage — replaced the Madras Mami placeholder (mm-about.jpg)
+// 2026-09-22. Same shared map graphic as the homepage's Our Story section:
+// see storyMapDesktop/Mobile there.
+import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.jpg";
+import spaceCollageMobile from "@/assets/about-photo-collage-mobile.jpg";
+import storyMapDesktop from "@/assets/about-story-map-desktop.jpg";
+import storyMapMobile from "@/assets/about-story-map-mobile.jpg";
+import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.png";
+import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.png";
 
 // ── Public image paths (served from /public) ─────────────────────
 
@@ -112,8 +121,8 @@ const AboutUs = () => {
       </section>
 
       {/* ── SECTION 2: HOW IT ALL BEGAN ─────────────────────────── */}
-      <section className="py-24 px-6" style={{ backgroundColor: CREAM }} id="story">
-        <FadeUp className="max-w-[560px] mx-auto text-center">
+      <section className="pt-24 pb-0" style={{ backgroundColor: CREAM }} id="story">
+        <FadeUp className="max-w-[560px] mx-auto text-center px-6">
           <p className="section-label mb-5">How It All Began</p>
           <GoldOrnament className="mb-7" />
           <h2
@@ -122,7 +131,7 @@ const AboutUs = () => {
           >
             A room for it
           </h2>
-          <div className="space-y-6 font-body text-[14px] leading-[1.85]" style={{ color: BROWN }}>
+          <div className="space-y-6 font-body text-[14px] leading-[1.85] mb-14" style={{ color: BROWN }}>
             <p>
               South Indian food is on menus from Times Square to Singapore. Waterloo Region has
               the appetite for it, and the people. What it did not have was the room.
@@ -137,15 +146,38 @@ const AboutUs = () => {
             </p>
           </div>
         </FadeUp>
+
+        {/* Chennai to Waterloo, the same graphic that closes this story on the
+            homepage teaser. Full-bleed, own crop per breakpoint. */}
+        <img
+          src={storyMapDesktop}
+          alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
+          className="hidden md:block w-full h-auto"
+          loading="lazy"
+        />
+        <img
+          src={storyMapMobile}
+          alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
+          className="block md:hidden w-full h-auto"
+          loading="lazy"
+        />
       </section>
 
-      {/* ── OUR SPACE (homepage polaroid collage) ─────────────── */}
-      <img
-        src={mmAbout}
-        alt="Our Space"
-        style={{ width: "100%", height: "auto", display: "block", margin: 0, padding: 0 }}
-        loading="lazy"
-      />
+      {/* ── OUR SPACE (heritage polaroid collage) ───────────────── */}
+      <section id="our-space">
+        <img
+          src={spaceCollageDesktop}
+          alt="Our Space — a heritage-inspired polaroid collage: temple towers, spice and kumkum, a Thanjavur dancing doll, drying chillies, and the day's catch"
+          className="hidden md:block w-full h-auto"
+          loading="lazy"
+        />
+        <img
+          src={spaceCollageMobile}
+          alt="Our Space — a heritage-inspired polaroid collage: temple towers, spice and kumkum, a Thanjavur dancing doll, drying chillies, and the day's catch"
+          className="block md:hidden w-full h-auto"
+          loading="lazy"
+        />
+      </section>
 
       {/* ── SECTION 4: OUR VALUES ───────────────────────────────── */}
       {/*
@@ -174,7 +206,23 @@ const AboutUs = () => {
         />
       </section>
 
-      {/* ── SECTION 6: FOOTER ───────────────────────────────────── */}
+      {/* ── SECTION 6: CHENNAI SKYLINE ──────────────────────────── */}
+      <section className="w-full" style={{ backgroundColor: CREAM }} id="skyline">
+        <img
+          src={bottomIllustrationDesktop}
+          alt="A line-drawn skyline of Chennai landmarks: temple gopurams, a lighthouse, a Bharatanatyam dancer, and the shore"
+          className="hidden md:block w-full h-auto"
+          loading="lazy"
+        />
+        <img
+          src={bottomIllustrationMobile}
+          alt="A line-drawn skyline of Chennai landmarks: temple gopurams, a lighthouse, a Bharatanatyam dancer, and the shore"
+          className="block md:hidden w-full h-auto"
+          loading="lazy"
+        />
+      </section>
+
+      {/* ── SECTION 7: FOOTER ───────────────────────────────────── */}
       <HomeFooter />
     </div>
   );

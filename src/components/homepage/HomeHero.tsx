@@ -1,5 +1,5 @@
-import heroBanner from "@/assets/homepage-banner-with-text.png";
-import heroBannerMobile from "@/assets/homepage-hero-mobile.png";
+import heroBanner from "@/assets/homepage-banner-desktop.jpg";
+import heroBannerMobile from "@/assets/homepage-banner-mobile.jpg";
 import ScallopDivider from "./ScallopDivider";
 
 const HomeHero = () => {

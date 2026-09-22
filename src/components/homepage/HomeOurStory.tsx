@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import GoldOrnament from "./GoldOrnament";
+import storyMapDesktop from "@/assets/about-story-map-desktop.jpg";
+import storyMapMobile from "@/assets/about-story-map-mobile.jpg";
 
 const HomeOurStory = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,7 +17,7 @@ const HomeOurStory = () => {
   }, []);
 
   return (
-    <section className="pt-4 pb-6 md:py-[100px] md:pb-[80px] relative overflow-hidden" style={{ backgroundColor: '#F2EDE4' }} id="about-us">
+    <section className="pt-4 pb-0 md:pt-[100px] relative overflow-hidden" style={{ backgroundColor: '#F2EDE4' }} id="about-us">
       <div className="hidden md:block pt-[80px]" />
 
       <div
@@ -48,6 +50,22 @@ const HomeOurStory = () => {
           the room. That is Madras Social, on Erb Street West.
         </p>
       </div>
+
+      {/* Chennai-to-Waterloo map graphic — closes the section on the same
+          visual it opens with in the copy above: the two skylines, the
+          Madras Social wordmark's home. Full-bleed, own crop per breakpoint. */}
+      <img
+        src={storyMapDesktop}
+        alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
+        className="hidden md:block w-full h-auto"
+        loading="lazy"
+      />
+      <img
+        src={storyMapMobile}
+        alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
+        className="block md:hidden w-full h-auto"
+        loading="lazy"
+      />
     </section>
   );
 };
