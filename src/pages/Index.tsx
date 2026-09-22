@@ -1,5 +1,6 @@
 import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeHero from '@/components/homepage/HomeHero';
+import HomeOurStory from '@/components/homepage/HomeOurStory';
 import HomeMenuCategories from '@/components/homepage/HomeMenuCategories';
 import HomeOurSpace from '@/components/homepage/HomeOurSpace';
 import HomeFooter from '@/components/homepage/HomeFooter';
@@ -11,6 +12,7 @@ const Index = () => {
     <div className="overflow-x-hidden w-full">
       <HomeNavbar />
       <HomeHero />
+      <HomeOurStory />
       <HomeMenuCategories />
       <HomeOurSpace />
       <InstagramFeed />

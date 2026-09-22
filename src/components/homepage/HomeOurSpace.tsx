@@ -1,5 +1,5 @@
-import traditionDesktop from "@/assets/tradition-section-desktop.jpg";
-import traditionMobile from "@/assets/tradition-section-mobile.jpg";
+import traditionDesktop from "@/assets/tradition-section-desktop.png";
+import traditionMobile from "@/assets/tradition-section-mobile.png";
 
 const HomeOurSpace = () => {
   return (

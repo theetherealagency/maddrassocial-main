@@ -12,10 +12,10 @@ import valuesFull from "@/assets/values-full.png";
 // Our Space collage — replaced the Madras Mami placeholder (mm-about.jpg)
 // 2026-09-22. Same shared map graphic as the homepage's Our Story section:
 // see storyMapDesktop/Mobile there.
-import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.jpg";
-import spaceCollageMobile from "@/assets/about-photo-collage-mobile.jpg";
-import storyMapDesktop from "@/assets/about-story-map-desktop.jpg";
-import storyMapMobile from "@/assets/about-story-map-mobile.jpg";
+import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.png";
+import spaceCollageMobile from "@/assets/about-photo-collage-mobile.png";
+import storyMapDesktop from "@/assets/about-story-map-desktop.png";
+import storyMapMobile from "@/assets/about-story-map-mobile.png";
 import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.png";
 import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.png";
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import GoldOrnament from "./GoldOrnament";
-import menuCardImage from "@/assets/homepage-menu-tapas.jpg";
+import menuCardImage from "@/assets/homepage-menu-tapas.png";
 
 /**
  * Four categories, one card style, one line.
@@ -9,11 +9,16 @@ import menuCardImage from "@/assets/homepage-menu-tapas.jpg";
  * each with its own image slideshow) at the client's request, 2026-09-22.
  * The card design comes from the client's own supplied asset
  * (`home page/homepage menu food card.png`) — a portrait photo with a solid
- * Carbon (#1f1b1a) bar baked into the bottom 25% of the frame, sized for a
- * category label and a title. `menuCardImage` (`homepage-menu-tapas.jpg`) is
- * the only real Madras Social food photo supplied so far, so all four cards
- * use it for now; swap each card's `image` in `CATEGORIES` below as real
- * photography per category arrives — nothing else about the layout changes.
+ * bar baked into the bottom 25% of the frame, sized for a category label and
+ * a title. The bar shipped Carbon (#1f1b1a); recoloured to terracotta
+ * (#9c3821, sampled from the Our Story map's own ground) at the client's
+ * request the same day, so the card matches the section above it. Edit
+ * `homepage-menu-tapas.png` directly if that ever needs to change again —
+ * the color is baked into the photo, not drawn by this component.
+ * `menuCardImage` is the only real Madras Social food photo supplied so far,
+ * so all four cards use it for now; swap each card's `image` in
+ * `CATEGORIES` below as real photography per category arrives — nothing
+ * else about the layout changes.
  *
  * Categories are the real menu section names from `seo/site.mjs`, not
  * invented ones, so the labels stay true even before each has its own photo.
@@ -72,7 +77,11 @@ const MenuCard = ({ category }: { category: Category }) => (
       className="absolute inset-x-0 bottom-0 flex flex-col justify-center px-3 md:px-5"
       style={{ height: "25%" }}
     >
-      <p className="font-body font-medium text-[9px] md:text-[11px] uppercase tracking-[0.25em] text-gold mb-1 md:mb-1.5">
+      {/* Gold read fine on the bar's old Carbon; it nearly disappears on
+          terracotta (too close in hue/luminance). Offwhite at reduced
+          opacity keeps the same visual hierarchy — quieter than the title —
+          without losing contrast. */}
+      <p className="font-body font-medium text-[9px] md:text-[11px] uppercase tracking-[0.25em] text-offwhite/75 mb-1 md:mb-1.5">
         {category.label}
       </p>
       <h3 className="font-display text-[16px] md:text-[22px] lg:text-[26px] text-offwhite leading-[1.15]">
