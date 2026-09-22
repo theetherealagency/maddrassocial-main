@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
 import ScallopDivider from "@/components/homepage/ScallopDivider";
 import GoldOrnament from "@/components/homepage/GoldOrnament";
+import Header from "@/components/Header";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import socialCharacter from "@/assets/social-character-hero.png";
 
@@ -90,10 +91,23 @@ const FadeUp = ({
 // ── Page ─────────────────────────────────────────────────────────
 const AboutUs = () => {
   const [floating, setFloating] = useState(false);
+  const storyRef = useRef<HTMLElement>(null);
+  const [storyVisible, setStoryVisible] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setFloating(true), 800);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const el = storyRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStoryVisible(true); },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -104,6 +118,11 @@ const AboutUs = () => {
           50%       { transform: translateY(-8px); }
         }
       `}</style>
+
+      {/* Shared site header — added 2026-09-22. This page had none before:
+          no way back to the rest of the site short of the browser's back
+          button. Every other page uses this same component. */}
+      <Header />
 
       {/* ── SECTION 1: HERO ─────────────────────────────────────── */}
       <section className="relative overflow-hidden" style={{ minHeight: "80vh" }} id="hero">
@@ -146,34 +165,21 @@ const AboutUs = () => {
       </section>
 
       {/* ── SECTION 2: HOW IT ALL BEGAN ─────────────────────────── */}
-      <section className="pt-24 pb-0" style={{ backgroundColor: CREAM }} id="story">
-        <FadeUp className="max-w-[560px] mx-auto text-center px-6">
-          <p className="section-label mb-5">How It All Began</p>
-          <GoldOrnament className="mb-7" />
-          <h2
-            className="font-display italic leading-[1.2] mb-10"
-            style={{ fontSize: "clamp(32px, 4.5vw, 44px)", color: BROWN }}
-          >
-            A room for it
-          </h2>
-          <div className="space-y-6 font-body text-[14px] leading-[1.85] mb-14" style={{ color: BROWN }}>
-            <p>
-              South Indian food is on menus from Times Square to Singapore. Waterloo Region has
-              the appetite for it, and the people. What it did not have was the room.
-            </p>
-            <p>
-              Not a dosa counter with a liquor licence. A South Indian kitchen with a real bar,
-              where the evening is the point and the table is yours for as long as you want it.
-            </p>
-            <p>
-              Kerala and Tamil cooking, plates built for the middle of the table, and somewhere
-              to sit with all of it. That is Madras Social, on Erb Street West.
-            </p>
-          </div>
-        </FadeUp>
+      {/*
+        REBUILT 2026-09-22 to match the homepage's Our Story section: no box,
+        copy directly on the map's white Tamil Nadu silhouette (client
+        instruction — "the box is the map shape"). Same shared asset as Home
+        (about-story-map-desktop/mobile.png IS storyMapDesktop/Mobile there),
+        same measured safe zones — see HomeOurStory.tsx for how those were
+        found and why they are this tight.
 
-        {/* Chennai to Waterloo, the same graphic that closes this story on the
-            homepage teaser. Full-bleed, own crop per breakpoint. */}
+        The copy here is condensed from the original three paragraphs to one,
+        for the same reason Home's was: the desktop zone is 390 x 194 CSS px
+        at most, and mobile's silhouette renders at roughly a third of that.
+        Nothing invented — this is the original wording, shortened, not new
+        claims.
+      */}
+      <section ref={storyRef} className="relative overflow-hidden" id="story">
         <img
           src={storyMapDesktop}
           alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
@@ -186,6 +192,44 @@ const AboutUs = () => {
           className="block md:hidden w-full h-auto"
           loading="lazy"
         />
+
+        {/* Desktop — same 390 x 194 CSS px band as HomeOurStory.tsx. */}
+        <div
+          className="hidden md:flex absolute flex-col justify-center text-center overflow-hidden transition-all duration-700 ease-out"
+          style={{
+            top: "33.1%", height: "25.2%", left: "34.1%", width: "28.6%",
+            color: BROWN,
+            opacity: storyVisible ? 1 : 0,
+            transform: storyVisible ? "translateY(0)" : "translateY(20px)",
+          }}
+        >
+          <p className="section-label mb-1 text-[9px] tracking-[0.3em]">How It All Began</p>
+          <h2 className="font-display italic" style={{ fontSize: "19px", lineHeight: 1.15 }}>
+            A room for it
+          </h2>
+          <p className="font-body text-[10px] leading-[1.4] mt-2">
+            Waterloo Region had the appetite for South Indian food. What it
+            did not have was the room — a real bar, an evening you do not
+            rush, a table that is yours for as long as you want it.
+          </p>
+        </div>
+
+        {/* Mobile — same measured band as HomeOurStory.tsx's mobile fix:
+            the silhouette renders too small here for more than a heading. */}
+        <div
+          className="flex md:hidden absolute flex-col justify-center text-center px-1 transition-all duration-700 ease-out"
+          style={{
+            top: "35.8%", height: "13.3%", left: "22.3%", width: "54%",
+            color: BROWN,
+            opacity: storyVisible ? 1 : 0,
+            transform: storyVisible ? "translateY(0)" : "translateY(20px)",
+          }}
+        >
+          <p className="section-label mb-1 text-[7px] tracking-[0.22em]">How It All Began</p>
+          <h2 className="font-display italic" style={{ fontSize: "13px", lineHeight: 1.15 }}>
+            A room for it
+          </h2>
+        </div>
       </section>
 
       {/* ── OUR SPACE (heritage polaroid collage) ───────────────── */}
@@ -303,6 +347,23 @@ const AboutUs = () => {
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />
+      </section>
+
+      {/* New closing statement, added 2026-09-22, right above the skyline
+          illustration below it — a short bridge between the two, on the
+          same cream ground the illustration sits on. */}
+      <section className="w-full pt-16 pb-2 px-6" style={{ backgroundColor: CREAM }}>
+        <FadeUp className="max-w-[480px] mx-auto text-center">
+          <p className="section-label mb-4">Still Home</p>
+          <h2
+            className="font-display italic leading-[1.25]"
+            style={{ fontSize: "clamp(24px, 3.2vw, 34px)", color: BROWN }}
+          >
+            Chennai never really left.
+            <br />
+            It just found a second address.
+          </h2>
+        </FadeUp>
       </section>
 
       {/* ── SECTION 6: CHENNAI SKYLINE ──────────────────────────── */}
