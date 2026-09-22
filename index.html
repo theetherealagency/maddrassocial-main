@@ -27,6 +27,14 @@
     <link rel="canonical" href="https://www.madrassocial.ca/">
     <!-- SEO:END -->
 
+    <!-- Favicon — Madras Social's own "MS" monogram, matching the live
+         madrassocial.ca site's app/icon.png. There was no explicit link here
+         before; the browser default /favicon.ico convention was serving the
+         Madras Mami flower mark this site was cloned from. -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/brand/madras-social-icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+
     <meta name="author" content="Madras Social">
     <meta name="publisher" content="Madras Social">
     <meta name="copyright" content="Madras Social">
@@ -61,7 +69,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Cormorant Garamond was dropped 2026-09-22 — unused anywhere in the
+         codebase (grep confirmed). Jost is real: src/pages/Reservations.tsx
+         sets it inline on the reservation form inputs. -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17964159024"></script>
     <script>

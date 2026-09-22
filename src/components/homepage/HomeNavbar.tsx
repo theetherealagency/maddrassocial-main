@@ -40,7 +40,7 @@ const HomeNavbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src="/lovable-uploads/mm-logo-web-01.png"
+            src="/brand/madras-social-logo.png"
             alt="Madras Social"
             className="h-10 w-auto"
           />

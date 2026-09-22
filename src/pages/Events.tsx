@@ -13,7 +13,7 @@ import kittyPartyImage from '@/assets/event-kitty-parties.jpg';
 import corporateImage from '@/assets/event-corporate-events.jpg';
 import festivalsImage from '@/assets/event-catering.jpg';
 import menuSecBg from '@/assets/menu-sec-bg.png';
-import mamiCharacter from '@/assets/social-character-thali.png';
+import socialCharacter from '@/assets/social-character-thali.png';
 
 /* Catering landing page — banner, then the four kinds of catering as expandable
    panels, each opening its enquiry modal. */
@@ -107,7 +107,7 @@ const Events = () => {
               removes the inline-image descender gap under her hem. */}
           <div className="flex justify-center lg:justify-end">
             <img
-              src={mamiCharacter}
+              src={socialCharacter}
               alt="The Madras Social character holding a brass filter coffee tumbler and a thali of idli, vada, sambar and chutney"
               className="block w-[220px] sm:w-[280px] lg:w-full lg:max-w-[340px] h-auto align-bottom"
               loading="lazy"

@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Instagram } from "lucide-react";
-import igFooterGrid from "@/assets/ig-footer-grid.png";
+/**
+ * Reuses the same four tiles InstagramFeed.tsx shows on the homepage,
+ * rather than this section's own separate six-tile grid (`ig-footer-grid.png`,
+ * removed 2026-09-22). That grid's bottom-left tile was a photograph of the
+ * actual Madras Mami storefront sign — not fixable by cropping text, the
+ * whole tile was a picture of someone else's restaurant. One clean, verified
+ * set of tiles now backs both places this teaser appears.
+ */
+import igFeedTiles from "@/assets/ig-home-1.png";
 
 const quickLinks = [
   { name: "Home",         href: "/" },
@@ -27,7 +35,7 @@ const InstagramGrid = () => (
     aria-label="View on Instagram"
   >
     <img
-      src={igFooterGrid}
+      src={igFeedTiles}
       alt="Madras Social on Instagram"
       className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
       loading="lazy"
@@ -66,7 +74,7 @@ const HomeFooter = () => {
           {/* Col 1: Logo + tagline */}
           <div>
             <div className="mb-4">
-              <img src="/lovable-uploads/mm-logo-web-01.png" alt="Madras Social" className="h-10 w-auto brightness-0 invert" />
+              <img src="/brand/madras-social-logo.png" alt="Madras Social" className="h-10 w-auto brightness-0 invert" />
             </div>
             <p className="font-body text-[13px] leading-[1.7]" style={{ color: cream }}>
               A South Indian kitchen and bar in Waterloo Region.

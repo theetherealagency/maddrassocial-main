@@ -69,7 +69,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <img
-              src="/lovable-uploads/mm-logo-web-01.png"
+              src="/brand/madras-social-logo.png"
               alt="Madras Social"
               className="h-10 w-auto transition-all duration-500 group-hover:scale-105"
               style={{

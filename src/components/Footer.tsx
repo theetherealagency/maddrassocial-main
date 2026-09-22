@@ -20,7 +20,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-4 group">
-              <img src="/lovable-uploads/mm-logo-web-01.png" alt="Madras Social" className="h-10 w-auto" />
+              <img src="/brand/madras-social-logo.png" alt="Madras Social" className="h-10 w-auto brightness-0 invert" />
             </Link>
             <p className="text-primary-foreground/40 text-xs leading-relaxed">
               A South Indian kitchen and bar<br />in Waterloo Region.
