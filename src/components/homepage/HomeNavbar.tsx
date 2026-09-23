@@ -136,7 +136,7 @@ const HomeNavbar = () => {
         <div className="px-6 py-3 flex flex-col gap-0.5">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
-            const linkClassName = "px-3 py-3 text-sm tracking-[0.1em] uppercase font-body font-medium rounded transition-all duration-300 min-h-[44px] flex items-center";
+            const linkClassName = "px-3 py-3 text-sm tracking-[0.1em] uppercase font-accent font-medium rounded transition-all duration-300 min-h-[44px] flex items-center";
             const linkStyle = { color: isActive ? '#1f1b1a' : 'rgba(31,27,26,0.7)' }; // Carbon
             return link.external ? (
               <a

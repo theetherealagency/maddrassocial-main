@@ -105,13 +105,13 @@ const HomeFooter = () => {
 
           {/* Col 2: Quick Links */}
           <div>
-            <p className="font-body font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Quick Links</p>
+            <p className="font-accent font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Quick Links</p>
             <div className="flex flex-col gap-[10px]">
               {quickLinks.map((link) => (
                 link.external ? (
-                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-body text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</a>
+                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-accent text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</a>
                 ) : (
-                  <Link key={link.name} to={link.href} className="font-body text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</Link>
+                  <Link key={link.name} to={link.href} className="font-accent text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</Link>
                 )
               ))}
             </div>
@@ -119,7 +119,7 @@ const HomeFooter = () => {
 
           {/* Col 3: Contact Us */}
           <div>
-            <p className="font-body font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Contact Us</p>
+            <p className="font-accent font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Contact Us</p>
             <address className="not-italic flex flex-col gap-3">
               <p className="font-body text-[13px] leading-[1.7]" style={{ color: cream }}>8 Erb Street West<br />Waterloo, ON N2L 1S7</p>
               <a href="mailto:hello@madrassocial.ca" className="font-body text-[13px] hover:opacity-100 transition-opacity" style={{ color: cream }}>hello@madrassocial.ca</a>
@@ -128,7 +128,7 @@ const HomeFooter = () => {
 
           {/* Col 4: Follow Us */}
           <div className="overflow-hidden">
-            <p className="font-body font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Follow Us</p>
+            <p className="font-accent font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Follow Us</p>
             <InstagramGrid />
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-1.5 font-body text-[12px]"
@@ -155,19 +155,19 @@ const HomeFooter = () => {
         {/* ROW 1: Quick Links + Contact side by side */}
         <div className="grid grid-cols-2 gap-3">
           <div className="text-center">
-            <p className="font-body font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Quick Links</p>
+            <p className="font-accent font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Quick Links</p>
             <div className="flex flex-col">
               {quickLinks.map((link) => (
                 link.external ? (
-                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-body transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</a>
+                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-accent transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</a>
                 ) : (
-                  <Link key={link.name} to={link.href} className="font-body transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</Link>
+                  <Link key={link.name} to={link.href} className="font-accent transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</Link>
                 )
               ))}
             </div>
           </div>
           <div className="text-center">
-            <p className="font-body font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Contact Us</p>
+            <p className="font-accent font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Contact Us</p>
             <address className="not-italic flex flex-col" style={{ gap: '2px' }}>
               <p className="font-body" style={{ color: cream, fontSize: '12px', lineHeight: 1.5 }}>8 Erb Street West, Waterloo, ON N2L 1S7</p>
               <a href="mailto:hello@madrassocial.ca" className="font-body" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>hello@madrassocial.ca</a>
@@ -177,7 +177,7 @@ const HomeFooter = () => {
 
         {/* ROW 2: Follow Us + Instagram */}
         <div className="text-center">
-          <p className="font-body font-semibold uppercase mb-2" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Follow Us</p>
+          <p className="font-accent font-semibold uppercase mb-2" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Follow Us</p>
           <div className="mx-auto" style={{ maxWidth: '280px', width: '100%' }}>
             <InstagramGrid />
           </div>

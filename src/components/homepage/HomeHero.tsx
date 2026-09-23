@@ -62,11 +62,23 @@ import ScallopDivider from "./ScallopDivider";
  * exposing it. Fix: `homepage-banner-desktop.png` / `-mobile.png` now have
  * that exact silhouette cut out as a real transparent hole (same GrabCut
  * mask, subtracted from the banner's alpha channel), so the base banner no
- * longer contains her at all — only the animated cutout does. At rest the
- * two are pixel-identical to the original art; wobbling exposes a sliver of
- * the page's own cream background (close to the banner's tone) on one side
- * rather than a second, static dancer. Wobble angle trimmed 3.5°→2.5° at
- * the same time to keep that sliver small.
+ * longer contains her at all — only the animated cutout does.
+ *
+ * Third round, same day — client: "at the bottom... we can see the cut
+ * happening while it moves." The hole was cut using the mask's raw
+ * anti-aliased alpha, which at rest matched the overlay's own soft edge
+ * pixel-for-pixel — but rotating the WHOLE figure around a bottom pivot
+ * swings the wide skirt hem sideways by several pixels at 2.5° (a rigid
+ * rotation moves points far from the pivot the most), enough to expose a
+ * thin gap between the (static) hole and the (rotated) overlay even though
+ * both came from the same mask. Tried making the hole a hard binary cutoff
+ * instead of a soft one — didn't help, the gap is geometric, not a
+ * compositing artefact. Fix: the hole is now eroded ~28px smaller than the
+ * overlay's actual silhouette (`cv2.erode`), leaving a margin of original,
+ * color-matched artwork hidden under the overlay's edge — so a few pixels
+ * of rotation swing land on matching art instead of open hole. Margin size
+ * was picked to clear the worst case (the hem's outer corners, ~270px from
+ * the bottom-center pivot) with room to spare.
  */
 const HomeHero = () => {
   const [mounted, setMounted] = useState(false);
@@ -85,7 +97,7 @@ const HomeHero = () => {
         }
         .doll-wobble {
           animation: doll-wobble 2.4s ease-in-out infinite;
-          transform-origin: 50% 96%;
+          transform-origin: 50% 100%;
         }
         @media (prefers-reduced-motion: reduce) {
           .doll-wobble { animation: none; }

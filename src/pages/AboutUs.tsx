@@ -248,7 +248,18 @@ const AboutUs = () => {
           silhouette was then cut out of the base collage PNGs as a real
           transparent hole — sized and positioned identically to the cutout,
           so at rest the two are pixel-identical and only the animated
-          cutout is ever visible. */}
+          cutout is ever visible.
+          Third pass, same day — client: "at the bottom... we can see the cut
+          happening while it moves." Rotating the whole figure around a
+          bottom pivot swings the wide skirt hem sideways enough at 2.5° to
+          expose a gap between the (static) hole and the (rotating) overlay,
+          even though both came from the same mask — a geometric side effect
+          of rotating a rigid shape, not a compositing bug (confirmed: a hard
+          binary mask edge didn't fix it either). Fix: the hole is eroded
+          ~28px smaller than the overlay's true silhouette, leaving a margin
+          of matching original artwork hidden under the overlay's edge, sized
+          to clear the hem's outer corners — the point on her farthest from
+          the pivot — through the full rotation. */}
       <style>{`
         @keyframes doll-wobble {
           0%, 100% { transform: rotate(-2.5deg); }
@@ -256,7 +267,7 @@ const AboutUs = () => {
         }
         .doll-wobble {
           animation: doll-wobble 2.4s ease-in-out infinite;
-          transform-origin: 50% 96%;
+          transform-origin: 50% 100%;
         }
         @media (prefers-reduced-motion: reduce) {
           .doll-wobble { animation: none; }
