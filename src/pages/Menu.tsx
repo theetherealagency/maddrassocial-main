@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import FloatingOrderCTA from "@/components/FloatingOrderCTA";
 import { ONLINE_ORDER_URL } from "@/lib/links";
 import madrasCover from "@/assets/menu-cover-madras.png";
 import socialCover from "@/assets/menu-cover-social.png";
-import menuSlide1 from "@/assets/menu-slide-1.jpg";
-import menuSlide2 from "@/assets/menu-slide-2.jpg";
-import menuSlide3 from "@/assets/menu-slide-3.jpg";
-import menuSlide4 from "@/assets/menu-slide-4.jpg";
-import menuSlide5 from "@/assets/menu-slide-5.jpg";
 import {
   FOOD_SECTIONS,
   DRINKS_SECTIONS,
@@ -17,14 +12,6 @@ import {
   type MenuSection,
   type MenuItem,
 } from "@/data/menuBookData";
-
-// Client request, 2026-09-23: "need image slideshow behind cards on menu
-// page" — the same real-photo pool used on the homepage's menu cards
-// (client's own Sony ILCE-7M4 shoot, see InstagramFeed.tsx for
-// provenance), crossfading behind the book, with a dark overlay so the
-// heading and the two covers stay legible over whatever frame is showing.
-const SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
-const SLIDE_INTERVAL_MS = 4000;
 
 /**
  * A book, not a page of tabs — client request, 2026-09-22: "the menu page
@@ -182,14 +169,6 @@ const MenuPages = ({
 
 const Menu = () => {
   const [open, setOpen] = useState<OpenSide>(null);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActive((i) => (i + 1) % SLIDES.length);
-    }, SLIDE_INTERVAL_MS);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -198,27 +177,9 @@ const Menu = () => {
       <main className="relative pt-16">
         <h1 className="sr-only">Madras Social Menu — South Indian Food and Drink in Waterloo</h1>
 
-        <div className="relative py-10 md:py-16 px-4 overflow-hidden">
-          {/* Background slideshow behind the heading and the book. */}
-          <div className="absolute inset-0" aria-hidden="true">
-            {SLIDES.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover transition-opacity ease-in-out"
-                style={{ opacity: i === active ? 1 : 0, transitionDuration: "1500ms" }}
-                loading="lazy"
-              />
-            ))}
-            <div
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(rgba(31,27,26,0.6), rgba(31,27,26,0.72))" }}
-            />
-          </div>
-
-          <p className="relative section-label text-center mb-2 text-offwhite">The Menu</p>
-          <h2 className="relative heading-display text-[28px] md:text-[40px] text-center mb-10 md:mb-14 text-offwhite">
+        <div className="py-10 md:py-16 px-4">
+          <p className="section-label text-center mb-2">The Menu</p>
+          <h2 className="heading-display text-[28px] md:text-[40px] text-center mb-10 md:mb-14">
             Let's get into it.
           </h2>
 
