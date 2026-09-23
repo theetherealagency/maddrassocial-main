@@ -233,16 +233,26 @@ const AboutUs = () => {
       {/* Client request, 2026-09-23: "make the doll moving like a toy, like
           Thanjavur dancing doll" — the Thanjavur Thalaiyatti Bommai in the
           centre polaroid is baked into the flat collage PNG, so it can't be
-          animated on its own. Instead, the exact same crop of just that
-          polaroid (measured by scanning for the background colour on all
-          four sides — left/right/top/bottom edges, both crops) sits as a
-          second image directly on top of it, pixel-identical when still, and
-          only THIS copy gets the rock/wobble animation real Thanjavur dolls
-          do — the base collage underneath is untouched. */}
+          animated on its own.
+          Revised same day — client: "we still see the doll behind the
+          toggle... why do we have 2 dolls." The first pass used a plain
+          rectangular crop of the polaroid as the moving layer, pixel-identical
+          to the same rectangle in the base collage when still — but
+          rotating a rectangle swings its corners away from that identical
+          rectangle underneath, exposing the still doll baked into the base
+          image behind it. Fixed the same way as the hero dancer: GrabCut
+          (graph-cut segmentation seeded on the doll's bounding box, easier
+          here since the polaroid's backdrop is a soft blurred curtain, not
+          detailed art) produced a true alpha cutout of just her silhouette,
+          which is what `spaceDollDesktop`/`-mobile` are now. That same
+          silhouette was then cut out of the base collage PNGs as a real
+          transparent hole — sized and positioned identically to the cutout,
+          so at rest the two are pixel-identical and only the animated
+          cutout is ever visible. */}
       <style>{`
         @keyframes doll-wobble {
-          0%, 100% { transform: rotate(-3.5deg); }
-          50% { transform: rotate(3.5deg); }
+          0%, 100% { transform: rotate(-2.5deg); }
+          50% { transform: rotate(2.5deg); }
         }
         .doll-wobble {
           animation: doll-wobble 2.4s ease-in-out infinite;

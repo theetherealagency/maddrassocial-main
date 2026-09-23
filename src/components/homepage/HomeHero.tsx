@@ -46,16 +46,27 @@ import ScallopDivider from "./ScallopDivider";
  * She's illustrated directly into the banner PNG, blended into the skyline
  * linework behind her, not a separate layer — so animating her meant
  * cutting her out first. A rectangular crop wasn't enough here (unlike the
- * doll polaroid on the About page): the skyline art runs continuously
- * behind her, so a rectangular copy would visibly rotate a chunk of
- * background along with her. Color-threshold cutout didn't work either —
- * her gold jewellery and the tan skyline linework are nearly the same hue.
- * What worked: OpenCV GrabCut (graph-cut segmentation seeded with her
- * bounding box), which separates her by spatial coherence rather than
- * color alone — `hero-dancer-desktop.png` / `-mobile.png` are true
- * cutouts with real alpha transparency, positioned to sit pixel-for-pixel
- * over her in the base banner. Only this layer gets the wobble; the banner
- * underneath, skyline included, stays completely still.
+ * doll polaroid on the About page, originally): the skyline art runs
+ * continuously behind her, so a rectangular copy would visibly rotate a
+ * chunk of background along with her. Color-threshold cutout didn't work
+ * either — her gold jewellery and the tan skyline linework are nearly the
+ * same hue. What worked: OpenCV GrabCut (graph-cut segmentation seeded with
+ * her bounding box), which separates her by spatial coherence rather than
+ * color alone — `hero-dancer-desktop.png` / `-mobile.png` are true cutouts
+ * with real alpha transparency.
+ *
+ * Second round, same day — client: "we still see the doll behind the
+ * toggle... why do we have 2 dolls." The cutout was positioned pixel-for-
+ * pixel over the SAME dancer still baked into the base banner, so rotating
+ * it swung her silhouette away from the identical figure underneath,
+ * exposing it. Fix: `homepage-banner-desktop.png` / `-mobile.png` now have
+ * that exact silhouette cut out as a real transparent hole (same GrabCut
+ * mask, subtracted from the banner's alpha channel), so the base banner no
+ * longer contains her at all — only the animated cutout does. At rest the
+ * two are pixel-identical to the original art; wobbling exposes a sliver of
+ * the page's own cream background (close to the banner's tone) on one side
+ * rather than a second, static dancer. Wobble angle trimmed 3.5°→2.5° at
+ * the same time to keep that sliver small.
  */
 const HomeHero = () => {
   const [mounted, setMounted] = useState(false);
@@ -69,8 +80,8 @@ const HomeHero = () => {
     <section className="relative w-full md:overflow-hidden" id="home">
       <style>{`
         @keyframes doll-wobble {
-          0%, 100% { transform: rotate(-3.5deg); }
-          50% { transform: rotate(3.5deg); }
+          0%, 100% { transform: rotate(-2.5deg); }
+          50% { transform: rotate(2.5deg); }
         }
         .doll-wobble {
           animation: doll-wobble 2.4s ease-in-out infinite;
