@@ -17,26 +17,27 @@ const navLinks = [
 ];
 
 /**
- * `forceSolid` — for pages whose content starts directly under the nav in a
- * colour close to the transparent state's terracotta text (e.g. AboutUs's
- * dark red "How It All Began" section), where "RESERVE NOW" and the nav
- * links were unreadable until the visitor scrolled past 50vh. The homepage
- * hero is a flat, light cream field, so its low-contrast risk never showed
- * up here before this component was reused on other pages (client
- * instruction, 2026-09-23 — one shared header everywhere).
+ * Same transparent-until-scrolled behaviour on every page (client
+ * instruction, 2026-09-23 — "keep header same as on home page... till then
+ * transparent"). An earlier `forceSolid` variant special-cased AboutUs,
+ * whose "How It All Began" section is a dark red duotone image that made
+ * the transparent state's terracotta text unreadable — reverted per that
+ * instruction, and the contrast problem solved a different way instead: a
+ * soft light halo (`drop-shadow`) behind the whole unscrolled nav row,
+ * which does nothing visible against the homepage's flat cream hero but
+ * keeps the terracotta legible over a dark or busy background on any
+ * other page.
  */
-const HomeNavbar = ({ forceSolid = false }: { forceSolid?: boolean }) => {
-  const [scrolledPast, setScrolledPast] = useState(false);
+const HomeNavbar = () => {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const scrolled = forceSolid || scrolledPast;
 
   useEffect(() => {
-    if (forceSolid) return;
-    const handleScroll = () => setScrolledPast(window.scrollY > window.innerHeight * 0.5);
+    const handleScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.5);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [forceSolid]);
+  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -53,7 +54,10 @@ const HomeNavbar = ({ forceSolid = false }: { forceSolid?: boolean }) => {
         scrolled ? "bg-cream shadow-nav" : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between h-[70px]">
+      <div
+        className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between h-[70px] transition-[filter] duration-300"
+        style={{ filter: scrolled ? "none" : "drop-shadow(0 0 5px rgba(236,228,216,0.95)) drop-shadow(0 0 2px rgba(236,228,216,0.95))" }}
+      >
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img

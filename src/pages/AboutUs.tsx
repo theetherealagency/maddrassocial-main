@@ -79,13 +79,11 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: CREAM }}>
-      {/* Shared site header — added 2026-09-22. This page had none before:
-          no way back to the rest of the site short of the browser's back
-          button. Every other page uses this same component. */}
-      {/* forceSolid: the section right under the nav here is a dark red
-          duotone image, not the homepage's flat light hero — the default
-          transparent/terracotta-text nav state was unreadable against it. */}
-      <HomeNavbar forceSolid />
+      {/* Shared site header — same transparent-until-scrolled component and
+          behaviour as every other page (client instruction, 2026-09-23).
+          See HomeNavbar.tsx for how legibility over this page's dark red
+          section is handled without special-casing this page. */}
+      <HomeNavbar />
 
       {/* ── SECTION 2: HOW IT ALL BEGAN ─────────────────────────── */}
       {/*
@@ -102,7 +100,18 @@ const AboutUs = () => {
         Nothing invented — this is the original wording, shortened, not new
         claims.
       */}
-      <section ref={storyRef} className="relative overflow-hidden" id="story">
+      {/* pt-[90px]: the map artwork's white Tamil Nadu shape touches row 0
+          of the source file with no headroom above it (measured — the
+          "white" shape colour starts at y=0%). Fine for the homepage's
+          equivalent section, which sits well below the hero; here this is
+          the very first thing under the always-present fixed nav, so
+          without this gap the nav visually chopped the shape's peak off
+          (client feedback, 2026-09-23 — "the map is getting cut from the
+          top"). The gap is a plain padding-top on a non-positioned wrapper,
+          not on the relative image container itself, so it doesn't shift
+          the measured percentage-based text-overlay math below. */}
+      <section ref={storyRef} className="overflow-hidden" id="story" style={{ paddingTop: "90px" }}>
+      <div className="relative">
         <img
           src={storyMapDesktop}
           alt="A map of Tamil Nadu traced over the streets of Chennai and Waterloo"
@@ -182,6 +191,7 @@ const AboutUs = () => {
             A room for it
           </h2>
         </div>
+      </div>
       </section>
 
       {/* ── OUR SPACE (heritage polaroid collage) ───────────────── */}
@@ -200,32 +210,40 @@ const AboutUs = () => {
         />
       </section>
 
-      {/* New closing statement, added 2026-09-22, right above the skyline
-          illustration below it — a short bridge between the two, on the
-          same cream ground the illustration sits on.
-          Client feedback, 2026-09-23: the heading alone didn't say anything
-          about Madras Social itself — added a body line naming the actual
-          cooking (Kerala and Tamil, per HomeOurStory.tsx's copy), the fact
-          it isn't vegetarian (CLAUDE.md § Not vegetarian), and the bar,
-          rather than just closing on a poetic couplet. */}
-      <section className="w-full pt-16 pb-16 px-6" style={{ backgroundColor: CREAM }}>
-        <FadeUp className="max-w-[480px] mx-auto text-center">
-          <p className="section-label mb-4">Still Home</p>
+      {/* Closing statement, right above the skyline illustration below it —
+          a short bridge between the two, on the same cream ground the
+          illustration sits on.
+          Revised 2026-09-23 (round 2): dropped the "Still Home" eyebrow
+          (client: remove it) and the "second address" line for "found a
+          new home" instead. The body line was flagged as "very very very
+          generic" — swapped the vague "chicken and mutton alongside the
+          vegetarian plates, a full bar" for two named dishes off the actual
+          menu (menuBookData.ts) and the one cocktail built on a rasam,
+          which says the same thing (non-veg, real bar) without reading like
+          boilerplate. Padding cut too — pt-16/pb-16 plus this being sandwiched
+          between two other cream sections read as dead air.
+          Revised again, 2026-09-23 (round 3): client called the copy flat
+          and asked for it bigger and bolder — heading roughly doubled
+          (24-34px → 40-64px, weight up), body sized up and darkened from
+          85% opacity to full ink, and the line itself rewritten to lead
+          with the dish rather than the geography lesson. */}
+      <section className="w-full pt-8 pb-8 px-6" style={{ backgroundColor: CREAM }}>
+        <FadeUp className="max-w-[600px] mx-auto text-center">
           <h2
-            className="font-display italic leading-[1.25]"
-            style={{ fontSize: "clamp(24px, 3.2vw, 34px)", color: BROWN }}
+            className="font-display leading-[1.15] font-semibold text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px]"
+            style={{ color: BROWN }}
           >
             Chennai never really left.
-            <br />
-            It just found a second address.
+            <br className="hidden sm:block" />{" "}
+            It just found a new home.
           </h2>
           <p
-            className="font-body mt-5 mx-auto"
-            style={{ fontSize: "15px", lineHeight: 1.7, color: BROWN, maxWidth: "38ch", opacity: 0.85 }}
+            className="font-body mt-6 mx-auto font-medium"
+            style={{ fontSize: "19px", lineHeight: 1.6, color: BROWN, maxWidth: "36ch" }}
           >
-            Kerala and Tamil cooking, chicken and mutton alongside the
-            vegetarian plates, a full bar for the evenings that run long.
-            Madras Social is that same kitchen, moved to Waterloo Region.
+            The lamb shank still gets its pepper crust. The rasam still
+            turns up in a cocktail before it turns up in a bowl. Madras
+            Social is that same kitchen — just moved to Waterloo Region.
           </p>
         </FadeUp>
       </section>
