@@ -32,8 +32,8 @@ const quickLinks = [
   { name: "Home",         href: "/" },
   { name: "Menu",         href: "/menu" },
   { name: "About",        href: "/about" },
-  { name: "Reservations", href: RESERVE_URL, external: true },
-  { name: "Careers",      href: CAREERS_URL, external: true },
+  { name: "Reservations", href: RESERVE_URL },
+  { name: "Careers",      href: CAREERS_URL },
 ];
 
 // Warm Linen — the real Madras Social palette (see CLAUDE.md § Brand).

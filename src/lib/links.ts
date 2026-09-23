@@ -13,20 +13,19 @@ export const ONLINE_ORDER_URL: string | null = null;
 /**
  * Reservations link.
  *
- * Client instruction, 2026-09-23: reservations must go to the real, live
- * booking page at madrassocial.ca/reservations (a separate Next.js project,
- * with the actual OpenTable widget) — not this repo's own /reservations
- * route. Every nav item and CTA that used to point at the internal route
- * now opens this URL instead.
+ * Briefly pointed at the live madrassocial.ca/reservations booking page
+ * (2026-09-23), then reverted the same day — client: "incorporate these
+ * pages to current website and not a different landing page," with the
+ * same header/footer as everywhere else. Back to this repo's own
+ * /reservations route.
  */
-export const RESERVE_URL = "https://www.madrassocial.ca/reservations";
+export const RESERVE_URL = "/reservations";
 
 /**
  * Careers link.
  *
- * Client instruction, 2026-09-23: "this has to be the careers page" — the
- * real, live hiring site, same pattern as RESERVE_URL above. Every nav item
- * that used to point at this repo's own /careers route now opens this
- * instead.
+ * Same reversal as RESERVE_URL above — briefly pointed at the external
+ * hiring.madrassocial.ca site, reverted the same day so Careers stays an
+ * internal page on this site with the shared header/footer.
  */
-export const CAREERS_URL = "https://hiring.madrassocial.ca";
+export const CAREERS_URL = "/careers";

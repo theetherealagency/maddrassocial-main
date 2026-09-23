@@ -107,14 +107,10 @@ const HomeOurSpace = () => {
         }}
       >
         <p className="section-label mb-3" style={{ color: "#a59976", fontSize: "13px", lineHeight: 1.6 }}>
-          Made in Waterloo.
-          <br />
-          Inspired by Madras.
+          Made in Waterloo. Inspired by Madras.
         </p>
         <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.2 }}>
-          Familiar in feeling.
-          <br />
-          New to the city.
+          Familiar in feeling. New to the city.
         </h2>
       </div>
 
@@ -193,14 +189,10 @@ const HomeOurSpace = () => {
         }}
       >
         <p className="section-label mb-1" style={{ color: "#a59976", fontSize: "8px", lineHeight: 1.4 }}>
-          Made in Waterloo.
-          <br />
-          Inspired by Madras.
+          Made in Waterloo. Inspired by Madras.
         </p>
         <h2 className="font-display italic text-cream" style={{ fontSize: "15px", lineHeight: 1.15 }}>
-          Familiar in feeling.
-          <br />
-          New to the city.
+          Familiar in feeling. New to the city.
         </h2>
       </div>
 

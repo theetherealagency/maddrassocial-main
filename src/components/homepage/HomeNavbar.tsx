@@ -12,8 +12,8 @@ const navLinks = [
   { name: "HOME", href: "/" },
   { name: "MENU", href: "/menu" },
   { name: "ABOUT", href: "/about" },
-  { name: "RESERVATIONS", href: RESERVE_URL, external: true },
-  { name: "CAREERS", href: CAREERS_URL, external: true },
+  { name: "RESERVATIONS", href: RESERVE_URL },
+  { name: "CAREERS", href: CAREERS_URL },
 ];
 
 /**
@@ -95,14 +95,12 @@ const HomeNavbar = () => {
         {/* Right side */}
         <div className="flex items-center gap-3">
           {/* CTA — desktop */}
-          <a
-            href={RESERVE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={RESERVE_URL}
             className="hidden xl:inline-block border-[1.5px] border-gold rounded-sm px-5 py-[9px] font-body font-medium text-[11px] uppercase tracking-[0.3em] text-gold transition-all duration-250 hover:bg-gold hover:text-brown-brand"
           >
             RESERVE NOW
-          </a>
+          </Link>
 
           {/* Order Now — mobile */}
           <Link
@@ -167,15 +165,13 @@ const HomeNavbar = () => {
               </Link>
             );
           })}
-          <a
-            href={RESERVE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={RESERVE_URL}
             className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#1f1b1a] text-[#1f1b1a] rounded-sm text-center"
             onClick={() => setMobileOpen(false)}
           >
             Reserve Now
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
