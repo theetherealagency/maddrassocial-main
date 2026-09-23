@@ -94,16 +94,31 @@ const SectionBlock = ({ section }: { section: MenuSection }) => (
  * `<button>`; the card around it (and the open menu behind it) is not,
  * because a scrollable menu nested inside one giant clickable wrapper
  * would re-toggle closed on every scroll or tap while reading it.
+ *
+ * Client feedback, 2026-09-23: "the cards has to be the size where it
+ * covers the names as pdf does" — the source art (menu-cover-madras.png /
+ * menu-cover-social.png) is a very tall panel (900×2720, the giant letters
+ * cascading the full height of the PDF page); `object-cover` inside this
+ * box's much wider aspect was cropping most of that away. Switched to
+ * `object-contain` so the whole tall panel — every letter — is always
+ * visible, uncropped, at the source's own proportions. `bg` fills
+ * whatever pillarboxing that leaves on the sides with the art's own flat
+ * background colour (sampled from the PNG itself), so the letterboxing is
+ * invisible rather than showing as bars. The small "MADRAS SOCIAL"
+ * wordmark that used to sit over the top of the giant "M"/"S" has been
+ * removed from the art entirely per the same feedback.
  */
 const CoverFace = ({
   src,
   alt,
   label,
+  bg,
   onOpen,
 }: {
   src: string;
   alt: string;
   label: string;
+  bg: string;
   onOpen: () => void;
 }) => (
   <button
@@ -111,8 +126,9 @@ const CoverFace = ({
     onClick={onOpen}
     aria-label={`Open the ${label} menu`}
     className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
+    style={{ backgroundColor: bg }}
   >
-    <img src={src} alt={alt} className="w-full h-full object-cover" loading="eager" />
+    <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
     <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
       <span className="font-body text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-[hsl(var(--offwhite))]/80 border border-[hsl(var(--offwhite))]/40 rounded-full px-4 py-2 backdrop-blur-sm">
         Open the {label} menu
@@ -194,6 +210,7 @@ const Menu = () => {
                 src={madrasCover}
                 alt="Madras — the food menu cover, as printed"
                 label="Madras"
+                bg="#414c2a"
                 onOpen={() => setOpen("madras")}
               />
               <MenuPages title="Madras — Food" onClose={() => setOpen(null)}>
@@ -217,6 +234,7 @@ const Menu = () => {
                 src={socialCover}
                 alt="Social — the drinks menu cover, as printed"
                 label="Social"
+                bg="#a83d24"
                 onOpen={() => setOpen("social")}
               />
               <MenuPages title="Social — Drinks" onClose={() => setOpen(null)}>
