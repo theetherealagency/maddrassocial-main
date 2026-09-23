@@ -1,283 +1,359 @@
-import { useState } from 'react';
-import { useInView } from '@/hooks/useInView';
+import { useRef, useState } from 'react';
 import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeFooter from '@/components/homepage/HomeFooter';
 import FloatingOrderCTA from '@/components/FloatingOrderCTA';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
-import { trackFormSuccess } from '@/lib/analytics';
-
-interface JobPosition {
-  id: string;
-  title: string;
-  type: string;
-  description: string;
-  requirements: string[];
-  responsibilities: string[];
-}
 
 /**
- * PENDING — Madras Social's actual open roles have not been supplied. These
- * four are inherited from the source and rewritten into The Host voice; they
- * are plausible for the room but unconfirmed. Note there is no bar role here
- * even though Madras Social has a full bar. Confirm or replace before launch.
- * See PENDING.md.
+ * Rebuilt 2026-09-23 to match the client's own live hiring page —
+ * madrassocial.ca/hiring/careers — client instruction: "I want
+ * [that page] as career page not as a separate page but in the same
+ * website we are building." That page is a real, working application
+ * form wired to the client's own Google Apps Script backend
+ * (config.js's ENDPOINT), not a mockup — so this isn't a redesign from
+ * scratch, it's the same copy, the same fields, the same submission
+ * target, rebuilt as a React page with this site's own header and footer
+ * instead of a separate hiring.madrassocial.ca landing page.
+ *
+ * ROLES below mirrors that site's config.js `CONFIG.ROLES` — the "one
+ * file the agency edits day-to-day" there. Keep this in sync with it:
+ * to close a role, delete its entry; to add one, copy the shape. The
+ * previous version of this page (Head Chef / Line Cook / Server /
+ * Restaurant Manager, with invented requirements and responsibilities)
+ * was PENDING placeholder content that never matched what the client
+ * was actually hiring for — replaced entirely.
  */
-const jobPositions: JobPosition[] = [
-  {
-    id: 'head-chef', title: 'Head Chef', type: 'Full-time',
-    description: 'Run the kitchen. Kerala and Tamil cooking, a menu that changes when it should, and a team worth keeping.',
-    requirements: ['5+ years in South Indian cuisine', 'Strong leadership skills', 'Food safety certification'],
-    responsibilities: ['Oversee all kitchen operations', 'Develop and refine menu items', 'Train and mentor kitchen staff'],
-  },
-  {
-    id: 'line-cook', title: 'Line Cook', type: 'Full-time / Part-time',
-    description: 'Work a station on a South Indian line. Dosas, gravies, biryani, and the prep behind all of it.',
-    requirements: ['1+ years kitchen experience', 'Familiarity with South Indian cuisine preferred', 'Team player'],
-    responsibilities: ['Prepare ingredients and dishes', 'Maintain station cleanliness', 'Follow food safety protocols'],
-  },
-  {
-    id: 'server', title: 'Server', type: 'Full-time / Part-time',
-    description: 'Look after a section. Know the menu, know the bar, and read a table before it asks.',
-    requirements: ['Previous restaurant experience preferred', 'Excellent communication', 'Smart Serve certification'],
-    responsibilities: ['Welcome and seat guests', 'Present menu and take orders', 'Ensure guest satisfaction'],
-  },
-  {
-    id: 'manager', title: 'Restaurant Manager', type: 'Full-time',
-    description: 'Run the floor. Rotas, service standards, and the hundred small things that make a room work.',
-    requirements: ['3+ years management experience', 'POS system proficiency', 'Strong leadership'],
-    responsibilities: ['Oversee daily operations', 'Hire and train staff', 'Handle customer feedback'],
-  },
+const ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbxy2Q5nKclp3SPw4LWrt8naSzSyeq0ypWarHYGULBOhasG9WlALVc6ay7ZcrB7nET49/exec';
+const REF_PREFIX = 'MS-2026';
+const RESUME_MAX_MB = 5;
+const TALENT_POOL = 'Talent pool — keep me on file';
+
+type Role = { title: string; openings: number; type: string; urgent?: boolean };
+
+const ROLES: Role[] = [
+  { title: 'Bartender', openings: 1, type: 'Full / part time', urgent: true },
+  { title: 'Front of House (FOH)', openings: 2, type: 'Full / part time' },
+  { title: 'Kitchen Helper', openings: 2, type: 'Full / part time' },
 ];
 
-const JobCard = ({ job, onApply }: { job: JobPosition; onApply: (job: JobPosition) => void }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  return (
-    <div className="border-b border-border/50 py-5">
-      <div className="cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="font-kugile text-base text-primary mb-0.5">{job.title}</h3>
-            <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground font-gotham">{job.type}</span>
-          </div>
-          <button className="text-muted-foreground p-1 hover:text-primary transition-colors">
-            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
-        </div>
-        <p className="text-muted-foreground mt-2 text-xs leading-relaxed">{job.description}</p>
-      </div>
-      {isExpanded && (
-        <div className="mt-5 pt-5 border-t border-border/30 animate-fade-in">
-          <div className="grid md:grid-cols-2 gap-6 mb-5">
-            <div>
-              <h4 className="text-[10px] tracking-[0.2em] uppercase text-accent mb-2 font-gotham">Requirements</h4>
-              <ul className="space-y-1.5">
-                {job.requirements.map((req, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                    <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
-                    {req}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-[10px] tracking-[0.2em] uppercase text-accent mb-2 font-gotham">Responsibilities</h4>
-              <ul className="space-y-1.5">
-                {job.responsibilities.map((resp, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                    <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
-                    {resp}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <button onClick={(e) => { e.stopPropagation(); onApply(job); }} className="btn-cta">
-            Apply Now
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
+const AVAILABILITY_OPTIONS = ['Days', 'Evenings', 'Weekends'];
+const TYPE_OPTIONS = ['Full time', 'Part time', 'Either works'];
+const EXPERIENCE_OPTIONS = [
+  'None yet — willing to learn',
+  'Under 1 year',
+  '1–3 years',
+  '3–5 years',
+  '5+ years',
+];
 
-const ApplicationModal = ({ job, onClose, onSubmit }: { job: JobPosition; onClose: () => void; onSubmit: () => void }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '', email: '', phone: '', experience: '',
-    availability: [] as string[], coverLetter: '', whyWork: '',
+type Resume = { name: string; mime: string; data: string };
+
+const fileToResume = (file: File): Promise<Resume> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result);
+      resolve({ name: file.name, mime: file.type || 'application/octet-stream', data: result.split(',')[1] });
+    };
+    reader.onerror = () => reject(new Error('read-failed'));
+    reader.readAsDataURL(file);
   });
-  const availabilityOptions = ['Full-time', 'Part-time', 'Weekends', 'Evenings'];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.phone) return;
-    setIsSubmitting(true);
+const RoleCard = ({ role, onApply }: { role: Role; onApply: (title: string) => void }) => (
+  <div className="flex flex-wrap items-center gap-2 py-4 border-b border-border/30 last:border-b-0">
+    <span className="font-display text-[15px] text-primary mr-1">{role.title}</span>
+    {role.urgent && (
+      <span className="text-[9px] uppercase tracking-[0.15em] font-body font-medium text-[hsl(var(--color-cream))] bg-[hsl(var(--color-gold))] rounded-full px-2 py-1">
+        Urgent — Immediate Hire
+      </span>
+    )}
+    <span className="text-[9px] uppercase tracking-[0.15em] font-body text-muted-foreground border border-border/50 rounded-full px-2 py-1">
+      {role.openings} opening{role.openings > 1 ? 's' : ''}
+    </span>
+    <span className="text-[9px] uppercase tracking-[0.15em] font-body text-muted-foreground border border-border/50 rounded-full px-2 py-1">
+      {role.type}
+    </span>
+    <button
+      type="button"
+      onClick={() => onApply(role.title)}
+      className="ml-auto text-[10px] uppercase tracking-[0.2em] font-body font-medium text-[hsl(var(--color-gold))] border border-[hsl(var(--color-gold))]/50 rounded-full px-4 py-1.5 hover:bg-[hsl(var(--color-gold))] hover:text-[hsl(var(--color-cream))] transition-colors"
+    >
+      Apply
+    </button>
+  </div>
+);
+
+const Careers = () => {
+  const { toast } = useToast();
+  const formRef = useRef<HTMLDivElement>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [refNumber, setRefNumber] = useState(REF_PREFIX);
+  const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [resumeError, setResumeError] = useState('');
+  const [resume, setResume] = useState<Resume | null>(null);
+  const [availability, setAvailability] = useState<string[]>([]);
+  const [honeypot, setHoneypot] = useState('');
+  const [form, setForm] = useState({
+    name: '', phone: '', email: '', role: '', type: TYPE_OPTIONS[0],
+    experience: EXPERIENCE_OPTIONS[0], start: '', referral: '', note: '',
+  });
+
+  const scrollToForm = (prefillRole?: string) => {
+    if (prefillRole) setForm((f) => ({ ...f, role: prefillRole }));
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const toggleAvailability = (option: string) =>
+    setAvailability((a) => (a.includes(option) ? a.filter((x) => x !== option) : [...a, option]));
+
+  const handleFile = async (file: File | undefined) => {
+    setResumeError('');
+    if (!file) return;
+    if (file.size > RESUME_MAX_MB * 1024 * 1024) {
+      setResumeError(`That file is over ${RESUME_MAX_MB} MB — a smaller PDF works best.`);
+      return;
+    }
+    if (!/\.(pdf|docx?|DOCX?|PDF)$/i.test(file.name)) {
+      setResumeError('PDF or Word files only, please.');
+      return;
+    }
     try {
-      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
-      const { error } = await supabase.from('leads').insert({
-        form_type: 'job_application', name: formData.fullName, email: formData.email,
-        phone: formData.phone, job_title: job.title, experience: formData.experience || null,
-        availability: formData.availability.join(', ') || null,
-        cover_letter: formData.coverLetter || null, why_work_here: formData.whyWork || null,
-      });
-      if (error) throw error;
-      trackFormSuccess('job_application');
-      onSubmit();
-    } catch (error) {
-      onSubmit();
-    } finally {
-      setIsSubmitting(false);
+      setResume(await fileToResume(file));
+    } catch {
+      setResumeError('That file could not be read — try another.');
     }
   };
 
-  const handleAvailabilityChange = (option: string) => {
-    setFormData(prev => ({
-      ...prev,
-      availability: prev.availability.includes(option)
-        ? prev.availability.filter(a => a !== option)
-        : [...prev.availability, option],
-    }));
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (honeypot) { setSubmitted(true); return; }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-primary/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-background border border-border rounded max-w-xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-background border-b border-border p-5 flex items-center justify-between">
-          <div>
-            <h3 className="font-kugile text-lg text-primary">Apply for {job.title}</h3>
-            <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">{job.type}</p>
-          </div>
-          <button onClick={onClose} className="text-muted-foreground hover:text-primary p-1">
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+    const nextErrors: Record<string, boolean> = {
+      name: form.name.trim().length < 2,
+      phone: form.phone.replace(/\D/g, '').length < 10,
+      email: !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim()),
+      start: !form.start,
+      role: !form.role,
+    };
+    setErrors(nextErrors);
+    if (!resume) setResumeError(`Please attach your resume — PDF or Word, max ${RESUME_MAX_MB} MB.`);
+    if (Object.values(nextErrors).some(Boolean) || !resume) return;
 
-        <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="form-label text-[10px]">Full Name *</label>
-              <input type="text" value={formData.fullName} required
-                onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
-                className="form-input text-sm py-2.5" />
-            </div>
-            <div>
-              <label className="form-label text-[10px]">Email *</label>
-              <input type="email" value={formData.email} required
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="form-input text-sm py-2.5" />
-            </div>
-          </div>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="form-label text-[10px]">Phone *</label>
-              <input type="tel" value={formData.phone} required
-                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="form-input text-sm py-2.5" />
-            </div>
-            <div>
-              <label className="form-label text-[10px]">Years of Experience</label>
-              <input type="number" min="0" value={formData.experience}
-                onChange={(e) => setFormData(prev => ({ ...prev, experience: e.target.value }))}
-                className="form-input text-sm py-2.5" />
-            </div>
-          </div>
-          <div>
-            <label className="form-label text-[10px]">Availability</label>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {availabilityOptions.map(option => (
-                <label key={option}
-                  className={`px-3 py-1.5 rounded-sm border cursor-pointer transition-all duration-300 text-[10px] tracking-wide ${
-                    formData.availability.includes(option)
-                      ? 'bg-accent/15 border-accent text-accent'
-                      : 'bg-transparent border-border text-muted-foreground hover:border-accent/40'
-                  }`}>
-                  <input type="checkbox" checked={formData.availability.includes(option)}
-                    onChange={() => handleAvailabilityChange(option)} className="sr-only" />
-                  {option}
-                </label>
-              ))}
-            </div>
-          </div>
-          <div>
-            <label className="form-label text-[10px]">Cover Letter</label>
-            <textarea value={formData.coverLetter}
-              onChange={(e) => setFormData(prev => ({ ...prev, coverLetter: e.target.value }))}
-              rows={3} className="form-input text-sm resize-none" placeholder="Tell us about yourself..." />
-          </div>
-          <div>
-            <label className="form-label text-[10px]">Why Madras Social?</label>
-            <textarea value={formData.whyWork}
-              onChange={(e) => setFormData(prev => ({ ...prev, whyWork: e.target.value }))}
-              rows={3} className="form-input text-sm resize-none" placeholder="What draws you to our family..." />
-          </div>
-          <button type="submit" disabled={isSubmitting} className="btn-cta w-full py-3">
-            {isSubmitting ? 'Submitting...' : 'Submit Application'}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-const Careers = () => {
-  const { ref, isInView } = useInView({ threshold: 0.1 });
-  const { toast } = useToast();
-  const [selectedJob, setSelectedJob] = useState<JobPosition | null>(null);
-
-  const handleApplicationSubmit = () => {
-    setSelectedJob(null);
-    toast({ title: "Application Submitted!", description: "Thank you for your interest. We'll be in touch soon." });
+    setSubmitting(true);
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        body: JSON.stringify({
+          kind: 'application',
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          role: form.role,
+          type: form.type,
+          availability: availability.join(', '),
+          experience: form.experience,
+          start: form.start,
+          referral: form.referral.trim(),
+          note: form.note.trim(),
+          source: 'website',
+          page: '/careers',
+          resume,
+        }),
+      });
+      const data = await res.json().catch(() => null);
+      if (data?.duplicate) {
+        toast({ title: 'Already on file', description: 'Looks like you already applied with this number — one application covers you. We have it.' });
+        setSubmitting(false);
+        return;
+      }
+      if (data?.ok === false) throw new Error('backend-failed');
+      setRefNumber(data?.ref || REF_PREFIX);
+      setSubmitted(true);
+    } catch {
+      toast({
+        title: 'Something hiccuped',
+        description: "Try once more, or email hello@madrassocial.ca with your name and number.",
+        variant: 'destructive',
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <HomeNavbar />
 
-      {/* Hero */}
-      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-16">
+      {/* Hero — "Before we open" / "Help us open Madras Social. Floor and
+          kitchen." is the client's own copy, verbatim. */}
+      <section className="relative min-h-[36vh] flex items-center justify-center overflow-hidden pt-16">
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-        <div className="relative z-10 text-center px-6 py-20">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4 font-gotham font-medium">Careers</p>
-          <h1 className="font-kugile text-3xl sm:text-4xl md:text-5xl text-primary mb-4">Join the Family</h1>
-          <div className="w-10 h-px bg-accent/50 mx-auto mb-4" />
-          <p className="text-muted-foreground text-xs max-w-sm mx-auto font-gotham tracking-wide">
-            We are opening in Waterloo Region and hiring for the kitchen, the bar and the floor.
-          </p>
+        <div className="relative z-10 text-center px-6 py-16">
+          <p className="section-label mb-4">Before we open</p>
+          <h1 className="heading-display text-3xl sm:text-4xl md:text-5xl text-primary leading-tight">
+            Help us open Madras Social.
+            <br />
+            <span style={{ color: 'hsl(var(--color-gold))' }}>Floor and kitchen.</span>
+          </h1>
         </div>
       </section>
 
-      <main className="py-24 md:py-32 relative overflow-hidden">
+      <main className="pb-24 md:pb-32 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <div ref={ref} className={`max-w-2xl mx-auto transition-all duration-[1.2s] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="text-center mb-12">
-              <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4 font-gotham font-medium">Open Positions</p>
-              <h2 className="font-kugile text-xl md:text-2xl text-primary">Current Opportunities</h2>
-              <p className="text-xs text-muted-foreground mt-3 max-w-md mx-auto">
-                Like Social always said — a kitchen is only as good as the people in it.
-              </p>
+          <div className="max-w-2xl mx-auto">
+
+            {/* Open positions */}
+            <div className="mb-10">
+              <p className="section-label mb-4">Open positions</p>
+              {ROLES.map((role) => (
+                <RoleCard key={role.title} role={role} onApply={scrollToForm} />
+              ))}
             </div>
 
-            {jobPositions.map(job => (
-              <JobCard key={job.id} job={job} onApply={setSelectedJob} />
-            ))}
+            {/* Apply */}
+            <div ref={formRef} className="scroll-mt-24">
+              <p className="section-label mb-4">Apply</p>
 
-            <p className="text-[10px] text-muted-foreground text-center mt-12 tracking-wide">
-              Madras Social is an equal opportunity employer.
-            </p>
+              {submitted ? (
+                <div className="text-center py-12 border border-border/40 rounded-md">
+                  <p className="section-label mb-3">Application received</p>
+                  <p className="font-display text-2xl text-primary mb-3">{refNumber}</p>
+                  <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+                    That's your reference number. We read everything and we text — keep an eye on your phone.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="form-label text-[10px]">Full name</label>
+                      <input type="text" autoComplete="name" value={form.name}
+                        onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                        className="form-input text-sm py-2.5" />
+                      {errors.name && <p className="text-[11px] text-destructive mt-1">We'll need your name.</p>}
+                    </div>
+                    <div>
+                      <label className="form-label text-[10px]">Phone</label>
+                      <input type="tel" autoComplete="tel" value={form.phone}
+                        onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                        className="form-input text-sm py-2.5" />
+                      {errors.phone && <p className="text-[11px] text-destructive mt-1">A phone number we can text.</p>}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="form-label text-[10px]">Email</label>
+                    <input type="email" autoComplete="email" value={form.email}
+                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                      className="form-input text-sm py-2.5" />
+                    {errors.email && <p className="text-[11px] text-destructive mt-1">That email doesn't look right.</p>}
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="form-label text-[10px]">Role</label>
+                      <select value={form.role}
+                        onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))}
+                        className="form-input text-sm py-2.5">
+                        <option value="" disabled>Choose a role</option>
+                        {ROLES.map((r) => <option key={r.title}>{r.title}</option>)}
+                        <option>{TALENT_POOL}</option>
+                      </select>
+                      {errors.role && <p className="text-[11px] text-destructive mt-1">Pick a role — or the talent pool.</p>}
+                    </div>
+                    <div>
+                      <label className="form-label text-[10px]">Full or part time</label>
+                      <select value={form.type}
+                        onChange={(e) => setForm((f) => ({ ...f, type: e.target.value }))}
+                        className="form-input text-sm py-2.5">
+                        {TYPE_OPTIONS.map((o) => <option key={o}>{o}</option>)}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="form-label text-[10px]">Availability</label>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {AVAILABILITY_OPTIONS.map((option) => (
+                        <button type="button" key={option} onClick={() => toggleAvailability(option)}
+                          className={`px-3 py-1.5 rounded-sm border transition-all duration-300 text-[10px] tracking-wide ${
+                            availability.includes(option)
+                              ? 'bg-accent/15 border-accent text-accent'
+                              : 'bg-transparent border-border text-muted-foreground hover:border-accent/40'
+                          }`}>
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="form-label text-[10px]">Years of experience</label>
+                      <select value={form.experience}
+                        onChange={(e) => setForm((f) => ({ ...f, experience: e.target.value }))}
+                        className="form-input text-sm py-2.5">
+                        {EXPERIENCE_OPTIONS.map((o) => <option key={o}>{o}</option>)}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="form-label text-[10px]">Earliest start date</label>
+                      <input type="date" value={form.start}
+                        onChange={(e) => setForm((f) => ({ ...f, start: e.target.value }))}
+                        className="form-input text-sm py-2.5" />
+                      {errors.start && <p className="text-[11px] text-destructive mt-1">The one field we really need.</p>}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="form-label text-[10px]">Resume</label>
+                    <label className="flex flex-col items-center justify-center gap-2 border border-dashed border-border rounded-md px-4 py-6 text-center cursor-pointer hover:border-accent/50 transition-colors">
+                      <span className="text-xs text-muted-foreground">
+                        Drop a PDF or Word file here, or tap to choose · max {RESUME_MAX_MB} MB
+                      </span>
+                      {resume && <span className="text-xs text-accent">✓ {resume.name}</span>}
+                      <input type="file" accept=".pdf,.doc,.docx" className="sr-only"
+                        onChange={(e) => handleFile(e.target.files?.[0])} />
+                    </label>
+                    {resumeError && <p className="text-[11px] text-destructive mt-1">{resumeError}</p>}
+                  </div>
+
+                  <div>
+                    <label className="form-label text-[10px]">Referred by someone here? <span className="text-muted-foreground">(optional)</span></label>
+                    <input type="text" placeholder="Their name" value={form.referral}
+                      onChange={(e) => setForm((f) => ({ ...f, referral: e.target.value }))}
+                      className="form-input text-sm py-2.5" />
+                  </div>
+
+                  <div>
+                    <label className="form-label text-[10px]">Anything else? <span className="text-muted-foreground">(optional)</span></label>
+                    <textarea rows={3} placeholder="A line or two is plenty." value={form.note}
+                      onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
+                      className="form-input text-sm resize-none" />
+                  </div>
+
+                  {/* Honeypot — hidden from real applicants, catches simple bots. */}
+                  <input type="text" value={honeypot} onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1} autoComplete="off" aria-hidden="true"
+                    style={{ position: 'absolute', left: '-5000px' }} />
+
+                  <div className="text-center pt-2">
+                    <button type="submit" disabled={submitting} className="btn-cta w-full md:w-auto md:min-w-[280px] py-3">
+                      {submitting ? 'Sending…' : 'Send it in'}
+                    </button>
+                    <p className="text-[11px] text-muted-foreground mt-4">
+                      We read everything and we text — keep an eye on your phone.
+                    </p>
+                  </div>
+                </form>
+              )}
+            </div>
+
           </div>
         </div>
       </main>
-
-      {selectedJob && (
-        <ApplicationModal
-          job={selectedJob}
-          onClose={() => setSelectedJob(null)}
-          onSubmit={handleApplicationSubmit}
-        />
-      )}
 
       <HomeFooter />
       <FloatingOrderCTA />
