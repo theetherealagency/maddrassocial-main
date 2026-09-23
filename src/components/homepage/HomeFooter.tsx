@@ -8,8 +8,22 @@ import { Instagram } from "lucide-react";
  * actual Madras Mami storefront sign — not fixable by cropping text, the
  * whole tile was a picture of someone else's restaurant. One clean, verified
  * set of tiles now backs both places this teaser appears.
+ *
+ * Client request, 2026-09-23: swapped the placeholder mockup for the same
+ * four real Madras Social photos InstagramFeed.tsx uses (see that file's
+ * comment for provenance and what was excluded).
  */
-import igFeedTiles from "@/assets/ig-home-1.png";
+import igTile1 from "@/assets/ig-tile-1.jpg";
+import igTile2 from "@/assets/ig-tile-2.jpg";
+import igTile3 from "@/assets/ig-tile-3.jpg";
+import igTile4 from "@/assets/ig-tile-4.jpg";
+
+const FOOTER_TILES = [
+  { src: igTile1, alt: "A crunchy Madras Social salad plated in a gold bowl, with crisp puris on the side" },
+  { src: igTile2, alt: "Madras Social's sprout and pomegranate salad, garnished with curry leaf and radish" },
+  { src: igTile3, alt: "Nattu kozhi rasam at Madras Social, served with a crisp Malabar paratha stick" },
+  { src: igTile4, alt: "Beet poriyal hummus with masala edamame and papadum, on a Madras Social sharing platter" },
+];
 
 const quickLinks = [
   { name: "Home",         href: "/" },
@@ -29,20 +43,25 @@ const creamFull = "rgb(236,228,216)";
 const INSTAGRAM_URL = "https://www.instagram.com/madrassocial/";
 
 const InstagramGrid = () => (
-  <a
-    href={INSTAGRAM_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block overflow-hidden rounded-sm group"
-    aria-label="View on Instagram"
-  >
-    <img
-      src={igFeedTiles}
-      alt="Madras Social on Instagram"
-      className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
-      loading="lazy"
-    />
-  </a>
+  <div className="grid grid-cols-4 gap-1">
+    {FOOTER_TILES.map((tile) => (
+      <a
+        key={tile.src}
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block aspect-square overflow-hidden rounded-sm group"
+        aria-label="View on Instagram"
+      >
+        <img
+          src={tile.src}
+          alt={tile.alt}
+          className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-[1.05]"
+          loading="lazy"
+        />
+      </a>
+    ))}
+  </div>
 );
 
 const HomeFooter = () => {
