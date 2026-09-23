@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { ONLINE_ORDER_URL } from '@/lib/links';
+import { RESERVE_URL, CAREERS_URL } from '@/lib/links';
 
+// Events, Contact and the Order Online CTA removed from navigation, client
+// instruction 2026-09-23 ("remove events page for now" / "even contact and
+// order online page"). The page components and routes are untouched —
+// this only takes them out of the site's own nav so they're not reachable
+// from it while pending.
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'Menu', href: '/menu' },
   { name: 'About', href: '/about' },
-  { name: 'Reservations', href: '/reservations' },
-  { name: 'Events', href: '/events' },
-  { name: 'Careers', href: '/careers' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Reservations', href: RESERVE_URL, external: true },
+  { name: 'Careers', href: CAREERS_URL, external: true },
 ];
 
 const Header = () => {
@@ -86,13 +89,14 @@ const Header = () => {
           <nav className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="relative px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-gotham font-medium transition-all duration-500"
-                  style={{ color: isActive ? activeColor : inactiveColor }}
-                >
+              const className = "relative px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-gotham font-medium transition-all duration-500";
+              const style = { color: isActive ? activeColor : inactiveColor };
+              return link.external ? (
+                <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className={className} style={style}>
+                  {link.name}
+                </a>
+              ) : (
+                <Link key={link.name} to={link.href} className={className} style={style}>
                   {link.name}
                 </Link>
               );
@@ -102,27 +106,7 @@ const Header = () => {
           {/* Order CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
             <a
-              {...(ONLINE_ORDER_URL
-                ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
-                : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
-              className="hidden md:inline-block px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm transition-all duration-500"
-              style={{
-                borderColor: textColor,
-                color: textColor,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = textColor;
-                e.currentTarget.style.color = isScrolled ? '#ece4d8' : '#1f1b1a';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = textColor;
-              }}
-            >
-              Order Online
-            </a>
-            <a
-              href="/reservations"
+              href={RESERVE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-block px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm transition-all duration-500"
@@ -167,35 +151,29 @@ const Header = () => {
           <div className="flex flex-col gap-0.5">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
-              return (
+              const className = "px-3 py-3 text-sm tracking-[0.1em] uppercase font-gotham font-medium rounded transition-all duration-300 min-h-[44px] flex items-center";
+              const style = {
+                color: isScrolled
+                  ? isActive ? '#1f1b1a' : 'rgba(31,27,26,0.7)'
+                  : isActive ? '#a83d24' : '#ece4d8',
+              };
+              return link.external ? (
+                <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className={className} style={style}>
+                  {link.name}
+                </a>
+              ) : (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="px-3 py-3 text-sm tracking-[0.1em] uppercase font-gotham font-medium rounded transition-all duration-300 min-h-[44px] flex items-center"
-                  style={{
-                    color: isScrolled
-                      ? isActive ? '#1f1b1a' : 'rgba(31,27,26,0.7)'
-                      : isActive ? '#a83d24' : '#ece4d8',
-                  }}
+                  className={className}
+                  style={style}
                 >
                   {link.name}
                 </Link>
               );
             })}
             <a
-              {...(ONLINE_ORDER_URL
-                ? { href: ONLINE_ORDER_URL, target: '_blank', rel: 'noopener noreferrer' }
-                : { 'aria-disabled': true, title: 'Online ordering is not available yet' })}
-              className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm text-center transition-all duration-300"
-              style={{
-                borderColor: isScrolled ? '#1f1b1a' : '#a83d24',
-                color: isScrolled ? '#1f1b1a' : '#a83d24',
-              }}
-            >
-              Order Online
-            </a>
-            <a
-              href="/reservations"
+              href={RESERVE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-gotham font-medium border rounded-sm text-center transition-all duration-300"

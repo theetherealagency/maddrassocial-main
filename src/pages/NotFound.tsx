@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
+import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Header />
+      <HomeNavbar />
       <div className="min-h-screen flex items-center justify-center px-6 pt-16">
         <div className="text-center max-w-md">
           <p className="text-[10px] tracking-[0.4em] uppercase font-gotham font-medium mb-4" style={{ color: "hsl(var(--gold))" }}>

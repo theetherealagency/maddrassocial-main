@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '@/components/Header';
+import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeFooter from '@/components/homepage/HomeFooter';
 import FloatingOrderCTA from '@/components/FloatingOrderCTA';
 import MandalaBackground from '@/components/MandalaBackground';
@@ -44,7 +44,7 @@ const Contact = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-background overflow-x-hidden">
-        <Header />
+        <HomeNavbar />
         <div className="min-h-screen flex items-center justify-center px-6 pt-16">
           <div className="text-center max-w-md">
             <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
@@ -62,7 +62,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Header />
+      <HomeNavbar />
 
       {/* Hero — unified off-white background */}
       <section className="relative min-h-[25vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden pt-16">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "@/components/Header";
+import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import FloatingOrderCTA from "@/components/FloatingOrderCTA";
 import { ONLINE_ORDER_URL } from "@/lib/links";
@@ -156,7 +156,7 @@ const Menu = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Header />
+      <HomeNavbar />
 
       <main className="relative pt-16">
         <h1 className="sr-only">Madras Social Menu — South Indian Food and Drink in Waterloo</h1>

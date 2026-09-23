@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useInView } from '@/hooks/useInView';
-import Header from '@/components/Header';
+import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeFooter from '@/components/homepage/HomeFooter';
 import FloatingOrderCTA from '@/components/FloatingOrderCTA';
 import { useToast } from '@/hooks/use-toast';
@@ -234,7 +234,7 @@ const Careers = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Header />
+      <HomeNavbar />
 
       {/* Hero */}
       <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-16">

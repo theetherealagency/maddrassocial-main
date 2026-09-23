@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '@/components/Header';
+import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeFooter from '@/components/homepage/HomeFooter';
 import MandalaBackground from '@/components/MandalaBackground';
 import EventsBanner from '@/components/events/EventsBanner';
@@ -42,7 +42,7 @@ const Events = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: cream }}>
-      <Header />
+      <HomeNavbar />
 
       {/* ---------------- 1. Opening banner ---------------- */}
       <section className="pt-16">

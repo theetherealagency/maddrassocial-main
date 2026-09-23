@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import Header from "@/components/Header";
+import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 
 // Our Space collage — replaced the Madras Mami placeholder (mm-about.jpg)
@@ -17,7 +17,13 @@ import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.
 
 
 // ── Design tokens ────────────────────────────────────────────────
-const CREAM  = "#F5EDD8";
+// CREAM was '#F5EDD8' — visibly lighter/more yellow than the actual
+// background baked into the surrounding section images (measured from
+// about-photo-collage-desktop.png and about-bottom-illustration-desktop.png:
+// rgb(232,224,215) at every sampled corner). That mismatch is what made the
+// "Still Home" section between them look like a different, flatter cream
+// (client feedback, 2026-09-23). Matched to the images now.
+const CREAM  = "#E8E0D7";
 const BROWN  = "#3B2314";
 
 
@@ -76,7 +82,10 @@ const AboutUs = () => {
       {/* Shared site header — added 2026-09-22. This page had none before:
           no way back to the rest of the site short of the browser's back
           button. Every other page uses this same component. */}
-      <Header />
+      {/* forceSolid: the section right under the nav here is a dark red
+          duotone image, not the homepage's flat light hero — the default
+          transparent/terracotta-text nav state was unreadable against it. */}
+      <HomeNavbar forceSolid />
 
       {/* ── SECTION 2: HOW IT ALL BEGAN ─────────────────────────── */}
       {/*
@@ -193,8 +202,13 @@ const AboutUs = () => {
 
       {/* New closing statement, added 2026-09-22, right above the skyline
           illustration below it — a short bridge between the two, on the
-          same cream ground the illustration sits on. */}
-      <section className="w-full pt-16 pb-2 px-6" style={{ backgroundColor: CREAM }}>
+          same cream ground the illustration sits on.
+          Client feedback, 2026-09-23: the heading alone didn't say anything
+          about Madras Social itself — added a body line naming the actual
+          cooking (Kerala and Tamil, per HomeOurStory.tsx's copy), the fact
+          it isn't vegetarian (CLAUDE.md § Not vegetarian), and the bar,
+          rather than just closing on a poetic couplet. */}
+      <section className="w-full pt-16 pb-16 px-6" style={{ backgroundColor: CREAM }}>
         <FadeUp className="max-w-[480px] mx-auto text-center">
           <p className="section-label mb-4">Still Home</p>
           <h2
@@ -205,6 +219,14 @@ const AboutUs = () => {
             <br />
             It just found a second address.
           </h2>
+          <p
+            className="font-body mt-5 mx-auto"
+            style={{ fontSize: "15px", lineHeight: 1.7, color: BROWN, maxWidth: "38ch", opacity: 0.85 }}
+          >
+            Kerala and Tamil cooking, chicken and mutton alongside the
+            vegetarian plates, a full bar for the evenings that run long.
+            Madras Social is that same kitchen, moved to Waterloo Region.
+          </p>
         </FadeUp>
       </section>
 

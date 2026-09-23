@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '@/components/Header';
+import HomeNavbar from '@/components/homepage/HomeNavbar';
 import HomeFooter from '@/components/homepage/HomeFooter';
 import { useToast } from '@/hooks/use-toast';
 import { useInView } from '@/hooks/useInView';
@@ -65,7 +65,7 @@ const Reservations = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-background overflow-x-hidden">
-        <Header />
+        <HomeNavbar />
         <div className="min-h-screen flex items-center justify-center px-6 pt-16">
           <div className="text-center max-w-md">
             <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
@@ -95,7 +95,7 @@ const Reservations = () => {
 
   return (
     <div style={{ backgroundColor: '#efe9db', overflowX: 'hidden' }}>
-      <Header />
+      <HomeNavbar />
 
       {/* ══ DESKTOP ══ */}
       <div className="hidden md:block" style={{ position: 'relative', width: '100%', paddingTop: '64px' }}>

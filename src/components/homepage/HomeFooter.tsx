@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Instagram } from "lucide-react";
+import { RESERVE_URL, CAREERS_URL } from "@/lib/links";
 /**
  * Reuses the same four tiles InstagramFeed.tsx shows on the homepage,
  * rather than this section's own separate six-tile grid (`ig-footer-grid.png`,
@@ -25,14 +26,14 @@ const FOOTER_TILES = [
   { src: igTile4, alt: "Beet poriyal hummus with masala edamame and papadum, on a Madras Social sharing platter" },
 ];
 
+// Events and Contact removed from navigation, client instruction 2026-09-23
+// ("remove events page for now" / "even contact and order online page").
 const quickLinks = [
   { name: "Home",         href: "/" },
   { name: "Menu",         href: "/menu" },
   { name: "About",        href: "/about" },
-  { name: "Reservations", href: "/reservations" },
-  { name: "Events",       href: "/events" },
-  { name: "Careers",      href: "/careers" },
-  { name: "Contact",      href: "/contact" },
+  { name: "Reservations", href: RESERVE_URL, external: true },
+  { name: "Careers",      href: CAREERS_URL, external: true },
 ];
 
 // Warm Linen — the real Madras Social palette (see CLAUDE.md § Brand).
@@ -107,7 +108,11 @@ const HomeFooter = () => {
             <p className="font-body font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Quick Links</p>
             <div className="flex flex-col gap-[10px]">
               {quickLinks.map((link) => (
-                <Link key={link.name} to={link.href} className="font-body text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</Link>
+                link.external ? (
+                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-body text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</a>
+                ) : (
+                  <Link key={link.name} to={link.href} className="font-body text-[13px] transition-opacity hover:opacity-100" style={{ color: cream }}>{link.name}</Link>
+                )
               ))}
             </div>
           </div>
@@ -153,7 +158,11 @@ const HomeFooter = () => {
             <p className="font-body font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Quick Links</p>
             <div className="flex flex-col">
               {quickLinks.map((link) => (
-                <Link key={link.name} to={link.href} className="font-body transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</Link>
+                link.external ? (
+                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-body transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</a>
+                ) : (
+                  <Link key={link.name} to={link.href} className="font-body transition-opacity hover:opacity-100" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>{link.name}</Link>
+                )
               ))}
             </div>
           </div>
