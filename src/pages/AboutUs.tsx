@@ -260,10 +260,10 @@ const AboutUs = () => {
           (24-34px → 40-64px, weight up), body sized up and darkened from
           85% opacity to full ink, and the line itself rewritten to lead
           with the dish rather than the geography lesson. */}
-      <section className="w-full pt-8 pb-8 px-6" style={{ backgroundColor: CREAM }}>
+      <section className="w-full pt-8 pb-2 px-6" style={{ backgroundColor: CREAM }}>
         <FadeUp className="max-w-[600px] mx-auto text-center">
           <h2
-            className="font-display leading-[1.15] font-semibold text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px]"
+            className="font-display leading-[1.15] text-[32px] sm:text-[40px] md:text-[52px] lg:text-[64px]"
             style={{ color: BROWN }}
           >
             Chennai never really left.
@@ -271,7 +271,7 @@ const AboutUs = () => {
             It just found a new home.
           </h2>
           <p
-            className="font-body mt-6 mx-auto font-medium"
+            className="font-body mt-6 mx-auto"
             style={{ fontSize: "19px", lineHeight: 1.6, color: BROWN, maxWidth: "36ch" }}
           >
             The lamb shank still gets its pepper crust. The rasam still

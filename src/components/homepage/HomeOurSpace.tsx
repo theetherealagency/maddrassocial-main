@@ -61,8 +61,12 @@ const HomeOurSpace = () => {
     <section ref={ref} className="relative overflow-hidden" id="our-space">
       {/* Section heading — this block had none before; everything lived
           inside the artwork itself. Kept tight (client feedback: the first
-          pass left too much empty cream above the artwork). */}
-      <div className="text-center px-4 pt-6 md:pt-8 pb-3 md:pb-4">
+          pass left too much empty cream above the artwork).
+          Background colour matched to HomeMenuCategories' "#F2EDE4" —
+          client feedback, 2026-09-23: this block had no explicit background
+          (fell back to the page default) and visibly didn't match the
+          "What's on the Table" heading right above it. */}
+      <div className="text-center px-4 pt-6 md:pt-8 pb-3 md:pb-4" style={{ backgroundColor: "#F2EDE4" }}>
         <p className="section-label mb-1">The Madras Social Way</p>
         <h2 className="heading-display text-[24px] md:text-[32px]">
           Where Tradition Meets Design
@@ -88,23 +92,26 @@ const HomeOurSpace = () => {
       />
 
       {/* Desktop — eyebrow + heading, hugging the top edge of the green field.
-          Height raised 11%→15% (client's latest copy, 2026-09-23, has a
-          two-line eyebrow and a two-line heading) — still inside the
-          measured flat-green zone, which is safe up to 16%. */}
+          Client feedback, 2026-09-23: this read as small type stranded in a
+          lot of unused green on the right — re-measured, and the flat green
+          here is actually clear to at least 22% (not just the 16% used
+          before), so both the box and the type are bigger now, filling more
+          of the available 56%-wide column instead of huddling at its
+          original small size. */}
       <div
         className="hidden md:flex absolute flex-col justify-start px-[3%] pt-[4%] transition-all duration-700 ease-out"
         style={{
-          left: 0, width: "56%", top: "0%", height: "15%",
+          left: 0, width: "56%", top: "0%", height: "20%",
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}
       >
-        <p className="section-label mb-2" style={{ color: "#a59976", fontSize: "10.5px", lineHeight: 1.5 }}>
+        <p className="section-label mb-3" style={{ color: "#a59976", fontSize: "13px", lineHeight: 1.6 }}>
           Made in Waterloo.
           <br />
           Inspired by Madras.
         </p>
-        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(18px, 2vw, 27px)", lineHeight: 1.2 }}>
+        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.2 }}>
           Familiar in feeling.
           <br />
           New to the city.
@@ -112,9 +119,11 @@ const HomeOurSpace = () => {
       </div>
 
       {/* Desktop — the body copy at the bottom of the green field, under the
-          polaroids. Client's latest pass (2026-09-23) replaced the previous
-          two-paragraph copy with a new, slightly longer pair — kept at the
-          same 11.5px/1.5 sizing, still fits the measured 19%-tall zone. */}
+          polaroids. Client feedback, 2026-09-23: the two paragraphs read as
+          "too much text" crammed into a narrow 48ch column, when the
+          available box is 56% wide — widened the measure so lines run
+          longer and each paragraph wraps to fewer, more spread-out lines,
+          and sized the type up to match (11.5px → 14px). */}
       <div
         className="hidden md:flex absolute flex-col justify-center px-[3%] transition-all duration-700 ease-out"
         style={{
@@ -123,12 +132,12 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80 mb-2" style={{ fontSize: "11.5px", lineHeight: 1.5, maxWidth: "48ch" }}>
+        <p className="font-body text-cream/80 mb-3" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
           Madras Social takes inspiration from the places we know and the way
           we grew up gathering: people around a table, conversations that
           carry on, and hospitality that makes you feel looked after.
         </p>
-        <p className="font-body text-cream/80" style={{ fontSize: "11.5px", lineHeight: 1.5, maxWidth: "48ch" }}>
+        <p className="font-body text-cream/80" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
           We brought that feeling to Waterloo and gave it a new setting — one
           made for dinner plans, drinks after work, celebrations, and
           ordinary nights that become memorable.

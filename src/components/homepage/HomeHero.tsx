@@ -60,10 +60,14 @@ const HomeHero = () => {
         loading="eager"
       />
 
-      {/* Desktop hero text — centred in the empty top 28% of the artwork. */}
+      {/* Desktop hero text — was vertically centred in the empty top 28% of
+          the artwork, which for a short one-line headline put it right up
+          against the nav (client feedback, 2026-09-23 — "very attached to
+          the header... should be a bit lower"). Anchored to a fixed
+          top offset instead, same fix as the mobile block already used. */}
       <div
-        className="hidden md:flex absolute inset-x-0 top-0 flex-col items-center justify-center text-center px-6"
-        style={{ height: "26%" }}
+        className="hidden md:flex absolute inset-x-0 flex-col items-center justify-start text-center px-6"
+        style={{ top: "110px" }}
         aria-hidden="true"
       >
         <p
