@@ -128,15 +128,10 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80 mb-3" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
+        <p className="font-body text-cream/80" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
           Madras Social takes inspiration from the places we know and the way
           we grew up gathering: people around a table, conversations that
           carry on, and hospitality that makes you feel looked after.
-        </p>
-        <p className="font-body text-cream/80" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
-          We brought that feeling to Waterloo and gave it a new setting — one
-          made for dinner plans, drinks after work, celebrations, and
-          ordinary nights that become memorable.
         </p>
       </div>
 
@@ -205,15 +200,10 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80 mb-1.5" style={{ fontSize: "9px", lineHeight: 1.3 }}>
+        <p className="font-body text-cream/80" style={{ fontSize: "9px", lineHeight: 1.3 }}>
           Madras Social takes inspiration from the places we know and the way
           we grew up gathering: people around a table, conversations that
           carry on, and hospitality that makes you feel looked after.
-        </p>
-        <p className="font-body text-cream/80" style={{ fontSize: "9px", lineHeight: 1.3 }}>
-          We brought that feeling to Waterloo and gave it a new setting — one
-          made for dinner plans, drinks after work, celebrations, and
-          ordinary nights that become memorable.
         </p>
       </div>
 

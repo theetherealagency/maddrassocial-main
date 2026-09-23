@@ -8,6 +8,8 @@ import HomeFooter from "@/components/homepage/HomeFooter";
 // see storyMapDesktop/Mobile there.
 import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.png";
 import spaceCollageMobile from "@/assets/about-photo-collage-mobile.png";
+import spaceDollDesktop from "@/assets/about-space-doll-desktop.png";
+import spaceDollMobile from "@/assets/about-space-doll-mobile.png";
 import storyMapDesktop from "@/assets/about-story-map-desktop.png";
 import storyMapMobile from "@/assets/about-story-map-mobile.png";
 import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.png";
@@ -228,7 +230,29 @@ const AboutUs = () => {
       </section>
 
       {/* ── OUR SPACE (heritage polaroid collage) ───────────────── */}
-      <section id="our-space">
+      {/* Client request, 2026-09-23: "make the doll moving like a toy, like
+          Thanjavur dancing doll" — the Thanjavur Thalaiyatti Bommai in the
+          centre polaroid is baked into the flat collage PNG, so it can't be
+          animated on its own. Instead, the exact same crop of just that
+          polaroid (measured by scanning for the background colour on all
+          four sides — left/right/top/bottom edges, both crops) sits as a
+          second image directly on top of it, pixel-identical when still, and
+          only THIS copy gets the rock/wobble animation real Thanjavur dolls
+          do — the base collage underneath is untouched. */}
+      <style>{`
+        @keyframes doll-wobble {
+          0%, 100% { transform: rotate(-3.5deg); }
+          50% { transform: rotate(3.5deg); }
+        }
+        .doll-wobble {
+          animation: doll-wobble 2.4s ease-in-out infinite;
+          transform-origin: 50% 96%;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .doll-wobble { animation: none; }
+        }
+      `}</style>
+      <section id="our-space" className="relative overflow-hidden">
         <img
           src={spaceCollageDesktop}
           alt="Our Space — a heritage-inspired polaroid collage: temple towers, spice and kumkum, a Thanjavur dancing doll, drying chillies, and the day's catch"
@@ -239,6 +263,22 @@ const AboutUs = () => {
           src={spaceCollageMobile}
           alt="Our Space — a heritage-inspired polaroid collage: temple towers, spice and kumkum, a Thanjavur dancing doll, drying chillies, and the day's catch"
           className="block md:hidden w-full h-auto"
+          loading="lazy"
+        />
+        <img
+          src={spaceDollDesktop}
+          alt=""
+          aria-hidden="true"
+          className="doll-wobble hidden md:block absolute pointer-events-none"
+          style={{ left: "38.646%", top: "14.109%", width: "22.674%", height: "75.822%" }}
+          loading="lazy"
+        />
+        <img
+          src={spaceDollMobile}
+          alt=""
+          aria-hidden="true"
+          className="doll-wobble block md:hidden absolute pointer-events-none"
+          style={{ left: "34.773%", top: "9.502%", width: "28.478%", height: "81.273%" }}
           loading="lazy"
         />
       </section>

@@ -20,10 +20,10 @@ import igTile3 from "@/assets/ig-tile-3.jpg";
 import igTile4 from "@/assets/ig-tile-4.jpg";
 
 const FOOTER_TILES = [
-  { src: igTile1, alt: "A crunchy Madras Social salad plated in a gold bowl, with crisp puris on the side" },
-  { src: igTile2, alt: "Madras Social's sprout and pomegranate salad, garnished with curry leaf and radish" },
-  { src: igTile3, alt: "Nattu kozhi rasam at Madras Social, served with a crisp Malabar paratha stick" },
-  { src: igTile4, alt: "Beet poriyal hummus with masala edamame and papadum, on a Madras Social sharing platter" },
+  { src: igTile1, alt: "Madras Social's Beet Poriyal Hummus & Edamame Varuval, from the @madrassocial Instagram" },
+  { src: igTile2, alt: "The Madras Social storefront on Erb Street West, from the restaurant's opening announcement on Instagram" },
+  { src: igTile3, alt: "A guest enjoying a dish at Madras Social, from the @madrassocial Instagram" },
+  { src: igTile4, alt: "Madras Social's Marina Beach illustration post, from the @madrassocial Instagram" },
 ];
 
 // Events and Contact removed from navigation, client instruction 2026-09-23

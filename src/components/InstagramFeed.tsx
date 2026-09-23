@@ -12,28 +12,25 @@ import igTile4 from '@/assets/ig-tile-4.jpg';
  * just a bad filename, an actual Mami Instagram post. It has been dropped
  * entirely rather than patched.
  *
- * Client request, 2026-09-23: replace the mockup feed image with real
- * Madras Social photography. These four tiles are the client's own shoot
- * (Sony ILCE-7M4 RAW captures, supplied via Drive — "Edited" folder),
- * centre-cropped to square. A "Named Photos" batch was also supplied but
- * uses an old, now-unsupported TIFF/JPEG variant no available tool
- * (ImageMagick, PIL, sips, ffmpeg) could decode; the "Edited" folder's
- * already-processed PNGs were used instead. A handful of loose video files
- * in the same Drive drop ("Christine"/"Marietta") were checked and are a
- * different client's hospitality-training content (REVclass/REVacademy) —
- * excluded, not Madras Social's.
+ * Revised 2026-09-23 (round 2) — client: "use images or posts from
+ * [instagram.com/madrassocial] for instagram cards." The previous four
+ * tiles were the client's own food photography (real, but never actually
+ * posted) — these four are pulled directly from the live @madrassocial
+ * feed itself: the Beet Poriyal Hummus & Edamame Varuval post, the
+ * storefront-opening announcement, a real guest photographed mid-bite at
+ * the restaurant, and the Marina Beach brand illustration post. Cropped to
+ * square from each post's own image, nothing else changed.
  *
  * Still not a live embed — that needs Meta/Instagram API access this repo
- * does not have — but real photos of real Madras Social dishes, not a
- * placeholder mockup.
+ * does not have — but the actual posts, not a mockup or unrelated photos.
  */
 
 const INSTAGRAM_URL = 'https://www.instagram.com/madrassocial/';
 const TILES = [
-  { src: igTile1, alt: "A crunchy Madras Social salad plated in a gold bowl, with crisp puris on the side" },
-  { src: igTile2, alt: "Madras Social's sprout and pomegranate salad, garnished with curry leaf and radish" },
-  { src: igTile3, alt: "Nattu kozhi rasam at Madras Social, served with a crisp Malabar paratha stick" },
-  { src: igTile4, alt: "Beet poriyal hummus with masala edamame and papadum, on a Madras Social sharing platter" },
+  { src: igTile1, alt: "Madras Social's Beet Poriyal Hummus & Edamame Varuval, from the @madrassocial Instagram" },
+  { src: igTile2, alt: "The Madras Social storefront on Erb Street West, from the restaurant's opening announcement on Instagram" },
+  { src: igTile3, alt: "A guest enjoying a dish at Madras Social, from the @madrassocial Instagram" },
+  { src: igTile4, alt: "Madras Social's Marina Beach illustration post, from the @madrassocial Instagram" },
 ];
 
 const InstagramFeed = () => {
@@ -47,7 +44,7 @@ const InstagramFeed = () => {
             The Social Side
           </p>
           <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-4">
-            @madrassocial.ca
+            @madrassocial
           </h2>
           <div className="w-8 h-px bg-accent/50 mx-auto" />
         </div>
@@ -60,7 +57,7 @@ const InstagramFeed = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="block aspect-square overflow-hidden rounded-sm border border-border/30 hover:border-accent/40 transition-all duration-500"
-              aria-label="Visit @madrassocial.ca on Instagram"
+              aria-label="Visit @madrassocial on Instagram"
             >
               <img
                 src={tile.src}

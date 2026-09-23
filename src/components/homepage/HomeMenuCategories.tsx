@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GoldOrnament from "./GoldOrnament";
+import menuPunugulu from "@/assets/menu-punugulu.jpg";
+import menuArancini from "@/assets/menu-arancini.jpg";
+import menuShrimpWrap from "@/assets/menu-shrimp-wrap.jpg";
+import menuParotta from "@/assets/menu-parotta.jpg";
 import menuSlide1 from "@/assets/menu-slide-1.jpg";
 import menuSlide2 from "@/assets/menu-slide-2.jpg";
 import menuSlide3 from "@/assets/menu-slide-3.jpg";
@@ -8,56 +12,83 @@ import menuSlide4 from "@/assets/menu-slide-4.jpg";
 import menuSlide5 from "@/assets/menu-slide-5.jpg";
 
 /**
- * Four categories, one card style, one line.
+ * Two food cards, two drink cards — client request, 2026-09-23: "keep 2
+ * cards for food and 2 for drinks... take original category names from the
+ * menu" (was four cards, all food, with copy that didn't come from the real
+ * menu at all).
  *
- * Replaces the old "Discover the Menu" section (alternating wide panels,
- * each with its own image slideshow) at the client's request, 2026-09-22.
+ * Names/taglines below are the real section names and taglines from
+ * `src/data/menuBookData.ts` (the file transcribed from the client's own
+ * menu PDFs), not invented:
+ *   - "Madras Tapas" — "Small plates with a southern attitude."
+ *   - "Dosa District" — "Crisp, comforting and made to tear & share."
+ *   - "Signature Cocktails" — "Six Regions • Six Stories • One Taste"
+ *     (the same tagline Menu.tsx already uses above this section)
+ *   - "Madras Refreshers" — no tagline in the source PDF, so the line here
+ *     just names three real items from that section rather than inventing
+ *     a claim.
  *
- * Client request, 2026-09-23: "show images behind the overlay sliding as a
- * video" — the old single static photo (`homepage-menu-tapas.png`, with a
- * solid colour bar baked into the bottom 25% of the frame for the label and
- * title) is replaced by a crossfading slideshow of the client's own real
- * food photography, supplied via Drive ("Edited" folder — the same Sony
- * ILCE-7M4 shoot used for the Instagram tiles; see InstagramFeed.tsx for
- * the provenance note and the RAW batch that had to be skipped). Since
- * these photos have no baked-in bar, the label/title now sit on a CSS
- * gradient scrim instead.
- *
- * All four cards draw from the same 5-photo pool, each starting at a
- * different offset (`SLIDES.length` doesn't divide 4 evenly, so no two
- * cards ever show the same photo at the same moment) — a shared rotation
- * reads as one continuous, alive motion across the grid rather than four
- * separate slideshows ticking in sync. Categories are the real menu
- * section names from `seo/site.mjs`, not invented ones.
+ * Photos, client-supplied 2026-09-23 ("use these images for to share -
+ * cheese chicken pungullu, soya chaap archni, honey chilli shrimp then for
+ * from the tawa - parotta, dosa, benne"): these are real dish photography
+ * from the "Named Photos" batch (same Drive drop as the Instagram tiles),
+ * which earlier in this project used an old TIFF/JPEG variant no tool could
+ * decode (ImageMagick, PIL, sips, ffmpeg all failed) — `tifffile` +
+ * `imagecodecs` (installed this session) finally opened it. Only Parotta
+ * was actually supplied for "From the Tava" — there is no Dosa or Benne
+ * photo in the batch, so that card's slideshow is Parotta alone rather than
+ * a fabricated substitute. The two drink cards have no drink-specific
+ * photography supplied, so they keep the existing general food-photography
+ * pool (real Madras Social photos, just not drink-specific) for ambiance.
  */
-const SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
 const SLIDE_INTERVAL_MS = 3200;
+const GENERAL_SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
 
 type Category = {
   label: string;
   title: string;
   blurb: string;
+  slides: string[];
 };
 
-// Client-supplied copy, 2026-09-23 — replaced the old label/title/blurb set
-// for three of the four cards (Small Plates, Mains, Desserts); "From the
-// Tava" wasn't included in that pass, so it keeps its existing copy.
 const CATEGORIES: Category[] = [
-  { label: "To Share", title: "The First Round", blurb: "A good place to begin." },
-  { label: "From the Tava", title: "Dosa District", blurb: "Crisp at the edge, made to tear." },
-  { label: "For Dinner", title: "The Main Event", blurb: "Settle in for something more." },
-  { label: "To Finish", title: "One More Thing", blurb: "Because the night is not over yet." },
+  {
+    label: "To Share",
+    title: "Madras Tapas",
+    blurb: "Small plates with a southern attitude.",
+    slides: [menuPunugulu, menuArancini, menuShrimpWrap],
+  },
+  {
+    label: "From the Tava",
+    title: "Dosa District",
+    blurb: "Crisp, comforting and made to tear & share.",
+    slides: [menuParotta],
+  },
+  {
+    label: "To Drink",
+    title: "Signature Cocktails",
+    blurb: "Six Regions • Six Stories • One Taste",
+    slides: GENERAL_SLIDES,
+  },
+  {
+    label: "Non-Alcoholic",
+    title: "Madras Refreshers",
+    blurb: "Filter kapi, nannari sharbat, mango moru.",
+    slides: GENERAL_SLIDES,
+  },
 ];
 
 const MenuCard = ({ category, offset }: { category: Category; offset: number }) => {
-  const [active, setActive] = useState(offset % SLIDES.length);
+  const { slides } = category;
+  const [active, setActive] = useState(offset % slides.length);
 
   useEffect(() => {
+    if (slides.length < 2) return;
     const id = setInterval(() => {
-      setActive((i) => (i + 1) % SLIDES.length);
+      setActive((i) => (i + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [slides.length]);
 
   return (
     <Link
@@ -66,7 +97,7 @@ const MenuCard = ({ category, offset }: { category: Category; offset: number }) 
       style={{ aspectRatio: "1080 / 1440" }}
       aria-label={`View the ${category.title} menu`}
     >
-      {SLIDES.map((src, i) => (
+      {slides.map((src, i) => (
         <img
           key={src}
           src={src}
@@ -115,12 +146,8 @@ const HomeMenuCategories = () => {
       <GoldOrnament className="mb-6 md:mb-10 mx-auto" />
 
       {/*
-        "4 times in the same line" from md up — a plain 4-col grid.
-        Below md, a 390px phone cannot hold four readable cards side by side,
-        so it becomes a horizontal swipe of two pages, two cards each: the
-        page on open shows cards 1-2, one swipe reveals 3-4 (client spec,
-        2026-09-22).
-
+        Exactly 4 cards now (2 food, 2 drinks) — the same "swipe two pages of
+        two" mobile layout still fits perfectly, no change needed there.
         `md:contents` is what makes one markup serve both layouts: below md
         each wrapper is a real element — a snap-locked, full-width flex child
         holding its own 2-col grid. At md and up `display:contents` removes

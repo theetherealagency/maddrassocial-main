@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import heroBanner from "@/assets/homepage-banner-desktop.png";
 import heroBannerMobile from "@/assets/homepage-banner-mobile.png";
+import heroDancerDesktop from "@/assets/hero-dancer-desktop.png";
+import heroDancerMobile from "@/assets/hero-dancer-mobile.png";
 import ScallopDivider from "./ScallopDivider";
 
 /**
@@ -33,6 +35,27 @@ import ScallopDivider from "./ScallopDivider";
  * everywhere else on this site for scroll-reveals) would never fire until
  * the user scrolled away and back. A one-shot "mounted" flag staggers the
  * eyebrow in just ahead of the heading.
+ *
+ * THE DANCER FIGURE — client, 2026-09-23: "make the doll moving like a toy,
+ * like Thanjavur dancing doll" (clarified afterward: "the doll is on hero
+ * section," "home page hero" — this figure, not a separate graphic). She's
+ * drawn in exactly that style deliberately (same crown, same red-and-gold
+ * costume silhouette as a real Thanjavur Thalaiyatti Bommai), so the ask is
+ * a gentle bobblehead rock, not a redesign.
+ *
+ * She's illustrated directly into the banner PNG, blended into the skyline
+ * linework behind her, not a separate layer — so animating her meant
+ * cutting her out first. A rectangular crop wasn't enough here (unlike the
+ * doll polaroid on the About page): the skyline art runs continuously
+ * behind her, so a rectangular copy would visibly rotate a chunk of
+ * background along with her. Color-threshold cutout didn't work either —
+ * her gold jewellery and the tan skyline linework are nearly the same hue.
+ * What worked: OpenCV GrabCut (graph-cut segmentation seeded with her
+ * bounding box), which separates her by spatial coherence rather than
+ * color alone — `hero-dancer-desktop.png` / `-mobile.png` are true
+ * cutouts with real alpha transparency, positioned to sit pixel-for-pixel
+ * over her in the base banner. Only this layer gets the wobble; the banner
+ * underneath, skyline included, stays completely still.
  */
 const HomeHero = () => {
   const [mounted, setMounted] = useState(false);
@@ -44,6 +67,19 @@ const HomeHero = () => {
 
   return (
     <section className="relative w-full md:overflow-hidden" id="home">
+      <style>{`
+        @keyframes doll-wobble {
+          0%, 100% { transform: rotate(-3.5deg); }
+          50% { transform: rotate(3.5deg); }
+        }
+        .doll-wobble {
+          animation: doll-wobble 2.4s ease-in-out infinite;
+          transform-origin: 50% 96%;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .doll-wobble { animation: none; }
+        }
+      `}</style>
       <h1 className="sr-only">Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
       {/* Desktop banner */}
       <img
@@ -52,11 +88,27 @@ const HomeHero = () => {
         className="hidden md:block w-full h-auto relative"
         loading="eager"
       />
+      <img
+        src={heroDancerDesktop}
+        alt=""
+        aria-hidden="true"
+        className="doll-wobble hidden md:block absolute pointer-events-none"
+        style={{ left: "40.278%", top: "27.968%", width: "18.75%", height: "72.032%" }}
+        loading="eager"
+      />
       {/* Mobile banner — full width, no cropping */}
       <img
         src={heroBannerMobile}
         alt="Madras Social — spice has a social life"
         className="block md:hidden w-full h-auto"
+        loading="eager"
+      />
+      <img
+        src={heroDancerMobile}
+        alt=""
+        aria-hidden="true"
+        className="doll-wobble block md:hidden absolute pointer-events-none"
+        style={{ left: "36.237%", top: "33.666%", width: "26.72%", height: "66.334%" }}
         loading="eager"
       />
 
