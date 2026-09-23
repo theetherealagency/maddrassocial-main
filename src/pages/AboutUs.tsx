@@ -85,6 +85,40 @@ const AboutUs = () => {
           section is handled without special-casing this page. */}
       <HomeNavbar />
 
+      {/* ── OPENING STORY — new, client-supplied copy, 2026-09-23 ──
+          This is now the first thing under the fixed nav, so it carries the
+          nav-clearance padding that used to sit on the map section below
+          (which no longer needs it, now that it isn't first — see that
+          section's own comment). Same plain-text treatment as "Still Home"
+          further down the page: eyebrow, big italic heading, body copy. */}
+      <section className="w-full pt-[110px] pb-12 md:pb-16 px-6" style={{ backgroundColor: CREAM }}>
+        <FadeUp className="max-w-[620px] mx-auto text-center">
+          <p className="section-label mb-4">Why Madras Social</p>
+          <h2
+            className="font-display leading-[1.15] font-semibold text-[30px] sm:text-[38px] md:text-[48px] lg:text-[56px]"
+            style={{ color: BROWN }}
+          >
+            We wanted to create a place people would return to.
+          </h2>
+          <p
+            className="font-body mt-6 mx-auto"
+            style={{ fontSize: "17px", lineHeight: 1.7, color: BROWN, maxWidth: "46ch", opacity: 0.9 }}
+          >
+            Madras Social was not created to be another restaurant you visit
+            once. It was created to become part of your plans.
+          </p>
+          <p
+            className="font-body mt-4 mx-auto"
+            style={{ fontSize: "17px", lineHeight: 1.7, color: BROWN, maxWidth: "46ch", opacity: 0.9 }}
+          >
+            A place for a first dinner, a regular Friday table, a celebration
+            with friends, a drink after work, or an evening when you do not
+            feel like going home yet. We want every guest to feel welcome,
+            looked after, and comfortable enough to stay awhile.
+          </p>
+        </FadeUp>
+      </section>
+
       {/* ── SECTION 2: HOW IT ALL BEGAN ─────────────────────────── */}
       {/*
         REBUILT 2026-09-22 to match the homepage's Our Story section: no box,
@@ -100,17 +134,16 @@ const AboutUs = () => {
         Nothing invented — this is the original wording, shortened, not new
         claims.
       */}
-      {/* pt-[90px]: the map artwork's white Tamil Nadu shape touches row 0
-          of the source file with no headroom above it (measured — the
-          "white" shape colour starts at y=0%). Fine for the homepage's
-          equivalent section, which sits well below the hero; here this is
-          the very first thing under the always-present fixed nav, so
-          without this gap the nav visually chopped the shape's peak off
-          (client feedback, 2026-09-23 — "the map is getting cut from the
-          top"). The gap is a plain padding-top on a non-positioned wrapper,
-          not on the relative image container itself, so it doesn't shift
-          the measured percentage-based text-overlay math below. */}
-      <section ref={storyRef} className="overflow-hidden" id="story" style={{ paddingTop: "90px" }}>
+      {/* pt-8: the map artwork's white Tamil Nadu shape touches row 0 of the
+          source file with no headroom above it (measured — the "white"
+          shape colour starts at y=0%). That used to need a 90px spacer to
+          clear the fixed nav, back when this was the first section on the
+          page; now the new "Opening Story" section above carries that
+          clearance instead, so this only needs a plain section-to-section
+          gap. Still a padding-top on a non-positioned wrapper, not on the
+          relative image container itself, so it doesn't shift the measured
+          percentage-based text-overlay math below. */}
+      <section ref={storyRef} className="overflow-hidden pt-8" id="story">
       <div className="relative">
         <img
           src={storyMapDesktop}

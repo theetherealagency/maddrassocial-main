@@ -78,21 +78,20 @@ const HomeOurStory = () => {
         style={{ top: "32.5%", height: "27%", left: "34%", width: "29%", containerType: "inline-size", ...fade }}
       >
         <p className="section-label mb-2" style={{ fontSize: "clamp(9px, 2.6cqw, 13px)", letterSpacing: "0.32em" }}>
-          Our Story
+          Madras Social
         </p>
         <span aria-hidden className="block mx-auto mb-3" style={{ width: "15%", height: "1px", backgroundColor: "currentColor", opacity: 0.35 }} />
         <h2 className="heading-display" style={{ fontSize: "clamp(17px, 6cqw, 32px)", lineHeight: 1.2 }}>
-          South Indian food, and somewhere to sit with it.
+          A different kind of night out.
         </h2>
         <p className="body-text mx-auto mt-3" style={{ fontSize: "clamp(10px, 2.5cqw, 13px)", lineHeight: 1.55, maxWidth: "94%" }}>
-          Kerala and Tamil cooking, a full bar, and a table you book rather
-          than a counter you queue at. Rasam and roots to open. Dosas off the
-          tava. Biryani for the middle of the table.
+          Madras Social is a place to meet, settle in, and enjoy the evening
+          without rushing through it.
         </p>
         <p className="body-text mx-auto mt-2" style={{ fontSize: "clamp(10px, 2.5cqw, 13px)", lineHeight: 1.55, maxWidth: "94%" }}>
-          South Indian food is on menus from Times Square to Singapore.
-          Waterloo Region has the appetite for it. What it did not have was
-          the room. That is Madras Social, on Erb Street West.
+          Inspired by the warmth and energy of South India, we have created a
+          space for good food, good drinks, and the people you came with.
+          Come in for dinner, stay because the table feels right.
         </p>
       </div>
 
@@ -116,9 +115,9 @@ const HomeOurStory = () => {
         className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out px-1"
         style={{ top: "35.8%", height: "13.3%", left: "22.3%", width: "54%", ...fade }}
       >
-        <p className="section-label mb-1 text-[7px] tracking-[0.22em]">OUR STORY</p>
+        <p className="section-label mb-1 text-[7px] tracking-[0.22em]">MADRAS SOCIAL</p>
         <h2 className="heading-display text-[13px] leading-[1.15]">
-          South Indian food, and somewhere to sit with it.
+          A different kind of night out.
         </h2>
       </div>
     </section>

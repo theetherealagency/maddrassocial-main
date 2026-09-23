@@ -39,11 +39,14 @@ type Category = {
   blurb: string;
 };
 
+// Client-supplied copy, 2026-09-23 — replaced the old label/title/blurb set
+// for three of the four cards (Small Plates, Mains, Desserts); "From the
+// Tava" wasn't included in that pass, so it keeps its existing copy.
 const CATEGORIES: Category[] = [
-  { label: "Small Plates", title: "Madras Tapas", blurb: "For the middle of the table." },
+  { label: "To Share", title: "The First Round", blurb: "A good place to begin." },
   { label: "From the Tava", title: "Dosa District", blurb: "Crisp at the edge, made to tear." },
-  { label: "Mains", title: "Main Affairs", blurb: "Built for the centre of the table." },
-  { label: "Desserts", title: "Sweet Social", blurb: "Save room." },
+  { label: "For Dinner", title: "The Main Event", blurb: "Settle in for something more." },
+  { label: "To Finish", title: "One More Thing", blurb: "Because the night is not over yet." },
 ];
 
 const MenuCard = ({ category, offset }: { category: Category; offset: number }) => {
@@ -107,7 +110,7 @@ const HomeMenuCategories = () => {
   return (
     <section className="py-10 md:py-[80px] lg:py-[100px] px-4 md:px-6" style={{ backgroundColor: "#F2EDE4" }} id="menu">
       <h2 className="heading-display text-[26px] md:text-[44px] lg:text-[52px] text-center mb-2 md:mb-3">
-        Discover the Menu
+        What's on the Table
       </h2>
       <GoldOrnament className="mb-6 md:mb-10 mx-auto" />
 

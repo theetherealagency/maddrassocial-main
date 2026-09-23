@@ -87,27 +87,34 @@ const HomeOurSpace = () => {
         loading="lazy"
       />
 
-      {/* Desktop — eyebrow + heading, hugging the top edge of the green field. */}
+      {/* Desktop — eyebrow + heading, hugging the top edge of the green field.
+          Height raised 11%→15% (client's latest copy, 2026-09-23, has a
+          two-line eyebrow and a two-line heading) — still inside the
+          measured flat-green zone, which is safe up to 16%. */}
       <div
-        className="hidden md:flex absolute flex-col justify-start px-[3%] pt-[5%] transition-all duration-700 ease-out"
+        className="hidden md:flex absolute flex-col justify-start px-[3%] pt-[4%] transition-all duration-700 ease-out"
         style={{
-          left: 0, width: "56%", top: "0%", height: "11%",
+          left: 0, width: "56%", top: "0%", height: "15%",
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}
       >
-        <p className="section-label mb-2" style={{ color: "#a59976", fontSize: "11px" }}>
-          From South India to Waterloo
+        <p className="section-label mb-2" style={{ color: "#a59976", fontSize: "10.5px", lineHeight: 1.5 }}>
+          Made in Waterloo.
+          <br />
+          Inspired by Madras.
         </p>
-        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(20px, 2.2vw, 30px)", lineHeight: 1.25 }}>
-          The food came with us.
+        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(18px, 2vw, 27px)", lineHeight: 1.2 }}>
+          Familiar in feeling.
+          <br />
+          New to the city.
         </h2>
       </div>
 
       {/* Desktop — the body copy at the bottom of the green field, under the
-          polaroids. Two paragraphs now (was one) — sized down from 13px to
-          11.5px and tightened to 1.5 line-height to fit the same measured
-          19%-tall clear zone (client-supplied copy, 2026-09-23). */}
+          polaroids. Client's latest pass (2026-09-23) replaced the previous
+          two-paragraph copy with a new, slightly longer pair — kept at the
+          same 11.5px/1.5 sizing, still fits the measured 19%-tall zone. */}
       <div
         className="hidden md:flex absolute flex-col justify-center px-[3%] transition-all duration-700 ease-out"
         style={{
@@ -117,13 +124,14 @@ const HomeOurSpace = () => {
         }}
       >
         <p className="font-body text-cream/80 mb-2" style={{ fontSize: "11.5px", lineHeight: 1.5, maxWidth: "48ch" }}>
-          Madras Social takes its inspiration from the everyday food culture
-          of South India: busy kitchens, generous portions, strong flavours,
-          and meals meant to be shared.
+          Madras Social takes inspiration from the places we know and the way
+          we grew up gathering: people around a table, conversations that
+          carry on, and hospitality that makes you feel looked after.
         </p>
         <p className="font-body text-cream/80" style={{ fontSize: "11.5px", lineHeight: 1.5, maxWidth: "48ch" }}>
-          Here in Waterloo, that becomes a place for a quick lunch, a long
-          dinner, a drink at the bar, or a table full of friends.
+          We brought that feeling to Waterloo and gave it a new setting — one
+          made for dinner plans, drinks after work, celebrations, and
+          ordinary nights that become memorable.
         </p>
       </div>
 
@@ -165,26 +173,29 @@ const HomeOurSpace = () => {
         </span>
       </div>
 
-      {/* Mobile — eyebrow + heading, hugging the top edge of the green field. */}
+      {/* Mobile — eyebrow + heading, hugging the top edge of the green field.
+          Height raised 8%→11% for the now two-line eyebrow. */}
       <div
-        className="flex md:hidden absolute flex-col justify-start pt-[3%] px-6 text-center transition-all duration-700 ease-out"
+        className="flex md:hidden absolute flex-col justify-start pt-[2.5%] px-6 text-center transition-all duration-700 ease-out"
         style={{
-          left: 0, right: 0, top: "0%", height: "8%",
+          left: 0, right: 0, top: "0%", height: "11%",
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}
       >
-        <p className="section-label mb-1" style={{ color: "#a59976", fontSize: "9px" }}>
-          From South India to Waterloo
+        <p className="section-label mb-1" style={{ color: "#a59976", fontSize: "8px", lineHeight: 1.4 }}>
+          Made in Waterloo.
+          <br />
+          Inspired by Madras.
         </p>
-        <h2 className="font-display italic text-cream" style={{ fontSize: "18px", lineHeight: 1.2 }}>
-          The food came with us.
+        <h2 className="font-display italic text-cream" style={{ fontSize: "15px", lineHeight: 1.15 }}>
+          Familiar in feeling.
+          <br />
+          New to the city.
         </h2>
       </div>
 
-      {/* Mobile — full-width band below the polaroids, above the map. Two
-          paragraphs now — sized down from 11px to 9.5px to fit the same
-          measured band (client-supplied copy, 2026-09-23). */}
+      {/* Mobile — full-width band below the polaroids, above the map. */}
       <div
         className="flex md:hidden absolute flex-col justify-center px-6 text-center transition-all duration-700 ease-out"
         style={{
@@ -193,14 +204,15 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80 mb-1.5" style={{ fontSize: "9.5px", lineHeight: 1.35 }}>
-          Madras Social takes its inspiration from the everyday food culture
-          of South India: busy kitchens, generous portions, strong flavours,
-          and meals meant to be shared.
+        <p className="font-body text-cream/80 mb-1.5" style={{ fontSize: "9px", lineHeight: 1.3 }}>
+          Madras Social takes inspiration from the places we know and the way
+          we grew up gathering: people around a table, conversations that
+          carry on, and hospitality that makes you feel looked after.
         </p>
-        <p className="font-body text-cream/80" style={{ fontSize: "9.5px", lineHeight: 1.35 }}>
-          Here in Waterloo, that becomes a place for a quick lunch, a long
-          dinner, a drink at the bar, or a table full of friends.
+        <p className="font-body text-cream/80" style={{ fontSize: "9px", lineHeight: 1.3 }}>
+          We brought that feeling to Waterloo and gave it a new setting — one
+          made for dinner plans, drinks after work, celebrations, and
+          ordinary nights that become memorable.
         </p>
       </div>
 

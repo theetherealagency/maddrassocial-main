@@ -44,7 +44,7 @@ const InstagramFeed = () => {
       <div className="container mx-auto px-4 md:px-6 lg:px-16">
         <div className={`text-center mb-8 md:mb-12 transition-all duration-[1.2s] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <p className="text-[10px] tracking-[0.4em] uppercase text-accent mb-4 font-gotham font-medium">
-            From Our Kitchen to Your Feed
+            The Social Side
           </p>
           <h2 className="font-kugile text-2xl md:text-3xl text-primary mb-4">
             @madrassocial.ca
@@ -75,7 +75,7 @@ const InstagramFeed = () => {
         <div className={`text-center mt-8 transition-all duration-[1.2s] delay-400 ${isInView ? 'opacity-100' : 'opacity-0'}`}>
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex items-center gap-2">
             <Instagram className="w-3.5 h-3.5" />
-            Follow Us
+            Follow Along
           </a>
         </div>
       </div>
