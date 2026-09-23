@@ -8,8 +8,6 @@ import HomeFooter from "@/components/homepage/HomeFooter";
 // see storyMapDesktop/Mobile there.
 import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.png";
 import spaceCollageMobile from "@/assets/about-photo-collage-mobile.png";
-import spaceDollDesktop from "@/assets/about-space-doll-desktop.png";
-import spaceDollMobile from "@/assets/about-space-doll-mobile.png";
 import storyMapDesktop from "@/assets/about-story-map-desktop.png";
 import storyMapMobile from "@/assets/about-story-map-mobile.png";
 import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.png";
@@ -231,48 +229,15 @@ const AboutUs = () => {
 
       {/* ── OUR SPACE (heritage polaroid collage) ───────────────── */}
       {/* Client request, 2026-09-23: "make the doll moving like a toy, like
-          Thanjavur dancing doll" — the Thanjavur Thalaiyatti Bommai in the
-          centre polaroid is baked into the flat collage PNG, so it can't be
-          animated on its own.
-          Revised same day — client: "we still see the doll behind the
-          toggle... why do we have 2 dolls." The first pass used a plain
-          rectangular crop of the polaroid as the moving layer, pixel-identical
-          to the same rectangle in the base collage when still — but
-          rotating a rectangle swings its corners away from that identical
-          rectangle underneath, exposing the still doll baked into the base
-          image behind it. Fixed the same way as the hero dancer: GrabCut
-          (graph-cut segmentation seeded on the doll's bounding box, easier
-          here since the polaroid's backdrop is a soft blurred curtain, not
-          detailed art) produced a true alpha cutout of just her silhouette,
-          which is what `spaceDollDesktop`/`-mobile` are now. That same
-          silhouette was then cut out of the base collage PNGs as a real
-          transparent hole — sized and positioned identically to the cutout,
-          so at rest the two are pixel-identical and only the animated
-          cutout is ever visible.
-          Third pass, same day — client: "at the bottom... we can see the cut
-          happening while it moves." Rotating the whole figure around a
-          bottom pivot swings the wide skirt hem sideways enough at 2.5° to
-          expose a gap between the (static) hole and the (rotating) overlay,
-          even though both came from the same mask — a geometric side effect
-          of rotating a rigid shape, not a compositing bug (confirmed: a hard
-          binary mask edge didn't fix it either). Fix: the hole is eroded
-          ~28px smaller than the overlay's true silhouette, leaving a margin
-          of matching original artwork hidden under the overlay's edge, sized
-          to clear the hem's outer corners — the point on her farthest from
-          the pivot — through the full rotation. */}
-      <style>{`
-        @keyframes doll-wobble {
-          0%, 100% { transform: rotate(-2.5deg); }
-          50% { transform: rotate(2.5deg); }
-        }
-        .doll-wobble {
-          animation: doll-wobble 2.4s ease-in-out infinite;
-          transform-origin: 50% 100%;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .doll-wobble { animation: none; }
-        }
-      `}</style>
+          Thanjavur dancing doll" — briefly animated the Thalaiyatti Bommai
+          in the centre polaroid (GrabCut cutout overlaid on a matching hole
+          punched in the collage), through several rounds fixing ghosting and
+          seam artefacts. Client then clarified, same day: "dont move the
+          doll on about us page only home page hero section" — reverted to
+          the plain static collage. The wobble treatment lives only on
+          `HomeHero.tsx` now; `about-space-doll-desktop.png` / `-mobile.png`
+          (the cutouts) and the collage's punched-hole alpha are unused here
+          but left on disk in case the doll animation comes back to this page. */}
       <section id="our-space" className="relative overflow-hidden">
         <img
           src={spaceCollageDesktop}
@@ -284,22 +249,6 @@ const AboutUs = () => {
           src={spaceCollageMobile}
           alt="Our Space — a heritage-inspired polaroid collage: temple towers, spice and kumkum, a Thanjavur dancing doll, drying chillies, and the day's catch"
           className="block md:hidden w-full h-auto"
-          loading="lazy"
-        />
-        <img
-          src={spaceDollDesktop}
-          alt=""
-          aria-hidden="true"
-          className="doll-wobble hidden md:block absolute pointer-events-none"
-          style={{ left: "38.646%", top: "14.109%", width: "22.674%", height: "75.822%" }}
-          loading="lazy"
-        />
-        <img
-          src={spaceDollMobile}
-          alt=""
-          aria-hidden="true"
-          className="doll-wobble block md:hidden absolute pointer-events-none"
-          style={{ left: "34.773%", top: "9.502%", width: "28.478%", height: "81.273%" }}
           loading="lazy"
         />
       </section>

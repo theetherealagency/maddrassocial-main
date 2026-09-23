@@ -73,12 +73,26 @@ import ScallopDivider from "./ScallopDivider";
  * thin gap between the (static) hole and the (rotated) overlay even though
  * both came from the same mask. Tried making the hole a hard binary cutoff
  * instead of a soft one — didn't help, the gap is geometric, not a
- * compositing artefact. Fix: the hole is now eroded ~28px smaller than the
- * overlay's actual silhouette (`cv2.erode`), leaving a margin of original,
+ * compositing artefact. Fix: the hole is eroded smaller than the overlay's
+ * actual silhouette (`cv2.erode`), leaving a margin of original,
  * color-matched artwork hidden under the overlay's edge — so a few pixels
- * of rotation swing land on matching art instead of open hole. Margin size
- * was picked to clear the worst case (the hem's outer corners, ~270px from
- * the bottom-center pivot) with room to spare.
+ * of rotation swing land on matching art instead of open hole.
+ *
+ * Fourth round, same day — client: "we have the outline of the doll...
+ * behind the doll there is outline." The first erosion pass (28px) was
+ * uniform, which is correct for the outer silhouette but wrong at CONCAVE
+ * features — finger gaps, the ear/crown notch, the corseted waist — where
+ * eroding a mask actually widens the gap rather than shrinking it, so the
+ * hole extended past what the overlay covered at exactly those spots.
+ * Fix: `cv2.morphologyEx(..., MORPH_CLOSE)` first, filling small internal
+ * gaps in the mask so erosion can't over-widen them, then erode by a larger
+ * margin (60px desktop, 40px mobile) for the outer-silhouette rotation case
+ * above. A same-session attempt at fixing this by scaling the overlay up
+ * (`transform: scale(1.08)`) made things worse, not better — scaling around
+ * the bottom pivot displaces MID-BODY content (the waist, ~40px at 8% scale
+ * for a point 500px from the pivot) far more than it displaces the pivot-
+ * adjacent hem, desynchronizing the overlay's internal features from the
+ * static hole cut at the unscaled position. Pure rotation, no scale.
  */
 const HomeHero = () => {
   const [mounted, setMounted] = useState(false);

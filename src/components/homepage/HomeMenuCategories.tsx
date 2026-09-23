@@ -11,8 +11,8 @@ import menuSlide3 from "@/assets/menu-slide-3.jpg";
 import menuSlide4 from "@/assets/menu-slide-4.jpg";
 import menuSlide5 from "@/assets/menu-slide-5.jpg";
 import menuCocktailChettinad from "@/assets/menu-cocktail-chettinad.jpg";
-import menuCocktailCoromandel from "@/assets/menu-cocktail-coromandel.jpg";
-import menuCocktailMule from "@/assets/menu-cocktail-mule.jpg";
+import menuCocktailOoty from "@/assets/menu-cocktail-ooty.jpg";
+import menuBenneMasala from "@/assets/menu-benne-masala.jpg";
 
 /**
  * Two food cards, two drink cards — client request, 2026-09-23: "keep 2
@@ -37,32 +37,37 @@ import menuCocktailMule from "@/assets/menu-cocktail-mule.jpg";
  * from the "Named Photos" batch (same Drive drop as the Instagram tiles),
  * which earlier in this project used an old TIFF/JPEG variant no tool could
  * decode (ImageMagick, PIL, sips, ffmpeg all failed) — `tifffile` +
- * `imagecodecs` (installed this session) finally opened it. Only Parotta
- * was actually supplied for "From the Tava" — there is no Dosa or Benne
- * photo in the batch, so that card's slideshow is Parotta alone rather than
- * a fabricated substitute.
+ * `imagecodecs` (installed this session) finally opened it.
  *
- * Cocktail photos, client-supplied same day from a Downloads/ALCOHOLIC
- * folder ("use for cocktails the images from alcoholic folder all three"):
- * Chettinad and Coromandel are named after real drinks on the Signature
- * Cocktails list (`SIGNATURE_COCKTAILS` in menuBookData.ts — Vodka • Rasam
- * • Citrus • Floral • South Indian Spices; Rum • Coconut • Pineapple • Lime
- * • Herbs, respectively), matching what's in each shot. The third (copper
- * mule mugs, ginger and mint) has no name in the file but fits the same
- * list's Mangaluru (Curry Leaves Reposado • Ginger Lime • Tropical Fruits).
+ * Later the same day, client: "use benne masala in from tawa with parotta" —
+ * a Benne Masala photo (Downloads/Benne Masala.png) was supplied then, so
+ * "From the Tava" is now Parotta + Benne Masala. Still no Dosa photo, so
+ * that dish isn't represented rather than substituting something else in.
+ *
+ * Cocktails: client first said "use for cocktails the images from alcoholic
+ * folder all three" (Chettinad, Coromandel, an unnamed copper-mug shot),
+ * then same day corrected to "use ambur, chettinad and ooty for signature
+ * cocktails." Chettinad and Ooty photos exist (Downloads/Chettinad.jpg,
+ * Downloads/Ooty.jpg) and match their real listed ingredients in
+ * `SIGNATURE_COCKTAILS` (menuBookData.ts) — Vodka • Rasam • Citrus • Floral
+ * • South Indian Spices; Strawberry Gin • Citrus • Herbs • Cheesecake Foam.
+ * No Ambur photo was ever supplied (searched Downloads and the ALCOHOLIC
+ * folder) — rather than substitute an unrelated shot for a named drink,
+ * the slideshow runs Chettinad + Ooty alone until one is provided.
  * The non-alcoholic card has no drink-specific photography, so it keeps the
  * general food-photography pool (real Madras Social photos, just not
  * drink-specific) for ambiance.
  */
 const SLIDE_INTERVAL_MS = 3200;
 const GENERAL_SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
-const COCKTAIL_SLIDES = [menuCocktailChettinad, menuCocktailCoromandel, menuCocktailMule];
+const COCKTAIL_SLIDES = [menuCocktailChettinad, menuCocktailOoty];
 
+type Slide = { src: string; position?: string };
 type Category = {
   label: string;
   title: string;
   blurb: string;
-  slides: string[];
+  slides: Slide[];
 };
 
 const CATEGORIES: Category[] = [
@@ -70,25 +75,32 @@ const CATEGORIES: Category[] = [
     label: "To Share",
     title: "Madras Tapas",
     blurb: "Small plates with a southern attitude.",
-    slides: [menuPunugulu, menuArancini, menuShrimpWrap],
+    // Arancini's object-position nudged right — the three-ball plate sits
+    // right-of-center on the diagonal, and a plain center crop clipped the
+    // rightmost ball's edge in this portrait card.
+    slides: [
+      { src: menuPunugulu },
+      { src: menuArancini, position: "62% center" },
+      { src: menuShrimpWrap },
+    ],
   },
   {
     label: "From the Tava",
     title: "Dosa District",
     blurb: "Crisp, comforting and made to tear & share.",
-    slides: [menuParotta],
+    slides: [{ src: menuParotta }, { src: menuBenneMasala }],
   },
   {
     label: "To Drink",
     title: "Signature Cocktails",
     blurb: "Six Regions • Six Stories • One Taste",
-    slides: COCKTAIL_SLIDES,
+    slides: COCKTAIL_SLIDES.map((src) => ({ src })),
   },
   {
     label: "Non-Alcoholic",
     title: "Madras Refreshers",
     blurb: "Filter kapi, nannari sharbat, mango moru.",
-    slides: GENERAL_SLIDES,
+    slides: GENERAL_SLIDES.map((src) => ({ src })),
   },
 ];
 
@@ -111,15 +123,16 @@ const MenuCard = ({ category, offset }: { category: Category; offset: number }) 
       style={{ aspectRatio: "1080 / 1440" }}
       aria-label={`View the ${category.title} menu`}
     >
-      {slides.map((src, i) => (
+      {slides.map((slide, i) => (
         <img
-          key={src}
-          src={src}
+          key={slide.src}
+          src={slide.src}
           alt={i === active ? `${category.title} — ${category.blurb}` : ""}
           aria-hidden={i !== active}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out group-hover:scale-105"
           style={{
             opacity: i === active ? 1 : 0,
+            objectPosition: slide.position ?? "center",
             transitionProperty: "opacity, transform",
             transitionDuration: "1200ms, 500ms",
           }}
