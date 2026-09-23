@@ -22,11 +22,11 @@ const navLinks = [
  * transparent"). An earlier `forceSolid` variant special-cased AboutUs,
  * whose "How It All Began" section is a dark red duotone image that made
  * the transparent state's terracotta text unreadable — reverted per that
- * instruction, and the contrast problem solved a different way instead: a
- * soft light halo (`drop-shadow`) behind the whole unscrolled nav row,
- * which does nothing visible against the homepage's flat cream hero but
- * keeps the terracotta legible over a dark or busy background on any
- * other page.
+ * instruction. A follow-up fix added a soft light `drop-shadow` halo behind
+ * the unscrolled nav row to keep it legible on dark backgrounds, but the
+ * client called it out as "a weird white colour effect" and asked for it
+ * gone (2026-09-23) — removed. Legibility on a dark hero is back to resting
+ * on the terracotta text colour alone, same as before either fix.
  */
 const HomeNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -54,10 +54,7 @@ const HomeNavbar = () => {
         scrolled ? "bg-cream shadow-nav" : "bg-transparent"
       }`}
     >
-      <div
-        className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between h-[70px] transition-[filter] duration-300"
-        style={{ filter: scrolled ? "none" : "drop-shadow(0 0 5px rgba(236,228,216,0.95)) drop-shadow(0 0 2px rgba(236,228,216,0.95))" }}
-      >
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between h-[70px]">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
