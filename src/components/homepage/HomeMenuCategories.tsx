@@ -10,6 +10,9 @@ import menuSlide2 from "@/assets/menu-slide-2.jpg";
 import menuSlide3 from "@/assets/menu-slide-3.jpg";
 import menuSlide4 from "@/assets/menu-slide-4.jpg";
 import menuSlide5 from "@/assets/menu-slide-5.jpg";
+import menuCocktailChettinad from "@/assets/menu-cocktail-chettinad.jpg";
+import menuCocktailCoromandel from "@/assets/menu-cocktail-coromandel.jpg";
+import menuCocktailMule from "@/assets/menu-cocktail-mule.jpg";
 
 /**
  * Two food cards, two drink cards — client request, 2026-09-23: "keep 2
@@ -37,12 +40,23 @@ import menuSlide5 from "@/assets/menu-slide-5.jpg";
  * `imagecodecs` (installed this session) finally opened it. Only Parotta
  * was actually supplied for "From the Tava" — there is no Dosa or Benne
  * photo in the batch, so that card's slideshow is Parotta alone rather than
- * a fabricated substitute. The two drink cards have no drink-specific
- * photography supplied, so they keep the existing general food-photography
- * pool (real Madras Social photos, just not drink-specific) for ambiance.
+ * a fabricated substitute.
+ *
+ * Cocktail photos, client-supplied same day from a Downloads/ALCOHOLIC
+ * folder ("use for cocktails the images from alcoholic folder all three"):
+ * Chettinad and Coromandel are named after real drinks on the Signature
+ * Cocktails list (`SIGNATURE_COCKTAILS` in menuBookData.ts — Vodka • Rasam
+ * • Citrus • Floral • South Indian Spices; Rum • Coconut • Pineapple • Lime
+ * • Herbs, respectively), matching what's in each shot. The third (copper
+ * mule mugs, ginger and mint) has no name in the file but fits the same
+ * list's Mangaluru (Curry Leaves Reposado • Ginger Lime • Tropical Fruits).
+ * The non-alcoholic card has no drink-specific photography, so it keeps the
+ * general food-photography pool (real Madras Social photos, just not
+ * drink-specific) for ambiance.
  */
 const SLIDE_INTERVAL_MS = 3200;
 const GENERAL_SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
+const COCKTAIL_SLIDES = [menuCocktailChettinad, menuCocktailCoromandel, menuCocktailMule];
 
 type Category = {
   label: string;
@@ -68,7 +82,7 @@ const CATEGORIES: Category[] = [
     label: "To Drink",
     title: "Signature Cocktails",
     blurb: "Six Regions • Six Stories • One Taste",
-    slides: GENERAL_SLIDES,
+    slides: COCKTAIL_SLIDES,
   },
   {
     label: "Non-Alcoholic",
