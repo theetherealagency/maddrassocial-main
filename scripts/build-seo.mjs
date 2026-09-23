@@ -132,14 +132,27 @@ ${graph}
 /**
  * Crawlable text for one route, injected inside #root.
  *
- * Lightly styled so that the split second before React mounts — and the whole
- * visit for a no-JS client — reads as a clean text page rather than raw HTML.
+ * Lightly styled so that the whole visit for a no-JS client reads as a clean
+ * text page rather than raw HTML.
+ *
+ * HIDDEN IMMEDIATELY FOR EVERYONE ELSE. This used to be visible for "the
+ * split second before React mounts" by design — but with GTM, GA4, Meta
+ * Pixel and Clarity all loading in <head> ahead of the app bundle, that
+ * split second was sometimes a full second or more, and a real visitor
+ * would see this plain, unstyled block flash on screen before the actual
+ * site appeared (client, 2026-09-23 — "why is there text coming when i
+ * load the website"). The inline script right after the div runs
+ * synchronously, before the browser paints anything further, and hides it
+ * for any client that executes JS at all — which is every real visitor and
+ * every crawler that renders the page (Googlebot included). A client that
+ * never runs JS never runs this script either, so it still sees the full
+ * text, unchanged.
  */
 function contentFor(route) {
   return `${CONTENT_START}<div id="seo-static" style="max-width:52rem;margin:0 auto;padding:2rem 1.25rem;font-family:Jost,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65;color:#1B3A2D;background:#F2EDE4">
   <h1 style="font-size:1.5rem;line-height:1.3;margin:0 0 1rem">${route.h1}</h1>
   ${route.content.trim()}
-</div>${CONTENT_END}`;
+</div><script>document.getElementById('seo-static').style.display='none'</script>${CONTENT_END}`;
 }
 
 // ---------------------------------------------------------------------------
