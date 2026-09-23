@@ -77,7 +77,7 @@ const TastingPopup = () => {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={dismiss} />
 
       <div
-        className="relative w-full max-w-sm rounded-sm border bg-card p-6 md:p-8"
+        className="relative w-full max-w-sm rounded-sm border bg-background p-6 md:p-8"
         style={{ borderColor: "rgba(219,182,64,0.2)" }}
       >
         <button
