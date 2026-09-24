@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import FloatingOrderCTA from "@/components/FloatingOrderCTA";
@@ -137,7 +137,24 @@ const CoverFace = ({
   </button>
 );
 
-/** What sits behind a cover once it has flipped open — real, scrollable menu. */
+/**
+ * What sits behind a cover once it has flipped open — real, scrollable menu.
+ *
+ * Client, 2026-09-23: "menu page on mobile is not getting scrolled when
+ * card is closed or open and we want to go to 2nd card" — reproduced: once
+ * this div's own scroll reaches its bottom, further scroll/swipe does
+ * nothing at all, trapping the page instead of continuing on to reveal the
+ * second (Social) card below it. The cause is the 3D flip transform on the
+ * ancestor card (`perspective` + `transform-style: preserve-3d` +
+ * `backface-visibility: hidden`, needed for the open/close flip animation):
+ * browsers don't reliably chain wheel/touch scroll from a nested
+ * `overflow-y-auto` out to the page when it's inside that kind of 3D
+ * transform context, even though the outer page has plenty of room to
+ * scroll (confirmed — document scroll height is unchanged, only the
+ * scroll *event* stops propagating). Fixed by watching this div's own
+ * scroll boundary and, once reached, forwarding wheel/touch scroll to
+ * `window` by hand instead of relying on the browser's default chaining.
+ */
 const MenuPages = ({
   title,
   onClose,
@@ -146,26 +163,70 @@ const MenuPages = ({
   title: string;
   onClose: () => void;
   children: React.ReactNode;
-}) => (
-  <div
-    className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-y-auto"
-    style={{ backgroundColor: "hsl(var(--color-cream))" }}
-  >
-    <div className="sticky top-0 z-10 flex items-center justify-between px-5 md:px-8 py-4 border-b border-[hsl(var(--color-gold))]/25" style={{ backgroundColor: "hsl(var(--color-cream))" }}>
-      <p className="font-display italic text-[18px] md:text-[22px] text-[hsl(var(--color-brown))]">
-        {title}
-      </p>
-      <button
-        type="button"
-        onClick={onClose}
-        className="font-body text-[11px] uppercase tracking-[0.2em] border border-[hsl(var(--color-brown))]/30 rounded-full px-3 py-1.5 text-[hsl(var(--color-brown))] hover:bg-[hsl(var(--color-brown))] hover:text-[hsl(var(--color-cream))] transition-colors"
-      >
-        Close ✕
-      </button>
+}) => {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const touchStartY = useRef(0);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const atTop = () => el.scrollTop <= 0;
+    const atBottom = () => el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+
+    const onWheel = (e: WheelEvent) => {
+      if ((e.deltaY < 0 && atTop()) || (e.deltaY > 0 && atBottom())) {
+        window.scrollBy(0, e.deltaY);
+        e.preventDefault();
+      }
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const currentY = e.touches[0].clientY;
+      const deltaY = touchStartY.current - currentY; // positive = finger moving up = scrolling down
+      if ((deltaY < 0 && atTop()) || (deltaY > 0 && atBottom())) {
+        window.scrollBy(0, deltaY);
+        e.preventDefault();
+      }
+      touchStartY.current = currentY;
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={scrollerRef}
+      className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-y-auto"
+      style={{ backgroundColor: "hsl(var(--color-cream))" }}
+    >
+      <div className="sticky top-0 z-10 flex items-center justify-between px-5 md:px-8 py-4 border-b border-[hsl(var(--color-gold))]/25" style={{ backgroundColor: "hsl(var(--color-cream))" }}>
+        <p className="font-display italic text-[18px] md:text-[22px] text-[hsl(var(--color-brown))]">
+          {title}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="font-body text-[11px] uppercase tracking-[0.2em] border border-[hsl(var(--color-brown))]/30 rounded-full px-3 py-1.5 text-[hsl(var(--color-brown))] hover:bg-[hsl(var(--color-brown))] hover:text-[hsl(var(--color-cream))] transition-colors"
+        >
+          Close ✕
+        </button>
+      </div>
+      <div className="px-5 md:px-8 py-6 md:py-8">{children}</div>
     </div>
-    <div className="px-5 md:px-8 py-6 md:py-8">{children}</div>
-  </div>
-);
+  );
+};
 
 const Menu = () => {
   const [open, setOpen] = useState<OpenSide>(null);
