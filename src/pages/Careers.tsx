@@ -97,47 +97,6 @@ const fieldStyle: React.CSSProperties = {
   color: LINEN,
 };
 
-const RoleCard = ({ role, onApply }: { role: Role; onApply: (title: string) => void }) => (
-  <div
-    className="flex flex-wrap items-center gap-3 px-5 py-4 border transition-colors"
-    style={{ borderColor: 'rgba(201,165,92,.34)', backgroundColor: 'rgba(236,228,216,.05)' }}
-  >
-    <span className="font-display" style={{ fontSize: 'clamp(1.1rem,3vw,1.4rem)', color: LINEN }}>
-      {role.title}
-    </span>
-    {role.urgent && (
-      <span
-        className="text-[10px] uppercase tracking-[0.18em] font-body font-bold rounded-full px-3 py-1.5"
-        style={{ backgroundColor: UMBER, color: LINEN }}
-      >
-        Urgent — Immediate Hire
-      </span>
-    )}
-    <span
-      className="text-[10px] uppercase tracking-[0.18em] font-body font-bold rounded-full px-3 py-1.5"
-      style={{ backgroundColor: 'rgba(201,165,92,.18)', color: GOLD_SOFT }}
-    >
-      {role.openings} opening{role.openings > 1 ? 's' : ''}
-    </span>
-    <span
-      className="text-[10px] uppercase tracking-[0.18em] font-body font-bold rounded-full px-3 py-1.5"
-      style={{ backgroundColor: 'rgba(65,76,42,.28)', color: '#9fa08a' }}
-    >
-      {role.type}
-    </span>
-    <button
-      type="button"
-      onClick={() => onApply(role.title)}
-      className="ml-auto text-[11px] uppercase tracking-[0.24em] font-body font-semibold px-6 py-3 border transition-colors"
-      style={{ borderColor: GOLD, color: GOLD }}
-      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = GOLD; e.currentTarget.style.color = CARBON; }}
-      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = GOLD; }}
-    >
-      Apply
-    </button>
-  </div>
-);
-
 const Careers = () => {
   const { toast } = useToast();
   const formRef = useRef<HTMLDivElement>(null);
@@ -153,11 +112,6 @@ const Careers = () => {
     name: '', phone: '', email: '', role: '', type: TYPE_OPTIONS[0],
     experience: EXPERIENCE_OPTIONS[0], start: '', referral: '', note: '',
   });
-
-  const scrollToForm = (prefillRole?: string) => {
-    if (prefillRole) setForm((f) => ({ ...f, role: prefillRole }));
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   const toggleAvailability = (option: string) =>
     setAvailability((a) => (a.includes(option) ? a.filter((x) => x !== option) : [...a, option]));
@@ -277,24 +231,10 @@ const Careers = () => {
             </h2>
           </div>
 
-          {/* Open positions — real page's `.c-block` + `.c-panel`: a glass
-              panel (semi-transparent Carbon, gold border) over the photo. */}
-          <div style={{ marginTop: 'clamp(28px,4vw,48px)' }}>
-            <p
-              className="font-accent uppercase pb-3 mb-5"
-              style={{ fontSize: '11px', letterSpacing: '0.22em', color: OLIVE, borderBottom: '1px solid rgba(165,153,118,.25)' }}
-            >
-              Open positions
-            </p>
-            <div
-              className="grid gap-3"
-              style={{ backgroundColor: 'rgba(23,20,19,.82)', border: '1px solid rgba(201,165,92,.4)', padding: 'clamp(26px,4.5vw,44px)' }}
-            >
-              {ROLES.map((role) => (
-                <RoleCard key={role.title} role={role} onApply={scrollToForm} />
-              ))}
-            </div>
-          </div>
+          {/* Client, 2026-09-24: "on careers page remove the open position
+              section" — the open-positions list (RoleCard grid) was removed
+              entirely. `ROLES` itself is kept — the Apply form's role
+              dropdown below still lists every role by name. */}
 
           {/* Apply — same glass-panel treatment. */}
           <div ref={formRef} className="scroll-mt-24" style={{ marginTop: 'clamp(28px,4vw,48px)' }}>

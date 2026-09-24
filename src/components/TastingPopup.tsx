@@ -97,7 +97,7 @@ const TastingPopup = () => {
               Thanks — see you soon
             </h2>
             <p className="text-muted-foreground text-xs leading-relaxed mb-6">
-              We'll email you when the doors open, and when something worth coming in for lands on the menu.
+              We'll email you when something worth coming in for lands on the menu.
             </p>
             <button onClick={() => setIsOpen(false)} className="btn-cta px-6 py-2.5">
               Close
@@ -110,11 +110,11 @@ const TastingPopup = () => {
                 Madras Social, Waterloo
               </p>
               <h2 className="font-kugile text-2xl text-primary mb-2">
-                Opening in Waterloo Region
+                Already a Waterloo favourite
               </h2>
               <div className="w-8 h-px bg-accent/40 mx-auto mb-3" />
               <p className="text-muted-foreground text-xs leading-relaxed max-w-xs mx-auto">
-                A South Indian kitchen and bar on Erb Street West. Leave your email and we'll tell you when to book.
+                Join our newsletter for first word on new dishes, events, and offers.
               </p>
             </div>
 
