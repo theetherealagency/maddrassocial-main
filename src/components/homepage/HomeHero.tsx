@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import heroBanner from "@/assets/homepage-banner-desktop.png";
-import heroBannerMobile from "@/assets/homepage-banner-mobile.png";
-import heroDancerDesktop from "@/assets/hero-dancer-desktop.png";
-import heroDancerMobile from "@/assets/hero-dancer-mobile.png";
+import heroBanner from "@/assets/homepage-banner-desktop.webp";
+import heroBannerMobile from "@/assets/homepage-banner-mobile.webp";
+import heroDancerDesktop from "@/assets/hero-dancer-desktop.webp";
+import heroDancerMobile from "@/assets/hero-dancer-mobile.webp";
 import ScallopDivider from "./ScallopDivider";
 
 /**
@@ -52,14 +52,14 @@ import ScallopDivider from "./ScallopDivider";
  * either — her gold jewellery and the tan skyline linework are nearly the
  * same hue. What worked: OpenCV GrabCut (graph-cut segmentation seeded with
  * her bounding box), which separates her by spatial coherence rather than
- * color alone — `hero-dancer-desktop.png` / `-mobile.png` are true cutouts
+ * color alone — `hero-dancer-desktop.webp` / `-mobile.webp` are true cutouts
  * with real alpha transparency.
  *
  * Second round, same day — client: "we still see the doll behind the
  * toggle... why do we have 2 dolls." The cutout was positioned pixel-for-
  * pixel over the SAME dancer still baked into the base banner, so rotating
  * it swung her silhouette away from the identical figure underneath,
- * exposing it. Fix: `homepage-banner-desktop.png` / `-mobile.png` now have
+ * exposing it. Fix: `homepage-banner-desktop.webp` / `-mobile.webp` now have
  * that exact silhouette cut out as a real transparent hole (same GrabCut
  * mask, subtracted from the banner's alpha channel), so the base banner no
  * longer contains her at all — only the animated cutout does.
@@ -112,6 +112,9 @@ const HomeHero = () => {
         .doll-wobble {
           animation: doll-wobble 2.4s ease-in-out infinite;
           transform-origin: 50% 100%;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform-style: preserve-3d;
         }
         @media (prefers-reduced-motion: reduce) {
           .doll-wobble { animation: none; }

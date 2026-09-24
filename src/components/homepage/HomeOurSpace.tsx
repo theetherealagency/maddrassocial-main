@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import traditionDesktop from "@/assets/tradition-section-desktop.png";
-import traditionMobile from "@/assets/tradition-section-mobile.png";
+import traditionDesktop from "@/assets/tradition-section-desktop.webp";
+import traditionMobile from "@/assets/tradition-section-mobile.webp";
 
 /**
  * Heritage-inspired polaroid collage + the Chennai-to-Waterloo route,
@@ -147,7 +147,7 @@ const HomeOurSpace = () => {
       >
         <span
           className="font-accent italic uppercase tracking-[0.1em]"
-          style={{ color: "#a83d24", fontSize: "12px", textShadow: "0 0 6px #e8e0d7, 0 0 6px #e8e0d7" }}
+          style={{ color: "#a83d24", fontSize: "12px", background: "rgba(232,224,216,0.92)", padding: "2px 7px", borderRadius: "3px", boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}
         >
           Madras
           <br />
@@ -156,7 +156,17 @@ const HomeOurSpace = () => {
       </div>
 
       {/* Desktop — map label, Waterloo-region shape. Sits immediately left
-          of the shape's own location dot. */}
+          of the shape's own location dot.
+          Client feedback, 2026-09-23: "the text on both the maps is not
+          visible" — this label specifically. The blur-glow halo both labels
+          used (a soft text-shadow meant to lift text off busy map linework)
+          dilutes a thin 12px glyph's own color a lot, and dark green on the
+          grey/tan Waterloo street-map art has far less inherent hue contrast
+          than the terracotta Madras/Chennai label has against plain cream —
+          so the same dilution left Waterloo unreadable while Madras/Chennai
+          stayed legible. Fixed both with a solid cream chip behind the text
+          instead of a blur, which guarantees contrast regardless of what's
+          underneath. */}
       <div
         className="hidden md:flex absolute flex-col items-end justify-center text-right transition-all duration-700 ease-out"
         style={{
@@ -167,7 +177,7 @@ const HomeOurSpace = () => {
       >
         <span
           className="font-accent italic uppercase tracking-[0.1em]"
-          style={{ color: "#414c2a", fontSize: "12px", textShadow: "0 0 6px #e8e0d7, 0 0 6px #e8e0d7" }}
+          style={{ color: "#414c2a", fontSize: "12px", background: "rgba(232,224,216,0.92)", padding: "2px 7px", borderRadius: "3px" }}
         >
           Waterloo
         </span>
@@ -218,7 +228,7 @@ const HomeOurSpace = () => {
       >
         <span
           className="font-accent italic uppercase tracking-[0.08em]"
-          style={{ color: "#a83d24", fontSize: "9px", lineHeight: 1.3, textShadow: "0 0 5px #e8e0d7, 0 0 5px #e8e0d7" }}
+          style={{ color: "#a83d24", fontSize: "9px", lineHeight: 1.3, background: "rgba(232,224,216,0.92)", padding: "1px 5px", borderRadius: "3px" }}
         >
           Madras · Chennai
         </span>
@@ -235,7 +245,7 @@ const HomeOurSpace = () => {
       >
         <span
           className="font-accent italic uppercase tracking-[0.08em]"
-          style={{ color: "#414c2a", fontSize: "9px", textShadow: "0 0 5px #e8e0d7, 0 0 5px #e8e0d7" }}
+          style={{ color: "#414c2a", fontSize: "9px", background: "rgba(232,224,216,0.92)", padding: "1px 5px", borderRadius: "3px" }}
         >
           Waterloo
         </span>

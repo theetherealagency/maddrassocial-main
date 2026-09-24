@@ -94,7 +94,7 @@ const HomeNavbar = () => {
           {/* CTA — desktop */}
           <Link
             to={RESERVE_URL}
-            className="hidden xl:inline-block border-[1.5px] border-gold rounded-sm px-5 py-[9px] font-body font-medium text-[11px] uppercase tracking-[0.3em] text-gold transition-all duration-250 hover:bg-gold hover:text-brown-brand"
+            className="hidden xl:inline-block border-[1.5px] border-gold rounded-sm px-5 py-[9px] font-accent font-medium text-[11px] uppercase tracking-[0.3em] text-gold transition-all duration-250 hover:bg-gold hover:text-brown-brand"
           >
             RESERVE NOW
           </Link>
@@ -164,7 +164,7 @@ const HomeNavbar = () => {
           })}
           <Link
             to={RESERVE_URL}
-            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-body font-medium border border-[#1f1b1a] text-[#1f1b1a] rounded-sm text-center"
+            className="mt-2 px-4 py-3 text-sm tracking-[0.15em] uppercase font-accent font-medium border border-[#1f1b1a] text-[#1f1b1a] rounded-sm text-center"
             onClick={() => setMobileOpen(false)}
           >
             Reserve Now

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import storyMapDesktop from "@/assets/about-story-map-desktop.png";
-import storyMapMobile from "@/assets/about-story-map-mobile.png";
+import storyMapDesktop from "@/assets/about-story-map-desktop.webp";
+import storyMapMobile from "@/assets/about-story-map-mobile.webp";
 
 /**
  * No box. The map's own white Tamil Nadu silhouette IS the background —

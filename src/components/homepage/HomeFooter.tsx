@@ -98,7 +98,7 @@ const HomeFooter = () => {
             <div className="mb-4">
               <img src="/brand/madras-social-logo.png" alt="Madras Social" className="h-10 w-auto brightness-0 invert" />
             </div>
-            <p className="font-body text-[13px] leading-[1.7]" style={{ color: cream }}>
+            <p className="font-accent text-[13px] leading-[1.7]" style={{ color: cream }}>
               A South Indian kitchen and bar in Waterloo Region.
             </p>
           </div>
@@ -121,8 +121,8 @@ const HomeFooter = () => {
           <div>
             <p className="font-accent font-semibold text-[11px] uppercase tracking-[0.25em] mb-5" style={{ color: creamFull }}>Contact Us</p>
             <address className="not-italic flex flex-col gap-3">
-              <p className="font-body text-[13px] leading-[1.7]" style={{ color: cream }}>8 Erb Street West<br />Waterloo, ON N2L 1S7</p>
-              <a href="mailto:hello@madrassocial.ca" className="font-body text-[13px] hover:opacity-100 transition-opacity" style={{ color: cream }}>hello@madrassocial.ca</a>
+              <p className="font-accent text-[13px] leading-[1.7]" style={{ color: cream }}>8 Erb Street West<br />Waterloo, ON N2L 1S7</p>
+              <a href="mailto:hello@madrassocial.ca" className="font-accent text-[13px] hover:opacity-100 transition-opacity" style={{ color: cream }}>hello@madrassocial.ca</a>
             </address>
           </div>
 
@@ -169,8 +169,8 @@ const HomeFooter = () => {
           <div className="text-center">
             <p className="font-accent font-semibold uppercase mb-1" style={{ color: creamFull, fontSize: '10px', letterSpacing: '2px' }}>Contact Us</p>
             <address className="not-italic flex flex-col" style={{ gap: '2px' }}>
-              <p className="font-body" style={{ color: cream, fontSize: '12px', lineHeight: 1.5 }}>8 Erb Street West, Waterloo, ON N2L 1S7</p>
-              <a href="mailto:hello@madrassocial.ca" className="font-body" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>hello@madrassocial.ca</a>
+              <p className="font-accent" style={{ color: cream, fontSize: '12px', lineHeight: 1.5 }}>8 Erb Street West, Waterloo, ON N2L 1S7</p>
+              <a href="mailto:hello@madrassocial.ca" className="font-accent" style={{ color: cream, fontSize: '12px', lineHeight: 1.6 }}>hello@madrassocial.ca</a>
             </address>
           </div>
         </div>

@@ -6,12 +6,12 @@ import HomeFooter from "@/components/homepage/HomeFooter";
 // Our Space collage — replaced the Madras Mami placeholder (mm-about.jpg)
 // 2026-09-22. Same shared map graphic as the homepage's Our Story section:
 // see storyMapDesktop/Mobile there.
-import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.png";
-import spaceCollageMobile from "@/assets/about-photo-collage-mobile.png";
-import storyMapDesktop from "@/assets/about-story-map-desktop.png";
-import storyMapMobile from "@/assets/about-story-map-mobile.png";
-import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.png";
-import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.png";
+import spaceCollageDesktop from "@/assets/about-photo-collage-desktop.webp";
+import spaceCollageMobile from "@/assets/about-photo-collage-mobile.webp";
+import storyMapDesktop from "@/assets/about-story-map-desktop.webp";
+import storyMapMobile from "@/assets/about-story-map-mobile.webp";
+import bottomIllustrationDesktop from "@/assets/about-bottom-illustration-desktop.webp";
+import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.webp";
 
 // ── Public image paths (served from /public) ─────────────────────
 
@@ -19,7 +19,7 @@ import bottomIllustrationMobile from "@/assets/about-bottom-illustration-mobile.
 // ── Design tokens ────────────────────────────────────────────────
 // CREAM was '#F5EDD8' — visibly lighter/more yellow than the actual
 // background baked into the surrounding section images (measured from
-// about-photo-collage-desktop.png and about-bottom-illustration-desktop.png:
+// about-photo-collage-desktop.webp and about-bottom-illustration-desktop.webp:
 // rgb(232,224,215) at every sampled corner). That mismatch is what made the
 // "Still Home" section between them look like a different, flatter cream
 // (client feedback, 2026-09-23). Matched to the images now.
@@ -124,7 +124,7 @@ const AboutUs = () => {
         REBUILT 2026-09-22 to match the homepage's Our Story section: no box,
         copy directly on the map's white Tamil Nadu silhouette (client
         instruction — "the box is the map shape"). Same shared asset as Home
-        (about-story-map-desktop/mobile.png IS storyMapDesktop/Mobile there),
+        (about-story-map-desktop/mobile.webp IS storyMapDesktop/Mobile there),
         same measured safe zones — see HomeOurStory.tsx for how those were
         found and why they are this tight.
 

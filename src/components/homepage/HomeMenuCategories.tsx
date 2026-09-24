@@ -12,6 +12,7 @@ import menuSlide4 from "@/assets/menu-slide-4.jpg";
 import menuSlide5 from "@/assets/menu-slide-5.jpg";
 import menuCocktailChettinad from "@/assets/menu-cocktail-chettinad.jpg";
 import menuCocktailOoty from "@/assets/menu-cocktail-ooty.jpg";
+import menuCocktailMangaluru from "@/assets/menu-cocktail-mule.jpg";
 import menuBenneMasala from "@/assets/menu-benne-masala.jpg";
 
 /**
@@ -54,9 +55,11 @@ import menuBenneMasala from "@/assets/menu-benne-masala.jpg";
  * No Ambur photo was ever supplied (searched Downloads and the ALCOHOLIC
  * folder) — rather than substitute an unrelated shot for a named drink,
  * the slideshow runs Chettinad + Ooty alone until one is provided.
- * The non-alcoholic card has no drink-specific photography, so it keeps the
- * general food-photography pool (real Madras Social photos, just not
- * drink-specific) for ambiance.
+ *
+ * Client, same day: "use mangaluru for refreshers" — the copper-mug shot
+ * from the ALCOHOLIC folder (fits Mangaluru — Curry Leaves Reposado •
+ * Ginger Lime — on SIGNATURE_COCKTAILS) goes on the Madras Refreshers card
+ * instead, alongside the general ambiance pool it already used.
  */
 const SLIDE_INTERVAL_MS = 3200;
 const GENERAL_SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
@@ -85,7 +88,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
-    label: "From the Tava",
+    label: "From the Tawa",
     title: "Dosa District",
     blurb: "Crisp, comforting and made to tear & share.",
     slides: [{ src: menuParotta }, { src: menuBenneMasala }],
@@ -100,7 +103,7 @@ const CATEGORIES: Category[] = [
     label: "Non-Alcoholic",
     title: "Madras Refreshers",
     blurb: "Filter kapi, nannari sharbat, mango moru.",
-    slides: GENERAL_SLIDES.map((src) => ({ src })),
+    slides: [{ src: menuCocktailMangaluru }, ...GENERAL_SLIDES.map((src) => ({ src }))],
   },
 ];
 
