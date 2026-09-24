@@ -98,32 +98,32 @@ const HomeOurStory = () => {
       {/*
         Mobile — client, 2026-09-23: "the text is still not in the outline
         of the map... look at desktop and fix it," then 2026-09-24: "the
-        text is up" — the prior box (top 16.3%, height 42.9%) fit the copy
-        exactly but sat in the shape's narrow neck near the top, leaving a
-        big empty stretch of white below it down to the tail. Row-scanned
-        the silhouette again: the shape is widest through its "belly"
-        around 35-80% of its height, not near the top, so no single
-        rectangle can span from the neck down through the belly at the
-        old width. Moved the whole block down into that belly instead
-        (380×610 image-px, ≈109×174 CSS px at mobile width) — narrower
-        than before, so the cqw font values are scaled up ~1.25x to keep
-        the same absolute type size in the smaller container.
+        text is up," then, after moving it into the shape's belly: "shift
+        the text a bit upward and on a bit right." Re-scanned the belly
+        band (rows 440-1050) directly: the widest sustained intersection
+        there stays put whether it starts at row 440 or 476, so the block
+        can move up ~2.6% of image height for free. Shifting right cost a
+        bit of width — narrowing from 380 to 350 image-px opens 40px of
+        lateral room within the same row band. Box is now 350×610
+        image-px, ≈98×171 CSS px at mobile width; cqw values scaled up
+        again (~1.09x over the last pass) to hold the same absolute type
+        size in the narrower box.
       */}
       <div
         className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
-        style={{ top: "35.2%", height: "45.2%", left: "33.5%", width: "27.8%", containerType: "inline-size", ...fade }}
+        style={{ top: "32.6%", height: "45.2%", left: "35.1%", width: "25.6%", containerType: "inline-size", ...fade }}
       >
-        <p className="section-label mb-[5cqw]" style={{ fontSize: "6.5cqw", letterSpacing: "0.16em" }}>
+        <p className="section-label mb-[4.6cqw]" style={{ fontSize: "6cqw", letterSpacing: "0.16em" }}>
           Madras Social
         </p>
-        <h2 className="heading-display" style={{ fontSize: "10.5cqw", lineHeight: 1.15 }}>
+        <h2 className="heading-display" style={{ fontSize: "9.7cqw", lineHeight: 1.15 }}>
           A different kind of night out.
         </h2>
-        <p className="font-body mt-[5cqw]" style={{ fontSize: "6.5cqw", lineHeight: 1.35 }}>
+        <p className="font-body mt-[4.6cqw]" style={{ fontSize: "6cqw", lineHeight: 1.35 }}>
           Madras Social is a place to meet, settle in, and enjoy the evening
           without rushing through it.
         </p>
-        <p className="font-body mt-[4cqw]" style={{ fontSize: "6.5cqw", lineHeight: 1.35 }}>
+        <p className="font-body mt-[3.7cqw]" style={{ fontSize: "6cqw", lineHeight: 1.35 }}>
           Inspired by the warmth and energy of South India, we have created a
           space for good food, good drinks, and the people you came with.
           Come in for dinner, stay because the table feels right.

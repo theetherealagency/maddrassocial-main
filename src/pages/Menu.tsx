@@ -107,22 +107,29 @@ const SectionBlock = ({ section }: { section: MenuSection }) => (
  * removed from the art entirely per the same feedback.
  */
 /**
- * Client, 2026-09-24: "make sure the menu page is scrollable from anywhere
- * on screen on mobile not only sides." Verified with a real trusted touch
- * gesture (Chrome DevTools Protocol touch dispatch, not a manually
- * dispatched TouchEvent — synthetic in-page TouchEvents don't move the
- * page and would falsely "pass" this): a swipe over the plain page margin
- * beside the book scrolls fine, but the exact same swipe over the closed
- * cover itself does nothing, `touch-action: pan-y` and all. The cause is
- * the same one already worked around in MenuPages below — the card's own
- * `perspective` / `transform-style: preserve-3d` (needed for the flip
- * animation) sits between the touch target and the page, and Chromium
- * does not reliably chain a native touch-scroll gesture out through that
- * kind of 3D context, regardless of touch-action. Since a closed cover has
- * no scrollable content of its own, there's no boundary to check here —
- * every vertical drag on it is just forwarded straight to the page,
- * exactly like a native scroll would. A small 6px threshold keeps this
- * from swallowing the tap-to-open gesture.
+ * Client, 2026-09-24: first "make sure the menu page is scrollable from
+ * anywhere on screen on mobile not only sides," then, after that fix,
+ * "the menu page is very very very slow to scroll on mobile with the
+ * cards." Same underlying bug, two different symptoms.
+ *
+ * A swipe over the closed cover (verified with a real trusted CDP touch
+ * gesture, not a synthetic TouchEvent — those don't move the page and
+ * would falsely "pass" this) did nothing. `elementFromPoint` said the
+ * touch lands on this cover's `<img>`, but the CLOSED card's flipped-away
+ * `MenuPages` face — invisible, `backface-visibility: hidden`, rotated to
+ * face away — sits at the exact same screen rect and is still a valid
+ * scroll container. Chromium's touch-scroll targeting picked it anyway:
+ * confirmed by reading its `scrollTop` after the swipe (it had silently
+ * scrolled itself, invisibly, while the page never moved).
+ *
+ * First fix attempt was to manually forward every touchmove delta to
+ * `window.scrollBy()` from this component. That solved the trapped-scroll
+ * complaint but is what made scrolling feel glacial: a hand-rolled
+ * `scrollBy` has none of native touch scrolling's momentum/fling, so the
+ * page only moved exactly as far as the finger did, with no coast after
+ * lift. Real fix lives on MenuPages below — make the closed panel
+ * `pointer-events: none` so it's never a valid touch target in the first
+ * place, and native scroll (full momentum, no JS) reaches the page.
  */
 const CoverFace = ({
   src,
@@ -136,60 +143,22 @@ const CoverFace = ({
   label: string;
   bg: string;
   onOpen: () => void;
-}) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const touchStartY = useRef(0);
-  const lastY = useRef(0);
-  const isDragging = useRef(false);
-
-  useEffect(() => {
-    const el = buttonRef.current;
-    if (!el) return;
-
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY.current = e.touches[0].clientY;
-      lastY.current = touchStartY.current;
-      isDragging.current = false;
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      const currentY = e.touches[0].clientY;
-      if (!isDragging.current && Math.abs(currentY - touchStartY.current) > 6) {
-        isDragging.current = true;
-      }
-      if (isDragging.current) {
-        window.scrollBy(0, lastY.current - currentY);
-        e.preventDefault();
-      }
-      lastY.current = currentY;
-    };
-
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: false });
-    return () => {
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove", onTouchMove);
-    };
-  }, []);
-
-  return (
-    <button
-      ref={buttonRef}
-      type="button"
-      onClick={onOpen}
-      aria-label={`Open the ${label} menu`}
-      className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
-      style={{ backgroundColor: bg, touchAction: "pan-y" }}
-    >
-      <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
-      <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
-        <span className="font-body text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-[hsl(var(--offwhite))]/80 border border-[hsl(var(--offwhite))]/40 rounded-full px-4 py-2 backdrop-blur-sm">
-          Open the {label} menu
-        </span>
-      </div>
-    </button>
-  );
-};
+}) => (
+  <button
+    type="button"
+    onClick={onOpen}
+    aria-label={`Open the ${label} menu`}
+    className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
+    style={{ backgroundColor: bg, touchAction: "pan-y" }}
+  >
+    <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
+    <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
+      <span className="font-body text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-[hsl(var(--offwhite))]/80 border border-[hsl(var(--offwhite))]/40 rounded-full px-4 py-2 backdrop-blur-sm">
+        Open the {label} menu
+      </span>
+    </div>
+  </button>
+);
 
 /**
  * What sits behind a cover once it has flipped open — real, scrollable menu.
@@ -208,14 +177,25 @@ const CoverFace = ({
  * scroll *event* stops propagating). Fixed by watching this div's own
  * scroll boundary and, once reached, forwarding wheel/touch scroll to
  * `window` by hand instead of relying on the browser's default chaining.
+ *
+ * `isOpen` — 2026-09-24: this panel exists (and occupies the same screen
+ * rect as the cover) even while CLOSED, just rotated away and hidden via
+ * backface-visibility. That's invisible but not inert: Chromium still
+ * treats it as a valid touch-scroll target at that screen position, ahead
+ * of the visible cover on top of it, so a swipe meant for the page was
+ * silently scrolling this hidden panel's own content instead (its
+ * `scrollTop` moved; `window.scrollY` never did). `pointer-events: none`
+ * while closed removes it from touch-scroll targeting entirely.
  */
 const MenuPages = ({
   title,
   onClose,
+  isOpen,
   children,
 }: {
   title: string;
   onClose: () => void;
+  isOpen: boolean;
   children: React.ReactNode;
 }) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -228,9 +208,17 @@ const MenuPages = ({
     const atTop = () => el.scrollTop <= 0;
     const atBottom = () => el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
 
+    // { behavior: "auto" } here is load-bearing — index.css sets
+    // `scroll-behavior: smooth` on <html> for anchor-link navigation, which
+    // also applies to plain `scrollBy(x, y)`. Touchmove/wheel fire many
+    // times a second, so every one of those calls was starting its own
+    // ~300ms eased animation on top of whatever the previous call hadn't
+    // finished yet — the animations fought each other and the page barely
+    // moved. Client, 2026-09-24: "very very very slow to scroll." Forcing
+    // an instant jump per event is what a native scroll does anyway.
     const onWheel = (e: WheelEvent) => {
       if ((e.deltaY < 0 && atTop()) || (e.deltaY > 0 && atBottom())) {
-        window.scrollBy(0, e.deltaY);
+        window.scrollBy({ top: e.deltaY, behavior: "auto" });
         e.preventDefault();
       }
     };
@@ -243,7 +231,7 @@ const MenuPages = ({
       const currentY = e.touches[0].clientY;
       const deltaY = touchStartY.current - currentY; // positive = finger moving up = scrolling down
       if ((deltaY < 0 && atTop()) || (deltaY > 0 && atBottom())) {
-        window.scrollBy(0, deltaY);
+        window.scrollBy({ top: deltaY, behavior: "auto" });
         e.preventDefault();
       }
       touchStartY.current = currentY;
@@ -263,7 +251,11 @@ const MenuPages = ({
     <div
       ref={scrollerRef}
       className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-y-auto"
-      style={{ backgroundColor: "hsl(var(--color-cream))", touchAction: "pan-y" }}
+      style={{
+        backgroundColor: "hsl(var(--color-cream))",
+        touchAction: "pan-y",
+        pointerEvents: isOpen ? "auto" : "none",
+      }}
     >
       <div className="sticky top-0 z-10 flex items-center justify-between px-5 md:px-8 py-4 border-b border-[hsl(var(--color-gold))]/25" style={{ backgroundColor: "hsl(var(--color-cream))" }}>
         <p className="font-display italic text-[18px] md:text-[22px] text-[hsl(var(--color-brown))]">
@@ -281,6 +273,21 @@ const MenuPages = ({
     </div>
   );
 };
+
+const FlipCard = ({ isOpen, children }: { isOpen: boolean; children: React.ReactNode }) => (
+  <div
+    className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
+    style={{
+      height: "min(78vh, 780px)",
+      transformStyle: "preserve-3d",
+      transition: "transform 0.9s cubic-bezier(0.65,0,0.35,1)",
+      transform: isOpen ? "rotateY(180deg)" : "rotateY(0deg)",
+      touchAction: "pan-y",
+    }}
+  >
+    {children}
+  </div>
+);
 
 const Menu = () => {
   const [open, setOpen] = useState<OpenSide>(null);
@@ -311,27 +318,8 @@ const Menu = () => {
             className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"
             style={{ perspective: "2400px" }}
           >
-            {/* MADRAS — the food menu.
-                touchAction: "pan-y" — client, 2026-09-24: "if i scroll from
-                the card on menu i am not able to." A touch scroll STARTING
-                on the closed cover (not yet opened) was also getting
-                trapped by the same 3D-transform-blocks-scroll-chaining
-                issue as the open panel, just with no JS boundary check to
-                fall back on since there's no scrollable content here — the
-                gesture just needs to reach the page underneath untouched.
-                Explicit touch-action tells the browser to treat vertical
-                drags here as normal page panning regardless of the 3D
-                transform context. */}
-            <div
-              className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
-              style={{
-                height: "min(78vh, 780px)",
-                transformStyle: "preserve-3d",
-                transition: "transform 0.9s cubic-bezier(0.65,0,0.35,1)",
-                transform: open === "madras" ? "rotateY(180deg)" : "rotateY(0deg)",
-                touchAction: "pan-y",
-              }}
-            >
+            {/* MADRAS — the food menu. */}
+            <FlipCard isOpen={open === "madras"}>
               <CoverFace
                 src={madrasCover}
                 alt="Madras — the food menu cover, as printed"
@@ -339,24 +327,15 @@ const Menu = () => {
                 bg="#414c2a"
                 onOpen={() => setOpen("madras")}
               />
-              <MenuPages title="Madras — Food" onClose={() => setOpen(null)}>
+              <MenuPages title="Madras — Food" isOpen={open === "madras"} onClose={() => setOpen(null)}>
                 {FOOD_SECTIONS.map((section) => (
                   <SectionBlock key={section.name} section={section} />
                 ))}
               </MenuPages>
-            </div>
+            </FlipCard>
 
-            {/* SOCIAL — the drinks menu. Same touchAction fix as Madras. */}
-            <div
-              className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
-              style={{
-                height: "min(78vh, 780px)",
-                transformStyle: "preserve-3d",
-                transition: "transform 0.9s cubic-bezier(0.65,0,0.35,1)",
-                transform: open === "social" ? "rotateY(180deg)" : "rotateY(0deg)",
-                touchAction: "pan-y",
-              }}
-            >
+            {/* SOCIAL — the drinks menu. */}
+            <FlipCard isOpen={open === "social"}>
               <CoverFace
                 src={socialCover}
                 alt="Social — the drinks menu cover, as printed"
@@ -364,7 +343,7 @@ const Menu = () => {
                 bg="#a83d24"
                 onOpen={() => setOpen("social")}
               />
-              <MenuPages title="Social — Drinks" onClose={() => setOpen(null)}>
+              <MenuPages title="Social — Drinks" isOpen={open === "social"} onClose={() => setOpen(null)}>
                 <section className="mb-10">
                   <h3 className="font-display text-[20px] md:text-[24px] mb-1 text-[hsl(var(--color-brown))]">
                     Signature Cocktails
@@ -393,7 +372,7 @@ const Menu = () => {
                   <SectionBlock key={section.name} section={section} />
                 ))}
               </MenuPages>
-            </div>
+            </FlipCard>
           </div>
         </div>
       </main>
