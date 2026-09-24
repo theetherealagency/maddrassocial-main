@@ -126,7 +126,7 @@ const CoverFace = ({
     onClick={onOpen}
     aria-label={`Open the ${label} menu`}
     className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
-    style={{ backgroundColor: bg }}
+    style={{ backgroundColor: bg, touchAction: "pan-y" }}
   >
     <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
     <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
@@ -209,7 +209,7 @@ const MenuPages = ({
     <div
       ref={scrollerRef}
       className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-y-auto"
-      style={{ backgroundColor: "hsl(var(--color-cream))" }}
+      style={{ backgroundColor: "hsl(var(--color-cream))", touchAction: "pan-y" }}
     >
       <div className="sticky top-0 z-10 flex items-center justify-between px-5 md:px-8 py-4 border-b border-[hsl(var(--color-gold))]/25" style={{ backgroundColor: "hsl(var(--color-cream))" }}>
         <p className="font-display italic text-[18px] md:text-[22px] text-[hsl(var(--color-brown))]">
@@ -257,7 +257,17 @@ const Menu = () => {
             className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"
             style={{ perspective: "2400px" }}
           >
-            {/* MADRAS — the food menu */}
+            {/* MADRAS — the food menu.
+                touchAction: "pan-y" — client, 2026-09-24: "if i scroll from
+                the card on menu i am not able to." A touch scroll STARTING
+                on the closed cover (not yet opened) was also getting
+                trapped by the same 3D-transform-blocks-scroll-chaining
+                issue as the open panel, just with no JS boundary check to
+                fall back on since there's no scrollable content here — the
+                gesture just needs to reach the page underneath untouched.
+                Explicit touch-action tells the browser to treat vertical
+                drags here as normal page panning regardless of the 3D
+                transform context. */}
             <div
               className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
               style={{
@@ -265,6 +275,7 @@ const Menu = () => {
                 transformStyle: "preserve-3d",
                 transition: "transform 0.9s cubic-bezier(0.65,0,0.35,1)",
                 transform: open === "madras" ? "rotateY(180deg)" : "rotateY(0deg)",
+                touchAction: "pan-y",
               }}
             >
               <CoverFace
@@ -281,7 +292,7 @@ const Menu = () => {
               </MenuPages>
             </div>
 
-            {/* SOCIAL — the drinks menu */}
+            {/* SOCIAL — the drinks menu. Same touchAction fix as Madras. */}
             <div
               className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
               style={{
@@ -289,6 +300,7 @@ const Menu = () => {
                 transformStyle: "preserve-3d",
                 transition: "transform 0.9s cubic-bezier(0.65,0,0.35,1)",
                 transform: open === "social" ? "rotateY(180deg)" : "rotateY(0deg)",
+                touchAction: "pan-y",
               }}
             >
               <CoverFace
