@@ -96,42 +96,35 @@ const HomeOurStory = () => {
       </div>
 
       {/*
-        Mobile is a different problem, not just a smaller version of desktop's.
-        The artwork is 1366px wide but a phone displays it at ~390px CSS —
-        roughly 3.5x smaller — so ANY safe rectangle inside the silhouette
-        shrinks by that same factor once it is actually on a screen. The
-        widest band that still holds a couple of lines renders at only about
-        211 x 51 CSS px (measured, not eyeballed — same row-intersection
-        method as desktop, at several candidate heights). That is room for an
-        eyebrow and a two-line heading. It is not room for two paragraphs at
-        any font size a person can read; shrinking type to force the fit was
-        tried and was not legible.
-        So mobile drops the two paragraphs from the artwork overlay and keeps
-        just the eyebrow + heading there — the same simplification the
-        client already accepted once for this section (it shipped
-        heading-only for a while during earlier iteration).
-        Client, 2026-09-23: "make sure this is visible on mobile" (quoting
-        both paragraphs) — the copy itself was never optional, only its
-        placement ON TOP OF THE ARTWORK was. Both paragraphs now render
-        below the map image instead, in normal document flow with no space
-        constraint, mobile-only.
+        Mobile — client, 2026-09-23: "the text is still not in the outline
+        of the map... look at desktop and fix it." The original mobile
+        measurement only found a WIDE-but-SHORT band (211×51 CSS px, room
+        for an eyebrow + two-line heading, not two paragraphs at any legible
+        size) and the paragraphs were moved below the artwork as a fallback.
+        Re-measured properly this time — the row-intersection scan was only
+        checking a handful of candidate bands before; scanning every 10px of
+        vertical offset found a NARROW-but-TALL column instead (345×~700
+        image-px, ≈99×~200 CSS px at mobile width) running most of the
+        silhouette's mid-height, wide enough for 2–3 words per line and tall
+        enough for the full eyebrow + heading + both paragraphs stacked, at
+        a small but real font size. Same `containerType` + cqw scaling
+        technique as desktop, just tuned for a much narrower box.
       */}
       <div
-        className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out px-1"
-        style={{ top: "35.8%", height: "13.3%", left: "22.3%", width: "54%", ...fade }}
+        className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
+        style={{ top: "16.3%", height: "52%", left: "40.4%", width: "25.3%", containerType: "inline-size", ...fade }}
       >
-        <p className="section-label mb-1 text-[7px] tracking-[0.22em]">MADRAS SOCIAL</p>
-        <h2 className="heading-display text-[13px] leading-[1.15]">
+        <p className="section-label mb-[5cqw]" style={{ fontSize: "6.8cqw", letterSpacing: "0.16em" }}>
+          Madras Social
+        </p>
+        <h2 className="heading-display" style={{ fontSize: "11cqw", lineHeight: 1.15 }}>
           A different kind of night out.
         </h2>
-      </div>
-
-      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: "#F2EDE4" }}>
-        <p className="font-body text-[13px] leading-[1.55] mb-3" style={{ color: "#3B2314" }}>
+        <p className="font-body mt-[5cqw]" style={{ fontSize: "6.8cqw", lineHeight: 1.35 }}>
           Madras Social is a place to meet, settle in, and enjoy the evening
           without rushing through it.
         </p>
-        <p className="font-body text-[13px] leading-[1.55]" style={{ color: "#3B2314" }}>
+        <p className="font-body mt-[4cqw]" style={{ fontSize: "6.8cqw", lineHeight: 1.35 }}>
           Inspired by the warmth and energy of South India, we have created a
           space for good food, good drinks, and the people you came with.
           Come in for dinner, stay because the table feels right.

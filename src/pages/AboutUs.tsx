@@ -208,35 +208,36 @@ const AboutUs = () => {
           </p>
         </div>
 
-        {/* Mobile — same measured band as HomeOurStory.tsx's mobile fix:
-            the silhouette renders too small here for more than a heading.
-            Client, 2026-09-23: "make sure this is visible on mobile"
-            (quoting the body paragraph) — placement on the artwork was the
-            constraint, not the copy itself, so the paragraph now renders
-            below the map image in normal flow, mobile-only, same pattern
-            as HomeOurStory.tsx. */}
+        {/* Mobile — client, 2026-09-23: "the text is still not in the
+            outline of the map... look at desktop and fix it." Same
+            re-measurement as HomeOurStory.tsx (same map asset): the
+            original scan only checked a few candidate bands and found a
+            wide-but-short one (211×51 CSS px, heading only). Scanning every
+            10px of vertical offset found a narrow-but-tall column instead
+            (≈99×~200 CSS px), same box as home, wide enough for 2–3 words
+            per line and tall enough for eyebrow + heading + this section's
+            one paragraph, sized down from home's box since the box position
+            is identical (same asset) but the fade/visibility trigger here
+            is `storyVisible`, not `fade`. */}
         <div
-          className="flex md:hidden absolute flex-col justify-center text-center px-1 transition-all duration-700 ease-out"
+          className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
           style={{
-            top: "35.8%", height: "13.3%", left: "22.3%", width: "54%",
+            top: "16.3%", height: "52%", left: "40.4%", width: "25.3%", containerType: "inline-size",
             color: BROWN,
             opacity: storyVisible ? 1 : 0,
             transform: storyVisible ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          <p className="section-label mb-1 text-[7px] tracking-[0.22em]">How It All Began</p>
-          <h2 className="font-display italic" style={{ fontSize: "13px", lineHeight: 1.15 }}>
+          <p className="section-label mb-[5cqw]" style={{ fontSize: "6.8cqw", letterSpacing: "0.16em" }}>How It All Began</p>
+          <h2 className="font-display italic" style={{ fontSize: "11cqw", lineHeight: 1.15 }}>
             A room for it
           </h2>
+          <p className="font-body mt-[6cqw]" style={{ fontSize: "6.8cqw", lineHeight: 1.4 }}>
+            Waterloo Region had the appetite for South Indian food. What it did
+            not have was the room — a real bar, an evening you do not rush, a
+            table that is yours for as long as you want it.
+          </p>
         </div>
-      </div>
-
-      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: CREAM }}>
-        <p className="font-body text-[13px] leading-[1.55]" style={{ color: BROWN }}>
-          Waterloo Region had the appetite for South Indian food. What it did
-          not have was the room — a real bar, an evening you do not rush, a
-          table that is yours for as long as you want it.
-        </p>
       </div>
       </section>
 
@@ -295,7 +296,7 @@ const AboutUs = () => {
           </h2>
           <p
             className="font-body mt-6 mx-auto"
-            style={{ fontSize: "19px", lineHeight: 1.6, color: BROWN, maxWidth: "36ch" }}
+            style={{ fontSize: "17px", lineHeight: 1.7, color: BROWN, maxWidth: "46ch", opacity: 0.9 }}
           >
             The lamb shank still gets its pepper crust. The rasam still
             turns up in a cocktail before it turns up in a bowl. Madras
