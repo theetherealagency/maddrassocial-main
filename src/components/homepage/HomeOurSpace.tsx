@@ -106,10 +106,10 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}
       >
-        <p className="section-label mb-3" style={{ color: "#a59976", fontSize: "13px", lineHeight: 1.6 }}>
+        <p className="section-label mb-3" style={{ color: "#a59976", fontSize: "15px", lineHeight: 1.6 }}>
           Made in Waterloo. Inspired by Madras.
         </p>
-        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(26px, 3.4vw, 44px)", lineHeight: 1.2 }}>
+        <h2 className="font-display italic text-cream" style={{ fontSize: "clamp(29px, 3.8vw, 48px)", lineHeight: 1.2 }}>
           Familiar in feeling. New to the city.
         </h2>
       </div>
@@ -128,7 +128,7 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80" style={{ fontSize: "14px", lineHeight: 1.65, maxWidth: "92%" }}>
+        <p className="font-body text-cream/80" style={{ fontSize: "15.5px", lineHeight: 1.65, maxWidth: "92%" }}>
           Madras Social takes inspiration from the places we know and the way
           we grew up gathering: people around a table, conversations that
           carry on, and hospitality that makes you feel looked after.
@@ -195,10 +195,10 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}
       >
-        <p className="section-label mb-1" style={{ color: "#a59976", fontSize: "8px", lineHeight: 1.4 }}>
+        <p className="section-label mb-1" style={{ color: "#a59976", fontSize: "9.5px", lineHeight: 1.4 }}>
           Made in Waterloo. Inspired by Madras.
         </p>
-        <h2 className="font-display italic text-cream" style={{ fontSize: "15px", lineHeight: 1.15 }}>
+        <h2 className="font-display italic text-cream" style={{ fontSize: "17px", lineHeight: 1.15 }}>
           Familiar in feeling. New to the city.
         </h2>
       </div>
@@ -212,7 +212,7 @@ const HomeOurSpace = () => {
           transform: visible ? "translateY(0)" : "translateY(16px)",
         }}
       >
-        <p className="font-body text-cream/80" style={{ fontSize: "9px", lineHeight: 1.3 }}>
+        <p className="font-body text-cream/80" style={{ fontSize: "10.5px", lineHeight: 1.35 }}>
           Madras Social takes inspiration from the places we know and the way
           we grew up gathering: people around a table, conversations that
           carry on, and hospitality that makes you feel looked after.

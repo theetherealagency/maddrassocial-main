@@ -210,25 +210,25 @@ const AboutUs = () => {
 
         {/* Mobile — client, 2026-09-23: "the text is still not in the
             outline of the map... look at desktop and fix it," then
-            2026-09-24: "the text is up," then "shift the text a bit
-            upward and on a bit right." Same box as HomeOurStory.tsx (same
-            map asset) — see that file's comment for the re-measurement:
-            350×610 image-px, ≈98×171 CSS px, with cqw font values scaled
-            up ~1.09x over the last pass. */}
+            2026-09-24, across three rounds: "the text is up," "shift the
+            text a bit upward and on a bit right," then "push it a bit
+            above... and increase a bit font." Same box as
+            HomeOurStory.tsx (same map asset) — see that file's comment:
+            365×610 image-px, ≈102×171 CSS px, cqw values bumped ~13%. */}
         <div
           className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
           style={{
-            top: "32.6%", height: "45.2%", left: "35.1%", width: "25.6%", containerType: "inline-size",
+            top: "29.6%", height: "45.2%", left: "35%", width: "26.7%", containerType: "inline-size",
             color: BROWN,
             opacity: storyVisible ? 1 : 0,
             transform: storyVisible ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          <p className="section-label mb-[4.6cqw]" style={{ fontSize: "6cqw", letterSpacing: "0.16em" }}>How It All Began</p>
-          <h2 className="font-display italic" style={{ fontSize: "9.7cqw", lineHeight: 1.15 }}>
+          <p className="section-label mb-[5.2cqw]" style={{ fontSize: "6.8cqw", letterSpacing: "0.16em" }}>How It All Began</p>
+          <h2 className="font-display italic" style={{ fontSize: "11cqw", lineHeight: 1.15 }}>
             A room for it
           </h2>
-          <p className="font-body mt-[5.5cqw]" style={{ fontSize: "6cqw", lineHeight: 1.4 }}>
+          <p className="font-body mt-[6cqw]" style={{ fontSize: "6.8cqw", lineHeight: 1.4 }}>
             Waterloo Region had the appetite for South Indian food. What it did
             not have was the room — a real bar, an evening you do not rush, a
             table that is yours for as long as you want it.
