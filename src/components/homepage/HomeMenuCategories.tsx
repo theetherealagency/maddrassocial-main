@@ -5,11 +5,6 @@ import menuPunugulu from "@/assets/menu-punugulu.jpg";
 import menuArancini from "@/assets/menu-arancini.jpg";
 import menuShrimpWrap from "@/assets/menu-shrimp-wrap.jpg";
 import menuParotta from "@/assets/menu-parotta.jpg";
-import menuSlide1 from "@/assets/menu-slide-1.jpg";
-import menuSlide2 from "@/assets/menu-slide-2.jpg";
-import menuSlide3 from "@/assets/menu-slide-3.jpg";
-import menuSlide4 from "@/assets/menu-slide-4.jpg";
-import menuSlide5 from "@/assets/menu-slide-5.jpg";
 import menuCocktailChettinad from "@/assets/menu-cocktail-chettinad.jpg";
 import menuCocktailOoty from "@/assets/menu-cocktail-ooty.jpg";
 import menuCocktailMangaluru from "@/assets/menu-cocktail-mule.jpg";
@@ -58,11 +53,12 @@ import menuBenneMasala from "@/assets/menu-benne-masala.jpg";
  *
  * Client, same day: "use mangaluru for refreshers" — the copper-mug shot
  * from the ALCOHOLIC folder (fits Mangaluru — Curry Leaves Reposado •
- * Ginger Lime — on SIGNATURE_COCKTAILS) goes on the Madras Refreshers card
- * instead, alongside the general ambiance pool it already used.
+ * Ginger Lime — on SIGNATURE_COCKTAILS) goes on the Madras Refreshers card.
+ * Revised same day — client: "remove the food image just drink image" —
+ * dropped the general food-photography pool that card was also cycling
+ * through, so it's Mangaluru alone now.
  */
 const SLIDE_INTERVAL_MS = 3200;
-const GENERAL_SLIDES = [menuSlide1, menuSlide2, menuSlide3, menuSlide4, menuSlide5];
 const COCKTAIL_SLIDES = [menuCocktailChettinad, menuCocktailOoty];
 
 type Slide = { src: string; position?: string };
@@ -103,7 +99,11 @@ const CATEGORIES: Category[] = [
     label: "Non-Alcoholic",
     title: "Madras Refreshers",
     blurb: "Filter kapi, nannari sharbat, mango moru.",
-    slides: [{ src: menuCocktailMangaluru }, ...GENERAL_SLIDES.map((src) => ({ src }))],
+    // Client, 2026-09-23: "remove the food image just drink image" — the
+    // general food-photography pool (ambiance shots, not drinks) was
+    // filling out this slideshow alongside Mangaluru since no other
+    // drink-specific photo existed for this card. Down to just Mangaluru now.
+    slides: [{ src: menuCocktailMangaluru }],
   },
 ];
 

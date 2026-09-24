@@ -184,11 +184,13 @@ const HomeOurSpace = () => {
       </div>
 
       {/* Mobile — eyebrow + heading, hugging the top edge of the green field.
-          Height raised 8%→11% for the now two-line eyebrow. */}
+          Height raised 8%→11% for the now two-line eyebrow. Nudged down
+          from the very top edge — client, 2026-09-23: "move this text a
+          bit below on mobile". */}
       <div
         className="flex md:hidden absolute flex-col justify-start pt-[2.5%] px-6 text-center transition-all duration-700 ease-out"
         style={{
-          left: 0, right: 0, top: "0%", height: "11%",
+          left: 0, right: 0, top: "4%", height: "11%",
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-16px)",
         }}

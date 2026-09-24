@@ -99,16 +99,19 @@ const HomeNavbar = () => {
             RESERVE NOW
           </Link>
 
-          {/* Order Now — mobile */}
+          {/* Reserve Now — mobile. Was "Order Now" linking to /menu; client,
+              2026-09-23: "on mobile it should be reserve now button not
+              order now" — matches the desktop CTA above (same URL, same
+              accent font). */}
           <Link
-            to="/menu"
-            className="xl:hidden inline-block px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-body font-medium border rounded-sm transition-all duration-500"
+            to={RESERVE_URL}
+            className="xl:hidden inline-block px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-accent font-medium border rounded-sm transition-all duration-500"
             style={{
               borderColor: textColor,
               color: textColor,
             }}
           >
-            ORDER NOW
+            RESERVE NOW
           </Link>
 
           {/* Hamburger — mobile */}

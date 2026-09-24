@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import heroBanner from "@/assets/homepage-banner-desktop.webp";
 import heroBannerMobile from "@/assets/homepage-banner-mobile.webp";
-import heroDancerDesktop from "@/assets/hero-dancer-desktop.webp";
-import heroDancerMobile from "@/assets/hero-dancer-mobile.webp";
+// Wobble paused — see note below. Re-import these when re-enabling:
+// import heroDancerDesktop from "@/assets/hero-dancer-desktop.webp";
+// import heroDancerMobile from "@/assets/hero-dancer-mobile.webp";
 import ScallopDivider from "./ScallopDivider";
 
 /**
@@ -104,22 +105,25 @@ const HomeHero = () => {
 
   return (
     <section className="relative w-full md:overflow-hidden" id="home">
-      <style>{`
-        @keyframes doll-wobble {
-          0%, 100% { transform: rotate(-2.5deg); }
-          50% { transform: rotate(2.5deg); }
-        }
-        .doll-wobble {
-          animation: doll-wobble 2.4s ease-in-out infinite;
-          transform-origin: 50% 100%;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-          transform-style: preserve-3d;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .doll-wobble { animation: none; }
-        }
-      `}</style>
+      {/*
+        WOBBLE PAUSED, 2026-09-23 — client: "make doll stop wobbling for
+        now." After several rounds fixing seam/outline artifacts (see the
+        long history above), the client kept seeing a gap on their own
+        device that automated testing (2 browser engines, 12 viewport
+        widths, dozens of angles, pixel-diffed) could never reproduce —
+        meaning something about their specific rendering wasn't matched by
+        any test available here. Rather than keep shipping guesses,
+        `homepage-banner-desktop.webp` / `-mobile.webp` are back to the
+        pristine full artwork (dancer baked in, no hole — restored from git
+        history prior to any hole-punching), and the animated cutout
+        overlay is not rendered at all — a single flat image has no
+        compositing seam to have a bug in.
+
+        To re-enable: restore the hole-punched banner webp files (the git
+        history in this file's earlier comments has the exact erosion/
+        rotation-sweep parameters used), uncomment the two overlay <img>
+        elements below, and restore the `doll-wobble` keyframes/class here.
+      */}
       <h1 className="sr-only">Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
       {/* Desktop banner */}
       <img
@@ -128,14 +132,14 @@ const HomeHero = () => {
         className="hidden md:block w-full h-auto relative"
         loading="eager"
       />
-      <img
+      {/* <img
         src={heroDancerDesktop}
         alt=""
         aria-hidden="true"
         className="doll-wobble hidden md:block absolute pointer-events-none"
         style={{ left: "40.278%", top: "27.968%", width: "18.75%", height: "72.032%" }}
         loading="eager"
-      />
+      /> */}
       {/* Mobile banner — full width, no cropping */}
       <img
         src={heroBannerMobile}
@@ -143,14 +147,14 @@ const HomeHero = () => {
         className="block md:hidden w-full h-auto"
         loading="eager"
       />
-      <img
+      {/* <img
         src={heroDancerMobile}
         alt=""
         aria-hidden="true"
         className="doll-wobble block md:hidden absolute pointer-events-none"
         style={{ left: "36.237%", top: "33.666%", width: "26.72%", height: "66.334%" }}
         loading="eager"
-      />
+      /> */}
 
       {/* Desktop hero text — was vertically centred in the empty top 28% of
           the artwork, which for a short one-line headline put it right up
