@@ -209,7 +209,12 @@ const AboutUs = () => {
         </div>
 
         {/* Mobile — same measured band as HomeOurStory.tsx's mobile fix:
-            the silhouette renders too small here for more than a heading. */}
+            the silhouette renders too small here for more than a heading.
+            Client, 2026-09-23: "make sure this is visible on mobile"
+            (quoting the body paragraph) — placement on the artwork was the
+            constraint, not the copy itself, so the paragraph now renders
+            below the map image in normal flow, mobile-only, same pattern
+            as HomeOurStory.tsx. */}
         <div
           className="flex md:hidden absolute flex-col justify-center text-center px-1 transition-all duration-700 ease-out"
           style={{
@@ -224,6 +229,14 @@ const AboutUs = () => {
             A room for it
           </h2>
         </div>
+      </div>
+
+      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: CREAM }}>
+        <p className="font-body text-[13px] leading-[1.55]" style={{ color: BROWN }}>
+          Waterloo Region had the appetite for South Indian food. What it did
+          not have was the room — a real bar, an evening you do not rush, a
+          table that is yours for as long as you want it.
+        </p>
       </div>
       </section>
 

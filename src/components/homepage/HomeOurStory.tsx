@@ -106,10 +106,15 @@ const HomeOurStory = () => {
         eyebrow and a two-line heading. It is not room for two paragraphs at
         any font size a person can read; shrinking type to force the fit was
         tried and was not legible.
-        So mobile drops the two paragraphs and keeps the heading — the same
-        simplification the client already accepted once for this section (it
-        shipped heading-only for a while during earlier iteration). The full
-        story still reads on desktop and on the About Us page.
+        So mobile drops the two paragraphs from the artwork overlay and keeps
+        just the eyebrow + heading there — the same simplification the
+        client already accepted once for this section (it shipped
+        heading-only for a while during earlier iteration).
+        Client, 2026-09-23: "make sure this is visible on mobile" (quoting
+        both paragraphs) — the copy itself was never optional, only its
+        placement ON TOP OF THE ARTWORK was. Both paragraphs now render
+        below the map image instead, in normal document flow with no space
+        constraint, mobile-only.
       */}
       <div
         className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out px-1"
@@ -119,6 +124,18 @@ const HomeOurStory = () => {
         <h2 className="heading-display text-[13px] leading-[1.15]">
           A different kind of night out.
         </h2>
+      </div>
+
+      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: "#414c2a" }}>
+        <p className="font-body text-cream/80 text-[13px] leading-[1.55] mb-3">
+          Madras Social is a place to meet, settle in, and enjoy the evening
+          without rushing through it.
+        </p>
+        <p className="font-body text-cream/80 text-[13px] leading-[1.55]">
+          Inspired by the warmth and energy of South India, we have created a
+          space for good food, good drinks, and the people you came with.
+          Come in for dinner, stay because the table feels right.
+        </p>
       </div>
     </section>
   );
