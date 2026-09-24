@@ -15,11 +15,14 @@ const TastingPopup = () => {
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem('newsletterPopupShown');
     if (hasSeenPopup) return;
+    // Client, 2026-09-24: "make the newsletter popup in 3-5 seconds when on
+    // website" — was 5000ms (right at the edge of that window); 4000ms
+    // sits centered in the requested 3-5s range.
     const timer = setTimeout(() => {
       setIsOpen(true);
       trackPopup('shown', 'newsletter');
       sessionStorage.setItem('newsletterPopupShown', 'true');
-    }, 5000);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
