@@ -210,26 +210,27 @@ const AboutUs = () => {
 
         {/* Mobile — client, 2026-09-23: "the text is still not in the
             outline of the map... look at desktop and fix it," then
-            2026-09-24: "alignment on mobile for the map text can be
-            better." Same box as HomeOurStory.tsx (same map asset) — see
-            that file's comment for the full re-measurement: a wider, more
-            square block (476×580 image-px, ≈136×166 CSS px) that sits
-            closer to the shape's visual middle instead of a narrow column
-            crowded near the top with a large empty gap below it. */}
+            2026-09-24: "the text is up." Same box as HomeOurStory.tsx
+            (same map asset) — see that file's comment: the shape is
+            widest through its belly (35-80% of height), not near the
+            top, so the block moved down into the belly (380×610
+            image-px, ≈109×174 CSS px), with cqw font values scaled up
+            ~1.25x to keep the same absolute type size in the narrower
+            container. */}
         <div
           className="flex md:hidden absolute flex-col justify-center text-center transition-all duration-700 ease-out overflow-hidden"
           style={{
-            top: "16.3%", height: "42.9%", left: "40.4%", width: "34.8%", containerType: "inline-size",
+            top: "35.2%", height: "45.2%", left: "33.5%", width: "27.8%", containerType: "inline-size",
             color: BROWN,
             opacity: storyVisible ? 1 : 0,
             transform: storyVisible ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          <p className="section-label mb-[4cqw]" style={{ fontSize: "5.2cqw", letterSpacing: "0.16em" }}>How It All Began</p>
-          <h2 className="font-display italic" style={{ fontSize: "8.4cqw", lineHeight: 1.15 }}>
+          <p className="section-label mb-[5cqw]" style={{ fontSize: "6.5cqw", letterSpacing: "0.16em" }}>How It All Began</p>
+          <h2 className="font-display italic" style={{ fontSize: "10.5cqw", lineHeight: 1.15 }}>
             A room for it
           </h2>
-          <p className="font-body mt-[5cqw]" style={{ fontSize: "5.2cqw", lineHeight: 1.4 }}>
+          <p className="font-body mt-[6cqw]" style={{ fontSize: "6.5cqw", lineHeight: 1.4 }}>
             Waterloo Region had the appetite for South Indian food. What it did
             not have was the room — a real bar, an evening you do not rush, a
             table that is yours for as long as you want it.

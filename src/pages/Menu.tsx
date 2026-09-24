@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
-import FloatingOrderCTA from "@/components/FloatingOrderCTA";
-import { ONLINE_ORDER_URL } from "@/lib/links";
 import madrasCover from "@/assets/menu-cover-madras.png";
 import socialCover from "@/assets/menu-cover-social.png";
 import {
@@ -108,6 +106,24 @@ const SectionBlock = ({ section }: { section: MenuSection }) => (
  * wordmark that used to sit over the top of the giant "M"/"S" has been
  * removed from the art entirely per the same feedback.
  */
+/**
+ * Client, 2026-09-24: "make sure the menu page is scrollable from anywhere
+ * on screen on mobile not only sides." Verified with a real trusted touch
+ * gesture (Chrome DevTools Protocol touch dispatch, not a manually
+ * dispatched TouchEvent — synthetic in-page TouchEvents don't move the
+ * page and would falsely "pass" this): a swipe over the plain page margin
+ * beside the book scrolls fine, but the exact same swipe over the closed
+ * cover itself does nothing, `touch-action: pan-y` and all. The cause is
+ * the same one already worked around in MenuPages below — the card's own
+ * `perspective` / `transform-style: preserve-3d` (needed for the flip
+ * animation) sits between the touch target and the page, and Chromium
+ * does not reliably chain a native touch-scroll gesture out through that
+ * kind of 3D context, regardless of touch-action. Since a closed cover has
+ * no scrollable content of its own, there's no boundary to check here —
+ * every vertical drag on it is just forwarded straight to the page,
+ * exactly like a native scroll would. A small 6px threshold keeps this
+ * from swallowing the tap-to-open gesture.
+ */
 const CoverFace = ({
   src,
   alt,
@@ -120,22 +136,60 @@ const CoverFace = ({
   label: string;
   bg: string;
   onOpen: () => void;
-}) => (
-  <button
-    type="button"
-    onClick={onOpen}
-    aria-label={`Open the ${label} menu`}
-    className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
-    style={{ backgroundColor: bg, touchAction: "pan-y" }}
-  >
-    <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
-    <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
-      <span className="font-body text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-[hsl(var(--offwhite))]/80 border border-[hsl(var(--offwhite))]/40 rounded-full px-4 py-2 backdrop-blur-sm">
-        Open the {label} menu
-      </span>
-    </div>
-  </button>
-);
+}) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const touchStartY = useRef(0);
+  const lastY = useRef(0);
+  const isDragging = useRef(false);
+
+  useEffect(() => {
+    const el = buttonRef.current;
+    if (!el) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+      lastY.current = touchStartY.current;
+      isDragging.current = false;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const currentY = e.touches[0].clientY;
+      if (!isDragging.current && Math.abs(currentY - touchStartY.current) > 6) {
+        isDragging.current = true;
+      }
+      if (isDragging.current) {
+        window.scrollBy(0, lastY.current - currentY);
+        e.preventDefault();
+      }
+      lastY.current = currentY;
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+    };
+  }, []);
+
+  return (
+    <button
+      ref={buttonRef}
+      type="button"
+      onClick={onOpen}
+      aria-label={`Open the ${label} menu`}
+      className="absolute inset-0 [backface-visibility:hidden] overflow-hidden text-left w-full h-full"
+      style={{ backgroundColor: bg, touchAction: "pan-y" }}
+    >
+      <img src={src} alt={alt} className="w-full h-full object-contain" loading="eager" />
+      <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-10 pointer-events-none">
+        <span className="font-body text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-[hsl(var(--offwhite))]/80 border border-[hsl(var(--offwhite))]/40 rounded-full px-4 py-2 backdrop-blur-sm">
+          Open the {label} menu
+        </span>
+      </div>
+    </button>
+  );
+};
 
 /**
  * What sits behind a cover once it has flipped open — real, scrollable menu.
@@ -345,7 +399,6 @@ const Menu = () => {
       </main>
 
       <HomeFooter />
-      <FloatingOrderCTA href={ONLINE_ORDER_URL} />
     </div>
   );
 };
