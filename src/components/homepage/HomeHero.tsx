@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import heroBanner from "@/assets/homepage-banner-desktop.webp";
 import heroBannerMobile from "@/assets/homepage-banner-mobile.webp";
-// Wobble paused — see note below. Re-import these when re-enabling:
-// import heroDancerDesktop from "@/assets/hero-dancer-desktop.webp";
-// import heroDancerMobile from "@/assets/hero-dancer-mobile.webp";
+import heroDancerDesktop from "@/assets/hero-dancer-desktop.webp";
+import heroDancerMobile from "@/assets/hero-dancer-mobile.webp";
 import ScallopDivider from "./ScallopDivider";
 
 /**
@@ -88,12 +87,25 @@ import ScallopDivider from "./ScallopDivider";
  * Fix: `cv2.morphologyEx(..., MORPH_CLOSE)` first, filling small internal
  * gaps in the mask so erosion can't over-widen them, then erode by a larger
  * margin (60px desktop, 40px mobile) for the outer-silhouette rotation case
- * above. A same-session attempt at fixing this by scaling the overlay up
- * (`transform: scale(1.08)`) made things worse, not better — scaling around
- * the bottom pivot displaces MID-BODY content (the waist, ~40px at 8% scale
- * for a point 500px from the pivot) far more than it displaces the pivot-
- * adjacent hem, desynchronizing the overlay's internal features from the
- * static hole cut at the unscaled position. Pure rotation, no scale.
+ * above.
+ *
+ * Fifth/sixth rounds, same day — kept widening the rotation-sweep margin
+ * and switching to fully lossless WebP, but the client's own screenshots
+ * kept showing a seam that automated testing (2 browser engines, 12
+ * viewport widths, dozens of angles, pixel-diffed every time) could never
+ * reproduce. Paused the wobble entirely rather than keep guessing.
+ *
+ * Seventh round — client: "make the doll wobble... just wobble right and
+ * left." Switched from ROTATION to a plain horizontal `translateX`. This
+ * is a fundamentally simpler, more robust animation for this hole/overlay
+ * technique: rotation moves points by an amount PROPORTIONAL TO THEIR
+ * DISTANCE from the pivot (the crown, ~1150px away, moves ~50px at 2.5° —
+ * the raised hand, ~750px away and off-axis, moves ~35px — every point
+ * needed its own margin, which is exactly what kept breaking one specific
+ * spot after another). A horizontal slide moves EVERY point of the doll by
+ * the exact same fixed distance, so a single uniform margin (`cv2.erode`
+ * by translate-distance + buffer, same amount everywhere) is correct
+ * everywhere at once — no per-feature special-casing possible to miss.
  */
 const HomeHero = () => {
   const [mounted, setMounted] = useState(false);
@@ -105,25 +117,18 @@ const HomeHero = () => {
 
   return (
     <section className="relative w-full md:overflow-hidden" id="home">
-      {/*
-        WOBBLE PAUSED, 2026-09-23 — client: "make doll stop wobbling for
-        now." After several rounds fixing seam/outline artifacts (see the
-        long history above), the client kept seeing a gap on their own
-        device that automated testing (2 browser engines, 12 viewport
-        widths, dozens of angles, pixel-diffed) could never reproduce —
-        meaning something about their specific rendering wasn't matched by
-        any test available here. Rather than keep shipping guesses,
-        `homepage-banner-desktop.webp` / `-mobile.webp` are back to the
-        pristine full artwork (dancer baked in, no hole — restored from git
-        history prior to any hole-punching), and the animated cutout
-        overlay is not rendered at all — a single flat image has no
-        compositing seam to have a bug in.
-
-        To re-enable: restore the hole-punched banner webp files (the git
-        history in this file's earlier comments has the exact erosion/
-        rotation-sweep parameters used), uncomment the two overlay <img>
-        elements below, and restore the `doll-wobble` keyframes/class here.
-      */}
+      <style>{`
+        @keyframes doll-wobble {
+          0%, 100% { transform: translateX(-3%); }
+          50% { transform: translateX(3%); }
+        }
+        .doll-wobble {
+          animation: doll-wobble 2.4s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .doll-wobble { animation: none; }
+        }
+      `}</style>
       <h1 className="sr-only">Madras Social — A South Indian Kitchen and Bar in Waterloo</h1>
       {/* Desktop banner */}
       <img
@@ -132,14 +137,14 @@ const HomeHero = () => {
         className="hidden md:block w-full h-auto relative"
         loading="eager"
       />
-      {/* <img
+      <img
         src={heroDancerDesktop}
         alt=""
         aria-hidden="true"
         className="doll-wobble hidden md:block absolute pointer-events-none"
         style={{ left: "40.278%", top: "27.968%", width: "18.75%", height: "72.032%" }}
         loading="eager"
-      /> */}
+      />
       {/* Mobile banner — full width, no cropping */}
       <img
         src={heroBannerMobile}
@@ -147,14 +152,14 @@ const HomeHero = () => {
         className="block md:hidden w-full h-auto"
         loading="eager"
       />
-      {/* <img
+      <img
         src={heroDancerMobile}
         alt=""
         aria-hidden="true"
         className="doll-wobble block md:hidden absolute pointer-events-none"
         style={{ left: "36.237%", top: "33.666%", width: "26.72%", height: "66.334%" }}
         loading="eager"
-      /> */}
+      />
 
       {/* Desktop hero text — was vertically centred in the empty top 28% of
           the artwork, which for a short one-line headline put it right up

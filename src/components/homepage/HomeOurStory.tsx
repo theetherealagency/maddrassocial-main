@@ -126,12 +126,12 @@ const HomeOurStory = () => {
         </h2>
       </div>
 
-      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: "#414c2a" }}>
-        <p className="font-body text-cream/80 text-[13px] leading-[1.55] mb-3">
+      <div className="block md:hidden px-6 pt-6 pb-8 text-center" style={{ backgroundColor: "#F2EDE4" }}>
+        <p className="font-body text-[13px] leading-[1.55] mb-3" style={{ color: "#3B2314" }}>
           Madras Social is a place to meet, settle in, and enjoy the evening
           without rushing through it.
         </p>
-        <p className="font-body text-cream/80 text-[13px] leading-[1.55]">
+        <p className="font-body text-[13px] leading-[1.55]" style={{ color: "#3B2314" }}>
           Inspired by the warmth and energy of South India, we have created a
           space for good food, good drinks, and the people you came with.
           Come in for dinner, stay because the table feels right.
