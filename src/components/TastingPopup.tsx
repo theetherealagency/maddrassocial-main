@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { trackFormSuccess, trackPopup } from '@/lib/analytics';
+import { subscribeToNewsletter } from '@/lib/newsletter';
 
 const TastingPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,16 +42,21 @@ const TastingPopup = () => {
     if (!validate()) return;
     setIsSubmitting(true);
     try {
-      if (!supabase) throw new Error('Supabase is not configured — see .env.example');
-      const { error } = await supabase.from('leads').insert({
-        form_type: 'newsletter',
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        phone: formData.phone,
-        subject: 'Newsletter Signup — Popup',
-        message: 'Signed up via homepage popup',
-      });
-      if (error) throw error;
+      // Resend is the newsletter list and must succeed; Supabase is a
+      // secondary record, written only when it is configured.
+      if (supabase) {
+        const { error } = await supabase.from('leads').insert({
+          form_type: 'newsletter',
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: formData.phone,
+          subject: 'Newsletter Signup — Popup',
+          message: 'Signed up via homepage popup',
+        });
+        if (error) console.error('Supabase lead insert failed:', error);
+      }
+      const subscribed = await subscribeToNewsletter({ firstName: formData.firstName, lastName: formData.lastName, email: formData.email });
+      if (!subscribed) throw new Error('Newsletter signup failed');
       trackFormSuccess('newsletter');
       setIsSubmitted(true);
       toast({ title: "You're in!", description: "We'll be in touch." });
