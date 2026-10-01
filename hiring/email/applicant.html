@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+  MADRAS SOCIAL — confirmation email to the applicant.
+  Fetched at send time by apps-script/Code.gs, so editing the design here and
+  redeploying the site is enough — the script never needs re-pasting.
+
+  Placeholders the script fills in:
+    {{HELLO}}  {{REF}}  {{ROLE}}  {{TYPE}}  {{AVAILABILITY}}  {{START}}
+    {{RESUME}}  {{YEAR}}
+
+  Email rules: tables for layout, inline styles only, no webfonts (Didot and
+  Georgia stand in for the display face), nothing that depends on images
+  loading. Brand: madras cocoa #4A2B22 · burnt terracotta #963B26 ·
+  brushed copper #C08A6C · soft ivory #F3E4CE.
+-->
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>We have your application — Madras Social</title>
+</head>
+<body style="margin:0;padding:0;background-color:#33231d;">
+
+<!-- preheader: the line inboxes show beside the subject -->
+<div style="display:none;font-size:1px;color:#33231d;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+  Your reference is {{REF}}. We read everything within two working days, and if it's a fit we text.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#33231d;">
+<tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%;background-color:#F3E4CE;">
+
+    <!-- ── header band ── -->
+    <tr>
+      <td align="center" bgcolor="#4A2B22" style="background-color:#4A2B22;padding:34px 30px 30px 30px;">
+        <img src="https://hiring.madrassocial.ca/assets/logo-linen.png" width="190" alt="Madras Social" style="display:block;width:190px;max-width:70%;height:auto;border:0;outline:none;text-decoration:none;">
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:3.4px;text-transform:uppercase;color:#C08A6C;padding-top:14px;font-weight:bold;">
+          South Indian kitchen &#43; bar &#183; Uptown Waterloo
+        </div>
+      </td>
+    </tr>
+    <tr><td style="height:3px;background-color:#963B26;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+    <!-- ── body ── -->
+    <tr>
+      <td style="padding:34px 30px 10px 30px;">
+        <h1 style="margin:0;font-family:Didot,'Hoefler Text',Georgia,'Times New Roman',serif;font-size:27px;line-height:1.24;font-weight:normal;color:#4A2B22;">
+          {{HELLO}} your application landed.
+        </h1>
+      </td>
+    </tr>
+
+    <!-- reference -->
+    <tr>
+      <td style="padding:22px 30px 0 30px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #C08A6C;background-color:#FFFFFF;">
+          <tr>
+            <td align="center" style="padding:16px 18px 18px 18px;">
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:#963B26;font-weight:bold;">
+                Your reference
+              </div>
+              <div style="font-family:'Courier New',Courier,monospace;font-size:25px;letter-spacing:1.5px;color:#4A2B22;padding-top:8px;font-weight:bold;">
+                {{REF}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- what happens next -->
+    <tr>
+      <td style="padding:22px 30px 0 30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.72;color:#33231d;">
+        We read everything within two working days. If it&rsquo;s a fit, we text &mdash; so keep an eye on your
+        phone rather than your inbox. If it isn&rsquo;t this time, you stay on file and you&rsquo;ll hear from us
+        before the next posting goes public.
+      </td>
+    </tr>
+
+    <!-- what they sent -->
+    <tr>
+      <td style="padding:26px 30px 0 30px;">
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:#963B26;font-weight:bold;padding-bottom:6px;">
+          What you sent us
+        </div>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+          <tr>
+            <td width="45%" style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Role</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{ROLE}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Full or part time</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{TYPE}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">You&rsquo;re free</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{AVAILABILITY}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">You can start</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{START}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Resume</td>
+            <td style="padding:11px 0;color:#33231d;">{{RESUME}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:26px 30px 34px 30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.72;color:#33231d;">
+        Thanks for wanting to build this with us.<br>
+        <span style="font-family:Didot,'Hoefler Text',Georgia,serif;font-size:18px;color:#4A2B22;">&mdash; The Madras Social team</span>
+      </td>
+    </tr>
+
+    <!-- ── footer ── -->
+    <tr>
+      <td bgcolor="#4A2B22" style="background-color:#4A2B22;padding:24px 30px;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.75;color:#CEB59B;">
+        8 Erb Street West, Waterloo ON N2L 1S7<br>
+        Questions? Just reply to this email &mdash; it reaches us.
+        <div style="padding-top:12px;font-size:11px;color:#8f6d59;">
+          &copy; {{YEAR}} Madras Social
+        </div>
+      </td>
+    </tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>
