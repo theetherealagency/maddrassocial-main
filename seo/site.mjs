@@ -55,7 +55,7 @@ export const SITE = {
   orderUrl: 'PENDING',   // online ordering — FloatingOrderCTA hides until set
   reserveUrl: 'PENDING', // reservations — /reservations CTA disabled until set
 
-  cuisines: ['South Indian', 'Tamil', 'Kerala', 'Indian'],
+  cuisines: ['South Indian', 'Tamil', 'Indian'],
 
   areaServed: [
     'Waterloo', 'Kitchener', 'Cambridge', 'Guelph',
@@ -586,7 +586,6 @@ export const OFFERINGS = [
 export const KNOWS_ABOUT = [
   'South Indian cuisine',
   'Tamil Nadu cooking',
-  'Kerala cooking',
   'Dosa and uthappam',
   'Bangalore Benne dosa',
   'Chettinad spice blends',

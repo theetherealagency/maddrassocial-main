@@ -123,7 +123,7 @@ export const restaurantNode = () => ({
   name: SITE.name,
   alternateName: 'Madras Social Waterloo',
   description:
-    'A South Indian kitchen and bar in Waterloo Region. Kerala and Tamil cooking — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies and biryani — with a full bar. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
+    'A South Indian kitchen and bar in Waterloo Region. Tamil cooking — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies and biryani — with a full bar. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
   url: `${O}/`,
   image: { '@id': ID.ogImage },
   logo: { '@id': ID.logo },
@@ -172,7 +172,7 @@ export const restaurantNode = () => ({
   publicAccess: true,
   isAccessibleForFree: false,
   keywords:
-    'south indian restaurant waterloo, south indian kitchen and bar waterloo, dosa waterloo, biryani waterloo, kerala food kitchener, tamil food cambridge',
+    'south indian restaurant waterloo, south indian kitchen and bar waterloo, dosa waterloo, biryani waterloo, tamil food cambridge',
   amenityFeature: amenities,
   sameAs: SITE.sameAs,
   parentOrganization: { '@id': ID.org },
