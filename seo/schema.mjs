@@ -123,7 +123,7 @@ export const restaurantNode = () => ({
   name: SITE.name,
   alternateName: 'Madras Social Waterloo',
   description:
-    'A South Indian kitchen and bar in Waterloo Region. Tamil cooking — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies and biryani — with a full bar. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
+    'A South Indian kitchen and bar in KWC Region. Tamil cooking — rasam and roots, small plates, dosas and uthappams, Bangalore butter dosas, southern gravies and biryani — with a full bar. Vegetarian dishes are marked; the kitchen also serves chicken, mutton, lamb, pomfret, lobster and shrimp.',
   url: `${O}/`,
   image: { '@id': ID.ogImage },
   logo: { '@id': ID.logo },
@@ -250,7 +250,7 @@ export const websiteNode = () => ({
   url: `${O}/`,
   inLanguage: 'en-CA',
   description:
-    'A South Indian kitchen and bar in Waterloo Region.',
+    'A South Indian kitchen and bar in KWC Region.',
   publisher: { '@id': ID.org },
   about: { '@id': ID.restaurant },
 });

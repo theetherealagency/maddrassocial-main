@@ -19,7 +19,7 @@ const NAP = `
   <p><strong>Email:</strong> <a href="mailto:${SITE.email}">${SITE.email}</a></p>${
     isSet(HOURS_TEXT) ? `\n  <p><strong>Hours:</strong> ${HOURS_TEXT}</p>` : ''
   }
-  <p>A South Indian kitchen and bar in Waterloo Region.</p>`;
+  <p>A South Indian kitchen and bar in KWC Region.</p>`;
 
 const LINKS = `
   <nav aria-label="Madras Social pages">

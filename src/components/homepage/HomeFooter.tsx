@@ -99,7 +99,7 @@ const HomeFooter = () => {
               <img src="/brand/madras-social-logo.png" alt="Madras Social" className="h-10 w-auto brightness-0 invert" />
             </div>
             <p className="font-accent text-[13px] leading-[1.7]" style={{ color: cream }}>
-              A South Indian kitchen and bar in Waterloo Region.
+              A South Indian kitchen and bar in KWC Region.
             </p>
           </div>
 
