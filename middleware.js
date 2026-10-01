@@ -45,7 +45,9 @@ export function route(hostname, pathname) {
     return { rewrite: `${PREFIX}/hiring${file}`, headers: cache };
   }
 
-  // rsvp: plain static site, no clean URLs.
+  // rsvp: plain static site, no clean URLs. An extensionless miss would fall
+  // through to the main site's SPA catch-all, so answer it with a 404 here.
+  if (pathname !== '/' && !/\.[^/]+$/.test(pathname)) return { status: 404 };
   const file = pathname === '/' ? '/index.html' : pathname;
   return { rewrite: `${PREFIX}/rsvp${file}` };
 }
@@ -62,7 +64,7 @@ export default function middleware(request) {
 
   const r = route(hostname, url.pathname);
   if (r.next) return next();
-  if (r.status) return new Response('Not found', { status: r.status });
+  if (r.status) return new Response('The page could not be found\n\nNOT_FOUND\n', { status: r.status });
   if (r.redirect) {
     return new Response(null, {
       status: 308,
