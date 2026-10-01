@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+  MADRAS SOCIAL — new-application notification to hello@madrassocial.ca.
+  Fetched at send time by apps-script/Code.gs, so editing the design here and
+  redeploying the site is enough — the script never needs re-pasting.
+
+  Designed to be read on a phone, one-handed, mid-service: the name and the
+  call button come before anything else.
+
+  Placeholders the script fills in:
+    {{NAME}} {{ROLE}} {{TYPE}} {{REF}} {{PHONE}} {{PHONE_RAW}} {{EMAIL}}
+    {{AVAILABILITY}} {{EXPERIENCE}} {{START}} {{REFERRAL}} {{SOURCE}} {{NOTE}}
+    {{RESUME_BLOCK}} {{WARNING}} {{RECEIVED}} {{SHEET_URL}} {{YEAR}}
+  {{WARNING}} and {{RESUME_BLOCK}} arrive as ready-made HTML, or empty.
+-->
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New application — Madras Social</title>
+</head>
+<body style="margin:0;padding:0;background-color:#33231d;">
+
+<div style="display:none;font-size:1px;color:#33231d;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+  {{NAME}} &#183; {{ROLE}} &#183; can start {{START}} &#183; {{PHONE}}
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#33231d;">
+<tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%;background-color:#F3E4CE;">
+
+    <!-- ── header band ── -->
+    <tr>
+      <td align="center" bgcolor="#4A2B22" style="background-color:#4A2B22;padding:26px 30px 24px 30px;">
+        <img src="https://hiring.madrassocial.ca/assets/logo-linen.png" width="150" alt="Madras Social" style="display:block;width:150px;max-width:60%;height:auto;border:0;outline:none;text-decoration:none;">
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:3.4px;text-transform:uppercase;color:#C08A6C;padding-top:12px;font-weight:bold;">
+          New application &#183; {{RECEIVED}}
+        </div>
+      </td>
+    </tr>
+    <tr><td style="height:3px;background-color:#963B26;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+    {{WARNING}}
+
+    <!-- ── who ── -->
+    <tr>
+      <td style="padding:30px 30px 0 30px;">
+        <div style="font-family:Didot,'Hoefler Text',Georgia,'Times New Roman',serif;font-size:31px;line-height:1.12;color:#4A2B22;">
+          {{NAME}}
+        </div>
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:#963B26;font-weight:bold;padding-top:9px;">
+          {{ROLE}} &#183; {{TYPE}} &#183; {{REF}}
+        </div>
+      </td>
+    </tr>
+
+    <!-- ── call / text ── -->
+    <tr>
+      <td style="padding:20px 30px 0 30px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="50%" style="padding-right:5px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#963B26;">
+                <tr><td align="center" style="padding:15px 10px;">
+                  <a href="tel:{{PHONE_RAW}}" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#F3E4CE;text-decoration:none;letter-spacing:0.4px;">Call {{PHONE}}</a>
+                </td></tr>
+              </table>
+            </td>
+            <td width="50%" style="padding-left:5px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #4A2B22;">
+                <tr><td align="center" style="padding:14px 10px;">
+                  <a href="sms:{{PHONE_RAW}}" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#4A2B22;text-decoration:none;letter-spacing:0.4px;">Send a text</a>
+                </td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;padding-top:12px;color:#33231d;">
+          <a href="mailto:{{EMAIL}}" style="color:#963B26;text-decoration:underline;">{{EMAIL}}</a>
+          <span style="color:#8a7361;"> &#183; or just reply to this email</span>
+        </div>
+      </td>
+    </tr>
+
+    <!-- ── the answers ── -->
+    <tr>
+      <td style="padding:26px 30px 0 30px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+          <tr>
+            <td width="40%" style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Availability</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{AVAILABILITY}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Experience</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{EXPERIENCE}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Earliest start</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;font-weight:bold;">{{START}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Referred by</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{REFERRAL}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;border-bottom:1px solid #DFCDB2;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">Came from</td>
+            <td style="padding:11px 0;border-bottom:1px solid #DFCDB2;color:#33231d;">{{SOURCE}}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px 11px 0;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#963B26;font-weight:bold;vertical-align:top;">In their words</td>
+            <td style="padding:11px 0;color:#33231d;line-height:1.65;">{{NOTE}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    {{RESUME_BLOCK}}
+
+    <!-- ── what to do next ── -->
+    <tr>
+      <td style="padding:24px 30px 30px 30px;">
+        <!-- solid hex, not rgba: Outlook ignores rgba and would render this white -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#EFDCC3" style="background-color:#EFDCC3;">
+          <tr>
+            <td style="padding:14px 16px;border-left:3px solid #C08A6C;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.7;color:#33231d;">
+              Everything above is already a row in the sheet. To move them along, change the
+              <strong>Status</strong> column &mdash; that&rsquo;s what sends their next email.<br>
+              <a href="{{SHEET_URL}}" style="color:#963B26;text-decoration:underline;font-weight:bold;">Open the hiring sheet</a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ── footer ── -->
+    <tr>
+      <td bgcolor="#4A2B22" style="background-color:#4A2B22;padding:22px 30px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.75;color:#CEB59B;">
+        Sent by the careers page &#183; hiring.madrassocial.ca<br>
+        <span style="color:#8f6d59;">&copy; {{YEAR}} Madras Social &#183; 8 Erb Street West, Waterloo ON</span>
+      </td>
+    </tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

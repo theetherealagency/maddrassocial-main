@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — Madras Social — Join the Opening Team</title>
+<meta name="description" content="Madras Social is hiring its opening team — front of house and kitchen. One-screen application, resume required.">
+<meta property="og:title" content="Careers — Madras Social">
+<meta property="og:description" content="We're hiring the opening team — front of house and kitchen.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="careers-page">
+
+<div class="careers-bg" aria-hidden="true"></div>
+
+<nav>
+  <div class="bar">
+    <!-- The logo, linen, pointing at the RESERVATIONS page rather than this
+         site's own root or the main home page (client instruction,
+         2026-09-18). The careers site lives under madrassocial.ca and the mark
+         is the way out of it; the reservations page is where they want that to
+         land while the home page is still a pre-opening teaser. -->
+    <a class="mark" href="https://www.madrassocial.ca/reservations"><img src="assets/logo-linen.png" alt="Madras Social"></a>
+    <span class="nav-chip"><span class="dot"></span>Opening soon · Uptown Waterloo</span>
+  </div>
+</nav>
+
+<main class="careers-main dark plain">
+  <div class="wrap" style="max-width:840px">
+
+    <!-- 1 · TWO LINES -->
+    <p class="eyebrow center" style="margin-bottom:14px">Before we open</p>
+    <h1 class="display c-head">Help us open Madras Social.<br><span class="gold-grad">Floor and kitchen.</span></h1>
+
+    <!-- 2 · OPEN POSITIONS -->
+    <div class="c-block c-panel">
+      <p class="eyebrow">Open positions</p>
+      <div class="role-list-open" id="role-list"><!-- rendered from CONFIG.ROLES --></div>
+    </div>
+
+    <!-- 3 · THE FORM -->
+    <div class="c-block c-panel" id="apply">
+      <p class="eyebrow">Apply</p>
+      <form id="apply-form" novalidate>
+        <div class="f-grid cols2">
+          <div>
+            <label for="a-name">Full name</label>
+            <input type="text" id="a-name" name="name" autocomplete="name" required>
+            <p class="err-msg" data-for="a-name">We'll need your name.</p>
+          </div>
+          <div>
+            <label for="a-phone">Phone</label>
+            <input type="tel" id="a-phone" name="phone" autocomplete="tel" required>
+            <p class="err-msg" data-for="a-phone">A phone number we can text.</p>
+          </div>
+          <div class="f-span">
+            <label for="a-email">Email</label>
+            <input type="email" id="a-email" name="email" autocomplete="email" required>
+            <p class="err-msg" data-for="a-email">That email doesn't look right.</p>
+          </div>
+          <div>
+            <label for="a-role">Role</label>
+            <select id="a-role" name="role" required></select>
+            <p class="err-msg" data-for="a-role">Pick a role — or the talent pool.</p>
+          </div>
+          <div>
+            <label for="a-type">Full or part time</label>
+            <select id="a-type" name="type">
+              <option>Full time</option><option>Part time</option><option>Either works</option>
+            </select>
+          </div>
+          <div class="f-span">
+            <label>Availability</label>
+            <div class="chips" id="a-avail">
+              <span class="chip" data-v="Days" role="button" tabindex="0">Days</span>
+              <span class="chip" data-v="Evenings" role="button" tabindex="0">Evenings</span>
+              <span class="chip" data-v="Weekends" role="button" tabindex="0">Weekends</span>
+            </div>
+          </div>
+          <div>
+            <label for="a-exp">Years of experience</label>
+            <select id="a-exp" name="experience">
+              <option>None yet — willing to learn</option><option>Under 1 year</option><option>1–3 years</option><option>3–5 years</option><option>5+ years</option>
+            </select>
+          </div>
+          <div>
+            <label for="a-start">Earliest start date</label>
+            <input type="date" id="a-start" name="start" required>
+            <p class="err-msg" data-for="a-start">The one field we really need.</p>
+          </div>
+          <div class="f-span">
+            <label>Resume</label>
+            <div class="upload" id="resume-drop">
+              <span id="upload-hint">Drop a PDF or Word file here, or tap to choose · max 5&nbsp;MB</span>
+              <span class="file-chip" id="file-chip"></span>
+              <input type="file" id="a-resume" accept=".pdf,.doc,.docx" required>
+            </div>
+            <p class="err-msg" data-for="a-resume" id="resume-err">That file is over 5 MB — a smaller PDF works best.</p>
+          </div>
+          <div class="f-span">
+            <label for="a-ref">Referred by someone here? <span class="opt">(optional)</span></label>
+            <input type="text" id="a-ref" name="referral" placeholder="Their name">
+          </div>
+          <div class="f-span">
+            <label for="a-note">Anything else? <span class="opt">(optional)</span></label>
+            <textarea id="a-note" name="note" rows="3" placeholder="A line or two is plenty."></textarea>
+          </div>
+          <input type="hidden" name="source" class="src-field">
+          <input type="text" name="company_website" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
+          <div class="f-span center" style="margin-top:10px">
+            <button type="submit" class="btn btn-gold" id="apply-submit" style="min-width:min(100%,340px)">Send it in</button>
+            <p class="small" style="margin-top:16px;font-weight:300;color:rgba(243,228,206,.55)">We read everything and we text — keep an eye on your phone.</p>
+          </div>
+        </div>
+      </form>
+      <div class="confirm-block" id="apply-confirm">
+        <p class="eyebrow">Application received</p>
+        <p class="ref" id="apply-ref">MS-2026-000</p>
+        <p style="font-weight:300;color:rgba(243,228,206,.85)">That's your reference number. We read everything and we text — keep an eye on your phone.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img src="assets/logo-linen.png" alt="Madras Social" style="width:min(60vw,240px);margin-bottom:20px">
+        <p style="font-weight:300;max-width:320px;color:rgba(243,228,206,.7)">South Indian kitchen + bar.<br>Opening soon in Uptown Waterloo.</p>
+      </div>
+      <div>
+        <p class="f-head">Find us</p>
+        <p style="font-weight:300;color:rgba(243,228,206,.85)">8 Erb Street West<br>Waterloo, ON N2L 1S7</p>
+        <p style="margin-top:14px"><a href="mailto:hello@madrassocial.ca">hello@madrassocial.ca</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Madras Social. All rights reserved.</span>
+      <span>Site by <img src="assets/ethereal.png" alt="The Ethereal Agency"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
