@@ -148,6 +148,9 @@ export const ROUTES = [
     schema: ['reserve', 'restaurant', 'breadcrumb'],
     h1: 'Book a Table at Madras Social',
     content: `
+  <p>Take a seat, Waterloo. Madras has arrived.</p>
+  <p>Dosas off the tava, biryani for the middle of the table, a full bar. Pick
+  the night and we will hold your seat.</p>
   <p>Tell us the date, the time and how many. We will confirm by email.</p>
   ${NAP}${actions()}
   ${faqHtml(FAQS.filter((f) => /located|areas|bar|event/i.test(f.q)))}

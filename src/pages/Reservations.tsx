@@ -27,7 +27,7 @@ import reservationsBgMob from '@/assets/reservations-bg-mob-v2.webp';
  * reproduced here too.
  */
 const HEADING = 'Take a seat, Waterloo. Madras has arrived.';
-const STANDFIRST = 'Kerala spice, Tamil comfort, and a table that keeps the evening going.';
+const STANDFIRST = 'Dosas off the tava, biryani for the middle of the table, a full bar. Pick the night and we will hold your seat.';
 
 const ART = {
   desktop: {
