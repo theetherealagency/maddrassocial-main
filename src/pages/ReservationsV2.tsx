@@ -105,16 +105,17 @@ const FooterSlideshow = () => {
   }, []);
   return (
     // Every slide is 3:2 (1248×832). Phones get a full-width 3:2 frame, so the
-    // photo fills it exactly; wider screens get a fixed-height band with the
-    // photo shown whole and centred on Carbon — nothing is cropped (client, 2026-10-02).
-    <div className="relative w-full aspect-[3/2] md:aspect-auto md:h-[520px] overflow-hidden" style={{ backgroundColor: CARBON }}>
+    // photo fills it exactly. Wider screens get the original full-width 420px
+    // strip, centre-cropped — client preferred that to a whole photo floating
+    // in the middle of the band (2026-10-02).
+    <div className="relative w-full aspect-[3/2] md:aspect-auto md:h-[420px] overflow-hidden" style={{ backgroundColor: CARBON }}>
       {FOOTER_SLIDES.map((slide, i) => (
         <img
           key={slide.src}
           src={slide.src}
           alt={i === active ? `${slide.alt} at Madras Social` : ''}
           aria-hidden={i !== active}
-          className="absolute inset-0 h-full w-full object-contain object-center transition-opacity duration-[1200ms] ease-in-out"
+          className="absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1200ms] ease-in-out"
           style={{ opacity: i === active ? 1 : 0 }}
           loading="lazy"
         />
