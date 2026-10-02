@@ -177,7 +177,7 @@ const ReservationsV2 = () => (
           <h2 className="font-display italic mb-5 text-[30px] md:text-[40px] leading-none">What's on the Table</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {CATEGORIES.map((c) => (
-              <Link key={c.title} to="/menu" className="group block" aria-label={`See ${c.title} on the menu`}>
+              <Link key={c.title} to={c.kind === 'Food' ? '/menu?open=food' : '/menu?open=drinks'} className="group block" aria-label={`See ${c.title} on the menu`}>
                 <div className="aspect-[3/4] overflow-hidden rounded-[2px]">
                   <img src={c.src} alt={c.alt} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" />
                 </div>
