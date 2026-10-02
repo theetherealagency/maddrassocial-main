@@ -293,26 +293,26 @@ const ReservationsV2 = () => (
             Madras <span className="normal-case italic" style={{ color: TERRACOTTA }}>Social</span>
           </p>
 
-          {/* two per row on phones (Visit | Contact, Follow us | sign-off), four across on desktop */}
+          {/* two per row on phones (Visit | Follow us, Contact | sign-off — client, 2026-10-02), four across on desktop in the original order */}
           <div className="mt-8 md:mt-12 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-[1fr_1fr_1fr_1.4fr] pb-10 md:pb-14">
-            <div>
+            <div className="order-1">
               <p className={`${label} opacity-60 mb-3`}>Visit</p>
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="font-body text-[13px] leading-[1.7] hover:opacity-80">
                 8 Erb Street West<br />Waterloo, ON N2L 1S7
               </a>
             </div>
-            <div>
+            <div className="order-3 lg:order-2">
               <p className={`${label} opacity-60 mb-3`}>Contact</p>
               <a href="mailto:hello@madrassocial.ca" className="font-body text-[13px] break-words hover:opacity-80">hello@madrassocial.ca</a>
             </div>
-            <div>
+            <div className="order-2 lg:order-3">
               <p className={`${label} opacity-60 mb-3`}>Follow us</p>
               <div className="flex flex-col gap-1 font-body text-[13px]">
                 <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="hover:opacity-80">Instagram</a>
                 <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" className="hover:opacity-80">Facebook</a>
               </div>
             </div>
-            <p className="font-display italic self-center text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] lg:self-auto lg:text-right" style={{ color: OLIVE }}>
+            <p className="order-4 font-display italic self-center text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] lg:self-auto lg:text-right" style={{ color: OLIVE }}>
               See you on Erb Street.
             </p>
           </div>
