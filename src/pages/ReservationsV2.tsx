@@ -312,7 +312,7 @@ const ReservationsV2 = () => (
                 <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" className="hover:opacity-80">Facebook</a>
               </div>
             </div>
-            <p className="order-4 font-display italic self-center text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] lg:self-auto lg:text-right" style={{ color: OLIVE }}>
+            <p className="order-4 font-display italic self-end text-[20px] sm:text-[28px] md:text-[36px] leading-[1.1] lg:self-auto lg:text-right" style={{ color: OLIVE }}>
               See you on Erb Street.
             </p>
           </div>
