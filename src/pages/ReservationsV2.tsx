@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Minus } from 'lucide-react';
 import HomeNavbar from '@/components/homepage/HomeNavbar';
@@ -13,6 +13,12 @@ import mangaluru from '@/assets/res-v2/mangaluru.webp';
 import ambur from '@/assets/res-v2/ambur.webp';
 import kozhiRoast from '@/assets/res-v2/kozhi-roast.webp';
 import kunafa from '@/assets/res-v2/kunafa.webp';
+import footerKozhiRoast from '@/assets/res-v2/footer-kozhi-roast.webp';
+import footerKunafa from '@/assets/res-v2/footer-kunafa.webp';
+import footerPunugulu from '@/assets/res-v2/footer-punugulu.webp';
+import footerArancini from '@/assets/res-v2/footer-arancini.webp';
+import footerShrimpWrap from '@/assets/res-v2/footer-shrimp-wrap.webp';
+import footerPaneer from '@/assets/res-v2/footer-paneer.webp';
 
 /**
  * The /reservations page (live from 2026-10-02) — editorial layout the client asked for,
@@ -77,6 +83,43 @@ const Fold = ({ title, children }: { title: string; children: React.ReactNode })
   );
 };
 
+// Footer slideshow — landscape dish shots from Downloads/madras social images.
+const FOOTER_SLIDES = [
+  { src: moilee, alt: 'Lobster & Shrimp Moilee' },
+  { src: footerKozhiRoast, alt: 'Rum-my Kozhi Roast' },
+  { src: footerPunugulu, alt: 'Cheesy Chicken Punugulu' },
+  { src: footerPaneer, alt: 'Ghee Roast Patta Paneer' },
+  { src: footerShrimpWrap, alt: 'Honey Chilli Shrimp Lettuce Wrap' },
+  { src: footerArancini, alt: 'Mangalorean Soya Chaap Arancini' },
+  { src: footerKunafa, alt: 'Pistachio Semiya Kunafa' },
+];
+const SLIDE_MS = 4000;
+
+const FooterSlideshow = () => {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    // Hold on the first photo for anyone who has asked for less motion.
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setActive((i) => (i + 1) % FOOTER_SLIDES.length), SLIDE_MS);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="relative w-full h-[56vw] max-h-[420px] overflow-hidden" style={{ backgroundColor: CARBON }}>
+      {FOOTER_SLIDES.map((slide, i) => (
+        <img
+          key={slide.src}
+          src={slide.src}
+          alt={i === active ? `${slide.alt} at Madras Social` : ''}
+          aria-hidden={i !== active}
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out"
+          style={{ opacity: i === active ? 1 : 0 }}
+          loading="lazy"
+        />
+      ))}
+    </div>
+  );
+};
+
 const scrollToBooking = () =>
   document.getElementById('book')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
@@ -92,15 +135,18 @@ const ReservationsV2 = () => (
           <img
             src={ambianceBar}
             alt="The bar at Madras Social — terracotta pendants, brass and cane screens, the wordmark lit on the back wall"
-            className="block w-full h-[42vw] md:h-[28vw] max-h-[400px] min-h-[200px] object-cover"
+            className="block w-full h-[30vw] md:h-[18vw] max-h-[260px] min-h-[120px] object-cover"
+            // banner is short so the widget lands on the first screen; keep the lit
+            // wordmark in frame rather than centre-cropping it off
+            style={{ objectPosition: '50% 18%' }}
             loading="eager"
           />
         </div>
       </section>
 
       {/* ── 2. Booking row: details · widget · aside ─────────────────── */}
-      <section className="px-4 md:px-8 pt-8 md:pt-12 pb-16 md:pb-24">
-        <div className="mx-auto max-w-[1320px] grid gap-8 lg:gap-6 lg:grid-cols-[260px_minmax(0,1fr)_230px]">
+      <section className="px-4 md:px-8 pt-5 md:pt-8 pb-16 md:pb-24">
+        <div className="mx-auto max-w-[1320px] grid gap-5 lg:gap-6 lg:grid-cols-[260px_minmax(0,1fr)_230px]">
           {/* left — `contents` below lg so the widget can slot between
               the heading and the details on a phone */}
           <div className="contents lg:flex lg:flex-col">
@@ -108,8 +154,8 @@ const ReservationsV2 = () => (
               <p className={`${label} opacity-60`}>
                 <Link to="/" className="hover:opacity-100">Home</Link> / <span className="opacity-100">Reservations</span>
               </p>
-              <h2 className="font-display mt-5 text-[44px] md:text-[60px] leading-[0.98]">Take a seat, Waterloo.</h2>
-              <p className="font-display italic mt-3 text-[24px] md:text-[28px] leading-[1.15]" style={{ color: TERRACOTTA }}>
+              <h2 className="font-display mt-3 lg:mt-5 text-[34px] md:text-[60px] leading-[0.98]">Take a seat, Waterloo.</h2>
+              <p className="font-display italic mt-1.5 lg:mt-3 text-[20px] md:text-[28px] leading-[1.15]" style={{ color: TERRACOTTA }}>
                 Madras has arrived.
               </p>
             </div>
@@ -244,7 +290,8 @@ const ReservationsV2 = () => (
             Madras <span className="normal-case italic" style={{ color: TERRACOTTA }}>Social</span>
           </p>
 
-          <div className="mt-8 md:mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1.4fr] pb-10 md:pb-14">
+          {/* two per row on phones (Visit | Contact, Follow us | sign-off), four across on desktop */}
+          <div className="mt-8 md:mt-12 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-[1fr_1fr_1fr_1.4fr] pb-10 md:pb-14">
             <div>
               <p className={`${label} opacity-60 mb-3`}>Visit</p>
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="font-body text-[13px] leading-[1.7] hover:opacity-80">
@@ -253,7 +300,7 @@ const ReservationsV2 = () => (
             </div>
             <div>
               <p className={`${label} opacity-60 mb-3`}>Contact</p>
-              <a href="mailto:hello@madrassocial.ca" className="font-body text-[13px] hover:opacity-80">hello@madrassocial.ca</a>
+              <a href="mailto:hello@madrassocial.ca" className="font-body text-[13px] break-words hover:opacity-80">hello@madrassocial.ca</a>
             </div>
             <div>
               <p className={`${label} opacity-60 mb-3`}>Follow us</p>
@@ -262,19 +309,14 @@ const ReservationsV2 = () => (
                 <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" className="hover:opacity-80">Facebook</a>
               </div>
             </div>
-            <p className="font-display italic text-[28px] md:text-[36px] leading-[1.1] lg:text-right" style={{ color: OLIVE }}>
+            <p className="font-display italic self-center text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] lg:self-auto lg:text-right" style={{ color: OLIVE }}>
               See you on Erb Street.
             </p>
           </div>
         </div>
       </div>
 
-      <img
-        src={moilee}
-        alt="Lobster & Shrimp Moilee at Madras Social"
-        className="block w-full h-[56vw] max-h-[420px] object-cover"
-        loading="lazy"
-      />
+      <FooterSlideshow />
 
       <div className="px-4 md:px-8 py-5">
         <div className="mx-auto max-w-[1320px] flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
