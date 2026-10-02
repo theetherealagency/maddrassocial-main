@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import Menu from "./pages/Menu";
 // /about renders the merged about page (pages/AboutUs.tsx), per BUILD-PLAN Part 2.
 import AboutUs from "./pages/AboutUs";
-import Reservations from "./pages/Reservations";
+import ReservationsV2 from "./pages/ReservationsV2";
 import Events from "./pages/Events";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
@@ -32,7 +32,7 @@ const App = () => (
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/reservations" element={<Reservations />} />
+          <Route path="/reservations" element={<ReservationsV2 />} />
           <Route path="/catering" element={<Events />} />
           <Route path="/events" element={<Events />} />
           <Route path="/careers" element={<Careers />} />

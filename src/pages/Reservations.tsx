@@ -44,7 +44,7 @@ const ART = {
 
 const OPENTABLE_EMBED_SRC =
   'https://www.opentable.ca/booking/restref/availability?lang=en-CA&restRef=1557355&otSource=Restaurant+website';
-const OPENTABLE_DIRECT_LINK = 'https://www.opentable.com/r/madras-social-waterloo';
+export const OPENTABLE_DIRECT_LINK = 'https://www.opentable.com/r/madras-social-waterloo';
 const MIN_WIDTH = 380;
 
 /**
@@ -54,7 +54,7 @@ const MIN_WIDTH = 380;
  * transform (the real site's own BookingWidget.tsx technique). After 7
  * seconds with no load event, offers a direct link instead of a blank card.
  */
-const OpenTableWidget = () => {
+export const OpenTableWidget = ({ fallbackLabel = 'Book on OpenTable' }: { fallbackLabel?: string } = {}) => {
   const box = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState<number | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -91,7 +91,7 @@ const OpenTableWidget = () => {
           rel="noreferrer"
           className="border border-[hsl(var(--color-gold))]/70 px-5 py-2.5 text-[clamp(10px,1.6cqw,13px)] uppercase tracking-[0.15em] font-body text-[hsl(var(--color-gold))] transition-colors hover:bg-[hsl(var(--color-gold))] hover:text-[hsl(var(--color-cream))]"
         >
-          Book on OpenTable
+          {fallbackLabel}
         </a>
       </div>
     );
@@ -111,7 +111,7 @@ const OpenTableWidget = () => {
       />
       <noscript>
         <a href={OPENTABLE_DIRECT_LINK} target="_blank" rel="noreferrer" className="text-[hsl(var(--color-brown))] underline">
-          Book on OpenTable
+          {fallbackLabel}
         </a>
       </noscript>
     </div>

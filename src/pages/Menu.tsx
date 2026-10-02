@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import HomeNavbar from "@/components/homepage/HomeNavbar";
 import HomeFooter from "@/components/homepage/HomeFooter";
 import madrasCover from "@/assets/menu-cover-madras.png";
@@ -274,9 +275,10 @@ const MenuPages = ({
   );
 };
 
-const FlipCard = ({ isOpen, children }: { isOpen: boolean; children: React.ReactNode }) => (
+const FlipCard = ({ id, isOpen, children }: { id?: string; isOpen: boolean; children: React.ReactNode }) => (
   <div
-    className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]"
+    id={id}
+    className="relative w-full rounded-sm shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] scroll-mt-20"
     style={{
       height: "min(78vh, 780px)",
       transformStyle: "preserve-3d",
@@ -289,8 +291,19 @@ const FlipCard = ({ isOpen, children }: { isOpen: boolean; children: React.React
   </div>
 );
 
+// `/menu?open=food` or `?open=drinks` arrives with that cover already open —
+// the reservations page's food and drink cards link here.
+const OPEN_PARAM: Record<string, OpenSide> = { food: "madras", drinks: "social" };
+
 const Menu = () => {
-  const [open, setOpen] = useState<OpenSide>(null);
+  const [params] = useSearchParams();
+  const [open, setOpen] = useState<OpenSide>(OPEN_PARAM[params.get("open") ?? ""] ?? null);
+
+  useEffect(() => {
+    // On a phone the covers stack, so the drinks one starts below the fold.
+    if (open) document.getElementById(`menu-${open}`)?.scrollIntoView({ block: "start" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -319,7 +332,7 @@ const Menu = () => {
             style={{ perspective: "2400px" }}
           >
             {/* MADRAS — the food menu. */}
-            <FlipCard isOpen={open === "madras"}>
+            <FlipCard id="menu-madras" isOpen={open === "madras"}>
               <CoverFace
                 src={madrasCover}
                 alt="Madras — the food menu cover, as printed"
@@ -335,7 +348,7 @@ const Menu = () => {
             </FlipCard>
 
             {/* SOCIAL — the drinks menu. */}
-            <FlipCard isOpen={open === "social"}>
+            <FlipCard id="menu-social" isOpen={open === "social"}>
               <CoverFace
                 src={socialCover}
                 alt="Social — the drinks menu cover, as printed"
