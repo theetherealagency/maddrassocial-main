@@ -11,6 +11,7 @@ import ReservationsV2 from "./pages/ReservationsV2";
 import Events from "./pages/Events";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
+import Rsvp from "./pages/Rsvp";
 import NotFound from "./pages/NotFound";
 import RouteSeo from "./seo/RouteSeo";
 import RouteTracker from "./components/RouteTracker";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/events" element={<Events />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/rsvp" element={<Rsvp />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

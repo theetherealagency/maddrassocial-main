@@ -36,6 +36,10 @@
       "destination": "/careers/index.html"
     },
     {
+      "source": "/rsvp",
+      "destination": "/rsvp/index.html"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }

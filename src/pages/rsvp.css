@@ -1,0 +1,299 @@
+/* Ported from rsvp/index.html (rsvp.madrassocial.ca). Every rule is scoped to
+   .rsvp-page so it cannot leak into the shared header, footer or other pages. */
+/* ==========================================================
+   TYPE — brand faces: New Icon (heading), Seruni (accent),
+   Aksen (body). Webfonts come from src/index.css; Georgia/system
+   stacks are the fallback while a font loads, not a substitute.
+   ==========================================================
+   COLOUR — the five Madras Social brand colours.
+   Muted Olive (#A59976) fails contrast as text on Warm Linen
+   (2.25:1), so secondary text uses it darkened until legible
+   (4.74:1). Inside the Curry Leaf band it's lightened instead
+   (5:1) — same hue family, tuned per background.
+   ========================================================== */
+.rsvp-page{
+  --linen:     #ECE4D8;   /* ground */
+  --card:      #F6F1E9;   /* form panel */
+  --carbon:    #1F1B1A;   /* headings, body */
+  --olive:     #A59976;   /* brand colour — muted olive */
+  --stone:     #6B634D;   /* olive, darkened — secondary text on linen, 4.74:1 */
+  --terracotta:#A83D24;   /* accent — 4.96:1 on linen */
+  --curry-leaf:#414C2A;   /* the one dark band */
+  --gold:      #C7BFA9;   /* olive, lightened — labels inside the band, 5:1 */
+  --hairline:  #D8CBB8;
+
+  --ms-mark: url('../assets/rsvp-ms-mark.png');
+
+  --font-display:'New Icon',Georgia,'Times New Roman',serif;
+  --font-body:   'Aksen',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-accent: 'Seruni','Aksen',sans-serif;
+}
+
+.rsvp-page{
+  margin:0;
+  background:var(--linen);
+  color:var(--carbon);
+  font-family:var(--font-body);
+  font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:reduce){.rsvp-page *{transition:none!important;animation:none!important}}
+.rsvp-page :focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+
+.rsvp-page .wrap{max-width:640px;margin:0 auto;padding:0 26px 72px}
+.rsvp-page .wrap-header{max-width:640px;margin:0 auto;padding:0 26px}
+
+/* ---------- brand rail ---------- */
+.rsvp-page .rail{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px 16px;
+  padding:22px 0;
+}
+.rsvp-page .rail-brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--stone);
+}
+.rsvp-page .rail .slash{color:var(--terracotta)}
+.rsvp-page .rail-cta{
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--linen);background:var(--terracotta);
+  padding:10px 18px;border-radius:2px;text-decoration:none;
+  white-space:nowrap;transition:background .16s ease;
+}
+@media(max-width:479px){
+  .rsvp-page .rail{flex-direction:column;align-items:flex-start;gap:14px}
+  .rsvp-page .rail-cta{align-self:stretch;text-align:center}
+}
+.rsvp-page .rail-cta:hover{background:#8A321E}
+.rsvp-page .rail.bottom{border-top:1px solid var(--hairline);margin-top:40px;padding-top:22px}
+
+/* ---------- hero ---------- */
+.rsvp-page .hero{padding:32px 0 0;margin-bottom:40px}
+.rsvp-page .mark-hero{
+  width:48px;height:48px;margin:0 0 20px;
+  background:var(--ms-mark) center/contain no-repeat;
+}
+.rsvp-page .eyebrow{
+  font-family:var(--font-accent);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--terracotta);margin:0 0 22px;
+}
+.rsvp-page h1{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(56px,14vw,98px);
+  line-height:.96;letter-spacing:-.018em;
+  margin:0 0 26px;text-transform:uppercase;text-wrap:balance;
+}
+.rsvp-page h1 .thin{color:var(--terracotta)}
+.rsvp-page .standfirst{
+  font-family:var(--font-body);
+  font-size:clamp(19px,3.6vw,23px);
+  font-weight:500;line-height:1.5;
+  margin:0 0 22px;max-width:34ch;
+}
+.rsvp-page .lede{color:var(--stone);margin:0;max-width:56ch}
+
+/* ---------- kicker ---------- */
+.rsvp-page .kicker-t{
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--terracotta);margin:0 0 14px;
+}
+
+/* ---------- details ---------- */
+.rsvp-page .details{display:grid;grid-template-columns:auto 1fr;gap:20px 28px;margin:0}
+.rsvp-page .details dt{
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--terracotta);padding-top:6px;white-space:nowrap;
+}
+.rsvp-page .details dd{margin:0;font-size:16px;font-weight:500;line-height:1.5}
+.rsvp-page .details dd span{display:block;color:var(--stone);font-weight:400;font-size:14.5px;margin-top:3px}
+
+/* ---------- sections ---------- */
+.rsvp-page h2{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(30px,6.6vw,40px);
+  line-height:1.1;letter-spacing:-.012em;
+  margin:0 0 28px;text-transform:uppercase;text-wrap:balance;
+}
+.rsvp-page .list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.rsvp-page .list li{
+  display:flex;gap:22px;align-items:flex-start;
+  padding:22px 0;border-bottom:1px solid var(--hairline);
+}
+.rsvp-page .list li:first-child{border-top:1px solid var(--hairline)}
+.rsvp-page .list .n{
+  font-family:var(--font-display);
+  font-size:15px;color:var(--terracotta);
+  min-width:26px;flex-shrink:0;padding-top:4px;
+}
+.rsvp-page .list strong{font-weight:500;display:block;margin-bottom:4px;font-size:16.5px}
+.rsvp-page .list span.t{color:var(--stone);font-size:15px;display:block;line-height:1.6}
+
+/* ---------- form ---------- */
+.rsvp-page .panel{
+  background:var(--card);
+  border:1px solid var(--hairline);
+  border-top:3px solid var(--curry-leaf);
+  padding:clamp(24px,5.5vw,38px);
+  margin-top:4px;
+}
+.rsvp-page .field{margin-bottom:26px}
+.rsvp-page label{
+  display:block;
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--carbon);margin-bottom:9px;
+}
+.rsvp-page .hint{
+  display:block;font-family:var(--font-body);
+  text-transform:none;letter-spacing:0;font-size:13.5px;
+  color:var(--stone);margin-top:5px;line-height:1.55;
+}
+.rsvp-page input[type=text],.rsvp-page input[type=email],.rsvp-page input[type=tel],.rsvp-page select,.rsvp-page textarea{
+  width:100%;padding:14px 15px;
+  font-family:var(--font-body);font-size:16px;
+  color:var(--carbon);background:#FFFCF7;
+  border:1px solid var(--hairline);border-radius:2px;
+  transition:border-color .16s ease;
+}
+.rsvp-page input::placeholder,.rsvp-page textarea::placeholder{color:var(--olive)}
+.rsvp-page textarea{resize:vertical;min-height:92px;line-height:1.55}
+.rsvp-page select{
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%236B634D' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:11px;padding-right:40px;
+}
+.rsvp-page input:focus,.rsvp-page select:focus,.rsvp-page textarea:focus{outline:none;border-color:var(--terracotta)}
+.rsvp-page .check{display:flex;gap:13px;align-items:flex-start;margin-top:30px}
+.rsvp-page .check input{margin:4px 0 0;width:17px;height:17px;flex-shrink:0;accent-color:var(--terracotta)}
+.rsvp-page .check label{
+  font-family:var(--font-body);text-transform:none;letter-spacing:0;
+  font-size:14px;color:var(--stone);line-height:1.6;margin:0;
+}
+.rsvp-page button{
+  width:100%;margin-top:34px;padding:19px;
+  font-family:var(--font-accent);
+  font-size:14px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--linen);background:var(--terracotta);
+  border:0;border-radius:2px;cursor:pointer;
+  transition:background .16s ease,transform .06s ease;
+}
+.rsvp-page button:hover{background:#8A321E}
+.rsvp-page button:active{transform:translateY(1px)}
+.rsvp-page button[disabled]{opacity:.55;cursor:default;transform:none}
+
+/* ---------- confirmation ---------- */
+.rsvp-page #done{display:none;text-align:center;padding:44px 0 16px}
+.rsvp-page #done.on{display:block}
+.rsvp-page #done .mark{
+  width:44px;height:44px;margin:0 auto 26px;
+  background:var(--ms-mark) center/contain no-repeat;
+}
+.rsvp-page #done h2{margin-bottom:14px}
+.rsvp-page #done p{color:var(--stone);margin:0 auto;max-width:38ch}
+.rsvp-page #rsvp.off{display:none}
+.rsvp-page #formError{
+  display:none;margin-top:16px;padding:13px 15px;
+  border:1px solid var(--terracotta);background:#F7E7E1;
+  color:var(--carbon);font-family:var(--font-body);
+  font-size:13.5px;line-height:1.55;
+}
+.rsvp-page #formError.on{display:block}
+
+/* ---------- footer ---------- */
+.rsvp-page .foot{margin-top:36px;font-size:13.5px;line-height:1.75;color:var(--stone)}
+.rsvp-page .foot p{margin:0 0 12px}
+.rsvp-page .foot strong{color:var(--carbon);font-weight:500}
+.rsvp-page .handles{text-align:center;margin-top:34px;font-family:var(--font-accent);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.rsvp-page .handles a{color:var(--terracotta);text-decoration:none}
+.rsvp-page .handles a:hover{text-decoration:underline}
+
+/* ---------- narrative sections ---------- */
+.rsvp-page .sec{margin:0 0 40px}
+.rsvp-page .sec h2{margin-bottom:22px}
+.rsvp-page .sec p{color:var(--stone);margin:0 0 18px;max-width:58ch}
+.rsvp-page .sec p:last-child{margin-bottom:0}
+.rsvp-page .sec p.lift{
+  font-family:var(--font-display);
+  font-size:clamp(20px,4.2vw,25px);
+  line-height:1.45;color:var(--carbon);
+}
+
+/* ---------- the box triad ---------- */
+.rsvp-page .triad{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.rsvp-page .triad li{padding:20px 0;border-bottom:1px solid var(--hairline)}
+.rsvp-page .triad li:first-child{border-top:1px solid var(--hairline)}
+.rsvp-page .triad .what{
+  font-family:var(--font-accent);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terracotta);display:block;margin-bottom:6px;
+}
+.rsvp-page .triad p{margin:0;color:var(--stone);font-size:15.5px;line-height:1.6;max-width:52ch}
+
+/* ---------- closing note before the form ---------- */
+.rsvp-page .close{
+  font-family:var(--font-display);
+  font-size:clamp(21px,4.4vw,26px);
+  line-height:1.4;color:var(--carbon);
+  margin:0 0 40px;max-width:30ch;
+}
+
+/* ---------- desktop: spread the column out, label + copy side by side ---------- */
+@media(min-width:960px){
+  .rsvp-page .wrap,.rsvp-page .wrap-header{max-width:1080px}
+
+  .rsvp-page .hero{padding-top:40px;margin-bottom:56px}
+  .rsvp-page .hero-meta{display:flex;align-items:center;gap:18px;margin-bottom:32px}
+  .rsvp-page .hero-meta .mark-hero{margin-bottom:0}
+  .rsvp-page .hero-main{max-width:900px}
+  .rsvp-page .standfirst{max-width:46ch}
+  .rsvp-page .lede{max-width:72ch}
+
+  .rsvp-page .sec{display:grid;grid-template-columns:280px 1fr;column-gap:64px;align-items:start;margin-bottom:56px}
+  .rsvp-page .sec-head{grid-column:1;position:sticky;top:48px}
+  .rsvp-page .sec-body{grid-column:2}
+  .rsvp-page .sec h2{margin-bottom:22px}
+  .rsvp-page .sec-body .lift{margin-top:22px;font-size:19px;white-space:nowrap}
+
+  .rsvp-page .triad{flex-direction:row;gap:36px}
+  .rsvp-page .triad li,.rsvp-page .triad li:first-child{
+    flex:1;padding:0;border:0;border-top:2px solid var(--hairline);
+    padding-top:20px;
+  }
+
+  .rsvp-page .details{grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;grid-auto-flow:column;column-gap:40px}
+
+  .rsvp-page .panel form{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+  .rsvp-page .field-wide,.rsvp-page .check,.rsvp-page button,.rsvp-page #formError{grid-column:1/-1}
+  .rsvp-page .panel{padding:44px 48px}
+
+  .rsvp-page .close{max-width:44ch}
+}
+
+/* ---------- dress code — the one dark band, gold label at 5:1 ---------- */
+.rsvp-page .callout{
+  margin-top:30px;
+  background:var(--curry-leaf);
+  padding:22px 26px;
+}
+.rsvp-page .callout .what{
+  font-family:var(--font-accent);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:7px;
+}
+.rsvp-page .callout p{
+  margin:0;color:#FFFFFF;font-size:16px;line-height:1.55;max-width:46ch;
+}
+
+/* ---------- in return ---------- */
+.rsvp-page .list strong{margin-bottom:0}
+.rsvp-page .tagline{margin:22px 0 0!important;font-size:14.5px;color:var(--stone)}
+.rsvp-page .sec-body a{color:var(--terracotta);text-decoration:none}
+.rsvp-page .sec-body a:hover{text-decoration:underline}

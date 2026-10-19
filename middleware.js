@@ -2,7 +2,10 @@
 //
 //   www.madrassocial.ca / madrassocial.ca  -> the Vite app in src/ (passes through)
 //   hiring.madrassocial.ca                 -> hiring/  (copied to dist/_sites/hiring)
-//   rsvp.madrassocial.ca                   -> rsvp/    (copied to dist/_sites/rsvp)
+//   rsvp.madrassocial.ca                   -> 308 to https://www.madrassocial.ca/rsvp
+//
+// The RSVP page moved into the main app at /rsvp (src/pages/Rsvp.tsx), so
+// every path on its old host redirects there, keeping any query string.
 //
 // Middleware runs before the filesystem, which is why this can't be done with
 // vercel.json rewrites: those only apply after a file match, so "/" on the
@@ -14,12 +17,17 @@ import { next, rewrite } from '@vercel/functions';
 
 const SITES = {
   'hiring.madrassocial.ca': 'hiring',
-  'rsvp.madrassocial.ca': 'rsvp',
+};
+
+const MOVED = {
+  'rsvp.madrassocial.ca': 'https://www.madrassocial.ca/rsvp',
 };
 
 const PREFIX = '/_sites';
 
 export function route(hostname, pathname) {
+  if (MOVED[hostname]) return { redirect: MOVED[hostname] };
+
   const site = SITES[hostname];
 
   if (!site) {
@@ -44,12 +52,6 @@ export function route(hostname, pathname) {
       : undefined;
     return { rewrite: `${PREFIX}/hiring${file}`, headers: cache };
   }
-
-  // rsvp: plain static site, no clean URLs. An extensionless miss would fall
-  // through to the main site's SPA catch-all, so answer it with a 404 here.
-  if (pathname !== '/' && !/\.[^/]+$/.test(pathname)) return { status: 404 };
-  const file = pathname === '/' ? '/index.html' : pathname;
-  return { rewrite: `${PREFIX}/rsvp${file}` };
 }
 
 export default function middleware(request) {
