@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import type { EventFormDef, FieldDef } from './eventForms';
 import { trackFormSuccess } from '@/lib/analytics';
+import { SITE } from '../../../seo/site.mjs';
 
 /* One renderer for every catering enquiry form.
 
@@ -17,6 +18,12 @@ import { trackFormSuccess } from '@/lib/analytics';
    Supabase row still saves, so the form keeps working before setup. */
 const SHEET_ENDPOINT = import.meta.env.VITE_CATERING_SHEET_ENDPOINT as string | undefined;
 const SHEET_TOKEN = 'mami-catering-2026';
+
+/* Fallback contact for a failed submit. The phone line is PENDING, so offer
+   the email until a real number is in seo/site.mjs. */
+const FALLBACK_CONTACT = SITE.phoneDisplay !== 'PENDING'
+  ? `call us at ${SITE.phoneDisplay}`
+  : `email us at ${SITE.email}`;
 
 async function postToSheet(payload: Record<string, unknown>) {
   if (!SHEET_ENDPOINT) throw new Error('catering sheet endpoint not configured');
@@ -181,7 +188,7 @@ const EventEnquiryForm = ({ def }: { def: EventFormDef }) => {
     if (bothFailed) {
       toast({
         title: "That didn't go through",
-        description: 'Please try again, or call us at (905) 913-5900.',
+        description: `Please try again, or ${FALLBACK_CONTACT}.`,
         variant: 'destructive',
       });
       return;

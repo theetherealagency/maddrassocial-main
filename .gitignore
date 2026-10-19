@@ -25,3 +25,6 @@ dist-ssr
 .vercel
 .env*.local
 .env*
+
+# The example file is committed so every key is documented.
+!.env.example

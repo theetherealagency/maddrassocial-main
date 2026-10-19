@@ -21,15 +21,15 @@ export const SITE = {
 
   email: 'hello@madrassocial.ca',
 
-  // Mains run $16–$38.50 with a full bar. Madras Social was '$$'; this sits
+  // Mains run $16–$38.50 with a full bar. Madras Mami was '$$'; this sits
   // higher. Confirm with the client — it shows in Google's listing.
   priceRange: '$$$',
   currency: 'CAD',
 
-  ogImage: 'https://www.madrassocial.ca/og-banner.jpg',
-  logo: 'https://www.madrassocial.ca/logo.png',
+  ogImage: 'https://www.madrassocial.ca/brand/og-madras-social.jpg',
+  logo: 'https://www.madrassocial.ca/brand/madras-social-logo.png',
   ogImageMeta: { width: 1200, height: 630, type: 'image/jpeg' },
-  logoMeta: { width: 1200, height: 461, type: 'image/png' },
+  logoMeta: { width: 1466, height: 508, type: 'image/png' },
 
   address: {
     street: '8 Erb Street West',

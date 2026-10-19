@@ -106,12 +106,29 @@ confirmed.
 Set to `$$$` on the reasoning that mains run $16–$38.50 with a full bar.
 Madras Mami was `$$`. This shows in Google's listing — confirm.
 
-### Logo and favicon
-Not supplied. The site still ships the Madras Mami artwork at
-`public/lovable-uploads/mm-logo-web-01.png`, `public/logo.png`,
-`public/og-banner.jpg` and `public/favicon.ico`. Needed: MADRAS SOCIAL
-wordmark (1920×738), schema logo (1200×461), OG banner (1200×630) and the MS
-submark at 512×512.
+### Logo, favicon and share image
+Now Madras Social's own artwork, taken from the hiring site's assets:
+
+- Favicon, PNG icon and apple-touch-icon: the MS monogram (`public/favicon.ico`,
+  `public/brand/madras-social-icon.png`, `public/brand/apple-touch-icon.png`).
+- Schema logo: `public/brand/madras-social-logo.png` (1466×508).
+- Catering email header: `public/brand/madras-social-logo-linen.png`.
+- OG / Twitter image: `public/brand/og-madras-social.jpg` (1200×630), the
+  copper wordmark card from `hiring/assets/og.jpg`. **Interim** — a wordmark
+  on brown, not a photograph and not on a brand token. Swap for the real OG
+  banner when it lands; only `SITE.ogImage` needs to change.
+
+Still Madras Mami and no longer referenced, awaiting deletion:
+`public/og-banner.jpg`, `public/lovable-uploads/mm-logo-web-01.png`,
+`public/lovable-uploads/mm-about-21.png` (the "Mami never used shortcuts"
+values art), `src/pages/About.tsx` (unrouted — `/about` renders `AboutUs`),
+`src/components/HeroSection.tsx` (unused, imports a missing
+`gold-logo.png`) and the unreferenced Lovable CDN records
+`src/assets/*.asset.json` (incl. `gift-cards-mami.png`, `jain-menu-*`).
+
+`public/catering/email-hero.jpg` (the carved door between two framed dosa
+plates) has the same art direction as the Madras Mami images and is probably
+theirs too. Needs a Madras Social replacement at the same size (1120×539).
 
 ### Photography — 25 images
 Every image on the site is still Madras Mami's. See BUILD-PLAN Part 3 for the
@@ -144,6 +161,7 @@ None of these have Madras Social credentials, so Phase 5 has not been run.
 | Supabase | `.env.example`, `src/integrations/supabase/` | Still the Madras Mami project |
 | Events enquiry Sheet | `VITE_CATERING_SHEET_ENDPOINT`, `apps-script/catering/` | Still Madras Mami's |
 | GTM container | `gtm/`, `index.html` | Still the Madras Mami container ID |
+| Enquiry shared token | `SHARED_TOKEN` in `apps-script/catering/Code.gs`, `SHEET_TOKEN` in `EventEnquiryForm.tsx` | Still `mami-catering-2026`. Change both together when the script is redeployed against the new Sheet — changing only one breaks the form |
 
 `apps-script/catering/Code.gs` fetches its email templates over HTTP from
 `https://www.madrassocial.ca/catering/email-template.html` and
