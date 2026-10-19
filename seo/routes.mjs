@@ -240,6 +240,26 @@ export const ROUTES = [
   ${NAP}
   ${LINKS}`,
   },
+  // Creator RSVP page for the 19 September preview. By invitation only, so it
+  // stays out of search and the sitemap. Moved here from rsvp.madrassocial.ca,
+  // which now 308s to this path (see middleware.js).
+  {
+    path: '/rsvp',
+    title: 'Madras Social — Creator Preview',
+    description:
+      'Saturday 19th, September 2026, 6:30 PM. 8 Erb St. W, Waterloo. Twenty-five seats at one long table.',
+    noindex: true,
+    sitemap: false,
+    schema: ['breadcrumb'],
+    h1: 'Take a seat.',
+    content: `
+  <p>You’re invited to a Madras cocktail experience unlike anything Waterloo has tasted.</p>
+  <p><strong>Where:</strong> 8 Erb St. W, Waterloo ON N2J 2W6</p>
+  <p><strong>When:</strong> Saturday 19th, September 2026. Arrival 6:30 PM, about three hours.</p>
+  <p><strong>Table:</strong> Twenty-five seats. One long table, family style.</p>
+  <p>Fill in the form on this page to save your seat.</p>
+  ${LINKS}`,
+  },
 ];
 
 export const INDEXABLE = ROUTES.filter((r) => !r.noindex && r.sitemap !== false);
