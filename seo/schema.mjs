@@ -232,14 +232,6 @@ export const organizationNode = () => ({
       areaServed: 'CA',
       availableLanguage: ['English', 'Tamil', 'Hindi'],
     },
-    {
-      '@type': 'ContactPoint',
-      ...opt('telephone', SITE.phone),
-      email: SITE.email,
-      contactType: 'catering',
-      areaServed: 'CA',
-      availableLanguage: ['English', 'Tamil', 'Hindi'],
-    },
   ],
 });
 
@@ -339,38 +331,6 @@ export const faqNode = (url) => ({
   })),
 });
 
-export const cateringNode = () => ({
-  '@type': 'Service',
-  '@id': `${O}/catering#service`,
-  name: 'South Indian Catering — Madras Social',
-  serviceType: 'South Indian catering',
-  description:
-    'Private dining and event catering from a South Indian kitchen and bar in Waterloo Region.',
-  provider: { '@id': ID.restaurant },
-  areaServed: SITE.areaServed.map((n) => ({ '@type': 'City', name: n })),
-  availableChannel: {
-    '@type': 'ServiceChannel',
-    serviceUrl: `${O}/catering`,
-    ...opt('servicePhone', SITE.phone),
-    serviceLocation: { '@id': ID.restaurant },
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Madras Social catering packages',
-    itemListElement: [
-      ['Live Dosa Counter', 'Dosas hand-rolled to order in front of your guests.'],
-      ['Wedding and Reception Catering', 'A full South Indian spread built around your guest count.'],
-      ['Private Events and House Parties', 'Birthdays, baby showers, kitty parties and corporate lunches.'],
-      ['Curated Packages', 'Tiffin menus, thali spreads, chaat counters and dessert stations.'],
-    ].map(([name, description]) => ({
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name, description },
-      priceCurrency: SITE.currency,
-      availability: 'https://schema.org/InStock',
-    })),
-  },
-});
-
 const breadcrumbFor = (route, url) => {
   const trail = [{ name: 'Home', item: `${O}/` }];
   if (route.path !== '/') {
@@ -425,7 +385,6 @@ export const graphFor = (route) => {
   if (want.has('website')) graph.push(websiteNode());
   if (want.has('menu')) graph.push(...menuNodes());
   if (want.has('faq')) graph.push(faqNode(url));
-  if (want.has('catering')) graph.push(cateringNode());
   if (want.has('giftcard')) graph.push(giftCardNode());
   if (want.has('video')) graph.push(videoNode());
   if (want.has('breadcrumb')) graph.push(breadcrumbFor(route, url));

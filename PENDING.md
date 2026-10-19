@@ -88,13 +88,6 @@ spirits, beer, wine and zero-proof were never supplied. Append them as further
 sections in the same array — nothing else needs to change. `/menu` currently
 presents food only.
 
-### Event categories — `src/components/events/eventForms.ts`
-The four categories (Weddings, Kitty Parties, Corporate, Festivals & Poojas)
-are inherited from Madras Mami and describe off-site vegetarian catering. It
-is not established whether Madras Social caters off site at all or only hosts
-private dining in the room. Copy is left in place so the page renders; it is
-flagged in the file and must be confirmed or replaced before launch.
-
 ### Amenities — `seo/schema.mjs`
 Reduced to `Dine In`, `Full Bar`, `Private Events`. The source also claimed
 Takeout, Delivery, Live Dosa Counter, Jain Menu, Wedding Catering, Family
@@ -112,7 +105,6 @@ Now Madras Social's own artwork, taken from the hiring site's assets:
 - Favicon, PNG icon and apple-touch-icon: the MS monogram (`public/favicon.ico`,
   `public/brand/madras-social-icon.png`, `public/brand/apple-touch-icon.png`).
 - Schema logo: `public/brand/madras-social-logo.png` (1466×508).
-- Catering email header: `public/brand/madras-social-logo-linen.png`.
 - OG / Twitter image: `public/brand/og-madras-social.jpg` (1200×630), the
   copper wordmark card from `hiring/assets/og.jpg`. **Interim** — a wordmark
   on brown, not a photograph and not on a brand token. Swap for the real OG
@@ -125,10 +117,6 @@ values art), `src/pages/About.tsx` (unrouted — `/about` renders `AboutUs`),
 `src/components/HeroSection.tsx` (unused, imports a missing
 `gold-logo.png`) and the unreferenced Lovable CDN records
 `src/assets/*.asset.json` (incl. `gift-cards-mami.png`, `jain-menu-*`).
-
-`public/catering/email-hero.jpg` (the carved door between two framed dosa
-plates) has the same art direction as the Madras Mami images and is probably
-theirs too. Needs a Madras Social replacement at the same size (1120×539).
 
 ### Photography — 25 images
 Every image on the site is still Madras Mami's. See BUILD-PLAN Part 3 for the
@@ -159,16 +147,7 @@ None of these have Madras Social credentials, so Phase 5 has not been run.
 | What | Where | State |
 |---|---|---|
 | Supabase | `.env.example`, `src/integrations/supabase/` | Still the Madras Mami project |
-| Events enquiry Sheet | `VITE_CATERING_SHEET_ENDPOINT`, `apps-script/catering/` | Still Madras Mami's |
 | GTM container | `gtm/`, `index.html` | Still the Madras Mami container ID |
-| Enquiry shared token | `SHARED_TOKEN` in `apps-script/catering/Code.gs`, `SHEET_TOKEN` in `EventEnquiryForm.tsx` | Still `mami-catering-2026`. Change both together when the script is redeployed against the new Sheet — changing only one breaks the form |
-
-`apps-script/catering/Code.gs` fetches its email templates over HTTP from
-`https://www.madrassocial.ca/catering/email-template.html` and
-`email-internal.html`. Those two files live in `public/catering/` and are
-still Madras Mami designs. BUILD-PLAN Phase 1 listed them for deletion, but
-the surviving Apps Script depends on them — they were kept deliberately. They
-need rebranding, not removal.
 
 ---
 
@@ -205,15 +184,42 @@ claim. The phone line is dropped while the number is pending.
 with the confirmation email omitting the "call us" line rather than printing a
 Madras Mami number.
 
-### Still outstanding in that script
-`SHEET_ID` is still Madras Mami's spreadsheet
-(`1jPPECYFnWL_k8yRkhL7hWFqLhG1JwCttmQ855f09ltE`). Enquiries will land in the
-wrong Sheet until it is replaced and the script is redeployed against Madras
-Social's own Google account.
-
 ### Live deployment
 `https://maddrassocialfinal.vercel.app` — production on the
 `the-ethereal-agency/maddrassocialfinal` project, no custom domain attached.
 `madrassocial.ca` is untouched. **No environment variables are set on that
 project**, so every form on the live site fails by design rather than writing
 to Madras Mami's database.
+
+---
+
+## Update — Events page removed
+
+Client instruction: Madras Social has no event categories, and the Events page
+goes. Removed (all recoverable from git history):
+
+- `/events` and `/catering` — routes in `src/App.tsx`, rewrites in
+  `vercel.json`, pre-rendered pages and the nav link in `seo/routes.mjs`, the
+  sitemap entry, and the link in `public/llms.txt`. Both paths now fall
+  through to the SPA's NotFound page.
+- `src/pages/Events.tsx`, `src/components/events/` (the four Madras Mami
+  catering categories, the enquiry form and modal) and the five event images.
+- The catering `Service` node in `seo/schema.mjs`, which listed Madras Mami's
+  offers (Live Dosa Counter, Wedding Catering, kitty parties, tiffin and thali
+  packages), and the `catering` ContactPoint.
+- `apps-script/catering/` and `public/catering/` (its email templates and
+  hero image), with `VITE_CATERING_SHEET_ENDPOINT`. This also retires the
+  Madras Mami `SHEET_ID` and the `mami-catering-2026` token.
+
+### Still to confirm — private events
+These remain and claim Madras Social takes private-event bookings by email.
+Confirm, or remove them too:
+
+- FAQ "Can I book Madras Social for an event?" — `seo/site.mjs` (also feeds
+  `public/llms.txt` and the FAQ schema)
+- `Private Events` in `OFFERINGS` (`seo/site.mjs`) and in `amenities`
+  (`seo/schema.mjs`)
+- The "Catering Request" subject option on the contact form
+  (`src/pages/Contact.tsx`)
+- `gtm/madras-mami-container.json` still has a `catering_` form trigger;
+  drop it when the container is rebuilt for Madras Social.

@@ -16,20 +16,12 @@
       "destination": "/reservations/index.html"
     },
     {
-      "source": "/catering",
-      "destination": "/catering/index.html"
-    },
-    {
       "source": "/contact",
       "destination": "/contact/index.html"
     },
     {
       "source": "/about-us",
       "destination": "/about-us/index.html"
-    },
-    {
-      "source": "/events",
-      "destination": "/events/index.html"
     },
     {
       "source": "/careers",

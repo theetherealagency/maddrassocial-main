@@ -28,7 +28,6 @@ const LINKS = `
       <li><a href="/menu">Menu</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/reservations">Reservations</a></li>
-      <li><a href="/events">Events</a></li>
       <li><a href="/careers">Careers</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
@@ -157,24 +156,6 @@ export const ROUTES = [
   ${LINKS}`,
   },
   {
-    path: '/events',
-    title: 'Events & Private Dining in Waterloo Region | Madras Social',
-    description:
-      'Private dining and events at Madras Social, a South Indian kitchen and bar in Waterloo. Send us the date and the numbers and we will come back to you.',
-    priority: '0.8',
-    schema: ['catering', 'restaurant', 'breadcrumb'],
-    h1: 'Events at Madras Social',
-    content: `
-  <p>Birthdays, work dinners, a long table for people who like each other.
-  Send us the date, the numbers and what the evening is for.</p>
-  <h2>Where we are</h2>
-  <p>${FULL_ADDRESS}. We serve ${SITE.areaServed.join(', ')}.</p>
-  <h2>Enquiries</h2>
-  <p>Email <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
-  ${NAP}
-  ${LINKS}`,
-  },
-  {
     path: '/careers',
     title: 'Careers — Join the Team | Madras Social Waterloo',
     description:
@@ -208,22 +189,6 @@ export const ROUTES = [
   },
 
   // ---- Consolidated / non-indexed routes -------------------------------
-  // The Events page also answers to /catering, which is where the source
-  // mounted it. Canonicalised so the two paths stop competing.
-  {
-    path: '/catering',
-    title: 'Events & Private Dining | Madras Social Waterloo',
-    description:
-      'Private dining and events at Madras Social, a South Indian kitchen and bar in Waterloo Region.',
-    canonicalTo: '/events',
-    sitemap: false,
-    schema: ['restaurant'],
-    h1: 'Events at Madras Social',
-    content: `
-  <p>See <a href="/events">events</a> for the full version.</p>
-  ${NAP}
-  ${LINKS}`,
-  },
   // Orphaned duplicate of /about (nothing links to it). Canonicalised so the
   // two pages stop competing for the same "about Madras Social" query.
   {
